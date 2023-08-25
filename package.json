@@ -5,8 +5,10 @@
     "ng": "ng",
     "start": "ng serve --open --configuration=dev",
     "build": "ng build",
-    "watch": "ng build --watch --configuration dev",
-    "test": "ng test"
+    "watch": "ng build --watch --configuration=dev",
+    "test": "ng test",
+    "build-test": "docker build -t covint -f ./containerfile --build-arg CONFIGURATION=test ./",
+    "build-prod": "docker build -t covint -f ./containerfile --build-arg CONFIGURATION=prod ./"
   },
   "private": true,
   "dependencies": {

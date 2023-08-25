@@ -30,7 +30,7 @@
             "scripts": []
           },
           "configurations": {
-            "production": {
+            "prod": {
               "budgets": [
                 {
                   "type": "initial",
@@ -80,13 +80,13 @@
               ]
             }
           },
-          "defaultConfiguration": "development"
+          "defaultConfiguration": "dev"
         },
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
-            "production": {
-              "browserTarget": "covint:build:production"
+            "prod": {
+              "browserTarget": "covint:build:prod"
             },
             "dev": {
               "browserTarget": "covint:build:dev"
@@ -95,7 +95,7 @@
               "browserTarget": "engineer-view:build:test"
             }
           },
-          "defaultConfiguration": "development"
+          "defaultConfiguration": "dev"
         },
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
