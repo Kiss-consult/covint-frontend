@@ -7,8 +7,8 @@
     "build": "ng build",
     "watch": "ng build --watch --configuration=dev",
     "test": "ng test",
-    "build-test": "docker build -t taskat/covint -f ./containerfile --build-arg CONFIGURATION=test ./",
-    "build-prod": "docker build -t taskat/covint -f ./containerfile --build-arg CONFIGURATION=prod ./"
+    "build-test": "docker build -t taskat/covint-frontend -f ./containerfile --build-arg CONFIGURATION=test ./",
+    "build-prod": "docker build -t taskat/covint-frontend -f ./containerfile --build-arg CONFIGURATION=prod ./"
   },
   "private": true,
   "dependencies": {
