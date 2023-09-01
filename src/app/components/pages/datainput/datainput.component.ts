@@ -35,12 +35,15 @@ export class DatainputComponent {
     this.case.Date = this.formatDate(new Date());
     console.log(this.case);
     this.backendService.insertValidated(this.case).subscribe(
-      (res) => {
-        console.log(res);
-      },
-      (err) => {
-        console.log(err);
-      }
-    );
+      result => {
+        if (result.isErr()) {
+          alert("Failed to insert into database");
+          console.error(result.unwrapErr());
+          return;
+        }
+        alert("Successfully inserted into database");
+        console.log("Successfully inserted into database")
+        //todo clear form
+      });
   }
 }
