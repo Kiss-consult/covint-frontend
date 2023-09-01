@@ -1,24 +1,24 @@
 <div id="app">
-  <nav class="navbar navbar-expand navbar-dark bg-dark">
+  <nav class="navbar navbar-expand navbar-dark custom-bg">
     <a href="#" class="navbar-brand">Covint</a>
     <ul class="navbar-nav mr-auto" routerLinkActive="active">
       <li class="nav-item">
-        <a href="/home" class="nav-link" routerLink="home">Kezdőlap</a>
+        <a href="/home" class="nav-link" style="color: rgb(255, 255, 255);" routerLink="home">Kezdőlap</a>
       </li>
       <li class="nav-item">
-        <a href="/datainput" class="nav-link" routerLink="datainput">Adatbevitel</a>
+        <a href="/datainput" class="nav-link" style="color: rgb(255, 255, 255);" routerLink="datainput">Adatbevitel</a>
       </li>
       <li class="nav-item">
-        <a href="/export" class="nav-link" routerLink="export">Export</a>
+        <a href="/export" class="nav-link" style="color: rgb(255, 255, 255);" routerLink="export">Export</a>
       </li>
       <li class="nav-item">
-        <a href="/diagram" class="nav-link" routerLink="diagram">Diagramok</a>
+        <a href="/diagram" class="nav-link" style="color: rgb(255, 255, 255);" routerLink="diagram">Diagramok</a>
       </li>
     </ul>
 
     <ul class="navbar-nav ml-auto" *ngIf="!loginService.isLoggedIn()">
       <li class="nav-item">
-        <a href="/login" class="nav-link" routerLink="login">Bejelentkezés</a>
+        <a href="/login" class="nav-link" style="color: rgb(255, 255, 255);" routerLink="login">Bejelentkezés</a>
       </li>
     </ul>
 
@@ -31,8 +31,9 @@
       </li>
     </ul>
   </nav>
-
+</div>
+  <br>
+  <br>
   <div class="container">
     <router-outlet></router-outlet>
   </div>
-</div>
