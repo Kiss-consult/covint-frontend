@@ -5,7 +5,7 @@
   Adatbevitel 
 </h1>
 <label for="sex">Páciens neme:</label>
-<input list="sex_options" name="sex" id="sex">
+<input list="sex_options" name="sex" id="sex" [(ngModel)]="case.Sex">
 
 <datalist id="sex_options">
   <option value="Férfi">
@@ -15,29 +15,29 @@
 
 <form >
   <label for="age">páciens kora:</label>
-  <input type="number" id="quantity" name="quantity" min="1" > 
+  <input type="number" id="quantity" name="quantity" min="1" [(ngModel)]="case.Age"> 
 </form>
 
-<input type="checkbox" id="hosp" name="hosp" value="true">
+<input type="checkbox" id="hosp" name="hosp" value="true" [(ngModel)]="case.Hospitalized">
 <label for="vehicle1"> Korházba került</label><br>
-<input type="checkbox" id="dead" name="dead" value="true">
+<input type="checkbox" id="dead" name="dead" value="true" [(ngModel)]="case.Dead">
 <label for="vehicle2"> Meghalt</label><br>
 
 <form >
   <label for="source">forrás:</label>
-  <input type="text" id="source" name="source"  > 
+  <input type="text" id="source" name="source"  [(ngModel)]="case.Source"> 
 </form>
 
 
 
 <!-- Input field -->
-<input type="text" id="course" name="course" class="form-control" [(ngModel)]="newCourse" placeholder="Enter course name">
+<input type="text" id="course" name="course" class="form-control" [(ngModel)]="newMarker" placeholder="Enter course name">
 <!-- Add button -->
-<button (click)="addCourse()">Add</button>
+<button (click)="addMarker()">Add</button>
 
-<p>{{allCourses|json}}</p>
+<p>{{case.Markers|json}}</p>
 
 
-
+<button (click)="finish()">Finish</button>
 
 <input type="submit">
