@@ -1,1 +1,43 @@
-<p>datainput works!</p>
+
+
+
+<h1>
+  Adatbevitel 
+</h1>
+<label for="sex">Páciens neme:</label>
+<input list="sex_options" name="sex" id="sex">
+
+<datalist id="sex_options">
+  <option value="Férfi">
+  <option value="Nő">
+  <option value="Nincs adat/Egyéb"> 
+</datalist>
+
+<form >
+  <label for="age">páciens kora:</label>
+  <input type="number" id="quantity" name="quantity" min="1" > 
+</form>
+
+<input type="checkbox" id="hosp" name="hosp" value="true">
+<label for="vehicle1"> Korházba került</label><br>
+<input type="checkbox" id="dead" name="dead" value="true">
+<label for="vehicle2"> Meghalt</label><br>
+
+<form >
+  <label for="source">forrás:</label>
+  <input type="text" id="source" name="source"  > 
+</form>
+
+
+
+<!-- Input field -->
+<input type="text" id="course" name="course" class="form-control" [(ngModel)]="newCourse" placeholder="Enter course name">
+<!-- Add button -->
+<button (click)="addCourse()">Add</button>
+
+<p>{{allCourses|json}}</p>
+
+
+
+
+<input type="submit">
