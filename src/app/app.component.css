@@ -11,8 +11,8 @@
 
 .custom-bg{
     background-color: #2fa251;
-    
     border-bottom: solid 3px white;
+    margin: 0;
 }
 
 .nav-item{
