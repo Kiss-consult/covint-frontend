@@ -1,11 +1,13 @@
-
-
-
 <h1>
   Adatbevitel 
 </h1>
+
+<br>
+<br>
+
+<div class="container">
 <label for="sex">Páciens neme:</label>
-<input list="sex_options" name="sex" id="sex" [(ngModel)]="case.Sex">
+<input class="droptextbox" list="sex_options" name="sex" id="sex" [(ngModel)]="case.Sex">
 
 <datalist id="sex_options">
   <option value="Férfi">
@@ -14,30 +16,49 @@
 </datalist>
 
 <form >
-  <label for="age">páciens kora:</label>
-  <input type="number" id="quantity" name="quantity" min="1" [(ngModel)]="case.Age"> 
+  <label for="age">Páciens kora:</label>
+  <input class="droptextbox" type="number" id="quantity" name="quantity" min="1" [(ngModel)]="case.Age"> 
 </form>
 
-<input type="checkbox" id="hosp" name="hosp" value="true" [(ngModel)]="case.Hospitalized">
-<label for="vehicle1"> Korházba került</label><br>
+
+
+<div>
+  <label for="vehicle1">Korházba került</label>
+  <input type="checkbox" id="hosp" name="hosp" value="true" [(ngModel)]="case.Hospitalized">
+</div>
+
+<div>
+<label for="vehicle2"> Meghalt</label>
 <input type="checkbox" id="dead" name="dead" value="true" [(ngModel)]="case.Dead">
-<label for="vehicle2"> Meghalt</label><br>
+</div>
+
+<br>
 
 <form >
-  <label for="source">forrás:</label>
-  <input type="text" id="source" name="source"  [(ngModel)]="case.Source"> 
+  <label for="source">Forrás:</label>
+  <input class="droptextbox" type="text" id="source" name="source"  [(ngModel)]="case.Source"> 
 </form>
 
+<br>
 
+<div class="container01">
+<input class="droptextbox" type="text" id="course" name="course"  [(ngModel)]="newMarker" placeholder="Enter course name">
 
-<!-- Input field -->
-<input type="text" id="course" name="course" class="form-control" [(ngModel)]="newMarker" placeholder="Enter course name">
-<!-- Add button -->
-<button (click)="addMarker()">Add</button>
+<br>
 
-<p>{{case.Markers|json}}</p>
+<button (click)="addMarker()">Hozzáadás</button>
+</div>
 
+<div class="addedtext">
+<p>Hozzáadott:</p>
+<p id="text00">{{case.Markers|json}}</p>
+</div>
 
-<button (click)="finish()">Finish</button>
+<br>
 
-<input type="submit">
+<button id="keszbutton" (click)="finish()">Kész</button>
+
+<!--Ez majd egy gomb lesz?-->
+<input style="float: left;" type="submit">
+
+</div>

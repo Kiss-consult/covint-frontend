@@ -1,0 +1,26 @@
+.navbar-brand{
+    font-size: 40px;
+    font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    padding-right: 30px;
+    padding-left: 10px;
+    padding-top: 0;
+    padding-bottom: 0;
+    border-right: solid 3px white;
+    
+}
+
+.custom-bg{
+    background-color: #2fa251;
+    border-bottom: solid 3px white;
+    margin: 0;
+}
+
+.nav-item{
+    font-size: 20px;
+}
+
+a:hover {
+    background-color: rgba(255, 255, 255, 0.305);
+    border-radius: 5px;
+  }
+
