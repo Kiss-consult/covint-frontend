@@ -1,39 +1,39 @@
-.container01{
+.container01 {
     display: flex;
     justify-content: space-between;
 
 }
 
-#course{
+#course {
     width: 75%;
     margin: 0;
     float: right;
 }
 
-#sex{
+#sex {
     margin-left: 25px;
 }
 
-#quantity{
+#quantity {
     margin-left: 35px;
 }
 
-#source{
+#source {
     margin-left: 90px;
 }
 
-button{
+button {
     float: right;
     margin: 0;
     margin-left: 20px;
 }
 
-#keszbutton{
+#finishbutton {
     float: left;
     margin-left: 0;
 }
 
-.addedtext{ 
+.addedtext {
     display: flex;
     justify-content: space-between;
     margin-top: 20px;
@@ -41,7 +41,7 @@ button{
     vertical-align: middle;
 }
 
-#text00{
+#text00 {
     border: 1px solid #42a160;
     border-radius: 5px;
     width: 87%;
@@ -50,17 +50,16 @@ button{
     padding: 0;
 }
 
-#hosp{
+#hospitalized {
     margin-left: 9px;
     margin-top: 2px;
     width: 30px;
     height: 30px;
 }
 
-#dead{
+#dead {
     margin-left: 85px;
     margin-top: 0;
     width: 30px;
     height: 30px;
 }
-

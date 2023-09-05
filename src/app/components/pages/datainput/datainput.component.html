@@ -1,64 +1,74 @@
 <h1>
-  Adatbevitel 
+  Adatbevitel
 </h1>
 
 <br>
 <br>
 
 <div class="container">
-<label for="sex">Páciens neme:</label>
-<input class="droptextbox" list="sex_options" name="sex" id="sex" [(ngModel)]="case.Sex">
+  <label for="sex">Páciens neme:</label>
+  <select class="droptextbox" name="sex" id="sex" [(ngModel)]="case.Sex">
+    <option value="Férfi">Férfi</option>
+    <option value="Nő">Nő</option>
+  </select>
 
-<datalist id="sex_options">
-  <option value="Férfi">
-  <option value="Nő">
-  <option value="Nincs adat/Egyéb"> 
-</datalist>
-
-<form >
-  <label for="age">Páciens kora:</label>
-  <input class="droptextbox" type="number" id="quantity" name="quantity" min="1" [(ngModel)]="case.Age"> 
-</form>
+  <form>
+    <label for="age">Páciens kora:</label>
+    <input class="droptextbox" type="number" id="age" name="age" min="1" [(ngModel)]="case.Age">
+  </form>
 
 
 
-<div>
-  <label for="vehicle1">Korházba került</label>
-  <input type="checkbox" id="hosp" name="hosp" value="true" [(ngModel)]="case.Hospitalized">
-</div>
+  <div>
+    <label>Kórházba került</label>
+    <label for="trueHosp">Igen</label>
+    <input type="radio" id="trueHosp" name="hospitalized" [value]="true" [(ngModel)]="case.Hospitalized">
+    <label for="falseHosp">Nem</label>
+    <input type="radio" id="falseHosp" name="hospitalized" [value]="false" [(ngModel)]="case.Hospitalized">
+  </div>
 
-<div>
-<label for="vehicle2"> Meghalt</label>
-<input type="checkbox" id="dead" name="dead" value="true" [(ngModel)]="case.Dead">
-</div>
+  <div>
+    <label> Meghalt</label>
+    <label for="trueDead">Igen</label>
+    <input type="radio" id="trueDead" name="dead" [value]="true" [(ngModel)]="case.Dead">
+    <label for="falseDead">Nem</label>
+    <input type="radio" id="falseDead" name="dead" [value]="false" [(ngModel)]="case.Dead">
+  </div>
 
-<br>
+  <br>
 
-<form >
-  <label for="source">Forrás:</label>
-  <input class="droptextbox" type="text" id="source" name="source"  [(ngModel)]="case.Source"> 
-</form>
+  <form>
+    <label for="source">Forrás:</label>
+    <input class="droptextbox" type="text" id="source" name="source" [(ngModel)]="case.Source">
+  </form>
 
-<br>
+  <br>
 
-<div class="container01">
-<input class="droptextbox" type="text" id="course" name="course"  [(ngModel)]="newMarker" placeholder="Enter course name">
+  <div class="container01">
+    <select class="droptextbox" type="text" id="markers" name="markers" [(ngModel)]="newBno">
+      <ng-container *ngFor="let illness of illnesses">
+        <optgroup label="{{illness.Names[0]}}">
+          <ng-container *ngFor="let bno of illness.BnoCodes">
+            <option value="{{bno}}">{{bno}}</option>
+          </ng-container>
+        </optgroup>
+      </ng-container>
+    </select>
 
-<br>
+    <br>
 
-<button (click)="addMarker()">Hozzáadás</button>
-</div>
+    <button (click)="addMarker()">Hozzáadás</button>
+  </div>
 
-<div class="addedtext">
-<p>Hozzáadott:</p>
-<p id="text00">{{case.Markers|json}}</p>
-</div>
+  <div class="addedtext">
+    <div *ngFor="let marker of case.Markers">
+      <p>{{marker.BnoCode}} - {{marker.Names[0]}}</p>
+      <button (click)="removeMarker(marker)">Törlés</button>
+    </div>
+  </div>
 
-<br>
+  <br>
 
-<button id="keszbutton" (click)="finish()">Kész</button>
-
-<!--Ez majd egy gomb lesz?-->
-<input style="float: left;" type="submit">
+  <button id="finishbutton" (click)="finish()">Kész</button>
 
 </div>
