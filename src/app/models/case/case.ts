@@ -9,5 +9,12 @@ export class Case {
     Source: string = "";
     Date: string = "";
 
-    constructor() {}
+    constructor() {
+        const obj = {
+            Age: null,
+            Dead: null,
+            Hospitalized: null
+        }
+        Object.assign(this, obj);
+    }
 }

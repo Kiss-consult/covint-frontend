@@ -52,6 +52,26 @@ export class DatainputComponent {
     this.newBno = '';
   }
 
+  private checkRequiredFields(): boolean{
+    if (this.case.Sex === null || this.case.Sex === "") {
+      alert("Sex is a required field");
+      return false;
+    }
+    if (this.case.Age === null || this.case.Age < 18 || this.case.Age > 88) {
+      alert("Age is a required field, and must be between 18 and 88");
+      return false;
+    }
+    if (this.case.Hospitalized === null) {
+      alert("Hospitalized is a required field");
+      return false;
+    }
+    if (this.case.Dead === null) {
+      alert("Dead is a required field");
+      return false;
+    }
+    return true;
+  }
+
   // Function to remove marker from the case
   removeMarker(marker: Marker) {
     this.case.Markers = this.case.Markers.filter(m => m.BnoCode !== marker.BnoCode);
@@ -71,6 +91,9 @@ export class DatainputComponent {
   // adds the current date to the case, and inserts the case into the database.
   // It also clears the form for the next case.
   public finish() {
+    if (!this.checkRequiredFields()) {
+      return;
+    }
     this.case.Date = this.formatDate(new Date());
     console.log(this.case);
     this.backendService.insertValidated(this.case).subscribe(

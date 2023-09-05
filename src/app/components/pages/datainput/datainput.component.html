@@ -20,13 +20,19 @@
 
 
   <div>
-    <label for="hospitalized">Kórházba került</label>
-    <input type="checkbox" id="hospitalized" name="hospitalized" value="true" [(ngModel)]="case.Hospitalized">
+    <label>Kórházba került</label>
+    <label for="trueHosp">Igen</label>
+    <input type="radio" id="trueHosp" name="hospitalized" [value]="true" [(ngModel)]="case.Hospitalized">
+    <label for="falseHosp">Nem</label>
+    <input type="radio" id="falseHosp" name="hospitalized" [value]="false" [(ngModel)]="case.Hospitalized">
   </div>
 
   <div>
-    <label for="dead"> Meghalt</label>
-    <input type="checkbox" id="dead" name="dead" value="true" [(ngModel)]="case.Dead">
+    <label> Meghalt</label>
+    <label for="trueDead">Igen</label>
+    <input type="radio" id="trueDead" name="dead" [value]="true" [(ngModel)]="case.Dead">
+    <label for="falseDead">Nem</label>
+    <input type="radio" id="falseDead" name="dead" [value]="false" [(ngModel)]="case.Dead">
   </div>
 
   <br>
