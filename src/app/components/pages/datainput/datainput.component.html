@@ -7,13 +7,11 @@
 
 <div class="container">
 <label for="sex">Páciens neme:</label>
-<input class="droptextbox" list="sex_options" name="sex" id="sex" [(ngModel)]="case.Sex">
-
-<datalist id="sex_options">
-  <option value="Férfi">
-  <option value="Nő">
-  <option value="Nincs adat/Egyéb"> 
-</datalist>
+<select class="droptextbox" name="sex" id="sex" [(ngModel)]="case.Sex">
+  <option value="Férfi">Férfi</option>
+  <option value="Nő">Nő</option>
+  <option value="Nincs adat/Egyéb">Nincs adat/Egyéb</option>
+  </select>
 
 <form >
   <label for="age">Páciens kora:</label>
@@ -57,8 +55,5 @@
 <br>
 
 <button id="keszbutton" (click)="finish()">Kész</button>
-
-<!--Ez majd egy gomb lesz?-->
-<input style="float: left;" type="submit">
 
 </div>
