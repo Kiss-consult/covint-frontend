@@ -10,11 +10,11 @@ import { BackendService } from 'src/app/services/backend/backend.service';
   styleUrls: ['./datainput.component.css']
 })
 
-
 export class DatainputComponent {
   case: Case = new Case();
   newBno: string = '';
   illnesses: Illness[] = [];
+  // This is only stored for faster access to the illnesses by BNO code
   illnessesByBno: Map<string, Illness> = new Map();
 
   constructor(private backendService: BackendService) {
@@ -36,8 +36,9 @@ export class DatainputComponent {
       });
   }
 
-  // Function to add marker
-  addMarker() {
+  // Function to add marker. If the newly selected marker is already in the case,
+  // it removes it. Otherwise it adds it to the case.
+  public addMarker() {
     if (this.newBno === '') {
       alert("Kérem adjon meg egy BNO kódot");
       return;
@@ -52,7 +53,9 @@ export class DatainputComponent {
     this.newBno = '';
   }
 
-  private checkRequiredFields(): boolean{
+  // Function to check the required fields of the case.
+  // If any of the required fields are not filled, it alerts the user and returns false.
+  private checkRequiredFields(): boolean {
     if (this.case.Sex === null || this.case.Sex === "") {
       alert("A 'Nem' mező kitöltése kötelező");
       return false;
@@ -73,7 +76,7 @@ export class DatainputComponent {
   }
 
   // Function to remove marker from the case
-  removeMarker(marker: Marker) {
+  public removeMarker(marker: Marker) {
     this.case.Markers = this.case.Markers.filter(m => m.BnoCode !== marker.BnoCode);
   }
 
