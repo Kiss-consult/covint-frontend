@@ -22,7 +22,7 @@ export class DatainputComponent {
     this.backendService.getAllIllnesses().subscribe(
       result => {
         if (result.isErr()) {
-          alert("Failed to get illnesses from database");
+          alert("Betegségek lekérdezése sikertelen");
           console.error(result.unwrapErr());
           return;
         }
@@ -39,7 +39,7 @@ export class DatainputComponent {
   // Function to add marker
   addMarker() {
     if (this.newBno === '') {
-      alert("Please enter a BNO code");
+      alert("Kérem adjon meg egy BNO kódot");
       return;
     }
     const newMarker = new Marker(this.newBno, this.illnessesByBno.get(this.newBno)?.Names);
@@ -54,19 +54,19 @@ export class DatainputComponent {
 
   private checkRequiredFields(): boolean{
     if (this.case.Sex === null || this.case.Sex === "") {
-      alert("Sex is a required field");
+      alert("A 'Nem' mező kitöltése kötelező");
       return false;
     }
     if (this.case.Age === null || this.case.Age < 18 || this.case.Age > 88) {
-      alert("Age is a required field, and must be between 18 and 88");
+      alert("A 'Kor' mező kitöltése kötelező, és 18 és 88 között kell lennie");
       return false;
     }
     if (this.case.Hospitalized === null) {
-      alert("Hospitalized is a required field");
+      alert("A 'Kórházba került' mező kitöltése kötelező");
       return false;
     }
     if (this.case.Dead === null) {
-      alert("Dead is a required field");
+      alert("A 'Meghalt' mező kitöltése kötelező");
       return false;
     }
     return true;
@@ -99,11 +99,11 @@ export class DatainputComponent {
     this.backendService.insertValidated(this.case).subscribe(
       result => {
         if (result.isErr()) {
-          alert("Failed to insert into database");
+          alert("Sikertelen adatfeltöltés");
           console.error(result.unwrapErr());
           return;
         }
-        alert("Successfully inserted into database");
+        alert("Sikeres adatfeltöltés");
         console.log("Successfully inserted into database")
         //todo clear form
       });
