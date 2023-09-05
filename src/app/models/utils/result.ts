@@ -1,7 +1,9 @@
 export type Result<T> = Ok<T> | Err<T>;
 
+// This function parses the JSON string into a Result object with the correct
+// underlying type. This function should be used at all times to get the 
+// Result object from JSON.
 export function fromJSON<T>(json: string): Result<T> {
-  console.log(json);
   const obj = JSON.parse(json);
   if (obj["Ok"]) {
     return new Ok(obj["Value"]);
