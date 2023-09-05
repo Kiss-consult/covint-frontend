@@ -10,7 +10,6 @@
   <select class="droptextbox" name="sex" id="sex" [(ngModel)]="case.Sex">
     <option value="Férfi">Férfi</option>
     <option value="Nő">Nő</option>
-    <option value="Nincs adat/Egyéb">Nincs adat/Egyéb</option>
   </select>
 
   <form>
@@ -44,7 +43,7 @@
       <ng-container *ngFor="let illness of illnesses">
         <optgroup label="{{illness.Names[0]}}">
           <ng-container *ngFor="let bno of illness.BnoCodes">
-            <option  value="{{bno}}">{{bno}}</option>
+            <option value="{{bno}}">{{bno}}</option>
           </ng-container>
         </optgroup>
       </ng-container>
@@ -56,8 +55,10 @@
   </div>
 
   <div class="addedtext">
-    <p>Hozzáadott:</p>
-    <p id="text00">{{case.Markers|json}}</p>
+    <div *ngFor="let marker of case.Markers">
+      <p>{{marker.BnoCode}} - {{marker.Names[0]}}</p>
+      <button (click)="removeMarker(marker)">Törlés</button>
+    </div>
   </div>
 
   <br>

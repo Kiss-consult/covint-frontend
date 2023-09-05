@@ -17,7 +17,7 @@ export class DatainputComponent {
   illnesses: Illness[] = [];
   illnessesByBno: Map<string, Illness> = new Map();
 
-  constructor(private backendService: BackendService) { 
+  constructor(private backendService: BackendService) {
     // query all the illnesses formn the database
     this.backendService.getAllIllnesses().subscribe(
       result => {
@@ -35,11 +35,26 @@ export class DatainputComponent {
         console.log("Successfully got illnesses from database")
       });
   }
-  
+
   // Function to add marker
   addMarker() {
-    this.case.Markers.push(new Marker(this.newBno, this.illnessesByBno.get(this.newBno)?.Names));
+    if (this.newBno === '') {
+      alert("Please enter a BNO code");
+      return;
+    }
+    const newMarker = new Marker(this.newBno, this.illnessesByBno.get(this.newBno)?.Names);
+    if (this.case.Markers.filter(m => m.BnoCode === newMarker.BnoCode).length > 0) {
+      console.log("Marker already exists")
+      this.removeMarker(newMarker);
+      return;
+    }
+    this.case.Markers.push(newMarker);
     this.newBno = '';
+  }
+
+  // Function to remove marker from the case
+  removeMarker(marker: Marker) {
+    this.case.Markers = this.case.Markers.filter(m => m.BnoCode !== marker.BnoCode);
   }
 
   // Format date to YYYY-MM-DD
