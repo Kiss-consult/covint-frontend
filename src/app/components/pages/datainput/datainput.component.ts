@@ -105,7 +105,7 @@ export class DatainputComponent {
         }
         alert("Sikeres adatfeltöltés");
         console.log("Successfully inserted into database")
-        //todo clear form
+        this.case = new Case();
       });
   }
 }
