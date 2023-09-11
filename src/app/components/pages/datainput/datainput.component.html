@@ -6,29 +6,33 @@
 <br>
 
 <div class="container">
-  <label for="sex">Páciens neme:</label>
-  <select class="droptextbox" name="sex" id="sex" [(ngModel)]="case.Sex">
-    <option value="Férfi">Férfi</option>
-    <option value="Nő">Nő</option>
-  </select>
+  <div style="display: flex;">
+    <label class="text" for="sex">Páciens neme</label>
+    <select class="droptextbox" name="sex" id="sex" [(ngModel)]="case.Sex">
+      <option value="Férfi">Férfi</option>
+      <option value="Nő">Nő</option>
+    </select>
+  
+    <form>
+      <label class="text" for="age">Páciens kora</label>
+      <input class="droptextbox" type="number" id="age" name="age" min="1" [(ngModel)]="case.Age">
+    </form>
+  </div>
 
-  <form>
-    <label for="age">Páciens kora:</label>
-    <input class="droptextbox" type="number" id="age" name="age" min="1" [(ngModel)]="case.Age">
-  </form>
+  <br>
 
-
-
-  <div>
-    <label>Kórházba került</label>
+  <div style="display: flex; align-items: center">
+    <label class="text" style="margin-right: 50px;">Kórházba került</label>
     <label for="trueHosp">Igen</label>
     <input type="radio" id="trueHosp" name="hospitalized" [value]="true" [(ngModel)]="case.Hospitalized">
     <label for="falseHosp">Nem</label>
     <input type="radio" id="falseHosp" name="hospitalized" [value]="false" [(ngModel)]="case.Hospitalized">
   </div>
 
+  <br>
+
   <div>
-    <label> Meghalt</label>
+    <label class="text" style="margin-right: 50px;"> Meghalt</label>
     <label for="trueDead">Igen</label>
     <input type="radio" id="trueDead" name="dead" [value]="true" [(ngModel)]="case.Dead">
     <label for="falseDead">Nem</label>
@@ -62,11 +66,14 @@
 
   <div class="addedtext">
     <div *ngFor="let marker of case.Markers">
-      <p>{{marker.BnoCode}} - {{marker.Names[0]}}</p>
-      <button (click)="removeMarker(marker)">Törlés</button>
+      <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: solid 3px #42a160; padding-bottom: 20px; padding-top: 20px;">
+        <p>{{marker.BnoCode}} - {{marker.Names[0]}}</p>
+        <button (click)="removeMarker(marker)">Törlés</button>
+      </div>
     </div>
   </div>
 
+  <br>
   <br>
 
   <button id="finishbutton" (click)="finish()">Kész</button>
