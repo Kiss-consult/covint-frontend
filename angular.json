@@ -92,7 +92,7 @@
               "browserTarget": "covint:build:dev"
             },
             "test": {
-              "browserTarget": "engineer-view:build:test"
+              "browserTarget": "covint:build:test"
             }
           },
           "defaultConfiguration": "dev"
