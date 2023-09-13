@@ -1,21 +1,15 @@
 .container01 {
     display: flex;
-    justify-content: space-between;
-
-}
-
-#course {
-    width: 75%;
-    margin: 0;
-    float: right;
+    vertical-align: middle;
+    align-items: center;
 }
 
 #sex {
+    width: 100px;
     margin-left: 25px;
-}
-
-#quantity {
-    margin-left: 35px;
+    margin-right: 50px;
+    text-align: center;
+    padding: 0;
 }
 
 #source {
@@ -23,7 +17,6 @@
 }
 
 button {
-    float: right;
     margin: 0;
     margin-left: 20px;
 }
@@ -33,13 +26,10 @@ button {
     margin-left: 0;
 }
 
-.addedtext {
-    display: flex;
-    justify-content: space-between;
+.addedtext { 
     margin-top: 20px;
     padding: 0;
-    vertical-align: middle;
-}
+  }
 
 #text00 {
     border: 1px solid #42a160;
@@ -50,16 +40,36 @@ button {
     padding: 0;
 }
 
-#hospitalized {
-    margin-left: 9px;
-    margin-top: 2px;
-    width: 30px;
-    height: 30px;
+#age{
+    width: 100px;
+    margin-left: 25px;
+    text-align: center;
+    padding: 0;
 }
 
-#dead {
-    margin-left: 85px;
-    margin-top: 0;
-    width: 30px;
-    height: 30px;
+#trueHosp{
+    margin-left: 10px;
+    margin-right: 70px;
+}
+
+#falseHosp{
+    margin-left: 10px;
+}
+
+#trueDead{
+    margin-left: 10px;
+    margin-right: 70px;
+}
+
+#falseDead{
+    margin-left: 10px;
+}
+
+.text{
+    margin: 0;  
+}
+
+#markers{
+    width: 80px;
+    
 }
