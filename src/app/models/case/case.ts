@@ -8,7 +8,8 @@ export class Case {
     Markers: Marker[] = [];
     Source: string = "";
     Date: string = "";
-
+    Valid: boolean = false;
+    
     constructor() {
         const obj = {
             Age: null,

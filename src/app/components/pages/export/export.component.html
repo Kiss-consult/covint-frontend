@@ -1,1 +1,87 @@
-<p>export works!</p>
+<h1>
+    Export
+</h1>
+
+<br>
+<br>
+
+<div class="container">
+  <div style="display: flex;">
+    <label class="text" for="sex">Páciens neme</label>
+    <select class="droptextbox" name="sex" id="sex" [(ngModel)]="case.Sex">
+      <option value="Férfi">Férfi</option>
+      <option value="Nő">Nő</option>
+    </select>
+  
+    <form>
+      <label class="text" for="age">Páciens kora</label>
+      <input class="droptextbox" type="number" id="age" name="age" min="1" [(ngModel)]="case.Age">
+    </form>
+  </div>
+
+  <div>
+    <label class="text" style="margin-right: 50px;"> Validált</label>
+    <label for="trueDead">Igen</label>
+    <input type="radio" id="igen" name="valid" [value]="true" [(ngModel)]="case.Valid">
+    <label for="falseDead">Nem</label>
+    <input type="radio" id="nem" name="valid" [value]="false" [(ngModel)]="case.Valid">
+  </div>
+
+  <div class="container01">
+    <select class="droptextbox" type="text" id="markers" name="markers" [(ngModel)]="newBno">
+      <ng-container *ngFor="let illness of illnesses">
+        <optgroup label="{{illness.Names[0]}}">
+          <ng-container *ngFor="let bno of illness.BnoCodes">
+            <option value="{{bno}}">{{bno}}</option>
+          </ng-container>
+        </optgroup>
+      </ng-container>
+    </select>
+
+    <br>
+
+    <button (click)="getMarker()">fefef</button>
+  </div>
+
+
+
+  <button id="okebutton" (click)="finish()">Kész</button>
+  <button id="okebutton" (click)="export()">Export</button>
+
+
+  
+
+
+
+<div class="mat-elevation-z8">
+  <table mat-table [dataSource]="illnesses" matSort>
+    <!-- Oszlopok hozzáadása -->
+
+        <!-- Position Column -->
+        <ng-container matColumnDef="position">
+          <th mat-header-cell *matHeaderCellDef> No. </th>
+          <td mat-cell *matCellDef="let element"> {{element.position}} </td>
+        </ng-container>
+    
+    <ng-container matColumnDef="bnoCode">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>BNO kód</th>b
+      <td mat-cell *matCellDef="let illness">{{ illness.BnoCode }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="names">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Név</th>
+      <td mat-cell *matCellDef="let illness">{{ illness.Names }}</td>
+    </ng-container>
+
+    <!-- További oszlopok hozzáadása szükség esetén -->
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  </table>
+
+  <mat-paginator [pageSizeOptions]="pageSizeOptions" showFirstLastButtons></mat-paginator>
+</div>
+
+
+
+
