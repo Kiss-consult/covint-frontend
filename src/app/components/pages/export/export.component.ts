@@ -6,6 +6,8 @@ import { BackendService } from 'src/app/services/backend/backend.service';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
+import { Filter } from 'src/app/models/filter/filter';
+import { Export } from 'src/app/models/export/export';
 
 
 @Component({
@@ -17,7 +19,10 @@ import { MatSort } from '@angular/material/sort';
 
 export class ExportComponent {
 
-  displayedColumns: string[] = ['position', 'bnoCode', 'names']; // Itt adhatod meg az oszlopok neveit
+  filter: Filter = new Filter();
+  exports: Export[] = [];
+
+  displayedColumns: string[] = ['position', 'bnoCode', 'names', 'names2']; // Itt adhatod meg az oszlopok neveit
   dataSource: MatTableDataSource<Illness> = new MatTableDataSource<Illness>;
   case: Case = new Case();
   newBno: string = '';
@@ -38,6 +43,11 @@ export class ExportComponent {
         return;
       }
       this.illnesses = result.unwrap();
+      for (let illness of result.unwrap()) {
+        illness.BnoCodes.forEach((bnoCode) => {
+          this.illnessesByBno.set(bnoCode, illness);
+        });
+      }
       this.dataSource.data = this.illnesses; // Az adatforrás frissítése
       console.log("Sikeresen lekérdezve a betegségek az adatbázisból");
       this.dataSource.paginator = this.paginator;
@@ -47,11 +57,11 @@ export class ExportComponent {
 
   private checkRequiredFields(): boolean {
     
-    if (this.case.Sex === null || this.case.Sex === "") {
+    if (this.filter.Sex === null || this.filter.Sex === "") {
       alert("A 'Nem' mező kitöltése kötelező");
       return false;
     }
-    if (this.case.Age === null || this.case.Age < 18 || this.case.Age > 88) {
+    if (this.filter.AgeFrom === null || this.filter.AgeFrom < 18 || this.filter.AgeFrom > 88) {
       alert("A 'Kor' mező kitöltése kötelező, és 18 és 88 között kell lennie");
       return false;
     }
@@ -66,16 +76,16 @@ export class ExportComponent {
     }
     
     console.log(this.case);
-    this.backendService.insertValidated(this.case).subscribe(
+    this.backendService.filterExports(this.filter).subscribe(
       result => {
         if (result.isErr()) {
-          alert("Sikertelen adatfeltöltés");
+          alert("Sikertelen szűrés");
           console.error(result.unwrapErr());
           return;
         }
-        alert("Sikeres adatfeltöltés");
-        console.log("Successfully inserted into database")
-        this.case = new Case();
+        alert("Sikeres szűrés");
+        console.log("Successfully filtered export data")
+        this.exports = result.unwrap();
       });
   }
 
@@ -102,5 +112,6 @@ export class ExportComponent {
   
   public getMarker() {
     const newMarker = new Marker(this.newBno, this.illnessesByBno.get(this.newBno)?.Names);
+    this.filter.Markers.push(newMarker);
   }
 }
