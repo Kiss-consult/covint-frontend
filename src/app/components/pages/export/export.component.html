@@ -45,15 +45,10 @@
     <button (click)="getMarker()">Hozzáadás</button>
   </div>
 
+<button id="okebutton" (click)="finish()">Kész</button>
 
 
-  <button id="okebutton" (click)="finish()">Kész</button>
-  <button id="okebutton" (click)="export()">Export</button>
-
-
-  
-
-
+<!--TABLE-->
 
 <div class="mat-elevation-z8">
   <table mat-table [dataSource]="exports" matSort>
@@ -89,6 +84,6 @@
   <mat-paginator [pageSizeOptions]="pageSizeOptions" showFirstLastButtons></mat-paginator>
 </div>
 
-
+<button id="exportbutton" (click)="export()">Export</button>
 
 

@@ -1,0 +1,68 @@
+.container01 {
+    display: flex;
+    vertical-align: middle;
+    align-items: center;
+    margin-top: 50px;
+    margin-bottom: 50px;
+}
+
+#sex {
+    width: 100px;
+    margin-left: 25px;
+    margin-right: 50px;
+    text-align: center;
+    padding: 0;
+}
+
+#source {
+    margin-left: 90px;
+}
+
+button {
+    margin: 0;
+    margin-left: 20px;
+}
+
+#okebutton{
+    margin-left: 0;
+    margin-bottom: 50px;
+}
+
+#exportbutton{
+    margin-top: 50px;
+    margin-left: 0;
+    float: right;
+}
+
+.addedtext { 
+    margin-top: 20px;
+    padding: 0;
+  }
+
+#text00 {
+    border: 1px solid #42a160;
+    border-radius: 5px;
+    width: 87%;
+    height: 40px;
+    margin-left: 20px;
+    padding: 0;
+}
+
+#age{
+    width: 100px;
+    margin-left: 25px;
+    text-align: center;
+    padding: 0;
+}
+
+.text{
+    margin: 0;  
+}
+
+#markers{
+    width: 80px;    
+}
+
+#validity{
+    margin-top: 50px;
+}
