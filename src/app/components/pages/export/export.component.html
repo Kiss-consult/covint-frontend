@@ -15,8 +15,13 @@
     </select>
 
     <form>
-      <label class="text" for="age">Páciens kora</label>
-      <input class="droptextbox" type="number" id="age" name="age" min="1" [(ngModel)]="filter.AgeFrom">
+      <label class="text" for="age">Páciens kora -tól</label>
+      <input class="droptextbox" type="number" id="agefrom" name="agefrom" min="1" [(ngModel)]="filter.AgeFrom">
+    </form>
+
+    <form>
+      <label class="text" for="age">Páciens kora -ig</label>
+      <input class="droptextbox" type="number" id="ageto" name="ageto" min="1" [(ngModel)]="filter.AgeTo">
     </form>
   </div>
 
