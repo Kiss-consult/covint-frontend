@@ -23,8 +23,12 @@
 
   <div style="display: flex; align-items: center">
     <label class="text" style="margin-right: 50px;">Kórházba került</label>
+
+    
     <label for="trueHosp">Igen</label>
     <input type="radio" id="trueHosp" name="hospitalized" [value]="true" [(ngModel)]="case.Hospitalized">
+
+
     <label for="falseHosp">Nem</label>
     <input type="radio" id="falseHosp" name="hospitalized" [value]="false" [(ngModel)]="case.Hospitalized">
   </div>
