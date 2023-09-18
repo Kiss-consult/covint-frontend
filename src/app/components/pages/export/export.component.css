@@ -6,12 +6,11 @@
     margin-bottom: 50px;
 }
 
-#sex {
-    width: 100px;
-    margin-left: 25px;
-    margin-right: 50px;
-    text-align: center;
-    padding: 0;
+.sexclass{
+    display: block;
+    flex-direction: column;
+    margin-right: 200px;
+    margin-bottom: 20px;
 }
 
 #source {
@@ -20,7 +19,7 @@
 
 button {
     margin: 0;
-    margin-left: 20px;
+    margin-left: 0  ;
 }
 
 #okebutton{
@@ -48,21 +47,37 @@ button {
     padding: 0;
 }
 
-#age{
-    width: 100px;
-    margin-left: 25px;
-    text-align: center;
-    padding: 0;
+.ageclass{
+    display: block;
+    flex-direction: column;
+    margin-right: 50px;
+    margin-bottom: 20px;
 }
 
 .text{
     margin: 0;  
 }
 
-#markers{
-    width: 80px;    
+.validclass{
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 20px;
 }
 
-#validity{
-    margin-top: 50px;
+.markerclass{
+    display: block;
+    flex-direction: column;
+    margin-bottom: 20px;
+}
+
+#markers{
+    margin-right: 20px;
+}
+
+#agefrom{
+    width: 200px;
+}
+
+#ageto{
+    width: 200px;
 }

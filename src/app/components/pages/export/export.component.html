@@ -6,54 +6,69 @@
 <br>
 
 <div class="container">
-  <div style="display: flex;">
-    <label class="text" for="sex">Páciens neme</label>
-    <select class="droptextbox" name="sex" id="sex" [(ngModel)]="filter.Sex">
-      <option value="Férfi">Férfi</option>
-      <option value="Nő">Nő</option>
-      <option value="Kumulált">Kumulált</option>
-    </select>
+  
+    <div class="sexclass">
+      <div>
+        <label class="text" for="sex">Páciens neme</label>
+      </div>
+      <div>
+        <select class="droptextbox" name="sex" id="sex" [(ngModel)]="filter.Sex">
+        <option value="Férfi">Férfi</option>
+        <option value="Nő">Nő</option>
+        <option value="Kumulált">Kumulált</option>
+        </select>
+      </div>
+    </div>
 
-    <form>
-      <label class="text" for="age">Páciens kora -tól</label>
-      <input class="droptextbox" type="number" id="agefrom" name="agefrom" min="1" [(ngModel)]="filter.AgeFrom">
-    </form>
+    <div class="ageclass">
+      
+        <div>
+          <label class="text" for="age">Páciens kora</label>
+        </div>
+        <div>
+          <input class="droptextbox" type="number" id="agefrom" name="agefrom" min="1" [(ngModel)]="filter.AgeFrom"><label style="margin-right: 20px;">-tól</label>
+          <input class="droptextbox" type="number" id="ageto" name="ageto" min="1" [(ngModel)]="filter.AgeTo"><label>-ig</label>
+        </div>
+    </div>
+  
 
-    <form>
-      <label class="text" for="age">Páciens kora -ig</label>
-      <input class="droptextbox" type="number" id="ageto" name="ageto" min="1" [(ngModel)]="filter.AgeTo">
-    </form>
-  </div>
-
-  <div>
-    <label class="text" style="margin-right: 50px;"> Validált</label>
-    <select class="droptextbox" name="validity" id="validity" [(ngModel)]="filter.Validity">
+  <div class="validclass">
+    <div>
+      <label class="text"> Validált</label>
+    </div>
+    <div>
+      <select class="droptextbox" name="validity" id="validity" [(ngModel)]="filter.Validity">
       <option value="validated">Validált</option>
       <option value="unvalidated">Nem validált</option>
       <option value="Kumulált">Kumulált</option>
-    </select>
+      </select>
+    </div>
   </div>
 
-  <div class="container01">
-    <select class="droptextbox" type="text" id="markers" name="markers" [(ngModel)]="newBno">
-      <ng-container *ngFor="let illness of illnesses">
-        <optgroup label="{{illness.Names[0]}}">
+  <div class="markerclass">
+    <div>
+      <label class="text"> Marker</label>
+    </div>
+    <div style="display: flex;">
+      <select class="droptextbox" type="text" id="markers" name="markers" [(ngModel)]="newBno">
+        <ng-container *ngFor="let illness of illnesses">
+          <optgroup label="{{illness.Names[0]}}">
           <ng-container *ngFor="let bno of illness.BnoCodes">
             <option value="{{bno}}">{{bno}}</option>
           </ng-container>
-        </optgroup>
-      </ng-container>
-    </select>
+          </optgroup>
+        </ng-container>
+      </select>
 
     <br>
-
-    <button (click)="getMarker()">Hozzáadás</button>
+     
+      <button (click)="getMarker()">Hozzáadás</button></div>
+    
   </div>
 
   <div class="addedtext">
     <div *ngFor="let marker of filter.Markers">
-      <div
-        style="display: flex; justify-content: space-between; align-items: center; border-bottom: solid 3px #42a160; padding-bottom: 20px; padding-top: 20px;">
+      <div style=" border-bottom: solid 3px #42a160; padding-bottom: 20px; padding-top: 20px;">
         <p>{{marker.BnoCode}} - {{marker.Names[0]}}</p>
         <button (click)="removeMarker(marker)">Törlés</button>
       </div>
@@ -112,6 +127,6 @@
     </table>
 
     <mat-paginator [pageSizeOptions]="pageSizeOptions" showFirstLastButtons></mat-paginator>
-  </div>
+</div>
 
   <button id="exportbutton" (click)="export()">Export</button>
