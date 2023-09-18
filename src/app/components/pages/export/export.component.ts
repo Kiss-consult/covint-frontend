@@ -114,4 +114,10 @@ export class ExportComponent {
     const newMarker = new Marker(this.newBno, this.illnessesByBno.get(this.newBno)?.Names);
     this.filter.Markers.push(newMarker);
   }
+
+
+  // Function to remove marker from the filter
+  public removeMarker(marker: Marker) {
+    this.filter.Markers = this.filter.Markers.filter(m => m.BnoCode !== marker.BnoCode);
+  }
 }

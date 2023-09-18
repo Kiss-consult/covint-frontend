@@ -1,5 +1,5 @@
 <h1>
-    Export
+  Export
 </h1>
 
 <br>
@@ -13,7 +13,7 @@
       <option value="Nő">Nő</option>
       <option value="Kumulált">Kumulált</option>
     </select>
-  
+
     <form>
       <label class="text" for="age">Páciens kora</label>
       <input class="droptextbox" type="number" id="age" name="age" min="1" [(ngModel)]="filter.AgeFrom">
@@ -45,45 +45,68 @@
     <button (click)="getMarker()">Hozzáadás</button>
   </div>
 
-<button id="okebutton" (click)="finish()">Kész</button>
+  <div class="addedtext">
+    <div *ngFor="let marker of filter.Markers">
+      <div
+        style="display: flex; justify-content: space-between; align-items: center; border-bottom: solid 3px #42a160; padding-bottom: 20px; padding-top: 20px;">
+        <p>{{marker.BnoCode}} - {{marker.Names[0]}}</p>
+        <button (click)="removeMarker(marker)">Törlés</button>
+      </div>
+    </div>
+  </div>
+
+  <br>
+  <button id="okebutton" (click)="finish()">Kész</button>
 
 
-<!--TABLE-->
+  <!--TABLE-->
 
-<div class="mat-elevation-z8">
-  <table mat-table [dataSource]="exports" matSort>
-    <!-- Oszlopok hozzáadása -->
+  <div class="mat-elevation-z8">
+    <table mat-table [dataSource]="exports" matSort>
+      <!-- Oszlopok hozzáadása -->
 
-        <!-- Position Column -->
-        <ng-container matColumnDef="position">
-          <th mat-header-cell *matHeaderCellDef> No. </th>
-          <td mat-cell *matCellDef="let export"> {{export.Validity}} </td>
-        </ng-container>
-    
-    <ng-container matColumnDef="bnoCode">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header>BNO kód</th>b
-      <td mat-cell *matCellDef="let export">{{ export.Sex }}</td>
-    </ng-container>
+      <!-- Position Column -->
+      <ng-container matColumnDef="position">
+        <th mat-header-cell *matHeaderCellDef> No. </th>
+        <td mat-cell *matCellDef="let export"> {{export.Validity}} </td>
+      </ng-container>
 
-    <ng-container matColumnDef="names">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header>Név</th>
-      <td mat-cell *matCellDef="let export">{{ export.Age }}</td>
-    </ng-container>
+      <ng-container matColumnDef="sex">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Nem</th>b
+        <td mat-cell *matCellDef="let export">{{ export.Sex }}</td>
+      </ng-container>
 
-    <ng-container matColumnDef="names2">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header>Név</th>
-      <td mat-cell *matCellDef="let export">{{ export.Markers[0].Names[0] }}</td>
-    </ng-container>
+      <ng-container matColumnDef="age">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Kor</th>
+        <td mat-cell *matCellDef="let export">{{ export.Age }}</td>
+      </ng-container>
 
-    <!-- További oszlopok hozzáadása szükség esetén -->
+      <ng-container matColumnDef="markers">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Marker</th>
+        <td mat-cell *matCellDef="let export">{{ export.Markers[0].Names[0] }}</td>
+      </ng-container>
 
-    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-  </table>
+      <ng-container matColumnDef="hospitalized">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Kórház esély %</th>
+        <td mat-cell *matCellDef="let export">{{ export.Hospitalized }}</td>
+      </ng-container>
 
-  <mat-paginator [pageSizeOptions]="pageSizeOptions" showFirstLastButtons></mat-paginator>
-</div>
+      <ng-container matColumnDef="dead">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Halálozási esély %</th>
+        <td mat-cell *matCellDef="let export">{{ export.Dead }}</td>
+      </ng-container>
 
-<button id="exportbutton" (click)="export()">Export</button>
+      <ng-container matColumnDef="count">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Összes adat</th>
+        <td mat-cell *matCellDef="let export">{{ export.Count }}</td>
+      </ng-container>
+      <!-- További oszlopok hozzáadása szükség esetén -->
 
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
 
+    <mat-paginator [pageSizeOptions]="pageSizeOptions" showFirstLastButtons></mat-paginator>
+  </div>
+
+  <button id="exportbutton" (click)="export()">Export</button>
