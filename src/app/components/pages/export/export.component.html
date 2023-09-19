@@ -87,10 +87,11 @@
       </ng-container>
 
       <ng-container matColumnDef="markers">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header>Marker</th>
-        <td mat-cell *matCellDef="let export">{{ export.Markers[0].Names[0] }}</td>
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Markerek</th>
+        <td mat-cell *matCellDef="let export" >{{ export.Markers[0].Names[0] }}</td>
       </ng-container>
 
+     
       <ng-container matColumnDef="hospitalized">
         <th mat-header-cell *matHeaderCellDef mat-sort-header>Kórház esély %</th>
         <td mat-cell *matCellDef="let export">{{ export.Hospitalized }}</td>
@@ -113,5 +114,9 @@
 
     <mat-paginator [pageSizeOptions]="pageSizeOptions" showFirstLastButtons></mat-paginator>
   </div>
+
+ 
+ 
+ 
 
   <button id="exportbutton" (click)="export()">Export</button>
