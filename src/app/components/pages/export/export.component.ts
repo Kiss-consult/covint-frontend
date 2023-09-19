@@ -13,7 +13,7 @@ import { Export } from 'src/app/models/export/export';
 @Component({
   selector: 'app-export',
   templateUrl: './export.component.html',
-  styleUrls: ['./export.component.css'],  
+  styleUrls: ['./export.component.css'],
 
 })
 
@@ -21,11 +21,10 @@ export class ExportComponent {
 
   filter: Filter = new Filter();
   exports: Export[] = [];
- 
 
-  displayedColumns: string[] = ['position', 'sex', 'age',  'markers','hospitalized','dead','count']; // Itt adhatod meg az oszlopok neveit
+
+  displayedColumns: string[] = ['position', 'sex', 'age', 'markers', 'hospitalized', 'dead', 'count']; // Itt adhatod meg az oszlopok neveit
   dataSource: MatTableDataSource<Illness> = new MatTableDataSource<Illness>;
-  case: Case = new Case();
   newBno: string = '';
   illnesses: Illness[] = [];
   // This is only stored for faster access to the illnesses by BNO code
@@ -38,26 +37,26 @@ export class ExportComponent {
 
     this.backendService.getAllIllnesses().subscribe(
       result => {
-      if (result.isErr()) {
-        alert("Betegségek lekérdezése sikertelen");
-        console.error(result.unwrapErr());
-        return;
-      }
-      this.illnesses = result.unwrap();
-      for (let illness of result.unwrap()) {
-        illness.BnoCodes.forEach((bnoCode) => {
-          this.illnessesByBno.set(bnoCode, illness);
-        });
-      }
-      this.dataSource.data = this.illnesses; // Az adatforrás frissítése
-      console.log("Sikeresen lekérdezve a betegségek az adatbázisból");
-      this.dataSource.paginator = this.paginator;
+        if (result.isErr()) {
+          alert("Betegségek lekérdezése sikertelen");
+          console.error(result.unwrapErr());
+          return;
+        }
+        this.illnesses = result.unwrap();
+        for (let illness of result.unwrap()) {
+          illness.BnoCodes.forEach((bnoCode) => {
+            this.illnessesByBno.set(bnoCode, illness);
+          });
+        }
+        this.dataSource.data = this.illnesses; // Az adatforrás frissítése
+        console.log("Sikeresen lekérdezve a betegségek az adatbázisból");
+        this.dataSource.paginator = this.paginator;
 
       });
   }
 
   private checkRequiredFields(): boolean {
-    
+
     if (this.filter.Sex === null || this.filter.Sex === "") {
       alert("A 'Nem' mező kitöltése kötelező");
       return false;
@@ -66,9 +65,9 @@ export class ExportComponent {
       alert("A 'Kor' mező kitöltése kötelező, és 18 és 88 között kell lennie");
       return false;
     }
-    return true; 
+    return true;
   }
-  
+
   public getMarkerNames(e: Export): string {
     return e.Markers.map(m => m.Names[0]).join(", ");
   }
@@ -77,8 +76,7 @@ export class ExportComponent {
     if (!this.checkRequiredFields()) {
       return;
     }
-    
-    console.log(this.case);
+
     this.backendService.filterExports(this.filter).subscribe(
       result => {
         if (result.isErr()) {
@@ -96,23 +94,26 @@ export class ExportComponent {
     if (!this.checkRequiredFields()) {
       return;
     }
-    
-    console.log(this.case);
-    this.backendService.insertValidated(this.case).subscribe(
-      result => {
-        if (result.isErr()) {
-          alert("Sikertelen exportálás");
-          console.error(result.unwrapErr());
-          return;
-        }
-        alert("Sikeres exportálás");
-        console.log("Successfully exported")
-        this.case = new Case();
-      });
+    const filename = "exported.xlsx";
+    this.backendService.downloadExport(this.filter).subscribe((result) => {
+      if (result.isErr()) {
+        console.error(result.unwrapErr());
+        return;
+      }
+      let response = result.unwrap();
+      let data = response[0];
+      let dataType = response[1];
+      let downloadLink = document.createElement('a');
+      downloadLink.href = window.URL.createObjectURL(new Blob(data, { type: dataType }));
+      if (filename)
+        downloadLink.setAttribute('download', filename);
+      document.body.appendChild(downloadLink);
+      downloadLink.click();
+    });
   }
 
 
-  
+
   public getMarker() {
     const newMarker = new Marker(this.newBno, this.illnessesByBno.get(this.newBno)?.Names);
     this.filter.Markers.push(newMarker);

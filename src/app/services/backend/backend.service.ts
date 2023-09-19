@@ -20,6 +20,19 @@ export class BackendService {
     return this.httpClient.get(this.url + "/", { responseType: "text" });
   }
 
+  public downloadExport(filter: Filter): Observable<Result<[any[], string]>> {
+    return this.httpClient.post(this.url + "/exports/download", filter, { responseType: "blob" }).pipe(
+      map(response => {
+        let dataType = response.type;
+        let binaryData = [];
+        binaryData.push(response);
+        let result: [any[], string] = [binaryData, dataType]
+        return new Ok(result);
+      }),
+      catchError(error => of(new Err<[any[], string]>(error)))
+    );
+  }
+
   // This function filters the exports with the given filter.
   public filterExports(filter: Filter): Observable<Result<Export[]>> {
     const url = this.url + "/exports/filter";
