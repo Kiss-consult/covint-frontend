@@ -32,7 +32,7 @@ body{
 }
 
 button{
-    width: 250px;
+    width: 200px;
     height: 40px;
     background-color: #42a160; 
     border: solid 1px rgb(255, 255, 255);
@@ -61,6 +61,8 @@ button:hover{
     background-color: #ffffffa9;
     height: 40px;
     padding: 5px;
+    min-width: 200px;
+    text-align: center;
 }
 
 input[type="radio"] {
