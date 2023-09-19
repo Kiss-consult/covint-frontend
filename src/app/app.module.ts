@@ -12,7 +12,7 @@ import { FormsModule } from '@angular/forms';
 import { MatTableModule } from '@angular/material/table';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatSortModule } from '@angular/material/sort';
-import {MatPaginator} from '@angular/material/paginator';
+import { MatPaginator} from '@angular/material/paginator';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -35,7 +35,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     MatPaginatorModule,  // Az oldalazás moduljának importálása
     MatSortModule, 
     MatFormFieldModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule    
   ],
   providers: [],
   bootstrap: [AppComponent]
