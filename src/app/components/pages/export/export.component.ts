@@ -66,9 +66,11 @@ export class ExportComponent {
       alert("A 'Kor' mező kitöltése kötelező, és 18 és 88 között kell lennie");
       return false;
     }
-    return true;
-
-    
+    return true; 
+  }
+  
+  public getMarkerNames(e: Export): string {
+    return e.Markers.map(m => m.Names[0]).join(", ");
   }
 
   public finish() {
