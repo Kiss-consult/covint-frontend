@@ -22,7 +22,7 @@ export class ExportComponent {
   filter: Filter = new Filter();
   exports: Export[] = [];
 
-  displayedColumns: string[] = ['position', 'sex', 'age', 'markers','hospitalized','dead']; // Itt adhatod meg az oszlopok neveit
+  displayedColumns: string[] = ['position', 'sex', 'age', 'markers','hospitalized','dead','count']; // Itt adhatod meg az oszlopok neveit
   dataSource: MatTableDataSource<Illness> = new MatTableDataSource<Illness>;
   case: Case = new Case();
   newBno: string = '';
