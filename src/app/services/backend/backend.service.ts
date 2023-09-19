@@ -3,10 +3,11 @@ import { HttpClient } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
 import { Observable, catchError, map, of } from 'rxjs';
 import { Case } from 'src/app/models/case/case';
-import { Err, Result, fromJSON } from 'src/app/models/utils/result';
+import { Err, Ok, Result, fromJSON } from 'src/app/models/utils/result';
 import { Illness } from 'src/app/models/illness/illness';
 import { Filter } from 'src/app/models/filter/filter';
 import { Export } from 'src/app/models/export/export';
+import { Marker } from 'src/app/models/marker/marker'; 
 
 @Injectable({
   providedIn: 'root'
@@ -22,8 +23,16 @@ export class BackendService {
   // This function filters the exports with the given filter.
   public filterExports(filter: Filter): Observable<Result<Export[]>> {
     const url = this.url + "/exports/filter";
+ 
+    // just for test
+let marker1 = new Marker("BNO1", ["betegseg1","betegseg2"]);
+let marker2 = new Marker("BNO2", ["betegseg3","betegseg4"]);
+
+
     return this.httpClient.post<Result<Export[]>>(url, filter).pipe(
-      map(result => fromJSON<Export[]>(JSON.stringify(result))),
+      //map(result => fromJSON<Export[]>(JSON.stringify(result))),
+
+      map(result => new Ok([new Export("valid", "Nő", 20, [marker1,marker2], 1, 1, 1)])),
       catchError(error => of(new Err<Export[]>(error)))
     );
     
