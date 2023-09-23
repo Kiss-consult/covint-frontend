@@ -16,6 +16,16 @@ import { MatPaginator} from '@angular/material/paginator';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { UsermanagementComponent } from './components/pages/usermanagement/usermanagement.component';
+import { AddnewuserComponent } from './components/pages/addnewuser/addnewuser.component';
+import { AcceptnewuserComponent } from './components/pages/acceptnewuser/acceptnewuser.component';
+import { ChangepwdComponent } from './components/pages/changepwd/changepwd.component';
+import { UsersComponent } from './components/pages/users/users.component';
+import { WaitingusersComponent } from './components/pages/waitingusers/waitingusers.component';
+import { AddnewmarkerComponent } from './components/pages/addnewmarker/addnewmarker.component';
+import { OverwritemasteruploadComponent } from './components/pages/overwritemasterupload/overwritemasterupload.component';
+import { FilterablemarkersComponent } from './components/pages/filterablemarkers/filterablemarkers.component';
+import { MarkermanagementComponent } from './components/pages/markermanagement/markermanagement.component';
 
 @NgModule({
   declarations: [
@@ -24,7 +34,17 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     ExportComponent,
     DatainputComponent,
     LoginComponent,
-    HomeComponent
+    HomeComponent,
+    UsermanagementComponent,
+    AddnewuserComponent,
+    AcceptnewuserComponent,
+    ChangepwdComponent,
+    UsersComponent,
+    WaitingusersComponent,
+    AddnewmarkerComponent,
+    OverwritemasteruploadComponent,
+    FilterablemarkersComponent,
+    MarkermanagementComponent
   ],
   imports: [
     BrowserModule,
