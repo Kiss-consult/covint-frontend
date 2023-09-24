@@ -1,26 +1,74 @@
-.navbar-brand{
-    font-size: 40px;
-    font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
-    padding-right: 30px;
-    padding-left: 10px;
-    padding-top: 0;
-    padding-bottom: 0;
-    border-right: solid 3px white;
+.custom-bg{
+    background-color: #ffffff;
+    
     
 }
 
-.custom-bg{
-    background-color: #2fa251;
-    border-bottom: solid 3px white;
+.nav-item.active a {
+    background-color: #0080ff; 
+    border-top-right-radius: 7px;
+    border-top-left-radius: 7px;
+    color: #ffffff;
+    position: relative;
+    margin: 0; 
+  }
+
+.nav-item a{
+    color: black;
+    margin: 0;
+}
+.nav-item:hover{
+    background-color:#9dc3ff ;
+    border-top-right-radius:7px;
+    border-top-left-radius: 7px;
+    color: #000000;
     margin: 0;
 }
 
-.nav-item{
-    font-size: 20px;
+#covint_logo{
+    width: 8%;
+    margin-right: 5%;
+    margin-bottom: 5px;
+}
+ 
+.navbar{
+    padding-bottom: 0;
 }
 
-a:hover {
-    background-color: rgba(255, 255, 255, 0.305);
-    border-radius: 5px;
+.nav {
+    list-style-type: none;
+    padding: 0;
   }
-
+  
+  .nav-item {
+    position: relative;
+    display: inline-block;
+    
+  }
+  
+  .nav-link {
+    text-decoration: none;
+    color: #333;
+  }
+  
+  .dropdown {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    background-color: #fff;
+    z-index: 1;
+  }
+  
+  .nav-item:hover .dropdown {
+    display: block;
+  }
+  
+  .dropdown li {
+    padding: 10px;
+  }
+  
+  .dropdown li:hover {
+    background-color: #f2f2f2;
+  }
+  

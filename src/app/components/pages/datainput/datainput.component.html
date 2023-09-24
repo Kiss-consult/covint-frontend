@@ -2,84 +2,86 @@
   Adatbevitel
 </h1>
 
-<br>
-<br>
-
 <div class="container">
-  <div style="display: flex;">
-    <label class="text" for="sex">Páciens neme</label>
-    <select class="droptextbox" name="sex" id="sex" [(ngModel)]="case.Sex">
+  <div class="sexclass">
+    <div>
+      <label class="text" for="sex">Páciens neme</label>
+    </div>
+    <div>
+      <select class="droptextbox" name="sex" id="sex" [(ngModel)]="case.Sex">
       <option value="Férfi">Férfi</option>
       <option value="Nő">Nő</option>
-    </select>
-  
-    <form>
-      <label class="text" for="age">Páciens kora</label>
-      <input class="droptextbox" type="number" id="age" name="age" min="1" [(ngModel)]="case.Age">
-    </form>
+      <option value="Kumulált">Kumulált</option>
+      </select>
+      <div class="ageclass">
+        <div>
+          <label class="text" for="age">Páciens kora</label>
+        </div>
+        <div>
+          <input class="droptextbox" type="number" id="age" name="age" min="1" [(ngModel)]="case.Age">
+        </div>
+      </div>
+    </div>
   </div>
 
-  <br>
-
-  <div style="display: flex; align-items: center">
-    <label class="text" style="margin-right: 50px;">Kórházba került</label>
-
+  <div class="hospitalized">
+    <div>
+      <label class="text">Kórházba került</label>
+    </div>
+    <div>
+      <label for="trueHosp">Igen</label>    
+      <input type="radio" id="trueHosp" name="hospitalized" [value]="true" [(ngModel)]="case.Hospitalized">
     
-    <label for="trueHosp">Igen</label>
-    <input type="radio" id="trueHosp" name="hospitalized" [value]="true" [(ngModel)]="case.Hospitalized">
-
-
-    <label for="falseHosp">Nem</label>
-    <input type="radio" id="falseHosp" name="hospitalized" [value]="false" [(ngModel)]="case.Hospitalized">
+      <label for="falseHosp">Nem</label>
+      <input type="radio" id="falseHosp" name="hospitalized" [value]="false" [(ngModel)]="case.Hospitalized">
+    </div>
   </div>
 
-  <br>
-
-  <div>
-    <label class="text" style="margin-right: 50px;"> Meghalt</label>
-    <label for="trueDead">Igen</label>
-    <input type="radio" id="trueDead" name="dead" [value]="true" [(ngModel)]="case.Dead">
-    <label for="falseDead">Nem</label>
-    <input type="radio" id="falseDead" name="dead" [value]="false" [(ngModel)]="case.Dead">
+  <div class="dead">
+    <div>
+      <label class="text"> Meghalt</label>
+    </div>
+    <div>
+      <label for="trueDead">Igen</label>
+      <input type="radio" id="trueDead" name="dead" [value]="true" [(ngModel)]="case.Dead">
+      <label for="falseDead">Nem</label>
+      <input type="radio" id="falseDead" name="dead" [value]="false" [(ngModel)]="case.Dead">
+    </div>
   </div>
-
-  <br>
 
   <form>
     <label for="source">Forrás:</label>
     <input class="droptextbox" type="text" id="source" name="source" [(ngModel)]="case.Source">
   </form>
 
-  <br>
-
-  <div class="container01">
-    <select class="droptextbox" type="text" id="markers" name="markers" [(ngModel)]="newBno">
-      <ng-container *ngFor="let illness of illnesses">
-        <optgroup label="{{illness.Names[0]}}">
+  <div class="markerclass">
+    <div>
+      <label class="text"> Marker</label>
+    </div>
+    <div style="display: flex;">
+      <select class="droptextbox" type="text" id="markers" name="markers" [(ngModel)]="newBno">
+        <ng-container *ngFor="let illness of illnesses">
+          <optgroup label="{{illness.Names[0]}}">
           <ng-container *ngFor="let bno of illness.BnoCodes">
             <option value="{{bno}}">{{bno}}</option>
           </ng-container>
-        </optgroup>
-      </ng-container>
-    </select>
-
-    <br>
-
-    <button (click)="addMarker()">Hozzáadás</button>
+          </optgroup>
+        </ng-container>
+      </select>
+     
+      <button (click)="addMarker()">Hozzáadás</button></div>
+    
   </div>
 
   <div class="addedtext">
     <div *ngFor="let marker of case.Markers">
-      <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: solid 3px #42a160; padding-bottom: 20px; padding-top: 20px;">
+      <div style=" border-bottom: solid 3px #848484; padding-bottom: 20px; padding-top: 20px;">
         <p>{{marker.BnoCode}} - {{marker.Names[0]}}</p>
         <button (click)="removeMarker(marker)">Törlés</button>
       </div>
     </div>
   </div>
 
-  <br>
-  <br>
-
-  <button id="finishbutton" (click)="finish()">Kész</button>
+  <button id="okebutton" (click)="finish()">Kész</button>
 
 </div>

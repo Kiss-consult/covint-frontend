@@ -2,28 +2,34 @@
     display: flex;
     vertical-align: middle;
     align-items: center;
+    margin-top: 50px;
+    margin-bottom: 50px;
 }
 
-#sex {
-    width: 100px;
-    margin-left: 25px;
-    margin-right: 50px;
-    text-align: center;
-    padding: 0;
+.sexclass{
+    display: block;
+    flex-direction: column;
+    
+    margin-bottom: 20px;
 }
 
 #source {
-    margin-left: 90px;
+    display: block;
+    flex-direction: column;
+    margin-right: 200px;
+    margin-bottom: 20px;
+    width: 200px;
 }
 
 button {
     margin: 0;
-    margin-left: 20px;
+    margin-left: 0px;
 }
 
-#finishbutton {
-    float: left;
+#okebutton{
     margin-left: 0;
+    margin-bottom: 50px;
+    margin-top: 20px;
 }
 
 .addedtext { 
@@ -40,11 +46,10 @@ button {
     padding: 0;
 }
 
-#age{
-    width: 100px;
-    margin-left: 25px;
-    text-align: center;
-    padding: 0;
+.ageclass{
+    display: block;
+    flex-direction: column;
+    margin-top: 20px;
 }
 
 #trueHosp{
@@ -69,7 +74,26 @@ button {
     margin: 0;  
 }
 
+.markerclass{
+    display: block;
+    flex-direction: column;
+    margin-bottom: 20px;
+}
+
 #markers{
-    width: 80px;
-    
+    margin-right: 20px;
+}
+
+#age{
+    width: 200px;
+}
+
+.hospitalized{
+    margin: top 20px;
+    margin-bottom:20px ;
+}
+
+.dead{
+    margin: top 20px;
+    margin-bottom:20px ;
 }
