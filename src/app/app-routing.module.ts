@@ -5,6 +5,16 @@ import { DatainputComponent } from './components/pages/datainput/datainput.compo
 import { ExportComponent } from './components/pages/export/export.component';
 import { DiagramComponent } from './components/pages/diagram/diagram.component';
 import { HomeComponent } from './components/pages/home/home.component';
+import { UsermanagementComponent } from './components/pages/usermanagement/usermanagement.component';
+import { AddnewuserComponent } from './components/pages/addnewuser/addnewuser.component';
+import { AcceptnewuserComponent } from './components/pages/acceptnewuser/acceptnewuser.component';
+import { ChangepwdComponent } from './components/pages/changepwd/changepwd.component';
+import { UsersComponent } from './components/pages/users/users.component';
+import { WaitingusersComponent } from './components/pages/waitingusers/waitingusers.component';
+import { AddnewmarkerComponent } from './components/pages/addnewmarker/addnewmarker.component';
+import { OverwritemasteruploadComponent } from './components/pages/overwritemasterupload/overwritemasterupload.component';
+import { FilterablemarkersComponent } from './components/pages/filterablemarkers/filterablemarkers.component';
+import { MarkermanagementComponent } from './components/pages/markermanagement/markermanagement.component';
 
 const routes: Routes = [
   { path: "", component: HomeComponent },
@@ -13,6 +23,16 @@ const routes: Routes = [
   {path: "datainput", component: DatainputComponent},
   {path: "export", component: ExportComponent},
   {path: "diagram", component: DiagramComponent},
+  {path: "usermanagement", component: UsermanagementComponent},
+  {path: "addnewuser", component: AddnewuserComponent},
+  {path: "acceptnewuser", component:AcceptnewuserComponent},
+  {path: "changepwd", component:ChangepwdComponent},
+  {path: "users", component:UsersComponent},
+  {path: "waitingusers", component:WaitingusersComponent},
+  {path: "addnewmarker", component:AddnewmarkerComponent},
+  {path: "overwritemasterupload", component:OverwritemasteruploadComponent},
+  {path: "filterablemarkers", component:FilterablemarkersComponent},
+  {path: "markermanagement", component:MarkermanagementComponent},
 ];
 
 @NgModule({

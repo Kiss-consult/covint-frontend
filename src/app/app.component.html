@@ -1,34 +1,71 @@
 <div id="app">
   <nav class="navbar navbar-expand navbar-dark custom-bg">
-    <a href="#" class="navbar-brand">Covint</a>
+    <svg id="covint_logo" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 197.33 50"><image width="592" height="150" transform="scale(.33)" xlink:href="data:image/png;base64,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"/></svg>    
+    
     <ul class="navbar-nav mr-auto" routerLinkActive="active">
-      <li class="nav-item">
-        <a href="/home" class="nav-link" style="color: rgb(255, 255, 255);" routerLink="home">Kezdőlap</a>
+      
+      <li class="nav-item" routerLinkActive="active" routerLinkActive="active">
+        <a href="/home" class="nav-link"  routerLink="home">Kezdőlap</a>
       </li>
-      <li class="nav-item">
-        <a href="/datainput" class="nav-link" style="color: rgb(255, 255, 255);" routerLink="datainput">Adatbevitel</a>
+      
+      <li class="nav-item" routerLinkActive="active">
+        <a href="/datainput" class="nav-link"  routerLink="datainput">Adatbevitel</a>
       </li>
-      <li class="nav-item">
-        <a href="/export" class="nav-link" style="color: rgb(255, 255, 255);" routerLink="export">Export</a>
+      
+      <li class="nav-item" routerLinkActive="active">
+        <a href="/export" class="nav-link"  routerLink="export">Export</a>
       </li>
-      <li class="nav-item">
-        <a href="/diagram" class="nav-link" style="color: rgb(255, 255, 255);" routerLink="diagram">Diagramok</a>
+      
+      <li class="nav-item" routerLinkActive="active">
+        <a href="/diagram" class="nav-link"  routerLink="diagram">Diagramok</a>
       </li>
+      
+      <nav>
+        <ul class="nav">
+          <li class="nav-item" routerLinkActive="active">
+            <a class="nav-link" >Felhasználók kezelése</a>
+            <ul class="dropdown">
+              <li><a [routerLink]="['/addnewuser']" routerLinkActive="active">Új felhasználó hozzáadása</a></li>
+              <li><a [routerLink]="['/acceptnewuser']" routerLinkActive="active">Új felhasználó elfogadása</a></li>
+              <li><a [routerLink]="['/changepwd']" routerLinkActive="active">Jelszócsere</a></li>
+            </ul>
+          </li>
+        </ul>
+      </nav>
+
+      <nav>
+        <ul class="nav">
+          <li class="nav-item" routerLinkActive="active">
+            <a class="nav-link">Markerek kezelése</a>
+            <ul class="dropdown">
+              <li><a [routerLink]="['/addnewmarker']" routerLinkActive="active">Új marker hozzáadása</a></li>
+              <li><a [routerLink]="['/filterablemarkers']" routerLinkActive="active">Marker szűrhető-e</a></li>
+              <li><a [routerLink]="['/overwritemasterupload']" routerLinkActive="active">Ősfeltöltés felülírása</a></li>
+            </ul>
+          </li>
+        </ul>
+      </nav>
+      
     </ul>
 
-    <ul class="navbar-nav ml-auto" *ngIf="!loginService.isLoggedIn()">
-      <li class="nav-item">
-        <a href="/login" class="nav-link" style="color: rgb(255, 255, 255);" routerLink="login">Bejelentkezés</a>
-      </li>
+    <ul class="navbar-nav ml-auto" *ngIf="!loginService.isLoggedIn()">      
+      
+      <li class="nav-item" routerLinkActive="active">
+        <a href="/login" class="nav-link"  routerLink="login">Bejelentkezés</a>
+      </li>    
+    
     </ul>
 
-    <ul class="navbar-nav ml-auto" *ngIf="loginService.isLoggedIn()">
-      <li class="nav-item">
+    <ul class="navbar-nav ml-auto" *ngIf="loginService.isLoggedIn()">      
+      
+      <li class="nav-item" routerLinkActive="active">
         <a class="nav-link">{{ loginService.getUsername() }}</a>
       </li>
-      <li class="nav-item">
+      
+      <li class="nav-item" routerLinkActive="active">
         <a [routerLink]="" class="nav-link" (click)="logout()">Kijelentkezés</a>
-      </li>
+      </li>    
+    
     </ul>
   </nav>
 </div>
