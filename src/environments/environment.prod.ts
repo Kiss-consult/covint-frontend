@@ -1,5 +1,5 @@
 export const environment = {
     production: true,
     type: "prod",
-    backendUrl: "http://localhost:8080",
+    backendUrl: "https://covint.kisscloud.eu/backend",
 };
