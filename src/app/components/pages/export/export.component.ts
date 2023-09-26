@@ -23,7 +23,7 @@ export class ExportComponent {
   exports: Export[] = [];
 
 
-  displayedColumns: string[] = ['position', 'sex', 'age', 'markers', 'hospitalized', 'dead', 'count']; // Itt adhatod meg az oszlopok neveit
+  displayedColumns: string[] = ['position', 'sex', 'age', 'markers', 'hospitalized', 'dead', 'count', 'validated']; // Itt adhatod meg az oszlopok neveit
   dataSource: MatTableDataSource<Illness> = new MatTableDataSource<Illness>;
   newIllness: string = '';
   illnesses: Illness[] = [];
@@ -48,9 +48,9 @@ export class ExportComponent {
          //   this.illnessesByBno.set(bnoCode, illness);
          // });
        // }
-        this.dataSource.data = this.illnesses; // Az adatforrás frissítése
+       // this.dataSource.data = this.illnesses; // Az adatforrás frissítése
         console.log("Sikeresen lekérdezve a betegségek az adatbázisból");
-        this.dataSource.paginator = this.paginator;
+        //this.dataSource.paginator = this.paginator;
 
       });
   }

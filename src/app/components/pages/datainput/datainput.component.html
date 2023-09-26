@@ -69,7 +69,6 @@
 
       <button (click)="addMarker()">Hozzáadás</button>
     </div>
-
   </div>
 
   <div class="addedtext">
@@ -81,6 +80,38 @@
     </div>
   </div>
 
+
+  <div class="markerclass">
+    
+
+    <label for="bno">BNO Kódok bevitele:</label>
+  <input type="text" id="bno" name="bno" [(ngModel)]="newBno"><br><br>
+</div>
+  
+  
+  
+  <div>
+   <!-- style="display: flex;">
+      <select class="droptextbox" type="text" id="markers" name="markers" [(ngModel)]="newIllness">
+        <ng-container *ngFor="let illness of illnesses">
+
+          <option value="{{illness.GroupName}}">{{illness.GroupName}}</option>
+
+        </ng-container>
+      </select>
+-->
+      <button (click)="addBno()">BNO Hozzáadás</button>
+    </div>
+  
+
+  <div class="addedtext">
+    <div *ngFor="let bno of case.BnoCodes">
+      <div style=" border-bottom: solid 3px #848484; padding-bottom: 20px; padding-top: 20px;">
+        <p>{{bno}}</p>
+        <button (click)="removeBno(bno)">BNO Törlés</button>
+      </div>
+    </div>
+  </div>
   <button id="okebutton" (click)="finish()">Kész</button>
 
 </div>
