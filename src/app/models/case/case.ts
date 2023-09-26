@@ -6,6 +6,7 @@ export class Case {
     Hospitalized: boolean = false;
     Dead: boolean = false;
     Illnesses: string[] = [];
+    BnoCodes: string[] = [];
     Source: string = "";
     Date: string = "";
     Validated: boolean = false;

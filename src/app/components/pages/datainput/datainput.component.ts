@@ -13,6 +13,7 @@ import { BackendService } from 'src/app/services/backend/backend.service';
 export class DatainputComponent {
   case: Case = new Case();
   newIllness: string = '';
+  newBno: string = '';
   illnesses: Illness[] = [];
   // This is only stored for faster access to the illnesses by BNO code
   illnessesByBno: Map<string, Illness> = new Map();
@@ -40,13 +41,10 @@ export class DatainputComponent {
   // it removes it. Otherwise it adds it to the case.
   public addMarker() {
     if (this.newIllness === '') {
-      alert("Kérem adjon meg egy BNO kódot");
+      alert("Kérem adjon meg egy markert!");
       return;
     }
     //const newMarker = new Marker(this.newBno, this.illnessesByBno.get(this.newBno)?.Names);
-
-
-
     
     if (this.case.Illnesses.filter((valami) => valami === this.newIllness).length > 0) {
       console.log("Marker already exists")
@@ -57,6 +55,30 @@ export class DatainputComponent {
     this.newIllness = '';
   }
 
+  // Function to add bno. If the newly typed bno is already in the case,
+  // it removes it. Otherwise it adds it to the case.
+  public addBno() {
+    if (this.newBno === '') {
+      alert("Kérem adjon meg egy BNO kódot!");
+      return;
+    }
+    //const newMarker = new Marker(this.newBno, this.illnessesByBno.get(this.newBno)?.Names);
+    
+    if (this.case.BnoCodes.filter((valami) => valami === this.newBno).length > 0) {
+      console.log("Marker already exists")
+      this.removeBno(this.newBno);
+      return;
+    }
+    this.case.BnoCodes.push(this.newBno);
+    this.newBno = '';
+  }
+
+
+
+  // Function to remove bno from the case
+  public removeBno(bno: string) {
+    this.case.BnoCodes = this.case.BnoCodes.filter(m => m !== bno);
+  }
   // Function to check the required fields of the case.
   // If any of the required fields are not filled, it alerts the user and returns false.
   private checkRequiredFields(): boolean {
