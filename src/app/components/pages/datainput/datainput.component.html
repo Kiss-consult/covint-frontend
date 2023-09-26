@@ -50,7 +50,7 @@
   </div>
 
   <form>
-    <label for="source">Forrás:</label>
+    <label style="margin-bottom: 0;" for="source">Forrás:</label>
     <input class="droptextbox" type="text" id="source" name="source" [(ngModel)]="case.Source">
   </form>
 
@@ -72,25 +72,37 @@
   </div>
 
   <div class="addedtext">
-    <div *ngFor="let illness of case.Illnesses">
-      <div style=" border-bottom: solid 3px #848484; padding-bottom: 20px; padding-top: 20px;">
-        <p>{{illness}}</p>
+    <div *ngFor="let illness of case.Illnesses" style="border-bottom: solid 3px #0080ff; display: flex; align-items: center; padding-bottom: 5px; margin-top: 5px;">
+      <div style="flex-grow: 1;">
+        <p style="margin: 0;">{{ illness }}</p>
+      </div>
+      <div style="margin-left: auto;">
         <button (click)="removeMarker(illness)">Törlés</button>
       </div>
     </div>
   </div>
+  
+  
+  
+  
+  <br>
+  
 
 
-  <div class="markerclass">
+  <div class="bnoclass">
     
+<div>
+    <label style="margin-bottom: 0;" for="bno">BNO Kódok bevitele</label>
+  </div>
+  <div style="display: flex;">
+  <input class="droptextbox" type="text" id="bno" name="bno" [(ngModel)]="newBno">
 
-    <label for="bno">BNO Kódok bevitele:</label>
-  <input type="text" id="bno" name="bno" [(ngModel)]="newBno"><br><br>
-</div>
+  
+   <button (click)="addBno()">BNO Hozzáadás</button>
+    </div>
+  </div>
   
   
-  
-  <div>
    <!-- style="display: flex;">
       <select class="droptextbox" type="text" id="markers" name="markers" [(ngModel)]="newIllness">
         <ng-container *ngFor="let illness of illnesses">
@@ -100,8 +112,7 @@
         </ng-container>
       </select>
 -->
-      <button (click)="addBno()">BNO Hozzáadás</button>
-    </div>
+     
   
 
   <div class="addedtext">
