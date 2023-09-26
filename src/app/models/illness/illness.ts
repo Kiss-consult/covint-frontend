@@ -1,8 +1,10 @@
 export class Illness {
-    BnoCodes: string[] = [];
-    Group: string = "";
-    IsMarker: boolean = false;
-    Names: string[] = [];
+    Group: number = 0;
+    GroupName: string = "";
+    AlternativeNames: string[] = [];   
+    IsMarker: number = 0;    
+
+
 
     constructor() {}
 }

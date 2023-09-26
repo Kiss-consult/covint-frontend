@@ -1,7 +1,7 @@
 import { Component, ViewChild, } from '@angular/core';
 import { Case } from 'src/app/models/case/case';
 import { Illness } from 'src/app/models/illness/illness';
-import { Marker } from 'src/app/models/marker/marker';
+
 import { BackendService } from 'src/app/services/backend/backend.service';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatPaginator } from '@angular/material/paginator';
@@ -25,7 +25,7 @@ export class ExportComponent {
 
   displayedColumns: string[] = ['position', 'sex', 'age', 'markers', 'hospitalized', 'dead', 'count']; // Itt adhatod meg az oszlopok neveit
   dataSource: MatTableDataSource<Illness> = new MatTableDataSource<Illness>;
-  newBno: string = '';
+  newIllness: string = '';
   illnesses: Illness[] = [];
   // This is only stored for faster access to the illnesses by BNO code
   illnessesByBno: Map<string, Illness> = new Map();
@@ -43,11 +43,11 @@ export class ExportComponent {
           return;
         }
         this.illnesses = result.unwrap();
-        for (let illness of result.unwrap()) {
-          illness.BnoCodes.forEach((bnoCode) => {
-            this.illnessesByBno.set(bnoCode, illness);
-          });
-        }
+        //for (let illness of result.unwrap()) {
+         // illness.BnoCodes.forEach((bnoCode) => {
+         //   this.illnessesByBno.set(bnoCode, illness);
+         // });
+       // }
         this.dataSource.data = this.illnesses; // Az adatforrás frissítése
         console.log("Sikeresen lekérdezve a betegségek az adatbázisból");
         this.dataSource.paginator = this.paginator;
@@ -62,14 +62,18 @@ export class ExportComponent {
       return false;
     }
     if (this.filter.AgeFrom === null || this.filter.AgeFrom < 18 || this.filter.AgeFrom > 88) {
-      alert("A 'Kor' mező kitöltése kötelező, és 18 és 88 között kell lennie");
+      alert("A 'Páciens kora -tól' mező kitöltése kötelező, és 18 és 88 között kell lennie");
+      return false;
+    }
+    if (this.filter.AgeTo === null || this.filter.AgeTo < 18 || this.filter.AgeTo > 88) {
+      alert("A 'Páciens kora -ig' mező kitöltése kötelező, és 18 és 88 között kell lennie");
       return false;
     }
     return true;
   }
 
   public getMarkerNames(e: Export): string {
-    return e.Markers.map(m => m.Names[0]).join(", ");
+    return e.Illnesses.map(m => m).join(", ");
   }
 
   public finish() {
@@ -115,13 +119,13 @@ export class ExportComponent {
 
 
   public getMarker() {
-    const newMarker = new Marker(this.newBno, this.illnessesByBno.get(this.newBno)?.Names);
-    this.filter.Markers.push(newMarker);
+    //const newMarker = new Marker(this.newBno, this.illnessesByBno.get(this.newBno)?.Names);
+    this.filter.Illnesses.push(this.newIllness);
   }
 
 
   // Function to remove marker from the filter
-  public removeMarker(marker: Marker) {
-    this.filter.Markers = this.filter.Markers.filter(m => m.BnoCode !== marker.BnoCode);
+  public removeMarker(illness: string) {
+    this.filter.Illnesses = this.filter.Illnesses.filter(m => m !== illness);
   }
 }

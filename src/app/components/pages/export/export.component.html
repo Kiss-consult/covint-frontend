@@ -36,10 +36,10 @@
       <label class="text"> Validált</label>
     </div>
     <div>
-      <select class="droptextbox" name="validity" id="validity" [(ngModel)]="filter.Validity">
-      <option value="validated">Validált</option>
-      <option value="unvalidated">Nem validált</option>
-      <option value="cumulated">Kumulált</option>
+      <select class="droptextbox" name="validity" id="validity" [(ngModel)]="filter.Validated">
+      <option value="validált">Validált</option>
+      <option value="nem validált">Nem validált</option>
+      <option value="kumulált">Kumulált</option>
       </select>
     </div>
   </div>
@@ -49,13 +49,11 @@
       <label class="text"> Marker</label>
     </div>
     <div style="display: flex;">
-      <select class="droptextbox" type="text" id="markers" name="markers" [(ngModel)]="newBno">
+      <select class="droptextbox" type="text" id="markers" name="markers" [(ngModel)]="newIllness">
         <ng-container *ngFor="let illness of illnesses">
-          <optgroup label="{{illness.Names[0]}}">
-          <ng-container *ngFor="let bno of illness.BnoCodes">
-            <option value="{{bno}}">{{bno}}</option>
-          </ng-container>
-          </optgroup>
+         
+            <option value="{{illness.GroupName}}">{{illness.GroupName}}</option>
+         
         </ng-container>
       </select>
 
@@ -66,10 +64,10 @@
   </div>
 
   <div class="addedtext">
-    <div *ngFor="let marker of filter.Markers">
+    <div *ngFor="let illness of filter.Illnesses">
       <div style=" border-bottom: solid 3px #42a160; padding-bottom: 20px; padding-top: 20px;">
-        <p>{{marker.BnoCode}} - {{marker.Names[0]}}</p>
-        <button (click)="removeMarker(marker)">Törlés</button>
+        <p> {{illness}}</p>
+        <button (click)="removeMarker(illness)">Törlés</button>
       </div>
     </div>
   </div>

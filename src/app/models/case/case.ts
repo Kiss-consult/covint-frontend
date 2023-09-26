@@ -1,14 +1,14 @@
-import { Marker } from "../marker/marker";
+
 
 export class Case {
     Sex: string = "";
     Age: number = 0;
     Hospitalized: boolean = false;
     Dead: boolean = false;
-    Markers: Marker[] = [];
+    Illnesses: string[] = [];
     Source: string = "";
     Date: string = "";
-    Valid: boolean = false;
+    Validated: boolean = false;
     
     constructor() {
         const obj = {

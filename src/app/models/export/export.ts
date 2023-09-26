@@ -1,22 +1,22 @@
 
-import { Marker } from "../marker/marker"; 
+
 
 export class Export {
-    Validity: string = "";
+    Validated: string = "";
     Sex: string = "";
     Age: number = 0;
-    Markers: Marker[] = [];
+    Illnesses: string[] = [];
     Hospitalized: number = 0;
     Dead: number = 0;
     Count: number = 0;
 
 
 
-    constructor(validity: string, sex: string, age: number, markers: Marker[], hosp: number, dead: number, count: number) {
-        this.Validity = validity;
+    constructor(validated: string, sex: string, age: number, illnesses: string[], hosp: number, dead: number, count: number) {
+        this.Validated = validated;
         this.Sex = sex; 
         this.Age = age;
-        this.Markers = markers;
+        this.Illnesses = illnesses;
         this.Hospitalized = hosp;
         this.Dead = dead;
         this.Count = count;

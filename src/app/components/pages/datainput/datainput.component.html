@@ -9,9 +9,9 @@
     </div>
     <div>
       <select class="droptextbox" name="sex" id="sex" [(ngModel)]="case.Sex">
-      <option value="Férfi">Férfi</option>
-      <option value="Nő">Nő</option>
-      <option value="Kumulált">Kumulált</option>
+        <option value="Férfi">Férfi</option>
+        <option value="Nő">Nő</option>
+       
       </select>
       <div class="ageclass">
         <div>
@@ -29,9 +29,9 @@
       <label class="text">Kórházba került</label>
     </div>
     <div>
-      <label for="trueHosp">Igen</label>    
+      <label for="trueHosp">Igen</label>
       <input type="radio" id="trueHosp" name="hospitalized" [value]="true" [(ngModel)]="case.Hospitalized">
-    
+
       <label for="falseHosp">Nem</label>
       <input type="radio" id="falseHosp" name="hospitalized" [value]="false" [(ngModel)]="case.Hospitalized">
     </div>
@@ -59,25 +59,24 @@
       <label class="text"> Marker</label>
     </div>
     <div style="display: flex;">
-      <select class="droptextbox" type="text" id="markers" name="markers" [(ngModel)]="newBno">
+      <select class="droptextbox" type="text" id="markers" name="markers" [(ngModel)]="newIllness">
         <ng-container *ngFor="let illness of illnesses">
-          <optgroup label="{{illness.Names[0]}}">
-          <ng-container *ngFor="let bno of illness.BnoCodes">
-            <option value="{{bno}}">{{bno}}</option>
-          </ng-container>
-          </optgroup>
+
+          <option value="{{illness.GroupName}}">{{illness.GroupName}}</option>
+
         </ng-container>
       </select>
-     
-      <button (click)="addMarker()">Hozzáadás</button></div>
-    
+
+      <button (click)="addMarker()">Hozzáadás</button>
+    </div>
+
   </div>
 
   <div class="addedtext">
-    <div *ngFor="let marker of case.Markers">
+    <div *ngFor="let illness of case.Illnesses">
       <div style=" border-bottom: solid 3px #848484; padding-bottom: 20px; padding-top: 20px;">
-        <p>{{marker.BnoCode}} - {{marker.Names[0]}}</p>
-        <button (click)="removeMarker(marker)">Törlés</button>
+        <p>{{illness}}</p>
+        <button (click)="removeMarker(illness)">Törlés</button>
       </div>
     </div>
   </div>

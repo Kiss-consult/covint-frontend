@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { Case } from 'src/app/models/case/case';
 import { Illness } from 'src/app/models/illness/illness';
-import { Marker } from 'src/app/models/marker/marker';
+
 import { BackendService } from 'src/app/services/backend/backend.service';
 
 @Component({
@@ -12,7 +12,7 @@ import { BackendService } from 'src/app/services/backend/backend.service';
 
 export class DatainputComponent {
   case: Case = new Case();
-  newBno: string = '';
+  newIllness: string = '';
   illnesses: Illness[] = [];
   // This is only stored for faster access to the illnesses by BNO code
   illnessesByBno: Map<string, Illness> = new Map();
@@ -26,11 +26,11 @@ export class DatainputComponent {
           console.error(result.unwrapErr());
           return;
         }
-        for (let illness of result.unwrap()) {
-          illness.BnoCodes.forEach((bnoCode) => {
-            this.illnessesByBno.set(bnoCode, illness);
-          });
-        }
+        //for (let illness of result.unwrap()) {
+         // illness.BnoCodes.forEach((bnoCode) => {
+         //   this.illnessesByBno.set(bnoCode, illness);
+          //});
+        //}
         this.illnesses = result.unwrap();
         console.log("Successfully got illnesses from database")
       });
@@ -39,18 +39,22 @@ export class DatainputComponent {
   // Function to add marker. If the newly selected marker is already in the case,
   // it removes it. Otherwise it adds it to the case.
   public addMarker() {
-    if (this.newBno === '') {
+    if (this.newIllness === '') {
       alert("Kérem adjon meg egy BNO kódot");
       return;
     }
-    const newMarker = new Marker(this.newBno, this.illnessesByBno.get(this.newBno)?.Names);
-    if (this.case.Markers.filter(m => m.BnoCode === newMarker.BnoCode).length > 0) {
+    //const newMarker = new Marker(this.newBno, this.illnessesByBno.get(this.newBno)?.Names);
+
+
+
+    
+    if (this.case.Illnesses.filter((valami) => valami === this.newIllness).length > 0) {
       console.log("Marker already exists")
-      this.removeMarker(newMarker);
+      this.removeMarker(this.newIllness);
       return;
     }
-    this.case.Markers.push(newMarker);
-    this.newBno = '';
+    this.case.Illnesses.push(this.newIllness);
+    this.newIllness = '';
   }
 
   // Function to check the required fields of the case.
@@ -76,9 +80,17 @@ export class DatainputComponent {
   }
 
   // Function to remove marker from the case
-  public removeMarker(marker: Marker) {
-    this.case.Markers = this.case.Markers.filter(m => m.BnoCode !== marker.BnoCode);
+  public removeMarker(illness: string) {
+    this.case.Illnesses = this.case.Illnesses.filter(m => m !== illness);
   }
+
+
+
+
+
+
+  
+ 
 
   // Format date to YYYY-MM-DD
   private formatDate(date: Date): string {
