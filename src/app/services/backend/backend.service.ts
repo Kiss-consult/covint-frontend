@@ -7,7 +7,7 @@ import { Err, Ok, Result, fromJSON } from 'src/app/models/utils/result';
 import { Illness } from 'src/app/models/illness/illness';
 import { Filter } from 'src/app/models/filter/filter';
 import { Export } from 'src/app/models/export/export';
-import { Marker } from 'src/app/models/marker/marker';
+
 
 @Injectable({
   providedIn: 'root'
@@ -62,7 +62,7 @@ export class BackendService {
 
   // This function inserts the given validated case into the database.
   public insertValidated(case_: Case): Observable<Result<{}>> {
-    const url = this.url + "/validated/upload";
+    const url = this.url + "/cases/validated/upload";
     return this.httpClient.post<Result<{}>>(url, case_).pipe(
       map(result => fromJSON<{}>(JSON.stringify(result))),
       catchError(error => of(new Err<{}>(error)))
