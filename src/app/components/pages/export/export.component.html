@@ -64,13 +64,16 @@
   </div>
 
   <div class="addedtext">
-    <div *ngFor="let illness of filter.Illnesses">
-      <div style=" border-bottom: solid 3px #42a160; padding-bottom: 20px; padding-top: 20px;">
-        <p> {{illness}}</p>
+    <div *ngFor="let illness of filter.Illnesses" style="border-bottom: solid 3px #0080ff; display: flex; align-items: center; padding-bottom: 5px; margin-top: 5px;">
+      <div style="flex-grow: 1;">
+        <p style="margin: 0;">{{ illness }}</p>
+      </div>
+      <div style="margin-left: auto;">
         <button (click)="removeMarker(illness)">Törlés</button>
       </div>
     </div>
   </div>
+  
 
   <br>
   <button id="okebutton" (click)="finish()">Kész</button>

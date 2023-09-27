@@ -64,6 +64,7 @@ button {
 #trueDead{
     margin-left: 10px;
     margin-right: 70px;
+    border-left: solid 1px #0800ff;
 }
 
 #falseDead{
@@ -82,6 +83,7 @@ button {
 
 #markers{
     margin-right: 20px;
+    
 }
 
 #age{
@@ -96,4 +98,17 @@ button {
 .dead{
     margin: top 20px;
     margin-bottom:20px ;
+}
+
+.bnoclass{
+    display: block;
+    flex-direction: column;
+    margin-bottom: 20px;
+    margin-top: 0;
+}
+
+#bno{
+   margin-top: 0; 
+    margin-right: 20px;
+    width: 200px;
 }
