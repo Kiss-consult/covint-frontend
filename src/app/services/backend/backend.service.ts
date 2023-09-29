@@ -1,20 +1,22 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { environment } from 'src/environments/environment';
 import { Observable, catchError, map, of } from 'rxjs';
 import { Case } from 'src/app/models/case/case';
 import { Err, Ok, Result, fromJSON } from 'src/app/models/utils/result';
 import { Illness } from 'src/app/models/illness/illness';
 import { Filter } from 'src/app/models/filter/filter';
 import { Export } from 'src/app/models/export/export';
+import { ConfigService } from '../config/config.service';
 
 
 @Injectable({
   providedIn: 'root'
 })
 export class BackendService {
-  private url: string = environment.backendUrl;
-  constructor(private httpClient: HttpClient) { }
+  private url: string = "";
+  constructor(private httpClient: HttpClient, private config: ConfigService) {
+    this.url = this.config.config.BackendUrl;
+   }
 
   public hello(): Observable<string> {
     return this.httpClient.get(this.url + "/", { responseType: "text" });

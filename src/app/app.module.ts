@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { APP_INITIALIZER, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -12,8 +12,6 @@ import { FormsModule } from '@angular/forms';
 import { MatTableModule } from '@angular/material/table';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatSortModule } from '@angular/material/sort';
-import { MatPaginator} from '@angular/material/paginator';
-import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { UsermanagementComponent } from './components/pages/usermanagement/usermanagement.component';
@@ -26,6 +24,7 @@ import { AddnewmarkerComponent } from './components/pages/addnewmarker/addnewmar
 import { OverwritemasteruploadComponent } from './components/pages/overwritemasterupload/overwritemasterupload.component';
 import { FilterablemarkersComponent } from './components/pages/filterablemarkers/filterablemarkers.component';
 import { MarkermanagementComponent } from './components/pages/markermanagement/markermanagement.component';
+import { ConfigService, initConfig } from './services/config/config.service';
 
 @NgModule({
   declarations: [
@@ -57,7 +56,15 @@ import { MarkermanagementComponent } from './components/pages/markermanagement/m
     MatFormFieldModule,
     BrowserAnimationsModule    
   ],
-  providers: [],
+  providers: [
+    ConfigService,
+    {
+      provide: APP_INITIALIZER,
+      useFactory: initConfig,
+      deps: [ConfigService],
+      multi: true
+    },
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
