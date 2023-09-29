@@ -6,11 +6,14 @@ COPY . ./
 ARG CONFIGURATION
 
 RUN npm install
-RUN npm run build -- --configuration=$CONFIGURATION
+RUN npm run build
 
 # STAGE 2: Serving the application using NGINX server
 FROM nginx:1.25.2
 COPY --from=builder /usr/local/app/dist/covint /app/usr/share/nginx/html
 COPY ./nginx.conf /etc/nginx/conf.d/default.conf
+COPY ./start.sh /app/start.sh
 
 EXPOSE 8080
+
+CMD ["/bin/bash", "-c", "envsubst </app/usr/share/nginx/html/assets/config.templ.json > /app/usr/share/nginx/html/assets/config.json && exec nginx -g 'daemon off;'"]
