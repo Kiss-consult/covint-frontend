@@ -12,7 +12,6 @@ RUN npm run build
 FROM nginx:1.25.2
 COPY --from=builder /usr/local/app/dist/covint /app/usr/share/nginx/html
 COPY ./nginx.conf /etc/nginx/conf.d/default.conf
-COPY ./start.sh /app/start.sh
 
 EXPOSE 8080
 

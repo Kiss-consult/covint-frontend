@@ -3,13 +3,10 @@
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
-    "start": "ng serve --open --configuration=dev",
-    "start-test": "ng serve --open --configuration=test",
+    "start": "ng serve --open",
     "build": "ng build",
-    "watch": "ng build --watch --configuration=dev",
     "test": "ng test",
-    "build-test": "docker build -t taskakiss/covint-frontend -f ./containerfile --build-arg CONFIGURATION=test ./",
-    "build-prod": "docker build -t taskakiss/covint-frontend -f ./containerfile --build-arg CONFIGURATION=prod ./"
+    "build-container": "docker build -t taskakiss/covint-frontend -f ./containerfile ./"
   },
   "private": true,
   "dependencies": {
