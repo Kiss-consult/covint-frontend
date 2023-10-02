@@ -15,6 +15,8 @@ import { AddnewmarkerComponent } from './components/pages/addnewmarker/addnewmar
 import { OverwritemasteruploadComponent } from './components/pages/overwritemasterupload/overwritemasterupload.component';
 import { FilterablemarkersComponent } from './components/pages/filterablemarkers/filterablemarkers.component';
 import { MarkermanagementComponent } from './components/pages/markermanagement/markermanagement.component';
+import { AuditlogComponent } from './components/pages/auditlog/auditlog.component';
+import { RegistrationComponent } from './components/pages/registration/registration.component';
 
 const routes: Routes = [
   { path: "", component: HomeComponent },
@@ -33,6 +35,8 @@ const routes: Routes = [
   {path: "overwritemasterupload", component:OverwritemasteruploadComponent},
   {path: "filterablemarkers", component:FilterablemarkersComponent},
   {path: "markermanagement", component:MarkermanagementComponent},
+  {path: "auditlog", component:AuditlogComponent},
+  {path: "registration", component:RegistrationComponent},
 ];
 
 @NgModule({

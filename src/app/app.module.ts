@@ -25,6 +25,8 @@ import { OverwritemasteruploadComponent } from './components/pages/overwritemast
 import { FilterablemarkersComponent } from './components/pages/filterablemarkers/filterablemarkers.component';
 import { MarkermanagementComponent } from './components/pages/markermanagement/markermanagement.component';
 import { ConfigService, initConfig } from './services/config/config.service';
+import { AuditlogComponent } from './components/pages/auditlog/auditlog.component';
+import { RegistrationComponent } from './components/pages/registration/registration.component';
 
 @NgModule({
   declarations: [
@@ -43,7 +45,9 @@ import { ConfigService, initConfig } from './services/config/config.service';
     AddnewmarkerComponent,
     OverwritemasteruploadComponent,
     FilterablemarkersComponent,
-    MarkermanagementComponent
+    MarkermanagementComponent,
+    AuditlogComponent,
+    RegistrationComponent
   ],
   imports: [
     BrowserModule,
