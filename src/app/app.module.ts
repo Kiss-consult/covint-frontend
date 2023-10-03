@@ -27,6 +27,7 @@ import { MarkermanagementComponent } from './components/pages/markermanagement/m
 import { ConfigService, initConfig } from './services/config/config.service';
 import { AuditlogComponent } from './components/pages/auditlog/auditlog.component';
 import { RegistrationComponent } from './components/pages/registration/registration.component';
+import { DiagramTestComponent } from './diagram-test/diagram-test.component';
 
 @NgModule({
   declarations: [
@@ -47,7 +48,8 @@ import { RegistrationComponent } from './components/pages/registration/registrat
     FilterablemarkersComponent,
     MarkermanagementComponent,
     AuditlogComponent,
-    RegistrationComponent
+    RegistrationComponent,
+    DiagramTestComponent
   ],
   imports: [
     BrowserModule,

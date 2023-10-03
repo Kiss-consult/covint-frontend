@@ -10,6 +10,7 @@ h1 {
     padding-left: 14%;
     width: 100%;  
     margin-top: 0; 
+    margin-bottom: 0;
     
 }
 
@@ -24,7 +25,7 @@ h1 {
 
 body{
     font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
-    font-size: 20px;
+    font-size: 1.1rem;
     height: 100%;
     margin: 0;
     padding: 0;
