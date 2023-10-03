@@ -116,9 +116,11 @@
   
 
   <div class="addedtext">
-    <div *ngFor="let bno of case.BnoCodes">
-      <div style=" border-bottom: solid 3px #848484; padding-bottom: 20px; padding-top: 20px;">
-        <p>{{bno}}</p>
+    <div *ngFor="let bno of case.BnoCodes" style="border-bottom: solid 3px #0080ff; display: flex; align-items: center; padding-bottom: 5px; margin-top: 5px;">
+      <div style="flex-grow: 1;">
+        <p style="margin: 0;">{{bno}}</p>
+        </div>
+        <div style="margin-left: auto;">
         <button (click)="removeBno(bno)">BNO Törlés</button>
       </div>
     </div>
@@ -126,3 +128,5 @@
   <button id="okebutton" (click)="finish()">Kész</button>
 
 </div>
+
+
