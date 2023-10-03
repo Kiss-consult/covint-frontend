@@ -10,6 +10,22 @@ import { LoginService } from 'src/app/services/login/login.service';
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent {
- 
+  username: string = "";
+  password: string = "";
+  groups: string[] = [];
+  backendService: any;
 
+  constructor(private loginService: LoginService) {}
+
+  onLogin() {
+    const loggedIn = this.loginService.login(this.username, this.password);
+    if (loggedIn) {
+      
+      console.log('Bejelentkezés sikeres');
+    } else {
+      
+      console.log('Bejelentkezés sikertelen');
+    }
+  }
 }
+

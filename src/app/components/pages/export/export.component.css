@@ -13,8 +13,15 @@
     margin-bottom: 20px;
 }
 
-#source {
-    margin-left: 90px;
+.source{
+    display: block;
+    flex-direction: column;
+    margin-right: 200px;
+    margin-bottom: 20px;
+}
+
+#source{
+    width: 200px;
 }
 
 button {

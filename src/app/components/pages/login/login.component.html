@@ -1,3 +1,19 @@
-<h1>
-    Login
-   </h1>
+<h1>Bejelentkezés</h1>
+
+<div class="container">
+    <form (ngSubmit)="onLogin()">
+      <div class="form-group">
+        <label for="email">Felhasználónév</label>
+        <input type="email" id="email" name="email" [(ngModel)]="username" required>
+      </div>
+      <div class="form-group">
+        <label for="password">Jelszó</label>
+        <input type="password" id="password" name="password" [(ngModel)]="password" required>
+      </div>
+      <button type="submit">Bejelentkezés</button>
+    </form>
+    <div class="forgot-password">
+      <a routerLink="/forgot-password">Elfelejtetted a jelszavad?</a>
+    </div>
+ 
+</div>
