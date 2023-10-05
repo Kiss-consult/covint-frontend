@@ -1,0 +1,39 @@
+#covint_logo{
+   width: 100%;
+   padding-top: 60px;
+   padding-right: 20px;
+}
+
+.covinttext{
+    padding: 20px;
+    padding-top: 40px;
+    width: 50%;
+    margin-top: 0;
+    border-left:solid 4px #848484;
+}
+ 
+.covinttext2{
+    margin-top: 99px;
+    padding-left:19% ;
+    
+}
+
+h2{
+    color: white;
+    border-bottom-left-radius: 7px;
+    background: #848484;
+    margin: 0;
+    padding: 10px;
+    font-size: 30px;
+    width: auto;
+}
+
+.containerhome{
+    justify-content: start;
+    display: flex;
+    max-width: 100%;
+    width: 60%;
+    margin-left: 20%;
+    margin-right: 20%;
+    margin-top: 0;
+}
