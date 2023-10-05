@@ -20,7 +20,7 @@ import { AcceptnewuserComponent } from './components/pages/acceptnewuser/acceptn
 import { ChangepwdComponent } from './components/pages/changepwd/changepwd.component';
 import { UsersComponent } from './components/pages/users/users.component';
 import { WaitingusersComponent } from './components/pages/waitingusers/waitingusers.component';
-import { AddnewmarkerComponent } from './components/pages/addnewmarker/addnewmarker.component';
+import { AddnewillnessComponent } from './components/pages/addnewillness/addnewillness.component';
 import { OverwritemasteruploadComponent } from './components/pages/overwritemasterupload/overwritemasterupload.component';
 import { FilterablemarkersComponent } from './components/pages/filterablemarkers/filterablemarkers.component';
 import { MarkermanagementComponent } from './components/pages/markermanagement/markermanagement.component';
@@ -43,7 +43,7 @@ import { DiagramTestComponent } from './components/pages/diagram-test/diagram-te
     ChangepwdComponent,
     UsersComponent,
     WaitingusersComponent,
-    AddnewmarkerComponent,
+    AddnewillnessComponent,
     OverwritemasteruploadComponent,
     FilterablemarkersComponent,
     MarkermanagementComponent,
