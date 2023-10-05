@@ -1,10 +1,4 @@
-.container01 {
-    display: flex;
-    vertical-align: middle;
-    align-items: center;
-    margin-top: 50px;
-    margin-bottom: 50px;
-}
+
 
 .sexclass{
     display: block;
@@ -108,7 +102,7 @@ button {
 }
 
 #bno{
-   margin-top: 0; 
+    margin-top: 0; 
     margin-right: 20px;
     width: 200px;
 }

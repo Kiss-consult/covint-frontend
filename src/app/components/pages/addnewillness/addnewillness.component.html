@@ -1,13 +1,18 @@
 <h1>
     Új Marker hozzáadása
-  </h1>
+</h1>
 
-  <div class="container">
-  <form>
-    <label style="margin-bottom: 0;" for="newillness">Új betegség:</label>
-    <input class="droptextbox" type="text" id="newillness" name="newillness" [(ngModel)]="newIllness.GroupName">
-  </form>
+<div class="container">
 
+  <div class="newillnessclass">
+    <div>
+      <label for="newillness">Új betegség:</label>
+    </div>
+    <div>
+      <input class="droptextbox" style="width: 200px;" type="text" id="newillness" name="newillness" [(ngModel)]="newIllness.GroupName">
+    </div>
+  </div>
+  
   <div class="ismarker">
     <div>
       <label class="text">Az új betegség egyben marker is?</label>
@@ -20,7 +25,7 @@
       <input type="radio" id="falseMark" name="ismarker" [value]="false" [(ngModel)]="newIllness.IsMarker">
     </div>
   </div>
-</div>
+
 
 
 
@@ -51,5 +56,6 @@
         </div>
       </div>
     </div>
-
+  
     <button id="okebutton" (click)="finish()">Kész</button>
+  </div>
