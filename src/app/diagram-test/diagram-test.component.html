@@ -7,7 +7,7 @@
     <div class="tab-button" (click)="showTab(4)" [ngClass]="{ 'selected': activeTab === 4 }">Kutató</div>
 
   </div>
-  <div class="tab-container">
+  <div class="tab-container" style="z-index: -1;">
     <div class="tab" *ngIf="activeTab === 1">
         <iframe id="diagram" src="https://covint.kisscloud.eu/dashboard/app/dashboards?security_tenant=global#/view/0e989c80-5d30-11ee-b73b-9399ce6d330a?embed=true&_g=(filters:!(),refreshInterval:(pause:!t,value:0),time:(from:now-15m,to:now))&_a=(description:'',filters:!(),fullScreenMode:!f,options:(hidePanelTitles:!f,useMargins:!t),query:(language:kuery,query:''),timeRestore:!f,title:J%C3%A1tsz%C3%B3s,viewMode:view)&hide-filter-bar=true"></iframe>
       </div>

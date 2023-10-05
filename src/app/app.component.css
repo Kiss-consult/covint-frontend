@@ -9,11 +9,13 @@
     color: #ffffff;
     position: relative;
     margin: 0; 
+    z-index: 1;
   }
 
 .nav-item a{
     color: black;
     margin: 0;
+    z-index: 1;
 }
 .nav-item:hover{
     background-color:#9dc3ff ;
@@ -21,6 +23,7 @@
     border-top-left-radius: 7px;
     color: #000000;
     margin: 0;
+    z-index: 1;
 }
 
 #covint_logo{
@@ -36,6 +39,7 @@
 .nav {
     list-style-type: none;
     padding: 0;
+    z-index: 1;
   }
   
   .nav-item {
@@ -47,6 +51,7 @@
   .nav-link {
     text-decoration: none;
     color: #333;
+    z-index: 1;
   }
   
   .dropdown {
@@ -60,12 +65,15 @@
   
   .nav-item:hover .dropdown {
     display: block;
+    z-index: 1;
   }
   
   .dropdown li {
     padding: 10px;
+    z-index: 1;
   }
   
   .dropdown li:hover {
     background-color: #f2f2f2;
+    z-index: 1;
   }

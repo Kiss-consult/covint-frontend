@@ -1,67 +1,95 @@
-<div >
-    <h1>Regisztráció</h1>
+<h1>Regisztráció</h1>
+
+<div class="container02"><h2>Regisztrációs adatok</h2></div>
     <!--<form (ngSubmit)="onRegister()"> -->
-      <div class="form-group">
-        <label for="email">E-mail cím</label>
-        <input type="email" id="email" name="email" [(ngModel)]="username" required>
-      </div>
-      <div class="form-group">
-        <label for="password">Jelszó</label>
-        <input type="password" id="password" name="password" [(ngModel)]="password" required>
-      </div>
-      <div class="form-group">
-        <label for="password2">Jelszó ismét </label>
-        <input type="password" id="password2" name="password2" [(ngModel)]="password2" required>
-      </div>
-      <br>
-      <br>
-      <br>
-      <div class="form-group">
-        <label for="firstname">Keresztnév</label>
-        <input type="text" id="firstname" name="firstname" [(ngModel)]="firstname" required>
-      </div>
-      <div class="form-group">
-        <label for="lastname">Vezetéknév</label>
-        <input type="text" id="lastname" name="lastname" [(ngModel)]="lastname" required>
-      </div>
-      <div class="form-group">
-        <label for="stampnumber">Pecsét száma</label>
-        <input type="text" id="stampnumber" name="stampnumber" [(ngModel)]="stampnumber" required>
-      </div>
-      <div class="form-group">
-        <label for="institution">Intézmény neve</label>
-        <input type="text" id="institution" name="institution" [(ngModel)]="institution" >
-      </div>
+<div class="reg-container">
+    
+  <div class="form-group" style="border-right: solid 3px #848484; padding-right: 40px;">
 
-      <div class="form-group">
-        <label for="department">Osztály</label>
-        <input type="text" id="department" name="department" [(ngModel)]="department" >
-      </div>
+    <div>
+      <label class="text" for="email">E-mail cím</label>
+     </div>
+    <div>
+       <input class="droptextbox" type="email" id="email" name="email" [(ngModel)]="username" required>
+     </div>  
+      
+    <div>
+      <label class="text" for="password">Jelszó</label>
+    </div>
+    <div>
+      <input class="droptextbox" type="password" id="password" name="password" [(ngModel)]="password" required>
+    </div>
+      
+    <div>
+      <label class="text" for="password2">Jelszó ismét </label>
+    </div>
+    <div>
+      <input class="droptextbox" type="password" id="password2" name="password2" [(ngModel)]="password2" required>
+    </div>
 
-      <div class="form-group">
-        <label for="company">Cég neve</label>
-        <input type="text" id="company" name="company" [(ngModel)]="company" >
-      </div>
-      <div class="form-group">
-        <label for="site">Telephely címe</label>
-        <input type="text" id="site"  name="site" [(ngModel)]="site" required>
-      </div>
-      <div class="form-group">
-        <label for="telephone">Telefonszám</label>
-        <input type="text" id="telephone" name="telephone" [(ngModel)]="telephone" required>
-      </div>
-
-
-
-
-
-
-
-
-
-
-
-
-      <button type="submit">Regisztráció</button>
-    <!-- </form> -->
   </div>
+
+  <div class="form-group" style="padding-left: 40px;">
+    <div>
+      <label class="text" for="firstname">Keresztnév</label>
+    </div>
+    <div>
+      <input class="droptextbox" type="text" id="firstname" name="firstname" [(ngModel)]="firstname" required>
+    </div>
+      
+    <div>
+      <label class="text" for="lastname">Vezetéknév</label>
+    </div>
+    <div>
+      <input class="droptextbox" type="text" id="lastname" name="lastname" [(ngModel)]="lastname" required>
+    </div>
+      
+    <div>
+      <label class="text" for="stampnumber">Pecsét száma</label>
+    </div>
+    <div>
+      <input class="droptextbox" type="text" id="stampnumber" name="stampnumber" [(ngModel)]="stampnumber" required>
+    </div>
+        
+    <div>
+      <label class="text" for="telephone">Telefonszám</label>
+    </div>
+    <div>
+      <input class="droptextbox" type="text" id="telephone" name="telephone" [(ngModel)]="telephone" required>
+    </div>
+  </div>
+
+  <div class="form-group">  
+    <div>
+      <label class="text" for="institution">Intézmény neve</label>
+    </div>
+    <div>
+      <input class="droptextbox" type="text" id="institution" name="institution" [(ngModel)]="institution" >
+    </div>
+
+    <div>
+      <label class="text" for="department">Osztály</label>
+    </div>
+    <div>
+      <input class="droptextbox" type="text" id="department" name="department" [(ngModel)]="department" >
+    </div>
+
+    <div>
+      <label class="text" for="company">Cég neve</label>
+    </div>
+    <div>
+      <input class="droptextbox" type="text" id="company" name="company" [(ngModel)]="company" >
+    </div>
+
+    <div>
+      <label class="text" for="site">Telephely címe</label>
+    </div>
+    <div>
+      <input class="droptextbox" type="text" id="site"  name="site" [(ngModel)]="site" required>
+    </div>
+  </div>
+        
+</div>
+<div class="reg-button">
+<button type="submit">Regisztráció</button>
+</div>
