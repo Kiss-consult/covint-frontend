@@ -26,7 +26,9 @@ export class ExportComponent {
   displayedColumns: string[] = [ 'sex', 'age', 'markers', 'hospitalized', 'dead', 'count', 'validated', 'source']; // Itt adhatod meg az oszlopok neveit
   dataSource: MatTableDataSource<Illness> = new MatTableDataSource<Illness>;
   newIllness: string = '';
+  marker: string = '';
   illnesses: Illness[] = [];
+  markers: string[] = [];
   // This is only stored for faster access to the illnesses by BNO code
   illnessesByBno: Map<string, Illness> = new Map();
   @ViewChild(MatPaginator) paginator!: MatPaginator;
@@ -35,14 +37,14 @@ export class ExportComponent {
 
   constructor(private backendService: BackendService) {
 
-    this.backendService.getAllIllnesses().subscribe(
+    this.backendService.getMarkers().subscribe(
       result => {
         if (result.isErr()) {
           alert("Betegségek lekérdezése sikertelen");
           console.error(result.unwrapErr());
           return;
         }
-        this.illnesses = result.unwrap();
+        this.markers = result.unwrap();
         //for (let illness of result.unwrap()) {
          // illness.BnoCodes.forEach((bnoCode) => {
          //   this.illnessesByBno.set(bnoCode, illness);
@@ -50,6 +52,7 @@ export class ExportComponent {
        // }
        // this.dataSource.data = this.illnesses; // Az adatforrás frissítése
         console.log("Sikeresen lekérdezve a betegségek az adatbázisból");
+        console.log(this.markers);
         //this.dataSource.paginator = this.paginator;
 
       });
@@ -120,7 +123,7 @@ export class ExportComponent {
 
   public getMarker() {
     //const newMarker = new Marker(this.newBno, this.illnessesByBno.get(this.newBno)?.Names);
-    this.filter.Illnesses.push(this.newIllness);
+    this.filter.Illnesses.push(this.marker);
   }
 
 

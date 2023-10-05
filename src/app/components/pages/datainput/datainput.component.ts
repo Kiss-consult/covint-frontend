@@ -14,44 +14,50 @@ export class DatainputComponent {
   case: Case = new Case();
   newIllness: string = '';
   newBno: string = '';
+  marker: string = '';
   illnesses: Illness[] = [];
+  markers: string[] = [];
   // This is only stored for faster access to the illnesses by BNO code
   illnessesByBno: Map<string, Illness> = new Map();
 
   constructor(private backendService: BackendService) {
     // query all the illnesses formn the database
-    this.backendService.getAllIllnesses().subscribe(
+    this.backendService.getMarkers().subscribe(
       result => {
         if (result.isErr()) {
           alert("Betegségek lekérdezése sikertelen");
           console.error(result.unwrapErr());
           return;
         }
+        this.markers = result.unwrap();
         //for (let illness of result.unwrap()) {
          // illness.BnoCodes.forEach((bnoCode) => {
          //   this.illnessesByBno.set(bnoCode, illness);
-          //});
-        //}
-        this.illnesses = result.unwrap();
-        console.log("Successfully got illnesses from database")
+         // });
+       // }
+       // this.dataSource.data = this.illnesses; // Az adatforrás frissítése
+        console.log("Sikeresen lekérdezve a betegségek az adatbázisból");
+        console.log(this.markers);
+        //this.dataSource.paginator = this.paginator;
+
       });
   }
 
   // Function to add marker. If the newly selected marker is already in the case,
   // it removes it. Otherwise it adds it to the case.
   public addMarker() {
-    if (this.newIllness === '') {
+    if (this.marker === '') {
       alert("Kérem adjon meg egy markert!");
       return;
     }
     //const newMarker = new Marker(this.newBno, this.illnessesByBno.get(this.newBno)?.Names);
     
-    if (this.case.Illnesses.filter((valami) => valami === this.newIllness).length > 0) {
+    if (this.case.Illnesses.filter((valami) => valami === this.marker).length > 0) {
       console.log("Marker already exists")
-      this.removeMarker(this.newIllness);
+      this.removeMarker(this.marker);
       return;
     }
-    this.case.Illnesses.push(this.newIllness);
+    this.case.Illnesses.push(this.marker);
     this.newIllness = '';
   }
 
