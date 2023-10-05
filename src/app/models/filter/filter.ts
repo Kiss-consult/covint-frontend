@@ -7,4 +7,6 @@ export class Filter {
     AgeTo: number = 0;
     Illnesses: string[] = [];
     Source: string = "";
+    DateFrom: string = "";
+    DateTo: string = "";
 }
