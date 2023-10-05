@@ -70,5 +70,12 @@ export class BackendService {
       catchError(error => of(new Err<{}>(error)))
     );
   }
-
+ // This function inserts the new illness into the database.
+ public insertIllness(illness_: Illness): Observable<Result<{}>> {
+  const url = this.url + "/illnesses/add";
+  return this.httpClient.post<Result<{}>>(url, illness_).pipe(
+    map(result => fromJSON<{}>(JSON.stringify(result))),
+    catchError(error => of(new Err<{}>(error)))
+  );
+}
 }

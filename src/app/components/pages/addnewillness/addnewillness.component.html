@@ -1,0 +1,55 @@
+<h1>
+    Új Marker hozzáadása
+  </h1>
+
+  <div class="container">
+  <form>
+    <label style="margin-bottom: 0;" for="newillness">Új betegség:</label>
+    <input class="droptextbox" type="text" id="newillness" name="newillness" [(ngModel)]="newIllness.GroupName">
+  </form>
+
+  <div class="ismarker">
+    <div>
+      <label class="text">Az új betegség egyben marker is?</label>
+    </div>
+    <div>
+      <label for="trueMark">Igen</label>
+      <input type="radio" id="trueMArk" name="ismarker" [value]="true" [(ngModel)]="newIllness.IsMarker">
+
+      <label for="falseMark">Nem</label>
+      <input type="radio" id="falseMark" name="ismarker" [value]="false" [(ngModel)]="newIllness.IsMarker">
+    </div>
+  </div>
+</div>
+
+
+
+<div class="bnoclass">
+    
+  <div>
+      <label style="margin-bottom: 0;" for="bno">Alternatív név bevitele</label>
+    </div>
+    <div style="display: flex;">
+    <input class="droptextbox" type="text" id="bno" name="bno" [(ngModel)]="newAlternativeName">
+  
+    
+     <button (click)="addAlternativeName()">Hozzáadás</button>
+      </div>
+    </div>
+    
+    
+   
+    
+  
+    <div class="addedtext">
+      <div *ngFor="let newillness of newIllness.AlternativeNames" style="border-bottom: solid 3px #0080ff; display: flex; align-items: center; padding-bottom: 5px; margin-top: 5px;">
+        <div style="flex-grow: 1;">
+          <p style="margin: 0;">{{newillness}}</p>
+          </div>
+          <div style="margin-left: auto;">
+          <button (click)="removeAlternativeName(newillness)">Törlés</button>
+        </div>
+      </div>
+    </div>
+
+    <button id="okebutton" (click)="finish()">Kész</button>
