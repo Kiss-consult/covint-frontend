@@ -59,10 +59,10 @@
       <label class="text"> Marker</label>
     </div>
     <div style="display: flex;">
-      <select class="droptextbox" type="text" id="markers" name="markers" [(ngModel)]="newIllness">
-        <ng-container *ngFor="let illness of illnesses">
+      <select class="droptextbox" type="text" id="markers" name="markers" [(ngModel)]="marker">
+        <ng-container *ngFor="let marker of markers">
 
-          <option value="{{illness.GroupName}}">{{illness.GroupName}}</option>
+          <option value="{{marker}}">{{marker}}</option>
 
         </ng-container>
       </select>

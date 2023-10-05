@@ -14,6 +14,9 @@ import { ConfigService } from '../config/config.service';
 })
 export class BackendService {
   private url: string = "";
+  markers: string[] = [];
+
+
   constructor(private httpClient: HttpClient, private config: ConfigService) {
     this.url = this.config.config.BackendUrl;
    }
@@ -21,6 +24,10 @@ export class BackendService {
   public hello(): Observable<string> {
     return this.httpClient.get(this.url + "/", { responseType: "text" });
   }
+
+
+
+
 
   public downloadExport(filter: Filter): Observable<Result<[any[], string]>> {
     return this.httpClient.post(this.url + "/exports/download", filter, { responseType: "blob" }).pipe(
@@ -61,6 +68,14 @@ export class BackendService {
       catchError(error => of(new Err<Illness[]>(error)))
     );
   }
+ // This function returns all the markers stored in the database.
+ public getMarkers(): Observable<Result<string[]>> {
+  const url = this.url + "/illnesses/markers";
+  return this.httpClient.get<Result<string[]>>(url).pipe(
+    map(result => fromJSON<string[]>(JSON.stringify(result))),
+    catchError(error => of(new Err<string[]>(error)))
+  );
+}
 
   // This function inserts the given validated case into the database.
   public insertValidated(case_: Case): Observable<Result<{}>> {
