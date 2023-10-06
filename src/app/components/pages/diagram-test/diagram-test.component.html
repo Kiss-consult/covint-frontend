@@ -4,7 +4,7 @@
   <div class="tab-button" (click)="showTab(3)" [ngClass]="{ 'selected': activeTab === 3 }">Orvos</div>
   <div class="tab-button" (click)="showTab(4)" [ngClass]="{ 'selected': activeTab === 4 }">Kutató</div>
   <div class="tab-button" (click)="showTab(5)" [ngClass]="{ 'selected': activeTab === 5 }">Űrlap</div>
-
+  <div class="tab-button" (click)="showTab(6)" [ngClass]="{ 'selected': activeTab === 5 }">Űrlap DANI</div>
 
 </div>
 <div class="tab-container" style="z-index: -1;">
@@ -35,4 +35,11 @@
 
   <div class="tab" *ngIf="activeTab === 5"><iframe id="diagram"
     src="https://docs.google.com/forms/d/e/1FAIpQLSeRWiXVZvPEh5T9WN2Yj8XJmbZzL7dWlDcV0Fk9UcUjXpLxGQ/viewform?embedded=true"></iframe>
+</div>
+
+
+
+<div class="tab" *ngIf="activeTab === 6"><iframe id="diagram"
+  
+  src=" https://docs.google.com/forms/d/e/1FAIpQLSeFNba_7XPjBUuzEubB-nvmfSfuTswVsE9kKiJ9SepfMe-Mvw/viewform?embedded=true%22"></iframe>
 </div>
