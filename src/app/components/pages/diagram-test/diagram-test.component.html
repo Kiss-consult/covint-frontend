@@ -1,32 +1,38 @@
-
-
 <div class="container-diagram">
-    <div class="tab-button" (click)="showTab(1)" [ngClass]="{ 'selected': activeTab === 1 }">Nem Regisztrált</div>
-    <div class="tab-button" (click)="showTab(2)" [ngClass]="{ 'selected': activeTab === 2 }">Forrás</div>
-    <div class="tab-button" (click)="showTab(3)" [ngClass]="{ 'selected': activeTab === 3 }">Orvos</div>
-    <div class="tab-button" (click)="showTab(4)" [ngClass]="{ 'selected': activeTab === 4 }">Kutató</div>
+  <div class="tab-button" (click)="showTab(1)" [ngClass]="{ 'selected': activeTab === 1 }">Nem Regisztrált</div>
+  <div class="tab-button" (click)="showTab(2)" [ngClass]="{ 'selected': activeTab === 2 }">Forrás</div>
+  <div class="tab-button" (click)="showTab(3)" [ngClass]="{ 'selected': activeTab === 3 }">Orvos</div>
+  <div class="tab-button" (click)="showTab(4)" [ngClass]="{ 'selected': activeTab === 4 }">Kutató</div>
+  <div class="tab-button" (click)="showTab(5)" [ngClass]="{ 'selected': activeTab === 5 }">Űrlap</div>
 
+
+</div>
+<div class="tab-container" style="z-index: -1;">
+  <div class="tab" *ngIf="activeTab === 1">
+    <iframe id="diagram"
+      src="https://covint.kisscloud.eu/dashboard/app/dashboards?security_tenant=global#/view/0e989c80-5d30-11ee-b73b-9399ce6d330a?embed=true&_g=(filters:!(),refreshInterval:(pause:!t,value:0),time:(from:now-15m,to:now))&_a=(description:'',filters:!(),fullScreenMode:!f,options:(hidePanelTitles:!f,useMargins:!t),query:(language:kuery,query:''),timeRestore:!f,title:J%C3%A1tsz%C3%B3s,viewMode:view)&hide-filter-bar=true"></iframe>
   </div>
-  <div class="tab-container" style="z-index: -1;">
-    <div class="tab" *ngIf="activeTab === 1">
-        <iframe id="diagram" src="https://covint.kisscloud.eu/dashboard/app/dashboards?security_tenant=global#/view/0e989c80-5d30-11ee-b73b-9399ce6d330a?embed=true&_g=(filters:!(),refreshInterval:(pause:!t,value:0),time:(from:now-15m,to:now))&_a=(description:'',filters:!(),fullScreenMode:!f,options:(hidePanelTitles:!f,useMargins:!t),query:(language:kuery,query:''),timeRestore:!f,title:J%C3%A1tsz%C3%B3s,viewMode:view)&hide-filter-bar=true"></iframe>
-      </div>
 
 
 
 
 
-    <div class="tab" *ngIf="activeTab === 2"><iframe id="diagram" src="https://covint.kisscloud.eu/dashboard/app/dashboards?security_tenant=global#/view/0ab39040-60f8-11ee-b73b-9399ce6d330a?embed=true&_g=(filters%3A!()%2CrefreshInterval%3A(pause%3A!t%2Cvalue%3A0)%2Ctime%3A(from%3Anow-15m%2Cto%3Anow))&hide-filter-bar=true%22"></iframe>
-    </div>
-
-
-
-
-    <div class="tab" *ngIf="activeTab === 3"><iframe id="diagram" src="https://covint.kisscloud.eu/dashboard/app/dashboards?security_tenant=global#/view/00583240-60f8-11ee-b73b-9399ce6d330a?embed=true&_g=(filters%3A!()%2CrefreshInterval%3A(pause%3A!t%2Cvalue%3A0)%2Ctime%3A(from%3Anow-15m%2Cto%3Anow))&hide-filter-bar=true%22"></iframe>
-     </div>
-
-
-    <div class="tab" *ngIf="activeTab === 4"><iframe id="diagram" src="https://covint.kisscloud.eu/dashboard/app/dashboards?security_tenant=global#/view/12aa9cc0-61da-11ee-b73b-9399ce6d330a?embed=true&_g=(filters%3A!()%2CrefreshInterval%3A(pause%3A!t%2Cvalue%3A0)%2Ctime%3A(from%3Anow-15m%2Cto%3Anow))&hide-filter-bar=true%22"></iframe>
-     </div>
-
+  <div class="tab" *ngIf="activeTab === 2"><iframe id="diagram"
+      src="https://covint.kisscloud.eu/dashboard/app/dashboards?security_tenant=global#/view/0ab39040-60f8-11ee-b73b-9399ce6d330a?embed=true&_g=(filters%3A!()%2CrefreshInterval%3A(pause%3A!t%2Cvalue%3A0)%2Ctime%3A(from%3Anow-15m%2Cto%3Anow))&hide-filter-bar=true%22"></iframe>
   </div>
+
+
+
+
+  <div class="tab" *ngIf="activeTab === 3"><iframe id="diagram"
+      src="https://covint.kisscloud.eu/dashboard/app/dashboards?security_tenant=global#/view/00583240-60f8-11ee-b73b-9399ce6d330a?embed=true&_g=(filters%3A!()%2CrefreshInterval%3A(pause%3A!t%2Cvalue%3A0)%2Ctime%3A(from%3Anow-15m%2Cto%3Anow))&hide-filter-bar=true%22"></iframe>
+  </div>
+
+
+  <div class="tab" *ngIf="activeTab === 4"><iframe id="diagram"
+      src="https://covint.kisscloud.eu/dashboard/app/dashboards?security_tenant=global#/view/12aa9cc0-61da-11ee-b73b-9399ce6d330a?embed=true&_g=(filters%3A!()%2CrefreshInterval%3A(pause%3A!t%2Cvalue%3A0)%2Ctime%3A(from%3Anow-15m%2Cto%3Anow))&hide-filter-bar=true%22"></iframe>
+  </div>
+
+  <div class="tab" *ngIf="activeTab === 5"><iframe id="diagram"
+    src="https://docs.google.com/forms/d/e/1FAIpQLSeRWiXVZvPEh5T9WN2Yj8XJmbZzL7dWlDcV0Fk9UcUjXpLxGQ/viewform?embedded=true"></iframe>
+</div>
