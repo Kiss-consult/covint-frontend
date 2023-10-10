@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import { Case } from 'src/app/models/case/case';
+import { Default } from 'src/app/models/default/default';
 import { Illness } from 'src/app/models/illness/illness';
+import { NewIllness } from 'src/app/models/newillness/newillness';
 import { BackendService } from 'src/app/services/backend/backend.service';
 
 
@@ -14,11 +16,12 @@ import { BackendService } from 'src/app/services/backend/backend.service';
 
 
 export class AddnewillnessComponent {
-  newIllness: Illness = new Illness();
+  newIllness: NewIllness = new NewIllness();
+  default: Default = new Default();
   newGroupName: string = '';
   newAlternativeName: string  = '';
   newIsmarker: number = 0;
-  //illnesses: Illness[] = [];
+ 
 
   // This is only stored for faster access to the illnesses by BNO code
   //illnessesByBno: Map<string, Illness> = new Map();
@@ -27,8 +30,33 @@ export class AddnewillnessComponent {
       console.log(data);
     });
   }
+  // Function to add bno. If the newly typed bno is already in the case,
+  // it removes it. Otherwise it adds it to the case.
+  public addDefault() {
+    if (this.default.Sex === '') {
+      alert("Kérem adja meg nemet!");
+      return;
+    }
+    if (this.default.Age === null) {
+      alert("Kérem adjon meg kort!");
+      return;
+    }
+    if (this.default.Hospitalized === null) {
+      alert("Kérem adjon meg %!");
+      return;
+    }
+    if (this.default.Dead === null) {
+      alert("Kérem adjon meg %!");
+      return;
+    }
+    //const newMarker = new Marker(this.newBno, this.illnessesByBno.get(this.newBno)?.Names);
   
-
+    this.newIllness.Defaults.push(this.default);
+    this.default = new Default;
+    console.log(this.default)
+    console.log(this.newIllness.Defaults)
+    //this.newAlternativeName = '';
+  }
 
   // Function to add bno. If the newly typed bno is already in the case,
   // it removes it. Otherwise it adds it to the case.
@@ -78,7 +106,7 @@ export class AddnewillnessComponent {
         }
         alert("Sikeres adatfeltöltés");
         console.log("Successfully inserted into database")
-        this.newIllness = new Illness();
+        this.newIllness = new NewIllness();
       });
   }
 

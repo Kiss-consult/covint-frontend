@@ -12,6 +12,8 @@ import { FormsModule } from '@angular/forms';
 import { MatTableModule } from '@angular/material/table';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatSortModule } from '@angular/material/sort';
+
+import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { UsermanagementComponent } from './components/pages/usermanagement/usermanagement.component';
@@ -64,6 +66,8 @@ import { PercentoverwriteComponent } from './components/pages/percentoverwrite/p
     MatPaginatorModule,  // Az oldalazás moduljának importálása
     MatSortModule, 
     MatFormFieldModule,
+    MatInputModule,
+
     BrowserAnimationsModule    
   ],
   providers: [

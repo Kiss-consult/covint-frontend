@@ -7,6 +7,7 @@ import { Illness } from 'src/app/models/illness/illness';
 import { Filter } from 'src/app/models/filter/filter';
 import { Export } from 'src/app/models/export/export';
 import { ConfigService } from '../config/config.service';
+import { NewIllness } from 'src/app/models/newillness/newillness';
 
 
 @Injectable({
@@ -86,9 +87,9 @@ export class BackendService {
     );
   }
  // This function inserts the new illness into the database.
- public insertIllness(illness_: Illness): Observable<Result<{}>> {
+ public insertIllness(newillness_: NewIllness): Observable<Result<{}>> {
   const url = this.url + "/illnesses/add";
-  return this.httpClient.post<Result<{}>>(url, illness_).pipe(
+  return this.httpClient.post<Result<{}>>(url, newillness_).pipe(
     map(result => fromJSON<{}>(JSON.stringify(result))),
     catchError(error => of(new Err<{}>(error)))
   );
