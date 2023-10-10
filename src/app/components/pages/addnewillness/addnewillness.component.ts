@@ -21,7 +21,9 @@ export class AddnewillnessComponent {
   newGroupName: string = '';
   newAlternativeName: string  = '';
   newIsmarker: number = 0;
- 
+  ages: number[] = [];
+  selectedRows: boolean[] = [];
+
 
   // This is only stored for faster access to the illnesses by BNO code
   //illnessesByBno: Map<string, Illness> = new Map();
@@ -33,7 +35,9 @@ export class AddnewillnessComponent {
   // Function to add bno. If the newly typed bno is already in the case,
   // it removes it. Otherwise it adds it to the case.
   public addDefault() {
-    if (this.default.Sex === '') {
+
+    
+    if (this.default.SexM === '') {
       alert("Kérem adja meg nemet!");
       return;
     }
@@ -49,6 +53,10 @@ export class AddnewillnessComponent {
       alert("Kérem adjon meg %!");
       return;
     }
+
+    this.newIllness.Defaults.push(this.default);
+    this.selectedRows.push(false); // Kezdetben a sor nincs kipipálva
+    this.default = new Default(); // Új Default objektum létrehozása
     //const newMarker = new Marker(this.newBno, this.illnessesByBno.get(this.newBno)?.Names);
   
     this.newIllness.Defaults.push(this.default);
@@ -61,6 +69,15 @@ export class AddnewillnessComponent {
   // Function to add bno. If the newly typed bno is already in the case,
   // it removes it. Otherwise it adds it to the case.
   public addAlternativeName() {
+
+    const selectedDefaults: Default[] = [];
+    for (let i = 0; i < this.selectedRows.length; i++) {
+      if (this.selectedRows[i]) {
+        // A sor kipipálva, hozzáadhatjuk a kiválasztott Default objektumokat
+        selectedDefaults.push(this.newIllness.Defaults[i]);
+      }
+    }
+
     if (this.newAlternativeName === '') {
       alert("Kérem adjon meg egy Alternatív nevet!");
       return;
@@ -110,7 +127,12 @@ export class AddnewillnessComponent {
       });
   }
 
-
+  ngOnInit(): void {
+    // Töltsd fel az "ages" tömböt a kívánt életkorokkal.
+    for (let i = 0; i <= 100; i++) {
+      this.ages.push(i);
+    }
+  }
 
 
 

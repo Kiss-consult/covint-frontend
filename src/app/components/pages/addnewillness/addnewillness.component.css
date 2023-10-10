@@ -41,3 +41,12 @@
     width: 200px;
 }
 
+/* styles.css */
+
+table {
+    width: 100%;
+  }
+  
+  th, td {
+    width: 25%; /* Minden oszlop egyforma szélessége */
+  }
