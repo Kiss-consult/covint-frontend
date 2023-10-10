@@ -41,12 +41,25 @@
     width: 200px;
 }
 
-/* styles.css */
+.scrollable-container {
+    overflow: auto;
+    max-height: 500px; 
+    background-color: #c4c4c4;
+    padding: 20px;
+  }
 
 table {
     width: 100%;
+    
   }
   
   th, td {
-    width: 25%; /* Minden oszlop egyforma szélessége */
+    width: 25%; 
+    text-align: center;
   }
+
+  th{
+    background-color: rgb(101, 147, 253);
+    padding: 5px;
+  }
+
