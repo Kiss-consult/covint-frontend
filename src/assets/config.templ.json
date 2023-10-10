@@ -1,3 +1,4 @@
 {
-    "BackendUrl": "${BACKEND_URL}" 
+    "BackendUrl": "${BACKEND_URL}",
+    "AuthUrl": "${AUTH_URL}"
 }
