@@ -28,6 +28,8 @@ import { ConfigService, initConfig } from './services/config/config.service';
 import { AuditlogComponent } from './components/pages/auditlog/auditlog.component';
 import { RegistrationComponent } from './components/pages/registration/registration.component';
 import { DiagramTestComponent } from './components/pages/diagram-test/diagram-test.component';
+import { DefaultformarkersComponent } from './components/pages/defaultformarkers/defaultformarkers.component';
+import { PercentoverwriteComponent } from './components/pages/percentoverwrite/percentoverwrite.component';
 
 @NgModule({
   declarations: [
@@ -49,7 +51,9 @@ import { DiagramTestComponent } from './components/pages/diagram-test/diagram-te
     MarkermanagementComponent,
     AuditlogComponent,
     RegistrationComponent,
-    DiagramTestComponent
+    DiagramTestComponent,
+    DefaultformarkersComponent,
+    PercentoverwriteComponent
   ],
   imports: [
     BrowserModule,
