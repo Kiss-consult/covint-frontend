@@ -17,26 +17,34 @@ import { FilterablemarkersComponent } from './components/pages/filterablemarkers
 import { MarkermanagementComponent } from './components/pages/markermanagement/markermanagement.component';
 import { AuditlogComponent } from './components/pages/auditlog/auditlog.component';
 import { RegistrationComponent } from './components/pages/registration/registration.component';
+import { GroupGuard } from './guards/group.guard';
+import { KutatoOrvos, Orvos, PortalAdmin, PortalVezeto } from './models/group/group';
 
 const routes: Routes = [
   { path: "", component: HomeComponent },
   { path: "home", component: HomeComponent },
-  {path: "login", component: LoginComponent},
-  {path: "datainput", component: DatainputComponent},
-  {path: "export", component: ExportComponent},
-  {path: "diagram", component: DiagramComponent},
-  {path: "usermanagement", component: UsermanagementComponent},
-  {path: "addnewuser", component: AddnewuserComponent},
-  {path: "acceptnewuser", component:AcceptnewuserComponent},
-  {path: "changepwd", component:ChangepwdComponent},
-  {path: "users", component:UsersComponent},
-  {path: "waitingusers", component:WaitingusersComponent},
-  {path: "addnewillness", component:AddnewillnessComponent},
-  {path: "overwritemasterupload", component:OverwritemasteruploadComponent},
-  {path: "filterablemarkers", component:FilterablemarkersComponent},
-  {path: "markermanagement", component:MarkermanagementComponent},
-  {path: "auditlog", component:AuditlogComponent},
-  {path: "registration", component:RegistrationComponent},
+  { path: "login", component: LoginComponent },
+  { path: "datainput", component: DatainputComponent, canActivate: [GroupGuard], data: { groups: [Orvos, PortalAdmin, KutatoOrvos, PortalVezeto] } },
+  { path: "export", component: ExportComponent, canActivate: [GroupGuard], data: { groups: [Orvos, PortalAdmin, KutatoOrvos, PortalVezeto] } },
+  { path: "diagram", component: DiagramComponent, children: [
+    {path: Orvos, component: DiagramComponent, canActivate: [GroupGuard], data: { groups: [Orvos] } },
+    {path: PortalAdmin, component: DiagramComponent, canActivate: [GroupGuard], data: { groups: [PortalAdmin] } },
+    {path: KutatoOrvos, component: DiagramComponent, canActivate: [GroupGuard], data: { groups: [KutatoOrvos] } },
+    {path: PortalVezeto, component: DiagramComponent, canActivate: [GroupGuard], data: { groups: [PortalVezeto] } },
+    {path: "", component: DiagramComponent}
+  ] },
+  { path: "usermanagement", component: UsermanagementComponent },
+  { path: "addnewuser", component: AddnewuserComponent },
+  { path: "acceptnewuser", component: AcceptnewuserComponent },
+  { path: "changepwd", component: ChangepwdComponent },
+  { path: "users", component: UsersComponent },
+  { path: "waitingusers", component: WaitingusersComponent },
+  { path: "addnewillness", component: AddnewillnessComponent },
+  { path: "overwritemasterupload", component: OverwritemasteruploadComponent },
+  { path: "filterablemarkers", component: FilterablemarkersComponent },
+  { path: "markermanagement", component: MarkermanagementComponent },
+  { path: "auditlog", component: AuditlogComponent },
+  { path: "registration", component: RegistrationComponent },
 ];
 
 @NgModule({

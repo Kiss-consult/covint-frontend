@@ -6,6 +6,7 @@ import { HttpClient } from '@angular/common/http';
 import { Token } from 'src/app/models/token/token';
 import jwt_decode from 'jwt-decode';
 import { AccessToken } from 'src/app/models/token/accesstoken';
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
@@ -14,13 +15,22 @@ export class LoginService {
   url: string = "";
   token: Token = new Token();
   
-  constructor(private httpClient: HttpClient, private config: ConfigService) {
+  constructor(private httpClient: HttpClient, private config: ConfigService, private router: Router) {
     this.url = this.config.config.AuthUrl;
   }
 
   public getUsername(): string {
     const decoded = jwt_decode<AccessToken>(this.token.access_token);
     return decoded.preferred_username;
+  }
+
+  public hasAnyGroup(expectedGroups: string[]): boolean {
+    if (!this.isLoggedIn()) {
+      this.router.navigate(['/login']);
+      return false;
+    }
+    const decoded = jwt_decode<AccessToken>(this.token.access_token);
+    return decoded.groups.some(group => expectedGroups.includes(group));
   }
 
   public isLoggedIn(): boolean {
