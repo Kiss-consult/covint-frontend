@@ -3,8 +3,7 @@
 
 
 export class Default {
-    SexM: string = "";
-    SexF: string = "";
+    Sex: string = "";
     Age: number = 0;
     Hospitalized: number = 0;
     Dead: number = 0;  
@@ -13,8 +12,7 @@ export class Default {
     
 
     constructor() {
-        this.SexM = 'Férfi';
-        this.SexF = 'Nő';
+       
        
       }
 }

@@ -71,8 +71,8 @@
         </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let age of ages; let i = index">
-          <td>{{ default.SexM }}</td>
+        <tr *ngFor="let age of ages; let i = index"> 
+          <td>{{ setDefaultSexMale(default)  }}</td>
           <td>{{ age }}</td>
           <td>
             <mat-form-field class="form-field" apearance="legacy">
@@ -118,7 +118,7 @@
       </thead>
       <tbody>
         <tr *ngFor="let age of ages; let i = index">
-          <td>{{ default.SexF }}</td>
+          <td>{{ setDefaultSexFemale(default)  }}</td>
           <td>{{ age }}</td>
           <td>
             <mat-form-field class="form-field" apearance="legacy">

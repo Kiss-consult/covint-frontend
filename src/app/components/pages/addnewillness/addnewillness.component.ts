@@ -23,6 +23,7 @@ export class AddnewillnessComponent {
   newIsmarker: number = 0;
   ages: number[] = [];
   selectedRows: boolean[] = [];
+ 
 
 
   // This is only stored for faster access to the illnesses by BNO code
@@ -32,12 +33,32 @@ export class AddnewillnessComponent {
       console.log(data);
     });
   }
+
+ 
+
+
+ public setDefaultSexFemale(d: Default) : string
+ {  
+
+  this.default.Sex = "Nő";
+  return d.Sex;
+ }
+
+
+ public setDefaultSexMale(d: Default) : string 
+ {
+  
+
+  this.default.Sex = "Férfi";
+  return  d.Sex;;
+ }
+
   // Function to add bno. If the newly typed bno is already in the case,
   // it removes it. Otherwise it adds it to the case.
   public addDefault() {
 
     
-    if (this.default.SexM === '') {
+    if (this.default.Sex === '') {
       alert("Kérem adja meg nemet!");
       return;
     }
@@ -129,7 +150,7 @@ export class AddnewillnessComponent {
 
   ngOnInit(): void {
     // Töltsd fel az "ages" tömböt a kívánt életkorokkal.
-    for (let i = 0; i <= 100; i++) {
+    for (let i = 18; i <= 88; i++) {
       this.ages.push(i);
     }
   }
