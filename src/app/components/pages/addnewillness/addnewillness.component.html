@@ -1,5 +1,5 @@
 <h1>
-    Új Marker hozzáadása
+  Új Marker hozzáadása
 </h1>
 
 <div class="container">
@@ -9,10 +9,11 @@
       <label for="newillness">Új betegség:</label>
     </div>
     <div>
-      <input class="droptextbox" style="width: 200px;" type="text" id="newillness" name="newillness" [(ngModel)]="newIllness.GroupName">
+      <input class="droptextbox" style="width: 200px;" type="text" id="newillness" name="newillness"
+        [(ngModel)]="newIllness.GroupName">
     </div>
   </div>
-  
+
   <div class="ismarker">
     <div>
       <label class="text">Az új betegség egyben marker is?</label>
@@ -29,36 +30,51 @@
 
 
 
-<div class="bnoclass">
-    
-  <div>
+  <div class="bnoclass">
+
+    <div>
       <label style="margin-bottom: 0;" for="bno">Alternatív név bevitele</label>
     </div>
     <div style="display: flex;">
-    <input class="droptextbox" type="text" id="bno" name="bno" [(ngModel)]="newAlternativeName">
-  
-    
-     <button (click)="addAlternativeName()">Hozzáadás</button>
+      <input class="droptextbox" type="text" id="bno" name="bno" [(ngModel)]="newAlternativeName">
+
+
+      <button (click)="addAlternativeName()">Hozzáadás</button>
+    </div>
+  </div>
+
+
+
+
+
+  <div class="addedtext">
+    <div *ngFor="let newillness of newIllness.AlternativeNames"
+      style="border-bottom: solid 3px #0080ff; display: flex; align-items: center; padding-bottom: 5px; margin-top: 5px;">
+      <div style="flex-grow: 1;">
+        <p style="margin: 0;">{{newillness}}</p>
+      </div>
+      <div style="margin-left: auto;">
+        <button (click)="removeAlternativeName(newillness)">Törlés</button>
       </div>
     </div>
-    
-    
-   
-    
-  
-    <div class="addedtext">
-      <div *ngFor="let newillness of newIllness.AlternativeNames" style="border-bottom: solid 3px #0080ff; display: flex; align-items: center; padding-bottom: 5px; margin-top: 5px;">
-        <div style="flex-grow: 1;">
-          <p style="margin: 0;">{{newillness}}</p>
-          </div>
-          <div style="margin-left: auto;">
-          <button (click)="removeAlternativeName(newillness)">Törlés</button>
-        </div>
-      </div>
-    </div>                                                                                                         
-  
-                            
-                                                                                                                                             
-
-    <button id="okebutton" (click)="finish()">Kész</button>
   </div>
+
+  <mat-form-field apparence="legacy">
+    <mat-label>Nem</mat-label> 
+    <input matInput [(ngModel)]="default.Sex" type="text" name="data" id="data" class="form-control">
+  </mat-form-field><br>
+  <mat-form-field apparence="legacy">
+    <mat-label>Kor</mat-label> 
+    <input matInput [(ngModel)]="default.Age" type="number" name="data" id="data" class="form-control">
+  </mat-form-field><br><mat-form-field apparence="legacy">
+    <mat-label>Halálozás %</mat-label> 
+    <input matInput [(ngModel)]="default.Hospitalized" type="number" name="data" id="data" class="form-control">
+  </mat-form-field><br><mat-form-field apparence="legacy">
+    <mat-label>Kórház %</mat-label> 
+    <input matInput [(ngModel)]="default.Dead" type="number" name="data" id="data" class="form-control">
+  </mat-form-field><br>
+
+  <button (click)="addDefault()">Hozzáadás</button>
+
+  <button id="okebutton" (click)="finish()">Kész</button>
+</div>
