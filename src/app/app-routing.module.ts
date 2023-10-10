@@ -17,12 +17,17 @@ import { FilterablemarkersComponent } from './components/pages/filterablemarkers
 import { MarkermanagementComponent } from './components/pages/markermanagement/markermanagement.component';
 import { AuditlogComponent } from './components/pages/auditlog/auditlog.component';
 import { RegistrationComponent } from './components/pages/registration/registration.component';
+
 import { GroupGuard } from './guards/group.guard';
 import { KutatoOrvos, Orvos, PortalAdmin, PortalVezeto } from './models/group/group';
+import { DefaultformarkersComponent } from './components/pages/defaultformarkers/defaultformarkers.component'; 
+import { PercentoverwriteComponent } from './components/pages/percentoverwrite/percentoverwrite.component';
+
 
 const routes: Routes = [
   { path: "", component: HomeComponent },
   { path: "home", component: HomeComponent },
+
   { path: "login", component: LoginComponent },
   { path: "datainput", component: DatainputComponent, canActivate: [GroupGuard], data: { groups: [Orvos, PortalAdmin, KutatoOrvos, PortalVezeto] } },
   { path: "export", component: ExportComponent, canActivate: [GroupGuard], data: { groups: [Orvos, PortalAdmin, KutatoOrvos, PortalVezeto] } },
@@ -45,6 +50,7 @@ const routes: Routes = [
   { path: "markermanagement", component: MarkermanagementComponent },
   { path: "auditlog", component: AuditlogComponent },
   { path: "registration", component: RegistrationComponent },
+
 ];
 
 @NgModule({

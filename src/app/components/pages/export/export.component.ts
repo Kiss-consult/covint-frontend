@@ -23,7 +23,7 @@ export class ExportComponent {
   exports: Export[] = [];
 
 
-  displayedColumns: string[] = [ 'sex', 'age', 'markers', 'hospitalized', 'dead', 'count', 'validated', 'source']; // Itt adhatod meg az oszlopok neveit
+  displayedColumns: string[] = [ 'sex', 'age', 'markers', 'hospitalized', 'dead', 'count', 'validated', 'source', 'datefrom', 'dateto']; // Itt adhatod meg az oszlopok neveit
   dataSource: MatTableDataSource<Illness> = new MatTableDataSource<Illness>;
   newIllness: string = '';
   marker: string = '';
