@@ -72,27 +72,32 @@
       </thead>
       <tbody>
         <tr *ngFor="let age of ages; let i = index"> 
-          <td>{{ setDefaultSexMale(default)  }}</td>
-          <td>{{ age }}</td>
+
+          <td> <input  type="text" id="sex" name="sex" placeholder="{{ setDefaultSexMale(default)}}" [(ngModel)]="default.Sex"> </td>
+          <td> <input  type="number" id="age" name="age" placeholder="{{age}}" [(ngModel)]="default.Age">
           <td>
             <mat-form-field class="form-field" apearance="legacy">
               <mat-label></mat-label>
-              <input matInput [(ngModel)]="default.Hospitalized" type="number" name="hospitalized" id="hospitalized" class="form-control">
+
+              <input  matInput [(ngModel)]="default.Hospitalized" type="number" name="hospitalized" id="hospitalized{{ age }}" placeholder="{{age}}" class="form-control">
+             
             </mat-form-field>
           </td>
           <td>
             <mat-form-field class="form-field" apearance="legacy">
               <mat-label></mat-label>
-              <input matInput [(ngModel)]="default.Dead" type="number" name="dead" id="dead" class="form-control">
+              <input matInput [(ngModel)]="default.Dead" type="number" name="dead" id="dead{{ age }}" class="form-control">
             </mat-form-field>
           </td>
           <td>
                         
             <div class="form-check">
-                <input class="form-check-input" type="checkbox" id="customCheckbox{{ age }}" [(ngModel)]="selectedRows[i]">
-                <label class="form-check-label" for="customCheckbox{{ age }}"></label>
+                <input class="form-check-input" type="checkbox" id="customCheckbox{{ age }}" (ngModelChange)="addDefault()" [(ngModel)]="selectedRows[i]">
+                <label class="form-check-label" for="customCheckbox{{ age }} "></label>
+                
             </div>
           </td>
+
         </tr>
       </tbody>
     </table>

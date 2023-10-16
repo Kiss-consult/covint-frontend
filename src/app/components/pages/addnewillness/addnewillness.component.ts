@@ -46,8 +46,7 @@ export class AddnewillnessComponent {
 
 
  public setDefaultSexMale(d: Default) : string 
- {
-  
+ { 
 
   this.default.Sex = "Férfi";
   return  d.Sex;;
@@ -55,7 +54,7 @@ export class AddnewillnessComponent {
 
   // Function to add bno. If the newly typed bno is already in the case,
   // it removes it. Otherwise it adds it to the case.
-  public addDefault() {
+  public  addDefault(){
 
     
     if (this.default.Sex === '') {
@@ -77,10 +76,10 @@ export class AddnewillnessComponent {
 
     this.newIllness.Defaults.push(this.default);
     this.selectedRows.push(false); // Kezdetben a sor nincs kipipálva
-    this.default = new Default(); // Új Default objektum létrehozása
+    //this.default = new Default(); // Új Default objektum létrehozása
     //const newMarker = new Marker(this.newBno, this.illnessesByBno.get(this.newBno)?.Names);
   
-    this.newIllness.Defaults.push(this.default);
+    //this.newIllness.Defaults.push(this.default);
     this.default = new Default;
     console.log(this.default)
     console.log(this.newIllness.Defaults)
