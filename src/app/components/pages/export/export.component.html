@@ -156,17 +156,17 @@
 
       <ng-container matColumnDef="source">
         <th mat-header-cell *matHeaderCellDef> Forrás </th>
-        <td mat-cell *matCellDef="let export"> {{export.Validity}} </td>
+        <td mat-cell *matCellDef="let export"> {{export.Source}} </td>
       </ng-container>
 <!--   a kövi kettő majd a dátumos lesz               -->
       <ng-container matColumnDef="datefrom">
         <th mat-header-cell *matHeaderCellDef> Dátum -tól </th>
-        <td mat-cell *matCellDef="let export"> {{export.Validity}} </td>
+        <td mat-cell *matCellDef="let export"> {{export.DateFrom}} </td>
       </ng-container>
 
       <ng-container matColumnDef="dateto">
         <th mat-header-cell *matHeaderCellDef> Dátum -ig </th>
-        <td mat-cell *matCellDef="let export"> {{export.Validity}} </td>
+        <td mat-cell *matCellDef="let export"> {{export.DateTo}} </td>
       </ng-container>
       
 

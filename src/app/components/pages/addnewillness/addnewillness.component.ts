@@ -21,7 +21,10 @@ export class AddnewillnessComponent {
   newGroupName: string = '';
   newAlternativeName: string  = '';
   newIsmarker: number = 0;
+  ages: number[] = [];
+  selectedRows: boolean[] = [];
  
+
 
   // This is only stored for faster access to the illnesses by BNO code
   //illnessesByBno: Map<string, Illness> = new Map();
@@ -30,9 +33,30 @@ export class AddnewillnessComponent {
       console.log(data);
     });
   }
+
+ 
+
+
+ public setDefaultSexFemale(d: Default) : string
+ {  
+
+  this.default.Sex = "Nő";
+  return d.Sex;
+ }
+
+
+ public setDefaultSexMale(d: Default) : string 
+ { 
+
+  this.default.Sex = "Férfi";
+  return  d.Sex;;
+ }
+
   // Function to add bno. If the newly typed bno is already in the case,
   // it removes it. Otherwise it adds it to the case.
-  public addDefault() {
+  public  addDefault(){
+
+    
     if (this.default.Sex === '') {
       alert("Kérem adja meg nemet!");
       return;
@@ -49,9 +73,13 @@ export class AddnewillnessComponent {
       alert("Kérem adjon meg %!");
       return;
     }
+
+    this.newIllness.Defaults.push(this.default);
+    this.selectedRows.push(false); // Kezdetben a sor nincs kipipálva
+    //this.default = new Default(); // Új Default objektum létrehozása
     //const newMarker = new Marker(this.newBno, this.illnessesByBno.get(this.newBno)?.Names);
   
-    this.newIllness.Defaults.push(this.default);
+    //this.newIllness.Defaults.push(this.default);
     this.default = new Default;
     console.log(this.default)
     console.log(this.newIllness.Defaults)
@@ -61,6 +89,15 @@ export class AddnewillnessComponent {
   // Function to add bno. If the newly typed bno is already in the case,
   // it removes it. Otherwise it adds it to the case.
   public addAlternativeName() {
+
+    const selectedDefaults: Default[] = [];
+    for (let i = 0; i < this.selectedRows.length; i++) {
+      if (this.selectedRows[i]) {
+        // A sor kipipálva, hozzáadhatjuk a kiválasztott Default objektumokat
+        selectedDefaults.push(this.newIllness.Defaults[i]);
+      }
+    }
+
     if (this.newAlternativeName === '') {
       alert("Kérem adjon meg egy Alternatív nevet!");
       return;
@@ -110,7 +147,12 @@ export class AddnewillnessComponent {
       });
   }
 
-
+  ngOnInit(): void {
+    // Töltsd fel az "ages" tömböt a kívánt életkorokkal.
+    for (let i = 18; i <= 88; i++) {
+      this.ages.push(i);
+    }
+  }
 
 
 
