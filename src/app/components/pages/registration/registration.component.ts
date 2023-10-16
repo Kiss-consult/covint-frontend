@@ -1,4 +1,7 @@
 import { Component } from '@angular/core';
+import { Site } from 'src/app/models/user/site';
+import { User } from 'src/app/models/user/user';
+import { LoginService } from 'src/app/services/login/login.service';
 
 @Component({
   selector: 'app-registration',
@@ -6,18 +9,31 @@ import { Component } from '@angular/core';
   styleUrls: ['./registration.component.css']
 })
 export class RegistrationComponent {
-  username: string = "";
-  password: string = "";
-  password2: string = "";
-  groups: string[] = [];
-  backendService: any;
+  user: User = new User;
+  site: Site = new Site;
+  password2: string = "" ;
+ 
 
-  firstname: string = "";
-  lastname : string = "";
-  stampnumber : string = "";
-  institution : string = "";
-  department : string = "";
-  company : string = "";
-  site : string = "";
-  telephone : string = "";
+
+  constructor(private loginService: LoginService) {}
+
+
+  public finish() {
+   // if (!this.checkRequiredFields()) {
+    //  return;
+  //  }
+    this.user.Site = this.site;
+    this.loginService.insertNewUser(this.user).subscribe(
+      result => {
+        if (result.isErr()) {
+          alert("Sikertelen regisztráció");
+          console.error(result.unwrapErr());
+          return;
+        }
+        alert("Sikeres regisztráció");
+        console.log("Successfully inserted into database")
+        this.site = new Site();
+        this.user = new User();
+      });
+  }
 }

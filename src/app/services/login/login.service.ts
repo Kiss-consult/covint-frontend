@@ -7,6 +7,7 @@ import { Token } from 'src/app/models/token/token';
 import jwt_decode from 'jwt-decode';
 import { AccessToken } from 'src/app/models/token/accesstoken';
 import { Router } from '@angular/router';
+import { User } from 'src/app/models/user/user';
 
 @Injectable({
   providedIn: 'root'
@@ -40,6 +41,15 @@ export class LoginService {
   public logout() {
     this.token = new Token();
   }
+
+ // This function inserts the new user into the Auth.
+ public insertNewUser(user_: User): Observable<Result<{}>> {
+  const url = this.url + "/registration";
+  return this.httpClient.post<Result<{}>>(url, user_).pipe(
+    map(result => fromJSON<{}>(JSON.stringify(result))),
+    catchError(error => of(new Err<{}>(error)))
+  );
+}
 
 
   public login(username: string, password: string): Observable<Result<Token>> {
