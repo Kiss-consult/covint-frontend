@@ -19,6 +19,10 @@ export class LoginService {
     this.url = this.config.config.AuthUrl;
   }
 
+  public getAccessToken(): string {
+    return this.token.access_token;
+  }
+
   public getUsername(): string {
     const decoded = jwt_decode<AccessToken>(this.token.access_token);
     return decoded.preferred_username;
