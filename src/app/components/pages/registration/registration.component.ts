@@ -15,7 +15,9 @@ export class RegistrationComponent {
  
 
 
-  constructor(private loginService: LoginService) {}
+  constructor(private loginService: LoginService) {
+    
+  }
 
 
   public finish() {

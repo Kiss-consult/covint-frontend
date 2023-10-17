@@ -8,6 +8,7 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { Filter } from 'src/app/models/filter/filter';
 import { Export } from 'src/app/models/export/export';
+import { SavedFilter } from 'src/app/models/savedfilter/savedfilter';
 
 
 @Component({
@@ -22,6 +23,8 @@ export class ExportComponent {
   filter: Filter = new Filter();
   exports: Export[] = [];
   filtername: string ="";
+  savedfilters:  SavedFilter[] = [];
+  savedfilter: SavedFilter = new SavedFilter();
 
 
   displayedColumns: string[] = [ 'sex', 'age', 'markers', 'hospitalized', 'dead', 'count', 'validated', 'source', 'datefrom', 'dateto']; // Itt adhatod meg az oszlopok neveit
@@ -57,6 +60,10 @@ export class ExportComponent {
         //this.dataSource.paginator = this.paginator;
 
       });
+
+
+
+     
   }
 
   private checkRequiredFields(): boolean {
@@ -139,6 +146,36 @@ export class ExportComponent {
     });
   }
 
+
+  public getFilters() {
+    //if (!this.checkRequiredFields()) {
+    //  return;
+    //}
+
+    this.backendService.getFilterList().subscribe(
+      result => {
+        if (result.isErr()) {
+          alert("Szűrők lekérdezése sikertelen");
+          console.error(result.unwrapErr());
+          return;
+        }
+        alert("Sikeres szűrők lekérdezése");
+        this.savedfilters = result.unwrap();
+        //for (let illness of result.unwrap()) {
+         // illness.BnoCodes.forEach((bnoCode) => {
+         //   this.illnessesByBno.set(bnoCode, illness);
+         // });
+       // }
+       // this.dataSource.data = this.illnesses; // Az adatforrás frissítése
+        console.log("Sikeresen szűrők lekérdezése az adatbázisból");
+        console.log(this.savedfilters);
+        //this.dataSource.paginator = this.paginator;
+  
+      });
+  }
+  public getFilterNames(sf: SavedFilter): string {
+    return sf.FilterName;
+  }
 
 
   public getMarker() {

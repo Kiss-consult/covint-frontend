@@ -189,3 +189,23 @@
 <button id="filtersavebutton" (click)="saveFilter()">Szűrő mentése</button>
 
   <button id="exportbutton" (click)="export()"> XLSX Export</button>
+
+  <br>
+     
+  <button (click)="getFilters()">Szűrők lekérdezése</button></div>
+  <div class="markerclass">
+    <div>
+      <label class="text"> Szűrők:</label>
+    </div>
+    <div style="display: flex;">
+      <select class="droptextbox" type="text" id="filters" name="filters" [(ngModel)]="savedfilters">
+        <ng-container *ngFor="let filter of savedfilters">
+
+            <option value="{{filter.FilterName}}">{{filter.FilterName}}</option>
+         
+        </ng-container>
+      </select>
+
+  
+    
+  </div>
