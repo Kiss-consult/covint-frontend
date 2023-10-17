@@ -50,6 +50,7 @@ const routes: Routes = [
   { path: "markermanagement", component: MarkermanagementComponent },
   { path: "auditlog", component: AuditlogComponent },
   { path: "registration", component: RegistrationComponent },
+  { path: "percentoverwrite", component: PercentoverwriteComponent },
 
 ];
 

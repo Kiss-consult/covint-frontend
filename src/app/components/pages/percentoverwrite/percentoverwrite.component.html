@@ -1,1 +1,77 @@
-<p>percentoverwrite works!</p>
+<h1>%-os értékek felülírása</h1>
+<div class="container">
+    <div class="sexclass">
+      <div>
+        <label class="text" for="sex">Páciens neme</label>
+      </div>
+      <div>
+        <select class="droptextbox" name="sex" id="sex" [(ngModel)]="override.Sex">
+          <option value="Férfi">Férfi</option>
+          <option value="Nő">Nő</option>
+         </select>
+        <div class="ageclass">
+          <div>
+            <label class="text" for="age">Páciens kora</label>
+          </div>
+          <div>
+            <input class="droptextbox" type="number" id="age" name="age" min="1" [(ngModel)]="override.Age">
+          </div>
+        </div>
+      </div>
+    </div>
+  
+   
+  
+    <div class="dead">
+      <div>
+        <label class="text"> Halálozási % </label>
+      </div>
+      <div>
+        
+            <input class="droptextbox" type="number" id="deadpercent" name="deadpercent" min="0" max="1" [(ngModel)]="override.Dead">
+          
+      </div>
+    </div>
+    <div class="dead">
+        <div>
+          <label class="text"> Kórházba kerülési % </label>
+        </div>
+        <div>
+          
+              <input class="droptextbox" type="number" id="hosppercent" name="hosppercent" min="0" max="1" [(ngModel)]="override.Hospitalized">
+            
+        </div>
+      </div>
+    
+  
+    <div class="markerclass">
+      <div>
+        <label class="text"> Marker</label>
+      </div>
+      <div style="display: flex;">
+        <select class="droptextbox" type="text" id="markers" name="markers" [(ngModel)]="marker">
+          <ng-container *ngFor="let marker of markers">
+  
+            <option value="{{marker}}">{{marker}}</option>
+  
+          </ng-container>
+        </select>
+  
+        <button (click)="addMarker()">Hozzáadás</button>
+      </div>
+    </div>
+
+    <div class="addedtext">
+        <div *ngFor="let illness of override.Illnesses" style="border-bottom: solid 3px #0080ff; display: flex; align-items: center; padding-bottom: 5px; margin-top: 5px;">
+          <div style="flex-grow: 1;">
+            <p style="margin: 0;">{{ illness }}</p>
+          </div>
+          <div style="margin-left: auto;">
+            <button (click)="removeMarker(illness)">Törlés</button>
+          </div>
+        </div>
+      </div>
+      
+
+
+    <button id="okebutton" (click)=" overridePercent()">Mentés</button>
