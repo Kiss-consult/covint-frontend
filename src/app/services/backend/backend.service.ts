@@ -62,6 +62,17 @@ export class BackendService {
     );
 
   }
+  // This function save  the  given filter.
+  public filterSave(filtername_: string, filter_: Filter): Observable<Result<{}>> {
+    const url = this.url + "/filters/save";
+    let savedfilter = { filtername_, filter_ }
+    return this.httpClient.post<Result<{}>>(url, savedfilter,{ headers: this.getHeaders() }).pipe(
+      map(result => fromJSON<{}>(JSON.stringify(result))),
+      catchError(error => of(new Err<{}>(error)))
+    );
+  }
+
+
 
   private getHeaders(): HttpHeaders {
     return new HttpHeaders({
@@ -103,4 +114,7 @@ export class BackendService {
       catchError(error => of(new Err<{}>(error)))
     );
   }
+
+
+
 }

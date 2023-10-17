@@ -7,7 +7,7 @@ export class User {
     FirstName: string = "";
     LastName: string = "";
     SealNumber: string = "";
-    IsCompany: boolean = true;
+    IsCompany: boolean = false;
     CompanyName: string = "";
     InstitutionName: string = "";
     InstitutionDepartment: string = "";

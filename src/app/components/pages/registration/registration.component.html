@@ -53,6 +53,13 @@
   </div>
 
   <div class="form-group">
+
+    <div>
+      <label for="trueHosp">Cég ?</label>
+    <input type="radio" id="trueHosp" name="iscompany" [value]="true" [(ngModel)]="user.IsCompany">
+    </div>
+
+    
     <div>
       <label class="text" for="institution">Intézmény neve</label>
       <input class="droptextbox" type="text" id="institution" name="institution" [(ngModel)]="user.InstitutionName">

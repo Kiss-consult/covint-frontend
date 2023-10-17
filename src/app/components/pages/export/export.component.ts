@@ -21,6 +21,7 @@ export class ExportComponent {
 
   filter: Filter = new Filter();
   exports: Export[] = [];
+  filtername: string ="";
 
 
   displayedColumns: string[] = [ 'sex', 'age', 'markers', 'hospitalized', 'dead', 'count', 'validated', 'source', 'datefrom', 'dateto']; // Itt adhatod meg az oszlopok neveit
@@ -94,6 +95,25 @@ export class ExportComponent {
         alert("Sikeres szűrés");
         console.log("Successfully filtered export data")
         this.exports = result.unwrap();
+      });
+  }
+
+
+  public saveFilter() {
+    //if (!this.checkRequiredFields()) {
+    //  return;
+    //}
+
+    this.backendService.filterSave(this.filtername, this.filter).subscribe(
+      result => {
+        if (result.isErr()) {
+          alert("Sikertelen szűrő mentés");
+          console.error(result.unwrapErr());
+          return;
+        }
+        alert("Sikeres szűrő mentés");
+        console.log("Successfully saved filter")
+       
       });
   }
 
