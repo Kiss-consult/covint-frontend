@@ -177,8 +177,15 @@
     <mat-paginator [pageSizeOptions]="pageSizeOptions" showFirstLastButtons></mat-paginator> 
 </div>
 
- 
+<div class="source">
+  <div>
+  <label style="margin-bottom: 0;" for="filtername">Szűrő neve:</label>
+  </div>
+  <div>
+  <input class="droptextbox" type="text" id="filtername" name="filtername" [(ngModel)]="filtername">
+  </div>
+</div>
 
- 
+<button id="filtersavebutton" (click)="saveFilter()">Szűrő mentése</button>
 
-  <button id="exportbutton" (click)="export()">Export</button>
+  <button id="exportbutton" (click)="export()"> XLSX Export</button>
