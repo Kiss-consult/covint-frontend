@@ -9,6 +9,7 @@ import { Export } from 'src/app/models/export/export';
 import { ConfigService } from '../config/config.service';
 import { NewIllness } from 'src/app/models/newillness/newillness';
 import { LoginService } from '../login/login.service';
+import { SavedFilter } from 'src/app/models/savedfilter/savedfilter';
 
 
 @Injectable({
@@ -17,6 +18,7 @@ import { LoginService } from '../login/login.service';
 export class BackendService {
   private url: string = "";
   markers: string[] = [];
+  username: string = "";
 
 
   constructor(private httpClient: HttpClient, private config: ConfigService,
@@ -63,15 +65,24 @@ export class BackendService {
 
   }
   // This function save  the  given filter.
-  public filterSave(filtername_: string, filter_: Filter): Observable<Result<{}>> {
+  public filterSave(filtername: string, filter: Filter): Observable<Result<{}>> {
     const url = this.url + "/filters/save";
-    let savedfilter = { filtername_, filter_ }
+    let savedfilter = { filtername, filter }
     return this.httpClient.post<Result<{}>>(url, savedfilter,{ headers: this.getHeaders() }).pipe(
       map(result => fromJSON<{}>(JSON.stringify(result))),
       catchError(error => of(new Err<{}>(error)))
     );
   }
 
+ // This function save  the  given filter.
+ public changeIllness(name: string, ismarker: boolean): Observable<Result<{}>> {
+  const url = this.url + "}/illnesses/change";
+  let changed = { name, ismarker }
+  return this.httpClient.post<Result<{}>>(url,changed,{ headers: this.getHeaders() }).pipe(
+    map(result => fromJSON<{}>(JSON.stringify(result))),
+    catchError(error => of(new Err<{}>(error)))
+  );
+}
 
 
   private getHeaders(): HttpHeaders {
@@ -95,6 +106,15 @@ export class BackendService {
     return this.httpClient.get<Result<string[]>>(url, { headers: this.getHeaders() }).pipe(
       map(result => fromJSON<string[]>(JSON.stringify(result))),
       catchError(error => of(new Err<string[]>(error)))
+    );
+  }
+
+    // This function returns all the illnesses stored in the database.
+  public getFilterList(): Observable<Result<SavedFilter[]>> {
+    const url = this.url + "/filters/list";
+    return this.httpClient.get<Result<SavedFilter[]>>(url, { headers: this.getHeaders() }).pipe(
+      map(result => fromJSON<SavedFilter[]>(JSON.stringify(result))),
+      catchError(error => of(new Err<SavedFilter[]>(error)))
     );
   }
 
