@@ -2,7 +2,6 @@ import { Component, ViewChild } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableModule, MatTableDataSource } from '@angular/material/table';
 import { Illness } from 'src/app/models/illness/illness';
-import { IsMarker } from 'src/app/models/ismarker/ismarker';
 import { BackendService } from 'src/app/services/backend/backend.service';
 
 @Component({

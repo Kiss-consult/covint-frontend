@@ -10,6 +10,7 @@ import { ConfigService } from '../config/config.service';
 import { NewIllness } from 'src/app/models/newillness/newillness';
 import { LoginService } from '../login/login.service';
 import { SavedFilter } from 'src/app/models/savedfilter/savedfilter';
+import { Override } from 'src/app/models/override/override';
 
 
 @Injectable({
@@ -135,6 +136,13 @@ export class BackendService {
     );
   }
 
-
+// This function inserts the new illness into the database.
+public insertOverride(override: Override): Observable<Result<{}>> {
+  const url = this.url + "/rates/override";
+  return this.httpClient.post<Result<{}>>(url, override, { headers: this.getHeaders() }).pipe(
+    map(result => fromJSON<{}>(JSON.stringify(result))),
+    catchError(error => of(new Err<{}>(error)))
+  );
+}
 
 }
