@@ -18,6 +18,7 @@ export class FilterablemarkersComponent {
 
   marker: string = '';
   illnesses: Illness[] = [];
+  illness: Illness = new Illness;
   markers: string[] = [];
   // This is only stored for faster access to the illnesses by BNO code
   illnessesByBno: Map<string, Illness> = new Map();
@@ -81,10 +82,27 @@ export class FilterablemarkersComponent {
   }
 
 
-  public change() {
+  public change(illness: Illness) {
 
+    this.illness.GroupName = illness.GroupName;
+    this.illness.IsMarker = illness.IsMarker;
+
+console.log("change")
+console.log(this.illness.GroupName, this.illness.IsMarker)
+
+this.backendService.changeIllness(this.illness.GroupName, this.illness.IsMarker ).subscribe(
+  result => {
+    if (result.isErr()) {
+      alert("Sikertelen marker illesztés");
+      console.error(result.unwrapErr());
+      return;
+    }
+    alert("Sikeres marker illesztés");
+    console.log("Successfully changed marker ")
+    
+  });
+}
 
   
   }
 
-}

@@ -77,7 +77,7 @@ export class BackendService {
 
  // This function save  the  given filter.
  public changeIllness(name: string, ismarker: boolean): Observable<Result<{}>> {
-  const url = this.url + "}/illnesses/change";
+  const url = this.url + "/illnesses/change";
   let changed = { name, ismarker }
   return this.httpClient.post<Result<{}>>(url,changed,{ headers: this.getHeaders() }).pipe(
     map(result => fromJSON<{}>(JSON.stringify(result))),
