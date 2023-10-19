@@ -198,10 +198,10 @@
       <label class="text"> Szűrők:</label>
     </div>
     <div style="display: flex;">
-      <select class="droptextbox" type="text" id="filters" name="filters" [(ngModel)]="savedfilters">
+      <select class="droptextbox" type="text" id="filters" name="filters" [(ngModel)]="filter">
         <ng-container *ngFor="let filter of savedfilters">
 
-            <option value="{{filter.FilterName}}">{{filter.FilterName}}</option>
+            <option [ngValue]="filter.Filter">{{filter.FilterName}}</option>
          
         </ng-container>
       </select>

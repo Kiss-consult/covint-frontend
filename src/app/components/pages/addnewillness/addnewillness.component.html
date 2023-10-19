@@ -71,64 +71,17 @@
         </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let age of ages; let i = index"> 
+        <tr *ngFor="let default of defaults"> 
 
-          <td> <input  type="text" id="sex" name="sex" placeholder="{{ setDefaultSexMale(default)}}" [(ngModel)]="default.Sex"> </td>
-          <td> <input  type="number" id="age" name="age" placeholder="{{age}}" [(ngModel)]="default.Age">
+          <!--<td> <input  type="text" id="sex" name="sex" placeholder="{{ setDefaultSexMale(default)}}" [(ngModel)]="default.Sex"> </td> -->
+          <td>  {{default.Sex}}  </td>
+          <td>  {{default.Age}}  </td>
           <td>
             <mat-form-field class="form-field" apearance="legacy">
               <mat-label></mat-label>
 
-              <input  matInput [(ngModel)]="default.Hospitalized" type="number" name="hospitalized" id="hospitalized{{ age }}" placeholder="{{age}}" class="form-control">
+              <input  matInput [(ngModel)]="default.Hospitalized" type="number" name="hospitalized" id="hospitalized" placeholder="" class="form-control" >
              
-            </mat-form-field>
-          </td>
-          <td>
-            <mat-form-field class="form-field" apearance="legacy">
-              <mat-label></mat-label>
-              <input matInput [(ngModel)]="default.Dead" type="number" name="dead" id="dead{{ age }}" class="form-control">
-            </mat-form-field>
-          </td>
-          <td>
-                        
-            <div class="form-check">
-                <input class="form-check-input" type="checkbox" id="customCheckbox{{ age }}" (ngModelChange)="addDefault()" [(ngModel)]="selectedRows[i]">
-                <label class="form-check-label" for="customCheckbox{{ age }} "></label>
-                
-            </div>
-          </td>
-
-        </tr>
-      </tbody>
-    </table>
-  </div>
-  
-  
-  
-
-    <button (click)="addDefault()">Hozzáadás</button>
-
-  <button id="okebutton" (click)="finish()">Kész</button>
-
-  <div class="scrollable-container">
-    <table>
-      <thead>
-        <tr>
-          <th>Nem</th>
-          <th>Kor</th>
-          <th>Halálozás</th>
-          <th>Kórház</th>
-          <th></th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr *ngFor="let age of ages; let i = index">
-          <td>{{ setDefaultSexFemale(default)  }}</td>
-          <td>{{ age }}</td>
-          <td>
-            <mat-form-field class="form-field" apearance="legacy">
-              <mat-label></mat-label>
-              <input matInput [(ngModel)]="default.Hospitalized" type="number" name="hospitalized" id="hospitalized" class="form-control">
             </mat-form-field>
           </td>
           <td>
@@ -137,22 +90,21 @@
               <input matInput [(ngModel)]="default.Dead" type="number" name="dead" id="dead" class="form-control">
             </mat-form-field>
           </td>
-          <td>
-                        
-            <div class="form-check">
-                <input class="form-check-input" type="checkbox" id="customCheckbox{{ age }}" [(ngModel)]="selectedRows[i]">
-                <label class="form-check-label" for="customCheckbox{{ age }}"></label>
-            </div>
-          </td>
+          
+
         </tr>
       </tbody>
-    </table>
+    </table>                                                                                 
   </div>
   
   
   
 
-    <button (click)="addDefault()">Hozzáadás</button>
+    
 
   <button id="okebutton" (click)="finish()">Kész</button>
+
+  
+
+ 
 </div>

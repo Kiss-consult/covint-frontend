@@ -25,6 +25,7 @@ export class ExportComponent {
   filtername: string ="";
   savedfilters:  SavedFilter[] = [];
   savedfilter: SavedFilter = new SavedFilter();
+  currentfilter : SavedFilter = new SavedFilter();
 
 
   displayedColumns: string[] = [ 'sex', 'age', 'markers', 'hospitalized', 'dead', 'count', 'validated', 'source', 'datefrom', 'dateto']; // Itt adhatod meg az oszlopok neveit
@@ -177,7 +178,19 @@ export class ExportComponent {
     return sf.FilterName;
   }
 
+  public getCurrentFilter(currentfilter : SavedFilter): Filter {
+   
+    console.log(currentfilter);
+    console.log(this.currentfilter.FilterName);
 
+    this.filter = this.currentfilter.Filter;
+
+    console.log(this.filter);
+
+    return this.filter;
+  }
+
+  
   public getMarker() {
     //const newMarker = new Marker(this.newBno, this.illnessesByBno.get(this.newBno)?.Names);
     this.filter.Illnesses.push(this.marker);
