@@ -22,6 +22,7 @@ export class ExportComponent {
 
   filter: Filter = new Filter();
   exports: Export[] = [];
+  
   filtername: string ="";
   savedfilters:  SavedFilter[] = [];
   savedfilter: SavedFilter = new SavedFilter();
@@ -29,14 +30,16 @@ export class ExportComponent {
 
 
   displayedColumns: string[] = [ 'sex', 'age', 'markers', 'hospitalized', 'dead', 'count', 'validated', 'source', 'datefrom', 'dateto']; // Itt adhatod meg az oszlopok neveit
-  dataSource: MatTableDataSource<Illness> = new MatTableDataSource<Illness>;
+  dataSource: MatTableDataSource<Export>;
+  
+
   newIllness: string = '';
   marker: string = '';
   illnesses: Illness[] = [];
   markers: string[] = [];
   // This is only stored for faster access to the illnesses by BNO code
   illnessesByBno: Map<string, Illness> = new Map();
-  @ViewChild(MatPaginator) paginator!: MatPaginator;
+  @ViewChild('paginator') paginator: MatPaginator;
   pageSizeOptions: number[] = [5, 10];
 
 
@@ -64,9 +67,16 @@ export class ExportComponent {
 
 
 
+
      
   }
 
+
+
+  ngAfterViewInit() {
+    this.dataSource = new MatTableDataSource(this.exports);
+    this.dataSource.paginator = this.paginator;
+}
   private checkRequiredFields(): boolean {
 
     if (this.filter.Sex === null || this.filter.Sex === "") {

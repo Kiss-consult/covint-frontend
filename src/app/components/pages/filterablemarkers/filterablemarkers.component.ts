@@ -43,30 +43,31 @@ export class FilterablemarkersComponent {
         console.log(this.illnesses);
         //this.dataSource.paginator = this.paginator;
 
+        this.backendService.getMarkers().subscribe(
+          result => {
+            if (result.isErr()) {
+              alert("Betegségek lekérdezése sikertelen filteres");
+              console.error(result.unwrapErr());
+              return;
+            }
+            this.markers = result.unwrap();
+            //for (let illness of result.unwrap()) {
+            // illness.BnoCodes.forEach((bnoCode) => {
+            //   this.illnessesByBno.set(bnoCode, illness);
+            // });
+            // }
+            // this.dataSource.data = this.illnesses; // Az adatforrás frissítése
+            console.log("Sikeresen lekérdezve a betegségek az adatbázisból filteres");
+            console.log(this.markers);
+            //this.dataSource.paginator = this.paginator;
+
+
+            this.setMarker()
+
+
+          });
+
       });
-
-
-    this.backendService.getMarkers().subscribe(
-      result => {
-        if (result.isErr()) {
-          alert("Betegségek lekérdezése sikertelen filteres");
-          console.error(result.unwrapErr());
-          return;
-        }
-        this.markers = result.unwrap();
-        //for (let illness of result.unwrap()) {
-        // illness.BnoCodes.forEach((bnoCode) => {
-        //   this.illnessesByBno.set(bnoCode, illness);
-        // });
-        // }
-        // this.dataSource.data = this.illnesses; // Az adatforrás frissítése
-        console.log("Sikeresen lekérdezve a betegségek az adatbázisból filteres");
-        console.log(this.markers);
-        //this.dataSource.paginator = this.paginator;
-
-      });
-
-
 
   }
 
@@ -87,22 +88,22 @@ export class FilterablemarkersComponent {
     this.illness.GroupName = illness.GroupName;
     this.illness.IsMarker = illness.IsMarker;
 
-console.log("change")
-console.log(this.illness.GroupName, this.illness.IsMarker)
+    console.log("change")
+    console.log(this.illness.GroupName, this.illness.IsMarker)
 
-this.backendService.changeIllness(this.illness.GroupName, this.illness.IsMarker ).subscribe(
-  result => {
-    if (result.isErr()) {
-      alert("Sikertelen marker illesztés");
-      console.error(result.unwrapErr());
-      return;
-    }
-    alert("Sikeres marker illesztés");
-    console.log("Successfully changed marker ")
-    
-  });
-}
+    this.backendService.changeIllness(this.illness.GroupName, this.illness.IsMarker).subscribe(
+      result => {
+        if (result.isErr()) {
+          alert("Sikertelen marker illesztés");
+          console.error(result.unwrapErr());
+          return;
+        }
+        alert("Sikeres marker illesztés");
+        console.log("Successfully changed marker ")
 
-  
+      });
   }
+
+
+}
 
