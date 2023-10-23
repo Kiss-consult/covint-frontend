@@ -11,6 +11,7 @@ import { NewIllness } from 'src/app/models/newillness/newillness';
 import { LoginService } from '../login/login.service';
 import { SavedFilter } from 'src/app/models/savedfilter/savedfilter';
 import { Override } from 'src/app/models/override/override';
+import { Default } from 'src/app/models/default/default';
 
 
 @Injectable({
@@ -84,7 +85,14 @@ export class BackendService {
     catchError(error => of(new Err<{}>(error)))
   );
 }
-
+public overrideCombination(illnesses: string[], defaults: Default[]): Observable<Result<{}>> {
+  const url = this.url + "/illnesses/change";
+  let combination = { illnesses, defaults }
+  return this.httpClient.post<Result<{}>>(url,combination,{ headers: this.getHeaders() }).pipe(
+    map(result => fromJSON<{}>(JSON.stringify(result))),
+    catchError(error => of(new Err<{}>(error)))
+  );
+}
 
   private getHeaders(): HttpHeaders {
     return new HttpHeaders({

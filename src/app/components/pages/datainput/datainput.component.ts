@@ -31,11 +31,11 @@ export class DatainputComponent {
         }
         this.markers = result.unwrap();
         //for (let illness of result.unwrap()) {
-         // illness.BnoCodes.forEach((bnoCode) => {
-         //   this.illnessesByBno.set(bnoCode, illness);
-         // });
-       // }
-       // this.dataSource.data = this.illnesses; // Az adatforrás frissítése
+        // illness.BnoCodes.forEach((bnoCode) => {
+        //   this.illnessesByBno.set(bnoCode, illness);
+        // });
+        // }
+        // this.dataSource.data = this.illnesses; // Az adatforrás frissítése
         console.log("Sikeresen lekérdezve a betegségek az adatbázisból");
         console.log(this.markers);
         //this.dataSource.paginator = this.paginator;
@@ -51,7 +51,7 @@ export class DatainputComponent {
       return;
     }
     //const newMarker = new Marker(this.newBno, this.illnessesByBno.get(this.newBno)?.Names);
-    
+
     if (this.case.Illnesses.filter((valami) => valami === this.marker).length > 0) {
       console.log("Marker already exists")
       this.removeMarker(this.marker);
@@ -59,6 +59,10 @@ export class DatainputComponent {
     }
     this.case.Illnesses.push(this.marker);
     this.newIllness = '';
+  }
+  // Function to remove marker from the case
+  public removeMarker(illness: string) {
+    this.case.Illnesses = this.case.Illnesses.filter(m => m !== illness);
   }
 
   // Function to add bno. If the newly typed bno is already in the case,
@@ -69,7 +73,7 @@ export class DatainputComponent {
       return;
     }
     //const newMarker = new Marker(this.newBno, this.illnessesByBno.get(this.newBno)?.Names);
-    
+
     if (this.case.BnoCodes.filter((valami) => valami === this.newBno).length > 0) {
       console.log("Marker already exists")
       this.removeBno(this.newBno);
@@ -78,7 +82,6 @@ export class DatainputComponent {
     this.case.BnoCodes.push(this.newBno);
     this.newBno = '';
   }
-
 
 
   // Function to remove bno from the case
@@ -107,18 +110,15 @@ export class DatainputComponent {
     return true;
   }
 
-  // Function to remove marker from the case
-  public removeMarker(illness: string) {
-    this.case.Illnesses = this.case.Illnesses.filter(m => m !== illness);
-  }
 
 
 
 
 
 
-  
- 
+
+
+
 
   // Format date to YYYY-MM-DD
   private formatDate(date: Date): string {
