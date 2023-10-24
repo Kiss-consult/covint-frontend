@@ -21,7 +21,7 @@ import { SavedFilter } from 'src/app/models/savedfilter/savedfilter';
 export class ExportComponent {
 
   filter: Filter = new Filter();
-  exports: Export[] = [];
+  private exports: Export[] = [];
   
   filtername: string ="";
   savedfilters:  SavedFilter[] = [];
@@ -113,7 +113,12 @@ export class ExportComponent {
         alert("Sikeres szűrés");
         console.log("Successfully filtered export data")
         this.exports = result.unwrap();
+        this.updateTable();
       });
+  }
+
+  private updateTable() {
+    this.dataSource.data = this.exports;
   }
 
 
