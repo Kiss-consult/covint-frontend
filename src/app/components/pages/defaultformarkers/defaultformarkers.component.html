@@ -1,1 +1,82 @@
 <p>dafaultformarkers works!</p>
+
+
+
+<div class="markerclass">
+    <div>
+      <label class="text"> Marker</label>
+    </div>
+    <div style="display: flex;">
+      <select class="droptextbox" type="text" id="markers" name="markers" [(ngModel)]="marker">
+        <ng-container *ngFor="let marker of markers">
+
+          <option value="{{marker}}">{{marker}}</option>
+
+        </ng-container>
+      </select>
+
+      <button (click)="addMarker()">Hozzáadás</button>
+    </div>
+  </div>
+
+  <div class="addedtext">
+    <div *ngFor="let illness of illnesses" style="border-bottom: solid 3px #0080ff; display: flex; align-items: center; padding-bottom: 5px; margin-top: 5px;">
+      <div style="flex-grow: 1;">
+        <p style="margin: 0;">{{ illness }}</p>
+      </div>
+      <div style="margin-left: auto;">
+        <button (click)="removeMarker(illness)">Törlés</button>
+      </div>
+    </div>
+  </div>
+  
+  
+  <div class="scrollable-container">
+    <table>
+      <thead>
+        <tr>
+          <th>Nem</th>
+          <th>Kor</th>
+          <th>Halálozás</th>
+          <th>Kórház</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let default of defaults"> 
+
+          <!--<td> <input  type="text" id="sex" name="sex" placeholder="{{ setDefaultSexMale(default)}}" [(ngModel)]="default.Sex"> </td> -->
+          <td>  {{default.Sex}}  </td>
+          <td>  {{default.Age}}  </td>
+          <td>
+            <mat-form-field class="form-field" apearance="legacy">
+              <mat-label></mat-label>
+
+              <input  matInput [(ngModel)]="default.Hospitalized" type="number" name="hospitalized" id="hospitalized" placeholder="" class="form-control" >
+             
+            </mat-form-field>
+          </td>
+          <td>
+            <mat-form-field class="form-field" apearance="legacy">
+              <mat-label></mat-label>
+              <input matInput [(ngModel)]="default.Dead" type="number" name="dead" id="dead" class="form-control">
+            </mat-form-field>
+          </td>
+          
+
+        </tr>
+      </tbody>
+    </table>                                                                                 
+  </div>
+  
+  
+  
+
+<div>
+
+  <button id="okebutton" (click)="finish()">Kész</button>
+
+  
+
+ 
+</div>

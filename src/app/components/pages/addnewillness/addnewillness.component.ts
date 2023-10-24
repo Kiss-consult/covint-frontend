@@ -132,8 +132,8 @@ export class AddnewillnessComponent {
 
   public finish() {
     //if (!this.checkRequiredFields()) {
-      //return;
-   // }
+    //return;
+    // }
     console.log("finish", this.defaults)
     this.newIllness.Defaults = this.defaults;
     this.backendService.insertIllness(this.newIllness).subscribe(
@@ -151,59 +151,24 @@ export class AddnewillnessComponent {
 
   ngOnInit(): void {
     // Töltsd fel az "ages" tömböt a kívánt életkorokkal.
-    let default_ :Default = new Default;
-    let defaults_ : Default[] = [];
-   
-
-/*
+    let default_: Default = new Default;
+    let defaults_: Default[] = [];
 
     for (let i = 0; i <= 70; i++) {
-      default_.Age = i +18;
-      default_.Sex = "Férfi";
-
-      console.log("record", "Age", default_)
-    
-      //this.defaults.forEach(function (value) {
-      //  console.log(value);
-      //});
-      
-      defaults_.push(default_);
-      console.log("tomb elotte", defaults_)
-
-      default_ = new Default;
-
-      console.log("tomb utana", defaults_)
+      this.default.Age = i + 18;
+      this.default.Sex = "Férfi";
+      this.defaults.push(this.default);
+      this.default = new Default;
     }
 
-this.defaults = defaults_;
-*/
-
-for (let i = 0; i <= 70; i++) {
-  this.default.Age = i +18;
-  this.default.Sex = "Férfi";  
-  
-  this.defaults.push(this.default); 
-
-  this.default = new Default;
-
-  
-}
-for (let i = 0; i <= 70; i++) {
-  this.default.Age = i +18;
-  this.default.Sex = "Nő";  
-  
-  this.defaults.push(this.default); 
-
-  this.default = new Default;
-
-  
-}
-
+    for (let i = 0; i <= 70; i++) {
+      this.default.Age = i + 18;
+      this.default.Sex = "Nő";
+      this.defaults.push(this.default);
+      this.default = new Default;
+    }
 
     console.log("mindegy", this.defaults)
   }
-  //public getDeafults() {
-    //this.newIllness.AlternativeNames = this.newIllness.AlternativeNames.filter(m => m !== bno);
-
-   
+ 
 }

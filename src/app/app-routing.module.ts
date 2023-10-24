@@ -17,7 +17,6 @@ import { FilterablemarkersComponent } from './components/pages/filterablemarkers
 import { MarkermanagementComponent } from './components/pages/markermanagement/markermanagement.component';
 import { AuditlogComponent } from './components/pages/auditlog/auditlog.component';
 import { RegistrationComponent } from './components/pages/registration/registration.component';
-
 import { GroupGuard } from './guards/group.guard';
 import { KutatoOrvos, Orvos, PortalAdmin, PortalVezeto } from './models/group/group';
 import { DefaultformarkersComponent } from './components/pages/defaultformarkers/defaultformarkers.component'; 
@@ -51,6 +50,7 @@ const routes: Routes = [
   { path: "auditlog", component: AuditlogComponent },
   { path: "registration", component: RegistrationComponent },
   { path: "percentoverwrite", component: PercentoverwriteComponent },
+  { path: "defaultformarkers", component: DefaultformarkersComponent }
 
 ];
 
