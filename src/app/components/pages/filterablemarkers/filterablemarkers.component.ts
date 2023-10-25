@@ -25,7 +25,10 @@ export class FilterablemarkersComponent {
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   pageSizeOptions: number[] = [5, 10];
 
-
+  illnessFilter(event: Event) {
+    const filterValue = (event.target as HTMLInputElement).value;
+    this.dataSource.filter = filterValue.trim().toLowerCase();
+  }
 
   constructor(private backendService: BackendService) {
 
@@ -37,7 +40,8 @@ export class FilterablemarkersComponent {
           return;
         }
         this.illnesses = result.unwrap();
-
+        this.dataSource = new MatTableDataSource<Illness>(this.illnesses);
+        
         // this.dataSource.data = this.illnesses; // Az adatforrás frissítése
         console.log("Sikeresen lekérdezve a betegségek (Illnesses)az adatbázisból filteres");
         console.log(this.illnesses);
