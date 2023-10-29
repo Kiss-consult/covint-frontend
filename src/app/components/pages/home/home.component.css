@@ -8,34 +8,10 @@
     display: block;
     justify-content: center;
     padding: 20px;
-    padding-top: 60px;
+    padding-top: 90px;
     width: 50%;
     margin-top: 0;
     border-left:solid 3px #848484;
-    height: 220px;
+    height: 300px;
 }
  
-h2{
-    color: white;
-    border-bottom-left-radius: 7px;
-    background: #848484;
-    margin: 0;
-    padding: 10px;
-    font-size: 30px;
-    width: 82%;
-    margin-top: 99px;
-    margin-left:18% ;
-    margin-right: 0;
-}
-
-.container{
-    justify-content: center;
-    display: flex;
-    max-width: 100%;
-    width: 60%;
-    margin-left: 20%;
-    margin-right: 20%;
-    margin-top: 0;
-    height: 100%;
-    padding-top: 0;
-}

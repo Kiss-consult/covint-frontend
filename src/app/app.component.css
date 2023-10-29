@@ -24,6 +24,7 @@
     color: #000000;
     margin: 0;
     z-index: 1;
+    cursor: pointer;
 }
 
 #covint_logo{
@@ -61,7 +62,7 @@
     left: 0;
     background-color: white;
     z-index: 1;
-    box-shadow: #000000;
+    box-shadow: 0px 2px 5px #848484;
   }
   
   .nav-item:hover .dropdown {

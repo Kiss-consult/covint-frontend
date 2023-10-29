@@ -1,5 +1,3 @@
-
-
 .sexclass{
     display: block;
     flex-direction: column;
@@ -7,14 +5,14 @@
     margin-bottom: 20px;
 }
 
-.source{
-    display: block;
-    flex-direction: column;
+.source{    
+    margin-top: 60px;
     margin-right: 200px;
     margin-bottom: 20px;
 }
 
 #source{
+    display: flex;
     width: 200px;
 }
 
@@ -23,13 +21,8 @@ button {
     margin-left: 0  ;
 }
 
-#okebutton{
-    margin-left: 0;
-    margin-bottom: 50px;
-}
-
-#exportbutton{
-    margin-top: 50px;
+.exportbutton{
+    margin-bottom: 60px;
     margin-left: 0;
     float: right;
 }
@@ -57,6 +50,7 @@ button {
 
 .text{
     margin: 0;  
+    display: flex;
 }
 
 .validclass{
@@ -68,7 +62,7 @@ button {
 .markerclass{
     display: block;
     flex-direction: column;
-    margin-bottom: 20px;
+    margin-bottom: 40px;
 }
 
 #markers{
@@ -77,8 +71,59 @@ button {
 
 #agefrom{
     width: 200px;
+    margin-right: 5px;
 }
 
 #ageto{
     width: 200px;
+    margin-right: 5px;
+}
+
+.table {
+    height: auto;
+    margin-bottom: 40px;
+    margin-top: 40px;
+}
+
+#dateto{
+    margin-left:10px;
+    margin-right: 2px;
+}
+
+#datefrom{
+    margin-right: 2px;
+}
+
+#okebutton {
+    margin-left: auto;
+    float: left;
+    margin-bottom: 20px;
+    margin-top: 40px;
+}
+
+#markerbutton{
+    margin-right: 45px;    
+    margin-bottom: 40px;
+    z-index: 0;
+}
+
+#addmarkerbutton{
+    margin-left: 25px;
+    margin-bottom: 40px;
+}
+
+.active-button {
+    opacity: 0.5; /* Aktív gomb teljesen látható */
+}
+  
+.inactive-button {
+    opacity: 1; /* Inaktív gomb halványabb */
+}
+
+#markerfiltercontent{
+    margin-top: 60px;
+}
+
+#filtersavebutton{
+    margin-left: 25px;
 }
