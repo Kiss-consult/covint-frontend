@@ -59,8 +59,9 @@
     position: absolute;
     top: 100%;
     left: 0;
-    background-color: #fff;
+    background-color: white;
     z-index: 1;
+    box-shadow: #000000;
   }
   
   .nav-item:hover .dropdown {
@@ -76,4 +77,11 @@
   .dropdown li:hover {
     background-color: #f2f2f2;
     z-index: 1;
+  }
+
+  ul, ol {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+    text-align: center;
   }
