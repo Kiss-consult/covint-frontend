@@ -33,7 +33,11 @@ button {
     margin-left: 0;
     float: right;
 }
-
+#ratesbutton{
+    margin-top: 50px;
+    margin-left: 0;
+    float: right;
+}
 .addedtext { 
     margin-top: 20px;
     padding: 0;

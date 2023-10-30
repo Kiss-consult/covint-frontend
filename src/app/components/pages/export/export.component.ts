@@ -161,7 +161,25 @@ export class ExportComponent {
       downloadLink.click();
     });
   }
-
+  public rates() {
+    
+    const filename = "rates.xlsx";
+    this.backendService.downloadRates().subscribe((result) => {
+      if (result.isErr()) {
+        console.error(result.unwrapErr());
+        return;
+      }
+      let response = result.unwrap();
+      let data = response[0];
+      let dataType = response[1];
+      let downloadLink = document.createElement('a');
+      downloadLink.href = window.URL.createObjectURL(new Blob(data, { type: dataType }));
+      if (filename)
+        downloadLink.setAttribute('download', filename);
+      document.body.appendChild(downloadLink);
+      downloadLink.click();
+    });
+  }
 
   public getFilters() {
     //if (!this.checkRequiredFields()) {
