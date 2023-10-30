@@ -209,24 +209,28 @@
 
     </div>
 
-    <div class="exportbutton">
-      <p>Exportálja a szűrt táblázatot</p>
-      <button (click)="export()"> XLSX Export Szűrt adatok</button>
-    </div>
-    <div class="ratestbutton">
-      <p>Exportálja a teljes eredmény adatokat</p>
-      <button (click)="rates()"> XLSX Export Teljes eredmény adatok</button>
-    </div>
-    <div class="source">
-      <div>
-        <p>Jelenlegi Szűrő mentése</p>
+    <div style="display: flex; justify-content: space-between; align-items: end;">
+      <div class="source2">      
+        <p style="align-items: start;">Jelenlegi Szűrő mentése</p>        
+        <div>        
+          <input style="margin-bottom: 5px;" class="droptextbox" type="text" id="filtername" name="filtername" [(ngModel)]="filtername">    
+          <button id="filtersavebutton" (click)="saveFilter()">Szűrő mentése</button>
+        </div> 
+        <p style="width: 200px;">Adja meg a szürő nevét a mentéshez</p>
+      </div> 
+
+      <div class="exportbutton">
+        <p>Exportálja a szűrt táblázatot</p>      
+        <button style="margin-bottom: 5px;" (click)="export()">Export</button>
+        <p>XLSX Export Szűrt adatok</p>
       </div>
-      <div>
-        <label style="margin-bottom: 0; width: 200px;" for="filtername">Adja meg a szürő nevét a mentéshez</label>
+
+      <div class="ratestbutton">
+        <p>Exportálja a teljes eredmény adatokat</p>      
+        <button style="margin-bottom: 5px;" (click)="rates()">Export</button>
+        <p> XLSX Export Teljes eredmény adatok</p>
       </div>    
-      <input class="droptextbox" type="text" id="filtername" name="filtername" [(ngModel)]="filtername">    
-      <button id="filtersavebutton" (click)="saveFilter()">Szűrő mentése</button>
-    </div>  
-    
+    </div>       
   </div>
 </div>
+

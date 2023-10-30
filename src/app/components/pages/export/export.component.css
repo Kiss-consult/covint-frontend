@@ -6,9 +6,17 @@
 }
 
 .source{    
-    margin-top: 60px;
+    margin-top: 20px;
     margin-right: 200px;
     margin-bottom: 20px;
+}
+
+.source2{
+    margin-bottom: 60px;
+    align-items: flex-start;
+    border-right: solid 4px #b8b8b8a6;
+    padding-right: 90px;
+    padding-top: 40px;
 }
 
 #source{
@@ -23,13 +31,13 @@ button {
 
 .exportbutton{
     margin-bottom: 60px;
-    margin-left: 0;
-    float: right;
+    width: 200px;
 }
-#ratesbutton{
-    margin-top: 50px;
+.ratestbutton{
+    margin-bottom: 60px;
     margin-left: 0;
-    float: right;
+    width: 200px;
+    
 }
 .addedtext { 
     margin-top: 20px;
@@ -60,7 +68,7 @@ button {
 .validclass{
     display: flex;
     flex-direction: column;
-    margin-bottom: 20px;
+    
 }
 
 .markerclass{
@@ -117,11 +125,11 @@ button {
 }
 
 .active-button {
-    opacity: 0.5; /* Aktív gomb teljesen látható */
+    opacity: 0.5; 
 }
   
 .inactive-button {
-    opacity: 1; /* Inaktív gomb halványabb */
+    opacity: 1; 
 }
 
 #markerfiltercontent{

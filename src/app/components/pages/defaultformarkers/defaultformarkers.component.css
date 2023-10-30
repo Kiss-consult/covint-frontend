@@ -29,6 +29,7 @@ button {
 .addedtext { 
     margin-top: 20px;
     padding: 0;
+    margin-bottom: 40px;
   }
 
 #text00 {
@@ -152,7 +153,6 @@ button {
 .scrollable-container {
     overflow: auto;
     max-height: 500px; 
-    background-color: #c4c4c4;
     padding: 20px;
   }
 

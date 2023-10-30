@@ -1,7 +1,7 @@
-<p>dafaultformarkers works!</p>
+<h1>Ősfeltöltés</h1>
+<h2>Ősfeltöltés több marker kombinációjára</h2>
 
-
-
+<div class="container">
 <div class="markerclass">
     <div>
       <label class="text"> Marker</label>
@@ -30,45 +30,31 @@
     </div>
   </div>
   
-  
   <div class="scrollable-container">
-    <table>
-      <thead>
-        <tr>
-          <th>Nem</th>
-          <th>Kor</th>
-          <th>Halálozás</th>
-          <th>Kórház</th>
-          <th></th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr *ngFor="let default of defaults"> 
-
-          <!--<td> <input  type="text" id="sex" name="sex" placeholder="{{ setDefaultSexMale(default)}}" [(ngModel)]="default.Sex"> </td> -->
-          <td>  {{default.Sex}}  </td>
-          <td>  {{default.Age}}  </td>
-          <td>
-            <mat-form-field class="form-field" apearance="legacy">
-              <mat-label></mat-label>
-
-              <input  matInput [(ngModel)]="default.Hospitalized" type="number" name="hospitalized" id="hospitalized" placeholder="" class="form-control" >
-             
-            </mat-form-field>
-          </td>
-          <td>
-            <mat-form-field class="form-field" apearance="legacy">
-              <mat-label></mat-label>
-              <input matInput [(ngModel)]="default.Dead" type="number" name="dead" id="dead" class="form-control">
-            </mat-form-field>
-          </td>
-          
-
-        </tr>
-      </tbody>
-    </table>                                                                                 
+  <table class="mat-table">
+    <thead>
+      <tr>
+        <th>Nem</th>
+        <th>Kor</th>
+        <th>Halálozás</th>
+        <th>Kórház</th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let default of defaults"> 
+        <td>{{ default.Sex }}</td>
+        <td>{{ default.Age }}</td>
+        <td>
+          <input type="number" [(ngModel)]="default.Hospitalized" name="hospitalized" id="hospitalized" class="form-control">
+        </td>
+        <td>
+          <input type="number" [(ngModel)]="default.Dead" name="dead" id="dead" class="form-control">
+        </td>
+      </tr>
+    </tbody>
+  </table>
   </div>
-  
   
   
 
@@ -79,4 +65,6 @@
   
 
  
+</div>
+
 </div>
