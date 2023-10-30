@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Observable, catchError, map, of } from 'rxjs';
 import { Err, Ok, Result, fromJSON } from 'src/app/models/utils/result';
 import { ConfigService } from '../config/config.service';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Token } from 'src/app/models/token/token';
 import jwt_decode from 'jwt-decode';
 import { AccessToken } from 'src/app/models/token/accesstoken';
@@ -46,6 +46,7 @@ export class LoginService {
 
   public isLoggedIn(): boolean {
     return !!this.token.access_token;
+    
   }
 
   public logout() {
@@ -61,8 +62,20 @@ export class LoginService {
     catchError(error => of(new Err<{}>(error)))
   );
 }
-
-
+public changePassword(currentPassword: string, newPassword: string, confirmation: string) :Observable<Result<{}>> {
+  const url = this.url + "/user/changepassword";
+  let newP = { currentPassword, newPassword, confirmation }
+  return this.httpClient.put<Result<{}>>(url,newP,{ headers: this.getHeaders() }).pipe(
+    map(result => fromJSON<{}>(JSON.stringify(result))),
+    catchError(error => of(new Err<{}>(error)))
+  );
+}
+private getHeaders(): HttpHeaders {
+  return new HttpHeaders({
+    "Content-Type": "application/json",
+    "Authorization": "Bearer " + this.getAccessToken()
+  });
+}
 public login(username: string, password: string): Observable<Result<Empty>> {
 
     const url = this.url + "/login";
@@ -72,9 +85,9 @@ public login(username: string, password: string): Observable<Result<Empty>> {
         const token = fromJSON<Token>(JSON.stringify(result));
         this.saveToken(token.unwrap());
         return new Ok<Empty>(new Empty());
-      }),
+             }),
       catchError(error => of(new Err<Empty>(error)))
-    );  
+    ); 
   }
 
   public refresh(): Observable<Result<Empty>> {

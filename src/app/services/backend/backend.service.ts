@@ -65,7 +65,7 @@ export class BackendService {
       catchError(error => of(new Err<[any[], string]>(error)))
     );
   }
-  
+
   // This function filters the exports with the given filter.
   public filterExports(filter: Filter): Observable<Result<Export[]>> {
     const url = this.url + "/exports/filter";

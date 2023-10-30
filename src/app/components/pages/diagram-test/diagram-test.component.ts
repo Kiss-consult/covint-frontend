@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { Orvos, PortalAdmin, KutatoOrvos, PortalVezeto} from 'src/app/models/group/group'
+import { LoginService } from 'src/app/services/login/login.service';
 
 @Component({
   selector: 'app-diagram-test',
@@ -9,8 +10,12 @@ import { Orvos, PortalAdmin, KutatoOrvos, PortalVezeto} from 'src/app/models/gro
 })
 export class DiagramTestComponent {
   activeTab: number = 0;
-
-  constructor(private router: Router) { }
+  orvos = Orvos;
+  kutatoorvos = KutatoOrvos;
+  portaladmin= PortalAdmin;
+  portalvezeto = PortalVezeto;
+  
+  constructor(private router: Router,public loginService: LoginService) { }
 
   showTab(tabNumber: number) {
     let path = ["diagram"];
