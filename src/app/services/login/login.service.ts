@@ -17,6 +17,7 @@ import { Empty } from 'src/app/models/utils/empty';
 export class LoginService {
   url: string = "";
   token: Token = new Token();
+
   
   constructor(private httpClient: HttpClient, private config: ConfigService, private router: Router) {
     this.url = this.config.config.AuthUrl;
