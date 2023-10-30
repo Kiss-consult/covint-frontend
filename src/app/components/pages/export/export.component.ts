@@ -191,7 +191,7 @@ ngAfterContentChecked(): void {
   if (!this.checkRequiredFields()) {
     return;
   }
-  const filename = "exported.xlsx";
+  const filename = "szurt_adatok_covint.xlsx";
   this.backendService.downloadExport(this.filter).subscribe((result) => {
     if (result.isErr()) {
       console.error(result.unwrapErr());
@@ -210,7 +210,7 @@ ngAfterContentChecked(): void {
 }
   public rates() {
 
-  const filename = "rates.xlsx";
+  const filename = "eredmenyek_teljes.xlsx";
   this.backendService.downloadRates().subscribe((result) => {
     if (result.isErr()) {
       console.error(result.unwrapErr());
