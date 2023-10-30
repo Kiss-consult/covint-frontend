@@ -3,6 +3,8 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatTableModule, MatTableDataSource } from '@angular/material/table';
 import { Illness } from 'src/app/models/illness/illness';
 import { BackendService } from 'src/app/services/backend/backend.service';
+import { KutatoOrvos, Orvos, PortalAdmin, PortalVezeto } from 'src/app/models/group/group';
+import { LoginService } from 'src/app/services/login/login.service';
 
 @Component({
   selector: 'app-filterablemarkers',
@@ -25,12 +27,17 @@ export class FilterablemarkersComponent {
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   pageSizeOptions: number[] = [10];
 
+  orvos = Orvos;
+  kutatoorvos = KutatoOrvos;
+  portaladmin= PortalAdmin;
+  portalvezeto = PortalVezeto;
+
   illnessFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;
     this.dataSource.filter = filterValue.trim().toLowerCase();
   }
   
-    constructor(private backendService: BackendService) {
+    constructor(private backendService: BackendService ,public loginService: LoginService) {
 
 
       

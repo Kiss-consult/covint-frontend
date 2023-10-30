@@ -44,8 +44,8 @@
         </select>
       </div>
     </div>
-
-    <div class="source">
+    
+    <div class="source"  *ngIf="loginService.hasAnyGroup([portaladmin, portalvezeto, kutatoorvos])">
       <div>
         <label style="margin-bottom: 0;" for="source">Forrás:</label>
       </div>

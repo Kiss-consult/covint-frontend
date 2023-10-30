@@ -1,4 +1,4 @@
-export const Orvos = "orvos";
-export const PortalAdmin = "portal-admin";
-export const KutatoOrvos = "kutato-orvos";
-export const PortalVezeto = "portal-vezeto";
+export const Orvos = "doctor";
+export const PortalAdmin = "portal-manager";
+export const KutatoOrvos = "researcher";
+export const PortalVezeto = "portal-leader";

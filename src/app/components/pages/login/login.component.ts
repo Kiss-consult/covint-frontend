@@ -15,9 +15,12 @@ export class LoginComponent {
 
   onLogin() {
     this.loginService.login(this.username, this.password).subscribe(result => {
+            
       if (result.isOk()) {
         console.log('Bejelentkezés sikeres');
         this.router.navigate(['/home']);
+
+        
         this.loginService.isLoggedIn()
       } else {
         console.log('Bejelentkezés sikertelen');

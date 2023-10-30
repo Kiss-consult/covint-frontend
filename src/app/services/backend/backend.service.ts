@@ -48,6 +48,7 @@ export class BackendService {
       catchError(error => of(new Err<[any[], string]>(error)))
     );
   }
+
   public downloadRates(): Observable<Result<[any[], string]>> {
     let options = {
       headers: this.getHeaders(),
@@ -64,6 +65,7 @@ export class BackendService {
       catchError(error => of(new Err<[any[], string]>(error)))
     );
   }
+  
   // This function filters the exports with the given filter.
   public filterExports(filter: Filter): Observable<Result<Export[]>> {
     const url = this.url + "/exports/filter";

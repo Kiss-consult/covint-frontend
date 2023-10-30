@@ -30,8 +30,8 @@
       <ng-container matColumnDef="ismarker">
         <th mat-header-cell *matHeaderCellDef mat-sort-header>Marker</th>
         <td mat-cell *matCellDef="let illness">
-          <input type="checkbox" [checked]="illness.IsMarker" [(ngModel)]="illness.IsMarker" (change)="change(illness) "  id="ismarker" >
-          
+          <input  *ngIf="loginService.hasAnyGroup([portalvezeto, kutatoorvos])" type="checkbox" [checked]="illness.IsMarker" [(ngModel)]="illness.IsMarker" (change)="change(illness) "  id="ismarker" >
+          <input *ngIf="loginService.hasAnyGroup([portaladmin])" type="checkbox"  disabled="disabled" [checked]="illness.IsMarker"  id="ismarker" >
         </td>
       </ng-container>     
       
