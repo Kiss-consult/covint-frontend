@@ -1,6 +1,5 @@
-<h1>
-  Új Marker hozzáadása
-</h1>
+<h1>Marker hozzáadá</h1>
+<h2>Új marker/betegség hozzáadása</h2>
 
 <div class="container">
 
@@ -60,7 +59,7 @@
   </div>
 
   <div class="scrollable-container">
-    <table>
+    <table class="mat-table">
       <thead>
         <tr>
           <th>Nem</th>
@@ -72,30 +71,18 @@
       </thead>
       <tbody>
         <tr *ngFor="let default of defaults"> 
-
-          <!--<td> <input  type="text" id="sex" name="sex" placeholder="{{ setDefaultSexMale(default)}}" [(ngModel)]="default.Sex"> </td> -->
-          <td>  {{default.Sex}}  </td>
-          <td>  {{default.Age}}  </td>
+          <td>{{ default.Sex }}</td>
+          <td>{{ default.Age }}</td>
           <td>
-            <mat-form-field class="form-field" apearance="legacy">
-              <mat-label></mat-label>
-
-              <input  matInput [(ngModel)]="default.Hospitalized" type="number" name="hospitalized" id="hospitalized" placeholder="" class="form-control" >
-             
-            </mat-form-field>
+            <input type="number" [(ngModel)]="default.Hospitalized" name="hospitalized" id="hospitalized" class="form-control">
           </td>
           <td>
-            <mat-form-field class="form-field" apearance="legacy">
-              <mat-label></mat-label>
-              <input matInput [(ngModel)]="default.Dead" type="number" name="dead" id="dead" class="form-control">
-            </mat-form-field>
+            <input type="number" [(ngModel)]="default.Dead" name="dead" id="dead" class="form-control">
           </td>
-          
-
         </tr>
       </tbody>
-    </table>                                                                                 
-  </div>
+    </table>
+    </div>
   
   
   

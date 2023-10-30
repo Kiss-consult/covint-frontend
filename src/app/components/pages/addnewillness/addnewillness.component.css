@@ -44,8 +44,8 @@
 .scrollable-container {
     overflow: auto;
     max-height: 500px; 
-    background-color: #c4c4c4;
     padding: 20px;
+    box-shadow: 0px 0px 7px #848484;
   }
 
 table {
@@ -54,6 +54,7 @@ table {
   }
   
   th, td {
+    height: auto;
     width: 25%; 
     text-align: center;
   }
@@ -63,3 +64,6 @@ table {
     padding: 5px;
   }
 
+.bnoclass{
+    margin-bottom: 40px;
+}

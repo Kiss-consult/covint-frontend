@@ -4,9 +4,6 @@ import { Default } from 'src/app/models/default/default';
 import { Illness } from 'src/app/models/illness/illness';
 import { NewIllness } from 'src/app/models/newillness/newillness';
 import { BackendService } from 'src/app/services/backend/backend.service';
-
-
-
 @Component({
   selector: 'app-addnewillness',
   templateUrl: './addnewillness.component.html',
