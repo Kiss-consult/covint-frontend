@@ -29,8 +29,11 @@ const routes: Routes = [
 
   { path: "login", component: LoginComponent },
   { path: "datainput", component: DatainputComponent, canActivate: [GroupGuard], data: { groups: [Orvos, PortalAdmin, KutatoOrvos, PortalVezeto] } },
+
   { path: "export", component: ExportComponent },
   //canActivate: [GroupGuard], data: { groups: [Orvos, PortalAdmin, KutatoOrvos, PortalVezeto] } },
+
+
   { path: "diagram", component: DiagramComponent, children: [
     {path: Orvos, component: DiagramComponent, canActivate: [GroupGuard], data: { groups: [Orvos] } },
     {path: PortalAdmin, component: DiagramComponent, canActivate: [GroupGuard], data: { groups: [PortalAdmin] } },

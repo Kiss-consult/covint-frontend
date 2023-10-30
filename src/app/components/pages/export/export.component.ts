@@ -20,6 +20,8 @@ import { SavedFilter } from 'src/app/models/savedfilter/savedfilter';
 
 export class ExportComponent {
 
+  markerActive: boolean = false;
+  filterActive: boolean = false;
   filter: Filter = new Filter();
   private exports: Export[] = [];
   
@@ -42,7 +44,16 @@ export class ExportComponent {
   @ViewChild('paginator') paginator: MatPaginator;
   pageSizeOptions: number[] = [5, 10];
 
-
+  toggleContent(contentType: string) {
+    if (contentType === 'marker') {
+      this.markerActive = true;
+      this.filterActive = false;
+    } else if (contentType === 'filter') {
+      this.markerActive = false;
+      this.filterActive = true;
+    }
+  
+  }
   constructor(private backendService: BackendService) {
 
     this.backendService.getMarkers().subscribe(

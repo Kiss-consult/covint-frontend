@@ -23,12 +23,17 @@ export class FilterablemarkersComponent {
   // This is only stored for faster access to the illnesses by BNO code
   illnessesByBno: Map<string, Illness> = new Map();
   @ViewChild(MatPaginator) paginator!: MatPaginator;
-  pageSizeOptions: number[] = [5, 10];
+  pageSizeOptions: number[] = [10];
+
+  illnessFilter(event: Event) {
+    const filterValue = (event.target as HTMLInputElement).value;
+    this.dataSource.filter = filterValue.trim().toLowerCase();
+  }
+  
+    constructor(private backendService: BackendService) {
 
 
-
-  constructor(private backendService: BackendService) {
-
+      
     this.backendService.getAllIllnesses().subscribe(
       result => {
         if (result.isErr()) {
@@ -37,7 +42,8 @@ export class FilterablemarkersComponent {
           return;
         }
         this.illnesses = result.unwrap();
-
+        this.dataSource = new MatTableDataSource<Illness>(this.illnesses);
+        
         // this.dataSource.data = this.illnesses; // Az adatforrás frissítése
         console.log("Sikeresen lekérdezve a betegségek (Illnesses)az adatbázisból filteres");
         console.log(this.illnesses);
@@ -68,7 +74,11 @@ export class FilterablemarkersComponent {
           });
 
       });
-
+      
+  }
+  
+  ngAfterViewInit() {
+    this.dataSource.paginator = this.paginator;
   }
 
   public setMarker() {

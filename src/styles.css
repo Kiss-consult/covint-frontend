@@ -14,18 +14,32 @@ h1 {
     z-index: 0;
 }
 
-.container{
+h2{
+    color: white;
+    border-bottom-left-radius: 7px;
+    background: #848484;
+    margin: 0;
+    padding: 10px;
+    font-size: 30px;
+    width: 82%;
+    margin-top: 99px;
+    margin-left:18% ;
+    margin-right: 0;
+    position: fixed;
+}
+
+.container{   
     max-width: 100%;
     width: 60%;
     margin-left: 20%;
     margin-right: 20%;
-    margin-top: 0;
-    padding-top: 60px;
-    margin-top: 80px;
+    margin-top: 155px;
+    padding-top: 30px;
     background-color: white;
-    height: 100%;
+    height: auto;
     padding-left: 30px;
     padding-right: 30px;
+    padding-bottom: 30px;
     }
 
 body{
@@ -94,8 +108,9 @@ input[type="radio"] {
   }
 
 
-html, body { height: 100%; }
-body { 
-    margin: 0; 
+html, body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
     font-family: Roboto, "Helvetica Neue", sans-serif; 
-}
+    }
