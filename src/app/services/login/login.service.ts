@@ -15,6 +15,9 @@ import { Empty } from 'src/app/models/utils/empty';
   providedIn: 'root'
 })
 export class LoginService {
+  static hasAnyGroup(groups: string[]) {
+    throw new Error('Method not implemented.');
+  }
   url: string = "";
   token: Token = new Token();
 
