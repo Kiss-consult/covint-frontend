@@ -98,8 +98,8 @@
           </div>
           <div>
             <label class="text">Válasszon szürőt</label>
-            <select class="droptextbox" type="text" id="filters" name="filters" [(ngModel)]="filter">
-              <ng-container *ngFor="let filter of savedfilters">
+            <select class="droptextbox" type="text" id="filters" name="filters" [(ngModel)]="filter" >
+              <ng-container *ngFor="let filter of savedfilters">                
                 <option [ngValue]="filter.Filter">{{filter.FilterName}}</option>
               </ng-container>
             </select>

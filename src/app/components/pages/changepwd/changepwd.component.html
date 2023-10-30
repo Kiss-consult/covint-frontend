@@ -3,5 +3,32 @@
     Jelszócsere
   </h1>
 
+  <div class="reg-container">
+ 
+  <div class="form-group" style="padding-left: 40px;">
 
-<p>changepwd works!</p>
+    <div>
+      <div>
+        <label class="text" for="title">Jelenlegi jelszó:</label>
+      </div>
+      <input class="droptextbox" type="text" id="title" name="title" [(ngModel)]="currentpassword" required>
+    </div>
+    <div>
+      <div>
+        <label class="text" for="firstname">Új jelszó:</label>
+      </div>
+      <input class="droptextbox" type="text" id="firstname" name="firstname" [(ngModel)]="newpassword" required>
+    </div>
+
+    <div>
+      <div>
+        <label class="text" for="lastname">Új jelszó ismét:</label>
+      </div>
+      <input class="droptextbox" type="text" id="lastname" name="lastname" [(ngModel)]="confirmation" required>
+    </div>
+
+   
+
+    <button id="done" (click)="changePassword()">Kész</button>
+  </div>
+  </div>

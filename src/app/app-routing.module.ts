@@ -35,10 +35,10 @@ const routes: Routes = [
 
 
   { path: "diagram", component: DiagramComponent, children: [
-    {path: Orvos, component: DiagramComponent, canActivate: [GroupGuard], data: { groups: [Orvos] } },
-    {path: PortalAdmin, component: DiagramComponent, canActivate: [GroupGuard], data: { groups: [PortalAdmin] } },
-    {path: KutatoOrvos, component: DiagramComponent, canActivate: [GroupGuard], data: { groups: [KutatoOrvos] } },
-    {path: PortalVezeto, component: DiagramComponent, canActivate: [GroupGuard], data: { groups: [PortalVezeto] } },
+    {path: Orvos, component: DiagramComponent },
+    {path: PortalAdmin, component: DiagramComponent },
+    {path: KutatoOrvos, component: DiagramComponent },
+    {path: PortalVezeto, component: DiagramComponent },
     {path: "", component: DiagramComponent}
   ] },
   { path: "usermanagement", component: UsermanagementComponent },
