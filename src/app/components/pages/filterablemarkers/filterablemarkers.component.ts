@@ -16,7 +16,7 @@ export class FilterablemarkersComponent {
 
 
   displayedColumns: string[] = ['groupname', 'ismarker']; // Itt adhatod meg az oszlopok neveit
-  dataSource: MatTableDataSource<Illness> = new MatTableDataSource<Illness>;
+  dataSource: MatTableDataSource<Illness>; 
 
   marker: string = '';
   illnesses: Illness[] = [];
@@ -24,8 +24,8 @@ export class FilterablemarkersComponent {
   markers: string[] = [];
   // This is only stored for faster access to the illnesses by BNO code
   illnessesByBno: Map<string, Illness> = new Map();
-  @ViewChild(MatPaginator) paginator!: MatPaginator;
-  pageSizeOptions: number[] = [10];
+  @ViewChild('paginator') paginator: MatPaginator;
+  pageSizeOptions: number[] = [5, 10];
 
   orvos = Orvos;
   kutatoorvos = KutatoOrvos;
@@ -49,12 +49,13 @@ export class FilterablemarkersComponent {
           return;
         }
         this.illnesses = result.unwrap();
-        this.dataSource = new MatTableDataSource<Illness>(this.illnesses);
-        
-        // this.dataSource.data = this.illnesses; // Az adatforrás frissítése
+        this.dataSource = new MatTableDataSource(this.illnesses);
+        this.dataSource.paginator = this.paginator;
+  
+       // this.dataSource.data = this.illnesses; // Az adatforrás frissítése
         console.log("Sikeresen lekérdezve a betegségek (Illnesses)az adatbázisból filteres");
         console.log(this.illnesses);
-        //this.dataSource.paginator = this.paginator;
+        
 
         this.backendService.getMarkers().subscribe(
           result => {
@@ -72,7 +73,7 @@ export class FilterablemarkersComponent {
             // this.dataSource.data = this.illnesses; // Az adatforrás frissítése
             console.log("Sikeresen lekérdezve a betegségek az adatbázisból filteres");
             console.log(this.markers);
-            //this.dataSource.paginator = this.paginator;
+            
 
 
             this.setMarker()
@@ -83,11 +84,12 @@ export class FilterablemarkersComponent {
       });
       
   }
-  
+  /*
   ngAfterViewInit() {
+    this.dataSource = new MatTableDataSource(this.illnesses);
     this.dataSource.paginator = this.paginator;
   }
-
+*/
   public setMarker() {
 
 
