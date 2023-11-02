@@ -64,6 +64,20 @@
       </form>
     </div>
 
+    <div class="relativeclass">
+      <div>
+        <label class="text" for="relative">relatív idő választása</label>
+      </div>
+      <div>
+        <select class="droptextbox" name="relative" id="relative" [(ngModel)]="filter.RelativeDate">
+        <option value="yesterday">tegnap</option>
+        <option value="this_week">ez a hét</option>
+        <option value="last_week">múlt hét</option>
+        <option value="last_month">múlt hónap</option>
+        <option value="last_3_months">utolsó 3 hónap</option>
+        </select>
+      </div>
+    </div>
 
     <p style="margin-top: 40px;">Marker hozzáadása vagy egy mentett szürő kiválasztása</p>
 
@@ -98,7 +112,7 @@
           </div>
           <div>
             <label class="text">Válasszon szürőt</label>
-            <select class="droptextbox" type="text" id="filters" name="filters" [(ngModel)]="filter" >
+            <select class="droptextbox" type="text" id="filters" name="filters"  [(ngModel)]="filter"  >
               <ng-container *ngFor="let filter of savedfilters">                
                 <option [ngValue]="filter.Filter">{{filter.FilterName}}</option>
               </ng-container>

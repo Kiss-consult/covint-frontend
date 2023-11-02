@@ -32,6 +32,7 @@ export class LoginService {
 
   public getUsername(): string {
     const decoded = jwt_decode<AccessToken>(this.token.access_token);
+    console.log(decoded.sub)
     return decoded.preferred_username;
   }
 
@@ -84,6 +85,7 @@ public login(username: string, password: string): Observable<Result<Empty>> {
       map(result => {
         const token = fromJSON<Token>(JSON.stringify(result));
         this.saveToken(token.unwrap());
+       
         return new Ok<Empty>(new Empty());
              }),
       catchError(error => of(new Err<Empty>(error)))
