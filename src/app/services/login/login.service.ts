@@ -9,6 +9,7 @@ import { AccessToken } from 'src/app/models/token/accesstoken';
 import { Router } from '@angular/router';
 import { User } from 'src/app/models/user/user';
 import { Empty } from 'src/app/models/utils/empty';
+import { UserData } from 'src/app/models/userdata/userdata';
 
 
 @Injectable({
@@ -20,8 +21,10 @@ export class LoginService {
   }
   url: string = "";
   token: Token = new Token();
+  id: string = "";
+  email: string = "";
 
-  
+
   constructor(private httpClient: HttpClient, private config: ConfigService, private router: Router) {
     this.url = this.config.config.AuthUrl;
   }
@@ -36,6 +39,11 @@ export class LoginService {
     return decoded.preferred_username;
   }
 
+  public getUserId(): string {
+    const decoded = jwt_decode<AccessToken>(this.token.access_token);
+    console.log(decoded.sub)
+    return decoded.sub;
+  }
   public hasAnyGroup(expectedGroups: string[]): boolean {
     if (!this.isLoggedIn()) {
       this.router.navigate(['/login']);
@@ -47,7 +55,7 @@ export class LoginService {
 
   public isLoggedIn(): boolean {
     return !!this.token.access_token;
-    
+
   }
 
   public logout() {
@@ -55,29 +63,52 @@ export class LoginService {
   }
 
 
- // This function inserts the new user into the Auth.
- public insertNewUser(user_: User): Observable<Result<{}>> {
-  const url = this.url + "/registration";
-  return this.httpClient.post<Result<{}>>(url, user_).pipe(
-    map(result => fromJSON<{}>(JSON.stringify(result))),
-    catchError(error => of(new Err<{}>(error)))
-  );
-}
-public changePassword(currentPassword: string, newPassword: string, confirmation: string) :Observable<Result<{}>> {
-  const url = this.url + "/user/changepassword";
-  let newP = { currentPassword, newPassword, confirmation }
-  return this.httpClient.put<Result<{}>>(url,newP,{ headers: this.getHeaders() }).pipe(
-    map(result => fromJSON<{}>(JSON.stringify(result))),
-    catchError(error => of(new Err<{}>(error)))
-  );
-}
-private getHeaders(): HttpHeaders {
-  return new HttpHeaders({
-    "Content-Type": "application/json",
-    "Authorization": "Bearer " + this.getAccessToken()
-  });
-}
-public login(username: string, password: string): Observable<Result<Empty>> {
+  // This function inserts the new user into the Auth.
+  public insertNewUser(user_: User): Observable<Result<{}>> {
+    const url = this.url + "/registration";
+    return this.httpClient.post<Result<{}>>(url, user_).pipe(
+      map(result => fromJSON<{}>(JSON.stringify(result))),
+      catchError(error => of(new Err<{}>(error)))
+    );
+  }
+
+
+  // This function inserts the new user into the Auth.
+  public getAllUsers(): Observable<Result<UserData[]>> {
+    const url = this.url + "/user/all";
+    return this.httpClient.get<Result<UserData[]>>(url, { headers: this.getHeaders() }).pipe(
+      map(result => fromJSON<UserData[]>(JSON.stringify(result))),
+      catchError(error => of(new Err<UserData[]>(error)))
+    );
+   
+  }
+
+  // This function get  new user attributes from  Auth.
+  public getUserAttributes(id_: string): Observable<Result<User>> {
+    const url = this.url + "/user/attributes/" + id_;
+    console.log("kuldtem:", id_)
+    return this.httpClient.get<Result<User>>(url, { headers: this.getHeaders() }).pipe(
+      map(result => fromJSON<User>(JSON.stringify(result))),
+      catchError(error => of(new Err<User>(error)))
+    );
+  }
+
+
+  public changePassword(currentPassword: string, newPassword: string, confirmation: string): Observable<Result<{}>> {
+    const url = this.url + "/user/changepassword";
+    let newP = { currentPassword, newPassword, confirmation }
+    return this.httpClient.put<Result<{}>>(url, newP, { headers: this.getHeaders() }).pipe(
+      map(result => fromJSON<{}>(JSON.stringify(result))),
+      catchError(error => of(new Err<{}>(error)))
+    );
+  }
+  private getHeaders(): HttpHeaders {
+    return new HttpHeaders({
+      "Content-Type": "application/json",
+      "Authorization": "Bearer " + this.getAccessToken()
+    });
+  }
+  public login(username: string, password: string): Observable<Result<Empty>> {
 
     const url = this.url + "/login";
     const body = { Username: username, Password: password };
@@ -85,11 +116,11 @@ public login(username: string, password: string): Observable<Result<Empty>> {
       map(result => {
         const token = fromJSON<Token>(JSON.stringify(result));
         this.saveToken(token.unwrap());
-       
+
         return new Ok<Empty>(new Empty());
-             }),
+      }),
       catchError(error => of(new Err<Empty>(error)))
-    ); 
+    );
   }
 
   public refresh(): Observable<Result<Empty>> {
@@ -102,7 +133,7 @@ public login(username: string, password: string): Observable<Result<Empty>> {
         return new Ok<Empty>(new Empty());
       }),
       catchError(error => of(new Err<Empty>(error)))
-    );  
+    );
   }
 
   private saveToken(token: Token) {

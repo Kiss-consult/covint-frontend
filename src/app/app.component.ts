@@ -26,6 +26,11 @@ export class AppComponent {
 
     this.router.navigate(["/changepwd"]);
   }
+  
+  getUserAttributes() {
+
+    this.router.navigate(["/profile"]);
+  }
 
 
 

@@ -32,6 +32,8 @@ import { RegistrationComponent } from './components/pages/registration/registrat
 import { DiagramTestComponent } from './components/pages/diagram-test/diagram-test.component';
 import { DefaultformarkersComponent } from './components/pages/defaultformarkers/defaultformarkers.component';
 import { PercentoverwriteComponent } from './components/pages/percentoverwrite/percentoverwrite.component';
+import { ProfileComponent } from './components/pages/profile/profile.component';
+
 
 @NgModule({
   declarations: [
@@ -55,7 +57,9 @@ import { PercentoverwriteComponent } from './components/pages/percentoverwrite/p
     RegistrationComponent,
     DiagramTestComponent,
     DefaultformarkersComponent,
-    PercentoverwriteComponent
+    PercentoverwriteComponent,
+    ProfileComponent,
+
   ],
   imports: [
     BrowserModule,
