@@ -1,0 +1,58 @@
+
+<h1>
+    Felhasználói profil
+  </h1>
+
+  <div class="reg-container">
+ 
+  <div class="form-group" style="padding-left: 40px;">
+
+    <div>
+      <div>
+        <label class="text" for="name"></label>
+    </div>
+    <div  class="text">
+        <p> felhasználó neve : {{this.user.Title}} {{this.user.LastName}} {{this.user.FirstName}}</p>
+      </div>
+    <div>
+        <div>
+          <label class="text" for="sealnumber"></label>
+      </div>
+      <div  class="text">
+        <p> pecsét száma : {{this.user.SealNumber}}</p>
+      </div>
+      <div>
+        <div>
+          <label class="text" for="companyname"></label>
+      </div>
+      <div  class="text"  >
+        <p> Cég neve : {{this.user.CompanyName}}</p>
+      </div>
+      <div>
+        <div>
+          <label class="text" for="institute"></label>
+      </div>
+      <div  class="text"  >
+        <p>Intézmény neve : {{this.user.InstitutionName}}</p>
+      </div>   
+      <div>
+        <label class="text" for="departure"></label>
+    </div>
+    <div  class="text"  >
+      <p>Osztály : {{this.user.InstitutionDepartment}}</p>
+    </div>
+    <div>
+      <label class="text" for="phone"></label>
+  </div>
+  <div  class="text"  >
+    <p>Telefon : {{this.user.Phone}}</p>
+  </div>
+
+  <div>
+    <button id="done" (click)="gotoChangePassword()">Jelszócsere</button>
+  </div>
+
+</div>
+
+
+  </div>
