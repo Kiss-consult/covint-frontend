@@ -8,7 +8,7 @@
       <label class="text" for="sex">Páciens neme</label>
     </div>
     <div>
-      <select class="droptextbox" name="sex" id="sex" [(ngModel)]="case.Sex">
+      <select class="droptextbox" name="sex" id="sex" [(ngModel)]="case.Sex" placeholder="Férfi/Nő">
         <option value="Férfi">Férfi</option>
         <option value="Nő">Nő</option>
        </select>
@@ -17,7 +17,7 @@
           <label class="text" for="age">Páciens kora</label>
         </div>
         <div>
-          <input class="droptextbox" type="number" id="age" name="age" min="1" [(ngModel)]="case.Age">
+          <input class="droptextbox" type="number" id="age" name="age" min="1" [(ngModel)]="case.Age" placeholder="35">
         </div>
       </div>
     </div>
@@ -50,7 +50,7 @@
 
   <form>
     <label style="margin-bottom: 0;" for="source">Forrás:</label>
-    <input class="droptextbox" type="text" id="source" name="source" [(ngModel)]="case.Source">
+    <input class="droptextbox" type="text" id="source" name="source" [(ngModel)]="case.Source" placeholder="???">
   </form>
 
   <div class="markerclass">
@@ -58,7 +58,7 @@
       <label class="text"> Marker</label>
     </div>
     <div style="display: flex;">
-      <select class="droptextbox" type="text" id="markers" name="markers" [(ngModel)]="marker">
+      <select class="droptextbox" type="text" id="markers" name="markers" [(ngModel)]="marker" placeholder="Asztma">
         <ng-container *ngFor="let marker of markers">
 
           <option value="{{marker}}">{{marker}}</option>
@@ -94,7 +94,7 @@
     <label style="margin-bottom: 0;" for="bno">BNO Kódok bevitele</label>
   </div>
   <div style="display: flex;">
-  <input class="droptextbox" type="text" id="bno" name="bno" [(ngModel)]="newBno">
+  <input class="droptextbox" type="text" id="bno" name="bno" [(ngModel)]="newBno" placeholder="345667">
 
   
    <button (click)="addBno()">BNO Hozzáadás</button>
