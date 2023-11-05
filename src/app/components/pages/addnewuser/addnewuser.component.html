@@ -1,4 +1,4 @@
-<h1>Regisztráció</h1>  
+  <h1>Regisztráció</h1>  
 <h2>Új felhasználó regisztrálása</h2>
   
 
@@ -48,7 +48,7 @@
           <label class="text" for="title">Előtag</label>
         </div>
         <div>
-          <input class="droptextbox" type="text" id="title" name="title" [(ngModel)]="user.Title" required>
+          <input class="droptextbox" type="text" id="title" name="title" [(ngModel)]="user.Title" required placeholder="Dr">
         </div>
       </div>
 
@@ -57,7 +57,7 @@
           <label class="text" for="firstname">Keresztnév</label>
         </div>
         <div>
-          <input class="droptextbox" type="text" id="firstname" name="firstname" [(ngModel)]="user.FirstName" required>
+          <input class="droptextbox" type="text" id="firstname" name="firstname" [(ngModel)]="user.FirstName" required placeholder="János">
         </div>
       </div>
   
@@ -66,7 +66,7 @@
           <label class="text" for="lastname">Vezetéknév</label>
         </div>
         <div>
-          <input class="droptextbox" type="text" id="lastname" name="lastname" [(ngModel)]="user.LastName" required>
+          <input class="droptextbox" type="text" id="lastname" name="lastname" [(ngModel)]="user.LastName" required placeholder="Covint">
         </div>
       </div>
   
@@ -75,7 +75,7 @@
           <label class="text" for="stampnumber">Pecsét száma</label>
         </div>
         <div>
-          <input class="droptextbox" type="text" id="stampnumber" name="stampnumber" [(ngModel)]="user.SealNumber" required>
+          <input class="droptextbox" type="text" id="stampnumber" name="stampnumber" [(ngModel)]="user.SealNumber" required placeholder="???">
         </div>
       </div>
   
@@ -84,7 +84,7 @@
           <label class="text" for="telephone">Telefonszám</label>
         </div>
         <div>
-          <input class="droptextbox" type="text" id="telephone" name="telephone" [(ngModel)]="user.Phone" required>
+          <input class="droptextbox" type="text" id="telephone" name="telephone" [(ngModel)]="user.Phone" required placeholder="???">
         </div>
       </div>
     
@@ -99,7 +99,7 @@
       <div class="form-group2" style="display: block; border-top: solid 4px #848484; margin-top: 0; padding-top: 40px;">
         <div>
           <input style="margin-bottom: 20px;" type="radio" id="intezmenybutton" name="intezmenyOrCeg" (click)="toggleContent('intezmeny')">
-          <label  class="text" for="institution">Intézményben dolgozom</label>          
+          <label  class="text" for="institution">Intézményben dolgozik</label>          
         </div>
         <div>          
           <input style="margin-bottom: 37px;" type="radio" id="cegbutton" name="intezmenyOrCeg" (click)="toggleContent('ceg')">
@@ -113,7 +113,7 @@
           <label class="text" for="institution">Intézmény neve</label>
         </div>
         <div>
-          <input class="droptextbox" type="text" id="institution" name="institution" [(ngModel)]="user.InstitutionName">
+          <input class="droptextbox" type="text" id="institution" name="institution" [(ngModel)]="user.InstitutionName" placeholder="???">
         </div>
       </div>
   
@@ -122,7 +122,7 @@
           <label class="text" for="department">Osztály</label>
         </div>
         <div>
-          <input class="droptextbox" type="text" id="department" name="department" [(ngModel)]="user.InstitutionDepartment">
+          <input class="droptextbox" type="text" id="department" name="department" [(ngModel)]="user.InstitutionDepartment" placeholder="???">
         </div>
       </div>      
       
@@ -133,7 +133,7 @@
           <label class="text" for="company">Cég neve</label>
         </div>
         <div>
-          <input class="droptextbox" type="text" id="company" name="company" [(ngModel)]="user.CompanyName">
+          <input class="droptextbox" type="text" id="company" name="company" [(ngModel)]="user.CompanyName" placeholder="???">
         </div>
        
       </div>
@@ -145,7 +145,7 @@
           <label class="text" for="site">Város</label>
          </div>
         <div>
-          <input class="droptextbox" type="text" id="city" name="city" [(ngModel)]="site.City" required>
+          <input class="droptextbox" type="text" id="city" name="city" [(ngModel)]="site.City" required placeholder="Budapest">
         </div>
       </div>
       
@@ -154,7 +154,7 @@
           <label class="text" for="postcode">Irányítószám</label>
         </div>
         <div>
-          <input class="droptextbox" type="number" id="postcode" name="postcode" [(ngModel)]="site.PostCode" required>
+          <input class="droptextbox" type="number" id="postcode" name="postcode" [(ngModel)]="site.PostCode" required placeholder="1007">
         </div>
       </div>  
   
@@ -163,7 +163,7 @@
           <label class="text" for="street">Utca ( közterület) neve</label>
         </div>
         <div>
-          <input class="droptextbox" type="text" id="street" name="street" [(ngModel)]="site.Street" required>
+          <input class="droptextbox" type="text" id="street" name="street" [(ngModel)]="site.Street" required placeholder="???">
         </div>
       </div>
 
@@ -172,7 +172,7 @@
           <label class="text" for="housenumber">Házszám</label>
         </div>
         <div>
-          <input class="droptextbox" type="number" id="postcode" name="postcode" [(ngModel)]="site.HouseNumber" required>
+          <input class="droptextbox" type="number" id="postcode" name="postcode" [(ngModel)]="site.HouseNumber" required placeholder="34">
         </div>
       </div> 
 

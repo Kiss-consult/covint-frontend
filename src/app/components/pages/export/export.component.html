@@ -50,7 +50,7 @@
         <label style="margin-bottom: 0;" for="source">Forrás:</label>
       </div>
       <div>
-        <input class="droptextbox" type="text" id="source" name="source" [(ngModel)]="filter.Source">
+        <input class="droptextbox" type="text" id="source" name="source" [(ngModel)]="filter.Source" placeholder="???">
       </div>
     </div>
 
@@ -227,7 +227,7 @@
       <div class="source2">      
         <p style="align-items: start;">Jelenlegi Szűrő mentése</p>        
         <div>        
-          <input style="margin-bottom: 5px;" class="droptextbox" type="text" id="filtername" name="filtername" [(ngModel)]="filtername">    
+          <input style="margin-bottom: 5px;" class="droptextbox" type="text" id="filtername" name="filtername" [(ngModel)]="filtername" placeholder="Új betegség">    
           <button id="filtersavebutton" (click)="saveFilter()">Szűrő mentése</button>
         </div> 
         <p style="width: 200px;">Adja meg a szürő nevét a mentéshez</p>

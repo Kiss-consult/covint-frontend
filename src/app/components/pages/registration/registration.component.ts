@@ -9,12 +9,24 @@ import { LoginService } from 'src/app/services/login/login.service';
   styleUrls: ['./registration.component.css']
 })
 export class RegistrationComponent {
+
+  cegActive: boolean = false;
+  intezmenyActive: boolean = false;
+
   user: User = new User;
   site: Site = new Site;
   password2: string = "" ;
  
+  toggleContent(contentType: string) {
+    if (contentType === 'ceg') {
+      this.cegActive = true;
+      this.intezmenyActive = false;
+    } else if (contentType === 'intezmeny') {
+      this.cegActive = false;
+      this.intezmenyActive = true;
+    }
 
-
+    }
   constructor(private loginService: LoginService) {
     
   }
