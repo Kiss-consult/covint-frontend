@@ -69,7 +69,7 @@
 
     <div>
   
-     <button style="z-index: 0;" id="markerbutton" (click)="toggleContent('marker')" [ngClass]="{'active-button': markerActive, 'inactive-button': !markerActive }">Marker hozzáadása</button>
+     <button id="markerbutton" (click)="toggleContent('marker')" [ngClass]="{'active-button': markerActive, 'inactive-button': !markerActive }">Marker hozzáadása</button>
      <button (click)="toggleContent('filter')" [ngClass]="{'active-button': filterActive, 'inactive-button': !filterActive }">Filter kiválasztása</button>
 
       <div class="markerfiltercontent">

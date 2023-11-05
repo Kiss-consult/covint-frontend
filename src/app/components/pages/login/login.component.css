@@ -1,6 +1,5 @@
 .text{
-    margin-bottom: 0;
-    margin-top: 20px;
+    margin-bottom: 0;    
 }
 
 .droptextbox{
@@ -19,6 +18,3 @@
     text-align: center;
 }
 
-.container{
-    padding-top: 160px;
-}
