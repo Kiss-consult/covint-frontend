@@ -9,21 +9,18 @@
     color: #ffffff;
     position: relative;
     margin: 0; 
-    z-index: 2;
   }
 
 .nav-item a{
     color: black;
     margin: 0;
-    z-index: 2;
 }
 .nav-item:hover{
     background-color:#9dc3ff ;
     border-top-right-radius:7px;
     border-top-left-radius: 7px;
     color: #000000;
-    margin: 0;
-    z-index: 3;
+    margin: 0;    
     cursor: pointer;
 }
 
@@ -35,25 +32,21 @@
  
 .navbar{
     padding-bottom: 0;
-    z-index: 2;
 }
 
 .nav {
     list-style-type: none;
     padding: 0;
-    z-index: 2;
-  }
+}
   
   .nav-item {
     position: relative;
     display: inline-block;
-    z-index: 2;
   }
   
   .nav-link {
     text-decoration: none;
     color: #333;
-    z-index: 2;
   }
   
   .dropdown {
@@ -62,23 +55,19 @@
     top: 100%;
     left: 0;
     background-color: white;
-    z-index: 2;
     box-shadow: 0px 2px 5px #848484;
   }
   
   .nav-item:hover .dropdown {
     display: block;
-    z-index: 2;
   }
   
   .dropdown li {
     padding: 10px;
-    z-index: 2;
   }
   
   .dropdown li:hover {
     background-color: #f2f2f2;
-    z-index: 2;
   }
 
   ul, ol {
