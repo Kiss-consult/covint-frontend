@@ -8,36 +8,47 @@ import { KutatoOrvos, Orvos, PortalAdmin, PortalVezeto } from 'src/app/models/gr
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
-export class AppComponent  {
+export class AppComponent {
   title = 'covint';
   flag: boolean = true;
   orvos = Orvos;
   kutatoorvos = KutatoOrvos;
-  portaladmin= PortalAdmin;
+  portaladmin = PortalAdmin;
   portalvezeto = PortalVezeto;
 
-  constructor(public loginService: LoginService, private router: Router) {}
-  
+  constructor(public loginService: LoginService, private router: Router) { }
+
   logout() {
     this.loginService.logout();
     this.router.navigate(["/login"]);
   }
+  changePassword() {
 
-/*
-  ngOnInit(): void {
-    const groups = [PortalAdmin, KutatoOrvos, PortalVezeto];
-    if(this.loginService.hasAnyGroup(groups)) {
-    this.flag = true;
-    console.log("app component", this.flag)
-  } else {
-    alert('uzenet annak akiNEM orvos');  
-    this.flag = false;
-    console.log("app component",this.flag)
+    this.router.navigate(["/changepwd"]);
   }
+  
+  getUserAttributes() {
+
+    this.router.navigate(["/profile"]);
   }
- 
-  ngAfterContentChecked(): void {
-    this.changeDetector.detectChanges();
-  }
-   */
+
+
+
+  /*
+    ngOnInit(): void {
+      const groups = [PortalAdmin, KutatoOrvos, PortalVezeto];
+      if(this.loginService.hasAnyGroup(groups)) {
+      this.flag = true;
+      console.log("app component", this.flag)
+    } else {
+      alert('uzenet annak akiNEM orvos');  
+      this.flag = false;
+      console.log("app component",this.flag)
+    }
+    }
+   
+    ngAfterContentChecked(): void {
+      this.changeDetector.detectChanges();
+    }
+     */
 }

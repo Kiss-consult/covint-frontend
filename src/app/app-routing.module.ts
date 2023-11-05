@@ -21,6 +21,7 @@ import { GroupGuard } from './guards/group.guard';
 import { KutatoOrvos, Orvos, PortalAdmin, PortalVezeto } from './models/group/group';
 import { DefaultformarkersComponent } from './components/pages/defaultformarkers/defaultformarkers.component'; 
 import { PercentoverwriteComponent } from './components/pages/percentoverwrite/percentoverwrite.component';
+import { ProfileComponent } from './components/pages/profile/profile.component';
 
 
 const routes: Routes = [
@@ -35,10 +36,10 @@ const routes: Routes = [
 
 
   { path: "diagram", component: DiagramComponent, children: [
-    {path: Orvos, component: DiagramComponent, canActivate: [GroupGuard], data: { groups: [Orvos] } },
-    {path: PortalAdmin, component: DiagramComponent, canActivate: [GroupGuard], data: { groups: [PortalAdmin] } },
-    {path: KutatoOrvos, component: DiagramComponent, canActivate: [GroupGuard], data: { groups: [KutatoOrvos] } },
-    {path: PortalVezeto, component: DiagramComponent, canActivate: [GroupGuard], data: { groups: [PortalVezeto] } },
+    {path: Orvos, component: DiagramComponent },
+    {path: PortalAdmin, component: DiagramComponent },
+    {path: KutatoOrvos, component: DiagramComponent },
+    {path: PortalVezeto, component: DiagramComponent },
     {path: "", component: DiagramComponent}
   ] },
   { path: "usermanagement", component: UsermanagementComponent },
@@ -54,7 +55,8 @@ const routes: Routes = [
   { path: "auditlog", component: AuditlogComponent },
   { path: "registration", component: RegistrationComponent },
   { path: "percentoverwrite", component: PercentoverwriteComponent },
-  { path: "defaultformarkers", component: DefaultformarkersComponent }
+  { path: "defaultformarkers", component: DefaultformarkersComponent },
+  { path: "profile", component: ProfileComponent }
 
 ];
 
