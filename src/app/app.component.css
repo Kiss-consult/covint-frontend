@@ -9,6 +9,7 @@
     color: #ffffff;
     position: relative;
     margin: 0; 
+    border-bottom: #0080ff 4px solid;
   }
 
 .nav-item a{
