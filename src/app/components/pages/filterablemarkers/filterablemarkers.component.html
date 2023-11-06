@@ -6,7 +6,7 @@
    <div >
     <mat-form-field>
         <mat-label>Keresés</mat-label>
-        <input matInput (keyup)="illnessFilter($event)" placeholder="Betegség" #input>
+        <input matInput (keyup)="illnessFilter($event)" placeholder="Betegség" #input title="Kérem töltse ki a mezőt">
       </mat-form-field>
 
       <table mat-table [dataSource]="dataSource" class="mat-elevation-z8" matSort>

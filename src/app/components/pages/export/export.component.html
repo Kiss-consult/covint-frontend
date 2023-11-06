@@ -13,7 +13,7 @@
         <label class="text" for="sex">Páciens neme</label>
       </div>
       <div>
-        <select class="droptextbox" name="sex" id="sex" [(ngModel)]="filter.Sex">
+        <select class="droptextbox" name="sex" id="sex" [(ngModel)]="filter.Sex" title="Kérem válasszon.">
         <option value="Férfi">Férfi</option>
         <option value="Nő">Nő</option>
         <option value="Kumulált">Kumulált</option>
@@ -26,8 +26,8 @@
         <label class="text" for="age">Páciens kora</label>
       </div>
       <div>
-        <input class="droptextbox" type="number" id="agefrom" name="agefrom" min="1" [(ngModel)]="filter.AgeFrom"><label style="margin-right: 20px;"> - tól</label>
-        <input class="droptextbox" type="number" id="ageto" name="ageto" min="1" [(ngModel)]="filter.AgeTo"><label> - ig</label>
+        <input class="droptextbox" type="number" id="agefrom" name="agefrom" min="1" [(ngModel)]="filter.AgeFrom" title="Kérem töltse ki a mezőt"><label style="margin-right: 20px;"> - tól</label>
+        <input class="droptextbox" type="number" id="ageto" name="ageto" min="1" [(ngModel)]="filter.AgeTo" title="Kérem töltse ki a mezőt"><label> - ig</label>
       </div>
     </div>
   
@@ -37,7 +37,7 @@
         <label class="text"> Validált</label>
      </div>
       <div>
-        <select class="droptextbox" name="validity" id="validity" [(ngModel)]="filter.Validated">
+        <select class="droptextbox" name="validity" id="validity" [(ngModel)]="filter.Validated" title="Kérem válasszon">
         <option value="validált">Validált</option>
         <option value="nem validált">Nem validált</option>
         <option value="kumulált">Kumulált</option>
@@ -50,7 +50,7 @@
         <label style="margin-bottom: 0;" for="source">Forrás:</label>
       </div>
       <div>
-        <input class="droptextbox" type="text" id="source" name="source" [(ngModel)]="filter.Source" placeholder="???">
+        <input class="droptextbox" type="text" id="source" name="source" [(ngModel)]="filter.Source" placeholder="???" title="Kérem töltse ki a mezőt">
       </div>
     </div>
 
@@ -59,8 +59,8 @@
     <div class="source">
       <label style="margin-bottom: 0;" for="datefrom">Dátum szűrés</label>
       <form>      
-        <input class="droptextbox" type="date" id="datefrom" name="datefrom" [(ngModel)]="filter.DateFrom" > - tól       
-        <input class="droptextbox" type="date" id="dateto" name="dateto"  [(ngModel)]="filter.DateTo" > - ig
+        <input class="droptextbox" type="date" id="datefrom" name="datefrom" [(ngModel)]="filter.DateFrom" title="Kérem válasszon"> - tól       
+        <input class="droptextbox" type="date" id="dateto" name="dateto"  [(ngModel)]="filter.DateTo" title="Kérem válasszon"> - ig
       </form>
     </div>
 
@@ -69,7 +69,7 @@
         <label class="text" for="relative">relatív idő választása</label>
       </div>
       <div>
-        <select class="droptextbox" name="relative" id="relative" [(ngModel)]="filter.RelativeDate">
+        <select class="droptextbox" name="relative" id="relative" [(ngModel)]="filter.RelativeDate" title="Kérem válasszon">
         <option value="yesterday">tegnap</option>
         <option value="this_week">ez a hét</option>
         <option value="last_week">múlt hét</option>
@@ -92,7 +92,7 @@
           <label class="text">Marker</label>
         </div>
         <div style="display: flex;">
-          <select class="droptextbox" type="text" id="markers" name="markers" [(ngModel)]="marker">
+          <select class="droptextbox" type="text" id="markers" name="markers" [(ngModel)]="marker" title="Kérem válasszon">
             <ng-container *ngFor="let marker of markers">
               <option value="{{marker}}">{{marker}}</option>
             </ng-container>
@@ -112,7 +112,7 @@
           </div>
           <div>
             <label class="text">Válasszon szürőt</label>
-            <select class="droptextbox" type="text" id="filters" name="filters"  [(ngModel)]="filter"  >
+            <select class="droptextbox" type="text" id="filters" name="filters"  [(ngModel)]="filter" title="Kérem válasszon" >
               <ng-container *ngFor="let filter of savedfilters">                
                 <option [ngValue]="filter.Filter">{{filter.FilterName}}</option>
               </ng-container>
@@ -223,14 +223,14 @@
 
     </div>
 
-    <div style="display: flex; justify-content: space-between; align-items: end;">
-      <div class="source2">      
+    <div style="display: flex; justify-content: space-around; text-align: center;">
+      <div class="savebutton">      
         <p style="align-items: start;">Jelenlegi Szűrő mentése</p>        
         <div>        
-          <input style="margin-bottom: 5px;" class="droptextbox" type="text" id="filtername" name="filtername" [(ngModel)]="filtername" placeholder="Új betegség">    
+          <input style="margin-bottom: 5px;" class="droptextbox" type="text" id="filtername" name="filtername" [(ngModel)]="filtername" placeholder="Új szürő" title="Kérem töltse ki a mezőt">    
           <button id="filtersavebutton" (click)="saveFilter()">Szűrő mentése</button>
         </div> 
-        <p style="width: 200px;">Adja meg a szürő nevét a mentéshez</p>
+        <p>Adja meg a szürő nevét a mentéshez</p>
       </div> 
 
       <div class="exportbutton">

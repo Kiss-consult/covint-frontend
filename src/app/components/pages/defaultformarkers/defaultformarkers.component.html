@@ -7,7 +7,7 @@
       <label class="text"> Marker</label>
     </div>
     <div style="display: flex;">
-      <select class="droptextbox" type="text" id="markers" name="markers" [(ngModel)]="marker">
+      <select class="droptextbox" type="text" id="markers" name="markers" [(ngModel)]="marker" title="Kérem válasszon">
         <ng-container *ngFor="let marker of markers">
 
           <option value="{{marker}}">{{marker}}</option>

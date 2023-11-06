@@ -8,7 +8,7 @@
       <label class="text" for="sex">Páciens neme</label>
     </div>
     <div>
-      <select class="droptextbox" name="sex" id="sex" [(ngModel)]="case.Sex" placeholder="Férfi/Nő">
+      <select class="droptextbox" name="sex" id="sex" [(ngModel)]="case.Sex" placeholder="Férfi/Nő" title="Kérem válasszon.">
         <option value="Férfi">Férfi</option>
         <option value="Nő">Nő</option>
        </select>
@@ -17,7 +17,7 @@
           <label class="text" for="age">Páciens kora</label>
         </div>
         <div>
-          <input class="droptextbox" type="number" id="age" name="age" min="1" [(ngModel)]="case.Age" placeholder="35">
+          <input class="droptextbox" type="number" id="age" name="age" min="1" [(ngModel)]="case.Age" placeholder="35" title="Kérem töltse ki a mezőt">
         </div>
       </div>
     </div>
@@ -29,10 +29,10 @@
     </div>
     <div>
       <label for="trueHosp">Igen</label>
-      <input type="radio" id="trueHosp" name="hospitalized" [value]="true" [(ngModel)]="case.Hospitalized">
+      <input type="radio" id="trueHosp" name="hospitalized" [value]="true" [(ngModel)]="case.Hospitalized" title="Kérem válasszon">
 
       <label for="falseHosp">Nem</label>
-      <input type="radio" id="falseHosp" name="hospitalized" [value]="false" [(ngModel)]="case.Hospitalized">
+      <input type="radio" id="falseHosp" name="hospitalized" [value]="false" [(ngModel)]="case.Hospitalized" title="Kérem válasszon">
     </div>
   </div>
 
@@ -42,15 +42,15 @@
     </div>
     <div>
       <label for="trueDead">Igen</label>
-      <input type="radio" id="trueDead" name="dead" [value]="true" [(ngModel)]="case.Dead">
+      <input type="radio" id="trueDead" name="dead" [value]="true" [(ngModel)]="case.Dead" title="Kérem válasszon">
       <label for="falseDead">Nem</label>
-      <input type="radio" id="falseDead" name="dead" [value]="false" [(ngModel)]="case.Dead">
+      <input type="radio" id="falseDead" name="dead" [value]="false" [(ngModel)]="case.Dead" title="Kérem válasszon">
     </div>
   </div>
 
   <form>
     <label style="margin-bottom: 0;" for="source">Forrás:</label>
-    <input class="droptextbox" type="text" id="source" name="source" [(ngModel)]="case.Source" placeholder="???">
+    <input class="droptextbox" type="text" id="source" name="source" [(ngModel)]="case.Source" placeholder="???" title="Kérem töltse ki a mezőt">
   </form>
 
   <div class="markerclass">
@@ -58,7 +58,7 @@
       <label class="text"> Marker</label>
     </div>
     <div style="display: flex;">
-      <select class="droptextbox" type="text" id="markers" name="markers" [(ngModel)]="marker" placeholder="Asztma">
+      <select class="droptextbox" type="text" id="markers" name="markers" [(ngModel)]="marker" placeholder="Asztma" title="Kérem válasszon">
         <ng-container *ngFor="let marker of markers">
 
           <option value="{{marker}}">{{marker}}</option>
@@ -94,7 +94,7 @@
     <label style="margin-bottom: 0;" for="bno">BNO Kódok bevitele</label>
   </div>
   <div style="display: flex;">
-  <input class="droptextbox" type="text" id="bno" name="bno" [(ngModel)]="newBno" placeholder="345667">
+  <input class="droptextbox" type="text" id="bno" name="bno" [(ngModel)]="newBno" placeholder="345667" title="Kérem töltse ki a mezőt">
 
   
    <button (click)="addBno()">BNO Hozzáadás</button>
