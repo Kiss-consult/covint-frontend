@@ -8,7 +8,7 @@ import { DatainputComponent } from './components/pages/datainput/datainput.compo
 import { LoginComponent } from './components/pages/login/login.component';
 import { HomeComponent } from './components/pages/home/home.component';
 import { HttpClientModule } from '@angular/common/http';
-import { FormsModule } from '@angular/forms';
+import { FormsModule , ReactiveFormsModule } from '@angular/forms';
 import { MatTableModule } from '@angular/material/table';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatSortModule } from '@angular/material/sort';
@@ -65,6 +65,7 @@ import { ProfileComponent } from './components/pages/profile/profile.component';
     BrowserModule,
     AppRoutingModule,
     FormsModule,
+    ReactiveFormsModule ,
     HttpClientModule,
     MatTableModule,       // A táblázat moduljának importálása
     MatPaginatorModule,  // Az oldalazás moduljának importálása
