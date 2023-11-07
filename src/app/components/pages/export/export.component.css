@@ -34,15 +34,18 @@ button {
     margin-left: 0  ;
 }
 
-.exportbutton{
-    margin-bottom: 85px;
-    width: 200px;
+.exportbutton{    
+    margin-left: 20%; 
+    margin-top: 40px;
+    text-align: center;
 }
-.ratestbutton{
-    margin-bottom: 60px;
-    margin-left: 0;
-    width: 200px;
-    
+.ratestbutton{    
+    margin-top: 40px;
+    text-align: center;   
+}
+
+.savebutton{
+    margin-top: 40px;
 }
 .addedtext { 
     margin-top: 20px;

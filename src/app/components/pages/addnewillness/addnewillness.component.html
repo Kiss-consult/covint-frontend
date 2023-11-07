@@ -8,8 +8,7 @@
       <label for="newillness">Új betegség:</label>
     </div>
     <div>
-      <input class="droptextbox" style="width: 200px;" type="text" id="newillness" name="newillness"
-        [(ngModel)]="newIllness.GroupName">
+      <input class="droptextbox" style="width: 200px;" type="text" id="newillness" name="newillness"[(ngModel)]="newIllness.GroupName" title="Kérem töltse ki a mezőt">
     </div>
   </div>
 
@@ -19,10 +18,10 @@
     </div>
     <div>
       <label for="trueMark">Igen</label>
-      <input type="radio" id="trueMArk" name="ismarker" [value]="true" [(ngModel)]="newIllness.IsMarker">
+      <input type="radio" id="trueMArk" name="ismarker" [value]="true" [(ngModel)]="newIllness.IsMarker" title="Kérem válasszon">
 
       <label for="falseMark">Nem</label>
-      <input type="radio" id="falseMark" name="ismarker" [value]="false" [(ngModel)]="newIllness.IsMarker">
+      <input type="radio" id="falseMark" name="ismarker" [value]="false" [(ngModel)]="newIllness.IsMarker" title="Kérem válasszon">
     </div>
   </div>
 
@@ -35,7 +34,7 @@
       <label style="margin-bottom: 0;" for="bno">Alternatív név bevitele</label>
     </div>
     <div style="display: flex;">
-      <input class="droptextbox" type="text" id="bno" name="bno" [(ngModel)]="newAlternativeName">
+      <input class="droptextbox" type="text" id="bno" name="bno" [(ngModel)]="newAlternativeName" title="Kérem töltse ki a mezőt">
 
 
       <button (click)="addAlternativeName()">Hozzáadás</button>

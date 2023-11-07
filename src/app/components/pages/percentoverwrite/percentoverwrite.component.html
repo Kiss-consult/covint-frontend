@@ -5,7 +5,7 @@
         <label class="text" for="sex">Páciens neme</label>
       </div>
       <div>
-        <select class="droptextbox" name="sex" id="sex" [(ngModel)]="override.Sex">
+        <select class="droptextbox" name="sex" id="sex" [(ngModel)]="override.Sex" title="Kérem válasszon">
           <option value="Férfi">Férfi</option>
           <option value="Nő">Nő</option>
          </select>
@@ -14,7 +14,7 @@
             <label class="text" for="age">Páciens kora</label>
           </div>
           <div>
-            <input class="droptextbox" type="number" id="age" name="age" min="1" [(ngModel)]="override.Age">
+            <input class="droptextbox" type="number" id="age" name="age" min="1" [(ngModel)]="override.Age" title="Kérem töltse ki a mezőt">
           </div>
         </div>
       </div>
@@ -28,7 +28,7 @@
       </div>
       <div>
         
-            <input class="droptextbox" type="number" id="deadpercent" name="deadpercent" min="0" max="1" [(ngModel)]="override.Dead">
+            <input class="droptextbox" type="number" id="deadpercent" name="deadpercent" min="0" max="1" [(ngModel)]="override.Dead" title="Kérem töltse ki a mezőt">
           
       </div>
     </div>
@@ -38,7 +38,7 @@
         </div>
         <div>
           
-              <input class="droptextbox" type="number" id="hosppercent" name="hosppercent" min="0" max="1" [(ngModel)]="override.Hospitalized">
+              <input class="droptextbox" type="number" id="hosppercent" name="hosppercent" min="0" max="1" [(ngModel)]="override.Hospitalized" title="Kérem töltse ki a mezőt">
             
         </div>
       </div>
@@ -49,7 +49,7 @@
         <label class="text"> Marker</label>
       </div>
       <div style="display: flex;">
-        <select class="droptextbox" type="text" id="markers" name="markers" [(ngModel)]="marker">
+        <select class="droptextbox" type="text" id="markers" name="markers" [(ngModel)]="marker" title="Kérem válasszon">
           <ng-container *ngFor="let marker of markers">
   
             <option value="{{marker}}">{{marker}}</option>
