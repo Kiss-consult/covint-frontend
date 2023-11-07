@@ -82,7 +82,15 @@ export class LoginService {
     );
    
   }
-
+ // This function inserts the new user into the Auth.
+ public getWaitingUsers(): Observable<Result<UserData[]>> {
+  const url = this.url + "/user/waiting";
+  return this.httpClient.get<Result<UserData[]>>(url, { headers: this.getHeaders() }).pipe(
+    map(result => fromJSON<UserData[]>(JSON.stringify(result))),
+    catchError(error => of(new Err<UserData[]>(error)))
+  );
+ 
+}
   // This function get  new user attributes from  Auth.
   public getUserAttributes(id_: string): Observable<Result<User>> {
     const url = this.url + "/user/attributes/" + id_;
@@ -94,14 +102,24 @@ export class LoginService {
   }
 
 
-  public changePassword(currentPassword: string, newPassword: string, confirmation: string): Observable<Result<{}>> {
-    const url = this.url + "/user/changepassword";
-    let newP = { currentPassword, newPassword, confirmation }
+  public changePassword(currentPassword: string, newPassword: string, confirmation: string, byAdmin: boolean): Observable<Result<{}>> {
+    const url = this.url + "/user/changepassword" + this.getUserId();
+    let newP = { currentPassword, newPassword, confirmation, byAdmin }
     return this.httpClient.put<Result<{}>>(url, newP, { headers: this.getHeaders() }).pipe(
       map(result => fromJSON<{}>(JSON.stringify(result))),
       catchError(error => of(new Err<{}>(error)))
     );
   }
+  public acceptUser(userId: string, usergroup: string[]): Observable<Result<{}>> {
+    const url = this.url + "/user/approve/" + userId;
+    
+    return this.httpClient.post<Result<{}>>(url,usergroup , { headers: this.getHeaders() }).pipe(
+      map(result => fromJSON<{}>(JSON.stringify(result))),
+      catchError(error => of(new Err<{}>(error)))
+    );
+  }
+
+
   private getHeaders(): HttpHeaders {
     return new HttpHeaders({
       "Content-Type": "application/json",

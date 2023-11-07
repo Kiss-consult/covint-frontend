@@ -13,12 +13,13 @@ export class ChangepwdComponent {
   currentpassword :  string = "";
   newpassword : string = "";
   confirmation :  string = "";
+  byAdmin : boolean = false;
 
   constructor(private loginService: LoginService, private router: Router) {}
 
   public changePassword() {
     
-    this.loginService.changePassword(this.currentpassword, this.newpassword, this.confirmation).subscribe(result => {
+    this.loginService.changePassword(this.currentpassword, this.newpassword, this.confirmation, this.byAdmin).subscribe(result => {
             
       if (result.isOk()) {
         console.log('Jelszócsere sikeres');

@@ -1,5 +1,5 @@
 export class UserData {
-    Email: string = "";
-    Id:  string = "";
+    email: string = "";
+    id:  string = "";
     
 }

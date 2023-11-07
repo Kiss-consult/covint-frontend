@@ -24,15 +24,40 @@
         <td mat-cell *matCellDef="let userdata"> {{ userdata.email }}</td>
       </ng-container>
 
+      <ng-container matColumnDef="Orvos">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Orvos</th>
+        <td mat-cell *matCellDef="let userdata">
+          <input  *ngIf="loginService.hasAnyGroup([portalvezeto, kutatoorvos])" type="checkbox"  [checked]="doctorgroup"  [(ngModel)]="doctorgroup"  (change)="isDoctor(doctorgroup) "   id="doctor" >
+          <!--[checked]="userdata.IsMarker" [(ngModel)]="illness.IsMarker"    (change)="accept(userdata) " -->
+        </td>
+      </ng-container>     
+      <ng-container matColumnDef="Kutató orvos">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Kutató orvos</th>
+        <td mat-cell *matCellDef="let userdata">
+          <input  *ngIf="loginService.hasAnyGroup([portalvezeto, kutatoorvos])" type="checkbox"  [checked]="researchergroup" [(ngModel)]="researchergroup"  (change)="isResearcher(researchergroup) "  id="researcher" >
+          <!--[checked]="userdata.IsMarker" [(ngModel)]="illness.IsMarker"    (change)="accept(userdata) " -->
+        </td>
+      </ng-container>  
+      <ng-container matColumnDef="Portál kezelő">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Portál kezelő</th>
+        <td mat-cell *matCellDef="let userdata">
+          <input  *ngIf="loginService.hasAnyGroup([portalvezeto, kutatoorvos])" type="checkbox"   [checked]="portaladmingroup" [(ngModel)]="portaladmingroup"  (change)="isPortalAdmin(portaladmingroup) "  id="portaladmin" >
+          <!--[checked]="userdata.IsMarker" [(ngModel)]="illness.IsMarker"    (change)="accept(userdata) " -->
+        </td>
+      </ng-container><ng-container matColumnDef="Portál vezető">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Portál vezető</th>
+        <td mat-cell *matCellDef="let userdata">
+          <input  *ngIf="loginService.hasAnyGroup([portalvezeto, kutatoorvos])" type="checkbox"  [checked]="portalmanagergroup" [(ngModel)]="portalmanagergroup"  (change)="isPortalManager(portalmanagergroup) "  id="portelmanager" >
+          <!--[checked]="userdata.IsMarker" [(ngModel)]="illness.IsMarker"    (change)="accept(userdata) " -->
+        </td>
+      </ng-container>
       <ng-container matColumnDef="elfogadva">
         <th mat-header-cell *matHeaderCellDef mat-sort-header>Elfogadva</th>
         <td mat-cell *matCellDef="let userdata">
-          <input  *ngIf="loginService.hasAnyGroup([portalvezeto, kutatoorvos])" type="checkbox"  (change)="accept(userdata) "  id="ismarker" >
-          <!--[checked]="userdata.IsMarker" [(ngModel)]="illness.IsMarker" -->
+          <input  *ngIf="loginService.hasAnyGroup([portalvezeto, kutatoorvos])" type="checkbox"   (change)="accept(userdata)"   id="isaccepted" >
+          <!--[checked]="userdata.IsMarker" [(ngModel)]="illness.IsMarker"    (change)="accept(userdata) " -->
         </td>
-      </ng-container>     
-      
-    
+      </ng-container>  
    
     
       <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
