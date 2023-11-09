@@ -19,6 +19,6 @@ export class HomeComponent {
   }
 
   toggleAlternateContent() {
-    this.showAlternateContent = this.loginService.isLoggedIn();
+    // this.showAlternateContent = this.loginService.isLoggedIn();
   }
 }

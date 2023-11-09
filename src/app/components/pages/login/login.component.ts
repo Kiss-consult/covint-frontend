@@ -14,17 +14,17 @@ export class LoginComponent {
   constructor(private loginService: LoginService, private router: Router) {}
 
   onLogin() {
-    this.loginService.login(this.username, this.password).subscribe(result => {
-            
-      if (result.isOk()) {
-        console.log('Bejelentkezés sikeres');
-        this.router.navigate(['/home']);
+      // this.loginService.login().subscribe(result => {
+              
+      //   if (result.isOk()) {
+      //     console.log('Bejelentkezés sikeres');
+      //     this.router.navigate(['/home']);
 
-        
-        this.loginService.isLoggedIn()
-      } else {
-        console.log('Bejelentkezés sikertelen');
-      }
-    });
+          
+      //     this.loginService.isLoggedIn()
+      //   } else {
+      //     console.log('Bejelentkezés sikertelen');
+      //   }
+      // });
   }
 }

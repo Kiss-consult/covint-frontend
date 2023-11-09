@@ -22,6 +22,7 @@ import { KutatoOrvos, Orvos, PortalAdmin, PortalVezeto } from './models/group/gr
 import { DefaultformarkersComponent } from './components/pages/defaultformarkers/defaultformarkers.component'; 
 import { PercentoverwriteComponent } from './components/pages/percentoverwrite/percentoverwrite.component';
 import { ProfileComponent } from './components/pages/profile/profile.component';
+import { AuthGuard } from './guard/auth.guard';
 
 
 const routes: Routes = [
@@ -29,9 +30,9 @@ const routes: Routes = [
   { path: "home", component: HomeComponent },
 
   { path: "login", component: LoginComponent },
-  { path: "datainput", component: DatainputComponent, canActivate: [GroupGuard], data: { groups: [Orvos, PortalAdmin, KutatoOrvos, PortalVezeto] } },
+  { path: "datainput", component: DatainputComponent, canActivate: [AuthGuard] },
 
-  { path: "export", component: ExportComponent },
+  { path: "export", component: ExportComponent, canActivate: [AuthGuard] },
   //canActivate: [GroupGuard], data: { groups: [Orvos, PortalAdmin, KutatoOrvos, PortalVezeto] } },
 
 

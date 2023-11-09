@@ -33,6 +33,8 @@ import { DiagramTestComponent } from './components/pages/diagram-test/diagram-te
 import { DefaultformarkersComponent } from './components/pages/defaultformarkers/defaultformarkers.component';
 import { PercentoverwriteComponent } from './components/pages/percentoverwrite/percentoverwrite.component';
 import { ProfileComponent } from './components/pages/profile/profile.component';
+import { initializeKeycloak } from './init/keycloak-init.factory';
+import { KeycloakAngularModule, KeycloakService } from 'keycloak-angular';
 
 
 @NgModule({
@@ -72,7 +74,8 @@ import { ProfileComponent } from './components/pages/profile/profile.component';
     MatSortModule, 
     MatFormFieldModule,
     MatInputModule,
-
+    
+    KeycloakAngularModule,
     BrowserAnimationsModule    
   ],
   providers: [
@@ -83,6 +86,12 @@ import { ProfileComponent } from './components/pages/profile/profile.component';
       deps: [ConfigService],
       multi: true
     },
+    {
+      provide: APP_INITIALIZER,
+      useFactory: initializeKeycloak,
+      multi: true,
+      deps: [KeycloakService],
+    }
   ],
   bootstrap: [AppComponent]
 })
