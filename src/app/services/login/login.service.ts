@@ -1,16 +1,14 @@
 import { Injectable } from '@angular/core';
 import { Observable, catchError, from, map, of } from 'rxjs';
-import { Err, Ok, Result, fromJSON } from 'src/app/models/utils/result';
+import { Err, Result, fromJSON } from 'src/app/models/utils/result';
 import { ConfigService } from '../config/config.service';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Token } from 'src/app/models/token/token';
 import jwt_decode from 'jwt-decode';
 import { AccessToken } from 'src/app/models/token/accesstoken';
 import { Router } from '@angular/router';
 import { User } from 'src/app/models/user/user';
-import { Empty } from 'src/app/models/utils/empty';
 import { UserData } from 'src/app/models/userdata/userdata';
-import { KeycloakService } from 'keycloak-angular';
+import { KeycloakEventType, KeycloakService } from 'keycloak-angular';
 
 
 @Injectable({
@@ -22,9 +20,6 @@ export class LoginService {
   }
   url: string = "";
   token: string = "";
-  id: string = "";
-  email: string = "";
-
   username: string = "";
   loggedIn: boolean = false;
   userId: string = "";
@@ -48,9 +43,16 @@ export class LoginService {
         }
       });
     }
-    catch (e: any) { 
+    catch (e: any) {
       console.log("e", e);
     }
+    keycloakService.keycloakEvents$.subscribe({
+      next: (e) => {
+        if (e.type == KeycloakEventType.OnTokenExpired) {
+          keycloakService.updateToken(20).then((refreshed) => {});
+        }
+      }
+    });
   }
 
   public getUsername(): string {
@@ -161,23 +163,4 @@ export class LoginService {
       });
     });
   }
-
-  // public refresh(): Observable<Result<Empty>> {
-  //   const url = this.url + "/refresh";
-  //   const body = { RefreshToken: this.token.refresh_token };
-  //   return this.httpClient.post<Token>(url, body).pipe(
-  //     map(result => {
-  //       const token = fromJSON<Token>(JSON.stringify(result));
-  //       this.saveToken(token.unwrap());
-  //       return new Ok<Empty>(new Empty());
-  //     }),
-  //     catchError(error => of(new Err<Empty>(error)))
-  //   );
-  // }
-
-  // private saveToken(token: Token) {
-  //   this.token = token;
-  //   const expire = this.token.expires_in * 1000;
-  //   setTimeout(() => this.refresh().subscribe(), expire - 10000);
-  // }
 }
