@@ -21,7 +21,7 @@ export class LoginService {
     throw new Error('Method not implemented.');
   }
   url: string = "";
-  token: Token = new Token();
+  token: string = "";
   id: string = "";
   email: string = "";
 
@@ -40,12 +40,15 @@ export class LoginService {
           this.keycloakService.loadUserProfile().then((profile) => {
             this.loggedIn = true;
             this.username = profile.username as string;
+            this.keycloakService.getToken().then((token) => {
+              this.token = token;
+            });
             this.userId = profile.id as string;
           });
         }
       });
     }
-    catch (e: any) { // <-- note `e` has explicit `unknown` type
+    catch (e: any) { 
       console.log("e", e);
     }
   }
@@ -58,12 +61,11 @@ export class LoginService {
     return this.userId;
   }
   public hasAnyGroup(expectedGroups: string[]): boolean {
-    return true;
     if (!this.isLoggedIn()) {
       this.router.navigate(['/login']);
       return false;
     }
-    const decoded = jwt_decode<AccessToken>(this.token.access_token);
+    const decoded = jwt_decode<AccessToken>(this.token);
     return decoded.groups.some(group => expectedGroups.includes(group));
   }
 
@@ -74,7 +76,7 @@ export class LoginService {
   public logout() {
     this.keycloakService.logout();
     this.keycloakService.clearToken();
-    this.token = new Token();
+    this.token = "";
   }
 
 
@@ -142,7 +144,6 @@ export class LoginService {
   }
 
   public login(): void {
-    console.log("login called")
     this.keycloakService.isLoggedIn().then((loggedIn) => {
       this.loggedIn = loggedIn;
       if (this.loggedIn === false) {
@@ -161,22 +162,22 @@ export class LoginService {
     });
   }
 
-  public refresh(): Observable<Result<Empty>> {
-    const url = this.url + "/refresh";
-    const body = { RefreshToken: this.token.refresh_token };
-    return this.httpClient.post<Token>(url, body).pipe(
-      map(result => {
-        const token = fromJSON<Token>(JSON.stringify(result));
-        this.saveToken(token.unwrap());
-        return new Ok<Empty>(new Empty());
-      }),
-      catchError(error => of(new Err<Empty>(error)))
-    );
-  }
+  // public refresh(): Observable<Result<Empty>> {
+  //   const url = this.url + "/refresh";
+  //   const body = { RefreshToken: this.token.refresh_token };
+  //   return this.httpClient.post<Token>(url, body).pipe(
+  //     map(result => {
+  //       const token = fromJSON<Token>(JSON.stringify(result));
+  //       this.saveToken(token.unwrap());
+  //       return new Ok<Empty>(new Empty());
+  //     }),
+  //     catchError(error => of(new Err<Empty>(error)))
+  //   );
+  // }
 
-  private saveToken(token: Token) {
-    this.token = token;
-    const expire = this.token.expires_in * 1000;
-    setTimeout(() => this.refresh().subscribe(), expire - 10000);
-  }
+  // private saveToken(token: Token) {
+  //   this.token = token;
+  //   const expire = this.token.expires_in * 1000;
+  //   setTimeout(() => this.refresh().subscribe(), expire - 10000);
+  // }
 }
