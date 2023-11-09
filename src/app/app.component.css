@@ -9,7 +9,7 @@
     color: #ffffff;
     position: relative;
     margin: 0; 
-    border-bottom: #0080ff 4px solid;
+    
   }
 
 .nav-item a{
@@ -28,7 +28,7 @@
 #covint_logo{
     width: 150px;
     margin-right: 5%;
-    margin-bottom: 5px;
+    
 }
  
 .navbar{
