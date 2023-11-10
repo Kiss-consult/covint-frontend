@@ -106,12 +106,14 @@
           <p>Meglévő szűrő lekérdezése</p>
         </div>
         <div style="display: flex;" >
+          <!--
           <div style="margin-right: 40px; margin-bottom: 40px;">
             <label class="text">Szűrők lekérdezése</label>
             <button (click)="getFilters()">Lekérdezés</button>
           </div>
+          -->
           <div>
-            <label class="text">Válasszon szürőt</label>
+            <label class="text">Válasszon a mentett filterek közül!</label>
             <select class="droptextbox" type="text" id="filters" name="filters"  [(ngModel)]="filter" title="Kérem válasszon" >
               <ng-container *ngFor="let filter of savedfilters">                
                 <option [ngValue]="filter.Filter">{{filter.FilterName}}</option>

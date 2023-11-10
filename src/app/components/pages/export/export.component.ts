@@ -60,6 +60,7 @@ export class ExportComponent  {
     } else if (contentType === 'filter') {
       this.markerActive = false;
       this.filterActive = true;
+      this.getFilters();
     }
 
   }
@@ -240,7 +241,7 @@ ngAfterContentChecked(): void {
         console.error(result.unwrapErr());
         return;
       }
-      alert("Sikeres szűrők lekérdezése");
+      //alert("Sikeres szűrők lekérdezése");
       this.savedfilters = result.unwrap();
       //for (let illness of result.unwrap()) {
       // illness.BnoCodes.forEach((bnoCode) => {

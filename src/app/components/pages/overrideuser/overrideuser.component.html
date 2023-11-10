@@ -1,0 +1,38 @@
+
+
+
+
+
+<h1>
+    Felhasználók
+  </h1>
+
+
+<div class="container">
+   <!--TABLE-->
+   
+   <div >
+    <mat-form-field>
+        <mat-label>Keresés</mat-label>
+        <input matInput (keyup)="illnessFilter($event)" placeholder="Felhasználók" #input>
+      </mat-form-field>
+
+      <table mat-table [dataSource]="dataSource" class="mat-elevation-z8" matSort>  
+
+     
+     
+      
+      <ng-container matColumnDef="Név">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Felhasználó neve</th>
+        <td mat-cell *matCellDef="let userdata"> {{ userdata.email }} </td>
+      </ng-container>
+      
+      
+   
+    
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+
+    <mat-paginator #paginator [pageSizeOptions]="pageSizeOptions" showFirstLastButtons></mat-paginator> 
+</div>

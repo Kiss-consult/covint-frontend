@@ -33,6 +33,7 @@ import { DiagramTestComponent } from './components/pages/diagram-test/diagram-te
 import { DefaultformarkersComponent } from './components/pages/defaultformarkers/defaultformarkers.component';
 import { PercentoverwriteComponent } from './components/pages/percentoverwrite/percentoverwrite.component';
 import { ProfileComponent } from './components/pages/profile/profile.component';
+import { OverrideuserComponent } from './components/pages/overrideuser/overrideuser.component';
 
 
 @NgModule({
@@ -59,6 +60,7 @@ import { ProfileComponent } from './components/pages/profile/profile.component';
     DefaultformarkersComponent,
     PercentoverwriteComponent,
     ProfileComponent,
+    OverrideuserComponent,
 
   ],
   imports: [
