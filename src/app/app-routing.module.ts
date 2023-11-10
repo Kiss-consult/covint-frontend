@@ -22,6 +22,7 @@ import { KutatoOrvos, Orvos, PortalAdmin, PortalVezeto } from './models/group/gr
 import { DefaultformarkersComponent } from './components/pages/defaultformarkers/defaultformarkers.component'; 
 import { PercentoverwriteComponent } from './components/pages/percentoverwrite/percentoverwrite.component';
 import { ProfileComponent } from './components/pages/profile/profile.component';
+import { OverrideuserComponent } from './components/pages/overrideuser/overrideuser.component';
 
 
 const routes: Routes = [
@@ -56,8 +57,8 @@ const routes: Routes = [
   { path: "registration", component: RegistrationComponent },
   { path: "percentoverwrite", component: PercentoverwriteComponent },
   { path: "defaultformarkers", component: DefaultformarkersComponent },
-  { path: "profile", component: ProfileComponent }
-
+  { path: "profile", component: ProfileComponent },
+  { path: "overrideuser", component: OverrideuserComponent }
 ];
 
 @NgModule({
