@@ -7,32 +7,35 @@
   border: none;
 }
 
-.container-diagram{
-  position: fixed;
-  top: 145px; 
-  display: flex;
-  max-width: 100%;
-  width: 63.75%;
-  margin-left: 20%;
-  margin-right: 20%;
-  margin-top: 0;
-  padding-top: 0;
-  z-index: 0;
-}
+
 
 .tab-button{
   cursor: pointer;
-  padding: 10px;
-  z-index: 0;
+  color: white;
+    border-bottom-right-radius:7px;
+    border-bottom-left-radius: 7px;
+    background: #848484;
+    margin: 0;
+    padding: 10px;
+    font-size: 1.5rem;
+    font-weight: 500;
+    margin-top: 65px;
+    margin-left:7% ;
+    margin-right: 0;
+    position: fixed;
+    width: auto;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    line-height: 1.2;
 }
 
 .tab-button.selected {
-  background-color: #848484; 
+  background-color: #0800ff; 
   border-bottom-right-radius: 7px;
   border-bottom-left-radius: 7px;
-  color: #ffffff;
-  position: relative;
-  margin: 0;
+  color: #ffffff;  
+border-top: #0080ff 20px;
+z-index: 3;
   }
   
 .tab-button:hover {
@@ -40,10 +43,13 @@
   border-bottom-right-radius:7px;
   border-bottom-left-radius: 7px;
   color: #ffffff;
-  margin: 0;
+  
   }
 
 .tab-button.selected:hover {
   background-color: #848484; 
   color: #fff;
+  
   }
+
+  

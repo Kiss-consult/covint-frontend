@@ -1,12 +1,12 @@
-<div class="container-diagram">
+<div style="display: flex;">
   
   <div class="tab-button" *ngIf="loginService.hasAnyGroup([portaladmin, portalvezeto, kutatoorvos])" (click)="showTab(2)" [ngClass]="{ 'selected': activeTab === 2 }">Forrás - diagram</div>
-  <div class="tab-button" *ngIf="loginService.hasAnyGroup([portaladmin, portalvezeto, kutatoorvos,orvos])" (click)="showTab(3)" [ngClass]="{ 'selected': activeTab === 3 }">Orvos - daigram</div>
-  <div class="tab-button" *ngIf="loginService.hasAnyGroup([portaladmin, portalvezeto, kutatoorvos])" (click)="showTab(4)" [ngClass]="{ 'selected': activeTab === 4 }">Kutató - diagram</div>
+  <div class="tab-button" style="margin-left: 340px;" *ngIf="loginService.hasAnyGroup([portaladmin, portalvezeto, kutatoorvos,orvos])" (click)="showTab(3)" [ngClass]="{ 'selected': activeTab === 3 }">Orvos - daigram</div>
+  <div class="tab-button" style="margin-left: 540px;" *ngIf="loginService.hasAnyGroup([portaladmin, portalvezeto, kutatoorvos])" (click)="showTab(4)" [ngClass]="{ 'selected': activeTab === 4 }">Kutató - diagram</div>
   
 
 </div>
-<div class="tab-container" style="z-index: -1;">
+
  
 
 
