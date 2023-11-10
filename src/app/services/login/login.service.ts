@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Observable, catchError, map, of } from 'rxjs';
 import { Err, Ok, Result, fromJSON } from 'src/app/models/utils/result';
 import { ConfigService } from '../config/config.service';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Token } from 'src/app/models/token/token';
 import jwt_decode from 'jwt-decode';
 import { AccessToken } from 'src/app/models/token/accesstoken';
@@ -27,6 +27,24 @@ export class LoginService {
 
   constructor(private httpClient: HttpClient, private config: ConfigService, private router: Router) {
     this.url = this.config.config.AuthUrl;
+  }
+
+  public downloadEmailTemplate(): Observable<Result<[any[], string]>> {
+    let options = {
+      headers: this.getHeaders(),
+      params: this.getParams(),
+      responseType: "blob" as "json"
+    };
+    return this.httpClient.get<Blob>(this.url + "/templates/download", options).pipe(
+      map(response => {
+        let dataType = response.type;
+        let binaryData = [];
+        binaryData.push(response);
+        let result: [any[], string] = [binaryData, dataType]
+        return new Ok(result);
+      }),
+      catchError(error => of(new Err<[any[], string]>(error)))
+    );
   }
 
   public getAccessToken(): string {
@@ -125,6 +143,12 @@ export class LoginService {
       "Content-Type": "application/json",
       "Authorization": "Bearer " + this.getAccessToken()
     });
+  }
+  
+  private getParams(): HttpParams {
+    return new HttpParams().set('action','email-test') 
+      
+    ;
   }
   public login(username: string, password: string): Observable<Result<Empty>> {
 

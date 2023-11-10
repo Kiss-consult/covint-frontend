@@ -63,7 +63,9 @@
       <li class="nav-item"  *ngIf="loginService.hasAnyGroup([portaladmin, portalvezeto, kutatoorvos])" >
         <a href="/auditlog" class="nav-link" routerLinkActive="active"  routerLink="auditlog">AuditLog</a>
       </li>
-      
+      <li class="nav-item"  *ngIf="loginService.hasAnyGroup([portaladmin, portalvezeto, kutatoorvos])" >
+        <a href="/email-template" class="nav-link" routerLinkActive="active"  routerLink="email-template">Email template</a>
+      </li>
     </ul>
 
     <ul class="navbar-nav ml-auto" *ngIf="!loginService.isLoggedIn()">      
