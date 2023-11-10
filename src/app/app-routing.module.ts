@@ -23,6 +23,7 @@ import { DefaultformarkersComponent } from './components/pages/defaultformarkers
 import { PercentoverwriteComponent } from './components/pages/percentoverwrite/percentoverwrite.component';
 import { ProfileComponent } from './components/pages/profile/profile.component';
 import { OverrideuserComponent } from './components/pages/overrideuser/overrideuser.component';
+import { EmailTemplateComponent } from './components/pages/email-template/email-template.component';
 
 
 const routes: Routes = [
@@ -58,7 +59,8 @@ const routes: Routes = [
   { path: "percentoverwrite", component: PercentoverwriteComponent },
   { path: "defaultformarkers", component: DefaultformarkersComponent },
   { path: "profile", component: ProfileComponent },
-  { path: "overrideuser", component: OverrideuserComponent }
+  { path: "overrideuser", component: OverrideuserComponent },
+  { path: "email-template", component: EmailTemplateComponent }
 ];
 
 @NgModule({

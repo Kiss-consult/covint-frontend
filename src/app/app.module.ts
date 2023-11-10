@@ -34,6 +34,7 @@ import { DefaultformarkersComponent } from './components/pages/defaultformarkers
 import { PercentoverwriteComponent } from './components/pages/percentoverwrite/percentoverwrite.component';
 import { ProfileComponent } from './components/pages/profile/profile.component';
 import { OverrideuserComponent } from './components/pages/overrideuser/overrideuser.component';
+import { EmailTemplateComponent } from './components/pages/email-template/email-template.component';
 
 
 @NgModule({
@@ -61,6 +62,7 @@ import { OverrideuserComponent } from './components/pages/overrideuser/overrideu
     PercentoverwriteComponent,
     ProfileComponent,
     OverrideuserComponent,
+    EmailTemplateComponent,
 
   ],
   imports: [
