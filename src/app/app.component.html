@@ -8,8 +8,8 @@
         <a href="/home" class="nav-link"  routerLink="home">Kezdőlap</a>
       </li>
       
-      <li class="nav-item"  *ngIf="loginService.hasAnyGroup([orvos,portaladmin, portalvezeto, kutatoorvos])">
-        <a href="/datainput" class="nav-link"   routerLinkActive="active" routerLink="datainput">Adatbevitel</a>
+      <li class="nav-item" routerLinkActive="active" *ngIf="loginService.hasAnyGroup([orvos,portaladmin, portalvezeto, kutatoorvos])">
+        <a href="/datainput" class="nav-link"    routerLink="datainput">Adatbevitel</a>
       </li>
       
       <li class="nav-item"  routerLinkActive="active">
@@ -25,9 +25,9 @@
           <li class="nav-item" routerLinkActive="active">
             <a class="nav-link" >Felhasználók kezelése</a>
             <ul class="dropdown">
-              <li><a [routerLink]="['/addnewuser']" routerLinkActive="active">Új felhasználó hozzáadása</a></li>
-              <li><a [routerLink]="['/acceptnewuser']" routerLinkActive="active">Új felhasználó elfogadása</a></li>
-              <li><a [routerLink]="['/overrideuser']" routerLinkActive="active">Felhasználók</a></li>
+              <li><p class="nav-link" [routerLink]="['/addnewuser']" routerLinkActive="active">Új felhasználó hozzáadása</p></li>
+              <li><p class="nav-link" [routerLink]="['/acceptnewuser']" routerLinkActive="active">Új felhasználó elfogadása</p></li>
+              <li><p class="nav-link" [routerLink]="['/overrideuser']" routerLinkActive="active">Felhasználók</p></li>
             </ul>
           </li>
         </ul>
@@ -38,10 +38,10 @@
           <li class="nav-item" routerLinkActive="active">
             <a class="nav-link">Markerek kezelése</a>
             <ul class="dropdown">
-              <li><a [routerLink]="['/addnewillness']" routerLinkActive="active">Új betegség hozzáadása</a></li>
-              <li><a [routerLink]="['/filterablemarkers']" routerLinkActive="active">Marker szűrhető-e</a></li>
-              <li><a [routerLink]="['/percentoverwrite']" routerLinkActive="active">%-ok felülírása felülírása</a></li>
-              <li><a [routerLink]="['/defaultformarkers']" routerLinkActive="active">Ősfeltöltés több marker kombinációjára</a></li>
+              <li><p class="nav-link" [routerLink]="['/addnewillness']" routerLinkActive="active">Új betegség hozzáadása</p></li>
+              <li><p class="nav-link" [routerLink]="['/filterablemarkers']" routerLinkActive="active">Marker szűrhető-e</p></li>
+              <li><p class="nav-link" [routerLink]="['/percentoverwrite']" routerLinkActive="active">%-ok felülírása felülírása</p></li>
+              <li><p class="nav-link" [routerLink]="['/defaultformarkers']" routerLinkActive="active">Ősfeltöltés több marker kombinációjára</p></li>
             </ul>
           </li>
         </ul>
@@ -60,11 +60,11 @@
         </ul>
       </nav>
 
-      <li class="nav-item"  *ngIf="loginService.hasAnyGroup([portaladmin, portalvezeto, kutatoorvos])" >
-        <a href="/auditlog" class="nav-link" routerLinkActive="active"  routerLink="auditlog">AuditLog</a>
+      <li class="nav-item" routerLinkActive="active" *ngIf="loginService.hasAnyGroup([portaladmin, portalvezeto, kutatoorvos])" >
+        <a href="/auditlog" class="nav-link"   routerLink="auditlog">AuditLog</a>
       </li>
-      <li class="nav-item"  *ngIf="loginService.hasAnyGroup([portaladmin, portalvezeto, kutatoorvos])" >
-        <a href="/email-template" class="nav-link" routerLinkActive="active"  routerLink="email-template">Email template</a>
+      <li class="nav-item" routerLinkActive="active" *ngIf="loginService.hasAnyGroup([portaladmin, portalvezeto, kutatoorvos])" >
+        <a href="/email-template" class="nav-link"   routerLink="email-template">Email template</a>
       </li>
     </ul>
 

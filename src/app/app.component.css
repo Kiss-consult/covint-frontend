@@ -11,11 +11,28 @@
     margin: 0; 
     
   }
+  .nav-link.active {
+    background-color: #0080ff; 
+    
+    color: #ffffff;
+}
+  
+
+  .nav-item p{
+    color: black;
+    margin: 0;
+}
 
 .nav-item a{
     color: black;
     margin: 0;
 }
+
+.nav-item p:hover {
+  background-color: #9dc3ff;
+  color: #ffffff; /* Például kék szín a hover állapotban */
+}
+
 .nav-item:hover{
     background-color:#9dc3ff ;
     border-top-right-radius:7px;
@@ -63,14 +80,11 @@
     display: block;
   }
   
-  .dropdown li {
-    padding: 10px;
-  }
   
-  .dropdown li:hover {
-    background-color: #f2f2f2;
-  }
+  
+  
 
+  
   ul, ol {
     list-style-type: none;
     padding: 0;

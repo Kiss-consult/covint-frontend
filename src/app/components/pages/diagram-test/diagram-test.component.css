@@ -9,24 +9,25 @@
 
 
 
-.tab-button{
+.tab-button {
   cursor: pointer;
   color: white;
-    border-bottom-right-radius:7px;
-    border-bottom-left-radius: 7px;
-    background: #848484;
-    margin: 0;
-    padding: 10px;
-    font-size: 1.5rem;
-    font-weight: 500;
-    margin-top: 65px;
-    margin-left:7% ;
-    margin-right: 0;
-    position: fixed;
-    width: auto;
-    padding-top: 10px;
-    padding-bottom: 10px;
-    line-height: 1.2;
+  border-bottom-right-radius: 7px;
+  border-bottom-left-radius: 7px;
+  background: #848484;
+  margin: 0;
+  padding: 10px;
+  font-size: 1.5rem;
+  font-weight: 500;
+  margin-top: 65px;
+  margin-left: 7%;
+  margin-right: 0;
+  width: auto;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  line-height: 1.2;    
+  margin-right: 20px;
+  padding-right: 10px;
 }
 
 .tab-button.selected {
@@ -47,7 +48,7 @@ z-index: 3;
   }
 
 .tab-button.selected:hover {
-  background-color: #848484; 
+  background-color: #0800ff; 
   color: #fff;
   
   }
