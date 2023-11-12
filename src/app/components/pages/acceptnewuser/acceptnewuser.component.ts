@@ -38,6 +38,8 @@ export class AcceptnewuserComponent {
 
   togglePopupContent(userdata: any) {
     this.expandedUser = this.expandedUser === userdata ? null : userdata;
+    this.getUserAttributes(userdata.id);
+    
   }
 
   displayedColumns: string[] = ['Név', 'Orvos', 'Kutató orvos', 'Portál kezelő', 'Portál vezető', 'elfogadva']; // Itt adhatod meg az oszlopok neveit

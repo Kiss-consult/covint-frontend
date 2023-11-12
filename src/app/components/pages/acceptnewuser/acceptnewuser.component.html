@@ -24,7 +24,11 @@
           </i>
           <div *ngIf="expandedUser === userdata" class="popup">
             <!-- Tartalom csak az adott sorra érvényesítve -->
-            ???
+            <span class="popuptext" id="myPopup1"> Név: {{ this.user.LastName }} {{ this.user.FirstName }}  </span> <br>
+            <span class="popuptext" id="myPopup2"> Pecsétszám: {{ this.user.SealNumber }}  </span>  <br>
+            <span class="popuptext" id="myPopup2"> Intézmény: {{ this.user.InstitutionName }}  {{ this.user.InstitutionDepartment }}</span>  <br>
+            <span class="popuptext" id="myPopup2"> Cég: {{ this.user.CompanyName }} </span>  <br>
+            <span class="popuptext" id="myPopup2"> Telefonszám: {{ this.user.Phone }} </span>  <br>
           </div>
         </td>
       </ng-container>
