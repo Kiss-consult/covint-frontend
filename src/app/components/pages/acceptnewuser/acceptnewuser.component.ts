@@ -162,6 +162,26 @@ export class AcceptnewuserComponent {
 
   }
 
+  public getUserAttributes(id : string) {
+    this.loginService.getUserAttributes(id).subscribe(
+      result => {
+        if (result.isErr()) {
+          alert("Sikertelen userlist");
+          console.error(result.unwrapErr());
+          return;
+        }
+        this.user = result.unwrap();
+  
+       // this.dataSource = new MatTableDataSource(this.userdatas);
+        //this.dataSource.paginator = this.paginator;
+        console.log(this.user)
+        //console.log(this.dataSource.data);
+  
+      });
+  
+  }
+  
+
   public reloadCurrentPage() {
     window.location.reload();
   }
