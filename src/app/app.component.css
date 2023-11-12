@@ -30,7 +30,7 @@
 
 .nav-item p:hover {
   background-color: #9dc3ff;
-  color: #ffffff; /* Például kék szín a hover állapotban */
+  color: #ffffff; 
 }
 
 .nav-item:hover{

@@ -35,11 +35,11 @@ h2{
     margin-left: 10%;
     margin-right: 10%;
     margin-top: 115px;
-    padding-top: 30px;
+    padding-top: 60px;
     background-color: white;
     height: auto;
-    padding-left: 30px;
-    padding-right: 30px;
+    padding-left: 60px;
+    padding-right: 60px;
     padding-bottom: 60px;
     border-bottom:solid 6px #0800ff;
     box-shadow:0px -10px 0px 0px #848484 inset;
@@ -75,7 +75,7 @@ button{
     width: 200px;
     height: 40px;
     background-color: #0080ff; 
-    border: solid 1px rgb(255, 255, 255);
+    border-color: #0080ff;
     border-radius: 5px;
     color: white;
     text-align: center;
@@ -83,11 +83,11 @@ button{
     display: inline-block;
     font-size: 1rem;
     cursor: pointer;
-    box-shadow: 0px 2px 5px #848484;
+    
 }
 
 button:hover{
-    background-color: #848484
+    background-color: #9dc3ff
 }
 
 .disabled {
@@ -104,7 +104,7 @@ button:hover{
     min-width: 200px;
     width: 200px;
     text-align: center;
-    box-shadow: 0px 2px 5px #848484;
+    box-shadow: 1px 1px 0px 0.5px #848484;
 }
 
 input[type="radio"] {
@@ -131,3 +131,6 @@ input::placeholder{
     opacity: 0.8;
 }
 
+s{
+    text-decoration: none;
+}
