@@ -34,6 +34,12 @@ export class AcceptnewuserComponent {
   newpassword: string = "";
   confirmation: string = "";
 
+  expandedUser: any | null = null;
+
+  togglePopupContent(userdata: any) {
+    this.expandedUser = this.expandedUser === userdata ? null : userdata;
+  }
+
   displayedColumns: string[] = ['Név', 'Orvos', 'Kutató orvos', 'Portál kezelő', 'Portál vezető', 'elfogadva']; // Itt adhatod meg az oszlopok neveit
   dataSource: MatTableDataSource<UserData>;
   @ViewChild('paginator') paginator: MatPaginator;

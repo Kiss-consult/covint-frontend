@@ -1,8 +1,4 @@
-
-
-<h1>
-    Új felhasználó elfogadása
-  </h1>
+<h1>Új felhasználó elfogadása</h1>
 
 
 <div class="container">
@@ -21,7 +17,16 @@
       
       <ng-container matColumnDef="Név">
         <th mat-header-cell *matHeaderCellDef mat-sort-header>Felhasználó neve</th>
-        <td mat-cell *matCellDef="let userdata"> {{ userdata.email }} </td>
+        <td mat-cell *matCellDef="let userdata">
+          {{ userdata.email }}
+          <i class="material-icons" (click)="togglePopupContent(userdata)">
+            {{ expandedUser === userdata ? 'keyboard_arrow_right' : 'keyboard_arrow_down' }}
+          </i>
+          <div *ngIf="expandedUser === userdata" class="popup">
+            <!-- Tartalom csak az adott sorra érvényesítve -->
+            ???
+          </div>
+        </td>
       </ng-container>
       
       <ng-container matColumnDef="Orvos">
