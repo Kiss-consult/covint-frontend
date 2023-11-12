@@ -62,5 +62,12 @@ export class ProfileComponent {
     this.router.navigate(['/changepwd']);
 
   }
+
+  
+  public () {
+    this.router.navigate(['']);
+
+  }
+
 }
 

@@ -1,51 +1,33 @@
-.reg-container{
-    justify-content: center;
-    display: flex;
-    max-width: 100%;
-    width: 60%;
-    margin-left: 20%;
-    margin-right: 30%;
-    margin-top: 0;
-    background-color: white;
-    height: 100%;
-    padding-top: 160px;
+.container{
+    margin-top: 70px;
+    padding-left: 200px;
+    padding-right: 200px;
 }
 
-.form-group{
-    display: block;
-    flex-direction: column;
-    padding: 20px;
-}
-
-.text{
-    margin-bottom: 0;
-    margin-top: 20px;
-    width: 400px;
-    color: rgb(16, 15, 15);
-}
-
-h2{
-    color: white;
-    border-bottom-left-radius: 7px;
-    background: #848484;
+p{
     margin: 0;
+    padding: 0;
+}
+
+label{
+    margin: 0;
+}
+
+table {
+    
+    width: 100%;
+
+  }
+
+td{
+    text-align: left;
     padding: 10px;
-    font-size: 30px;
-    width: 82%;
-    margin-top: 99px;
-    margin-left:18% ;
-    margin-right: 0;
 }
 
+tr:nth-child(even) {
+    background-color: #f2f2f2; 
+  }
 
-
-#trueHosp{
-    margin-top: 25px;
-    margin-left: 15px;
-}
-
-#done{
-    position:absolute;
-    bottom: 25%;
-
-}
+  tr:nth-child(odd) {
+    background-color: #ffffff; 
+  }

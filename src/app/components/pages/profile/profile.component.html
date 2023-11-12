@@ -1,58 +1,81 @@
+<h1>Felhasználói profil</h1>
 
-<h1>
-    Felhasználói profil
-  </h1>
-
-  <div class="reg-container">
+<div class="container">
  
-  <div class="form-group" style="padding-left: 40px;">
+  <table>
+    <tr>
+      <td>
+        <label for="name">Felhasználó neve:</label>
+      </td>
+      <td>
+        <p>{{this.user.Title}} {{this.user.LastName}} {{this.user.FirstName}}</p>
+      </td>
+    </tr>
+  
+    <tr>
+      <td>
+        <label for="sealnumber">Pecsét száma:</label>
+      </td>
+      <td>
+        <p>{{this.user.SealNumber}}</p>
+      </td>
+    </tr>
+  
+    <tr>
+      <td>
+        <label for="companyname">Cég neve:</label>
+      </td>
+      <td>
+        <p>{{this.user.CompanyName}}</p>
+      </td>
+    </tr>
+  
+    <tr>
+      <td>
+        <label for="institute">Intézmény neve:</label>
+      </td>
+      <td>
+        <p>{{this.user.InstitutionName}}</p>
+      </td>
+    </tr>
+  
+    <tr>
+      <td>
+        <label for="departure">Osztály:</label>
+      </td>
+      <td>
+        <p>{{this.user.InstitutionDepartment}}</p>
+      </td>
+    </tr>
+  
+    <tr>
+      <td>
+        <label for="phone">Telefon:</label>
+      </td>
+      <td>
+        <p>{{this.user.Phone}}</p>
+      </td>
+    </tr>
 
-    <div>
-      <div>
-        <label class="text" for="name"></label>
-    </div>
-    <div  class="text">
-        <p> felhasználó neve : {{this.user.Title}} {{this.user.LastName}} {{this.user.FirstName}}</p>
-      </div>
-    <div>
-        <div>
-          <label class="text" for="sealnumber"></label>
-      </div>
-      <div  class="text">
-        <p> pecsét száma : {{this.user.SealNumber}}</p>
-      </div>
-      <div>
-        <div>
-          <label class="text" for="companyname"></label>
-      </div>
-      <div  class="text"  >
-        <p> Cég neve : {{this.user.CompanyName}}</p>
-      </div>
-      <div>
-        <div>
-          <label class="text" for="institute"></label>
-      </div>
-      <div  class="text"  >
-        <p>Intézmény neve : {{this.user.InstitutionName}}</p>
-      </div>   
-      <div>
-        <label class="text" for="departure"></label>
-    </div>
-    <div  class="text"  >
-      <p>Osztály : {{this.user.InstitutionDepartment}}</p>
-    </div>
-    <div>
-      <label class="text" for="phone"></label>
-  </div>
-  <div  class="text"  >
-    <p>Telefon : {{this.user.Phone}}</p>
-  </div>
+    <tr>
+      <td>
+        <label>Adatmódosítási igény kérése</label>
+      </td>
+      <td>
+        <!--
+        <button id="done" (click)="">Adatmódosítás</button>
+      -->
+      </td>
+    </tr>
 
-  <div>
-    <button id="done" (click)="gotoChangePassword()">Jelszócsere</button>
-  </div>
+    <tr>
+      <td>
+        <label>Jelszó:</label>
+      </td>
+      <td>
+        <button id="done" (click)="gotoChangePassword()">Jelszócsere</button>
+      </td>
+    </tr>
+  </table>
 
 </div>
-
-
-  </div>
