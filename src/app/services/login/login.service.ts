@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
-import { Observable, catchError, map, of } from 'rxjs';
+import { Observable, Subscription, catchError, finalize, map, of } from 'rxjs';
 import { Err, Ok, Result, fromJSON } from 'src/app/models/utils/result';
 import { ConfigService } from '../config/config.service';
-import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
+import { HttpClient, HttpEventType, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Token } from 'src/app/models/token/token';
 import jwt_decode from 'jwt-decode';
 import { AccessToken } from 'src/app/models/token/accesstoken';
@@ -23,7 +23,8 @@ export class LoginService {
   token: Token = new Token();
   id: string = "";
   email: string = "";
-
+  uploadProgress:number;
+    uploadSub: Subscription;
 
   constructor(private httpClient: HttpClient, private config: ConfigService, private router: Router) {
     this.url = this.config.config.AuthUrl;
@@ -141,10 +142,19 @@ export class LoginService {
   private getHeaders(): HttpHeaders {
     return new HttpHeaders({
       "Content-Type": "application/json",
-      "Authorization": "Bearer " + this.getAccessToken()
+      
+      "Authorization": "Bearer " + this.getAccessToken(),      
     });
+    
   }
-  
+  private getHeadersForUpload(): HttpHeaders {
+    return new HttpHeaders({
+      "Content-Type": "multipart/form-data",
+      'enctype': 'multipart/form-data',
+      "Authorization": "Bearer " + this.getAccessToken(),      
+    });
+    
+  }
   private getParams(): HttpParams {
     return new HttpParams().set('action','email-test') 
       
@@ -183,4 +193,45 @@ export class LoginService {
     const expire = this.token.expires_in * 1000;
     setTimeout(() => this.refresh().subscribe(), expire - 10000);
   }
+
+  
+ uploadFile(file: File, filename: string):   Observable<Result<{}>> {
+    const url = this.url + "/templates/upload";
+    
+    console.log(`hivva uploadfile`, file)
+      let formData = new FormData();
+      formData.append('template', file); 
+      console.log(`headers`, this.getHeadersForUpload());
+      console.log("accesstoken:", this.getAccessToken);
+  
+      const upload$ = this.httpClient.post(url, formData, {
+        reportProgress: true,
+        observe: 'events',
+        headers: this.getHeadersForUpload(),        
+        params: this.getParams(),
+       
+    })
+    .pipe(
+        finalize(() => this.reset())
+    );
+  
+    this.uploadSub = upload$.subscribe(event => {
+      if (event.type == HttpEventType.UploadProgress) {
+        this.uploadProgress = Math.round(100 * (event.loaded ));
+      }
+    })
 }
+
+
+cancelUpload() {
+this.uploadSub.unsubscribe();
+this.reset();
+}
+
+reset() {
+this.uploadProgress = 0;
+this.uploadSub = Subscription.EMPTY;
+}
+    }
+   
+
