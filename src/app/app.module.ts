@@ -5,7 +5,6 @@ import { AppComponent } from './app.component';
 import { DiagramComponent } from './components/pages/diagram/diagram.component';
 import { ExportComponent } from './components/pages/export/export.component';
 import { DatainputComponent } from './components/pages/datainput/datainput.component';
-import { LoginComponent } from './components/pages/login/login.component';
 import { HomeComponent } from './components/pages/home/home.component';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule , ReactiveFormsModule } from '@angular/forms';
@@ -35,6 +34,8 @@ import { PercentoverwriteComponent } from './components/pages/percentoverwrite/p
 import { ProfileComponent } from './components/pages/profile/profile.component';
 import { OverrideuserComponent } from './components/pages/overrideuser/overrideuser.component';
 import { EmailTemplateComponent } from './components/pages/email-template/email-template.component';
+import { initializeKeycloak } from './init/keycloak-init.factory';
+import { KeycloakAngularModule, KeycloakService } from 'keycloak-angular';
 
 
 @NgModule({
@@ -43,7 +44,6 @@ import { EmailTemplateComponent } from './components/pages/email-template/email-
     DiagramComponent,
     ExportComponent,
     DatainputComponent,
-    LoginComponent,
     HomeComponent,
     UsermanagementComponent,
     AddnewuserComponent,
@@ -76,7 +76,8 @@ import { EmailTemplateComponent } from './components/pages/email-template/email-
     MatSortModule, 
     MatFormFieldModule,
     MatInputModule,
-
+    
+    KeycloakAngularModule,
     BrowserAnimationsModule    
   ],
   providers: [
@@ -87,6 +88,12 @@ import { EmailTemplateComponent } from './components/pages/email-template/email-
       deps: [ConfigService],
       multi: true
     },
+    {
+      provide: APP_INITIALIZER,
+      useFactory: initializeKeycloak,
+      multi: true,
+      deps: [KeycloakService],
+    }
   ],
   bootstrap: [AppComponent]
 })

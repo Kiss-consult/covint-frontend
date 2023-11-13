@@ -113,8 +113,7 @@ public overrideCombination(illnesses: string[], defaults: Default[]): Observable
 
   private getHeaders(): HttpHeaders {
     return new HttpHeaders({
-      "Content-Type": "application/json",
-      "Authorization": "Bearer " + this.loginService.getAccessToken()
+      "Content-Type": "application/json"
     });
   }
 
@@ -129,7 +128,7 @@ public overrideCombination(illnesses: string[], defaults: Default[]): Observable
   // This function returns all the markers stored in the database.
   public getMarkers(): Observable<Result<string[]>> {
     const url = this.url + "/illnesses/markers";
-    return this.httpClient.get<Result<string[]>>(url, { headers: this.getHeaders() }).pipe(
+    return this.httpClient.get<Result<string[]>>(url, {headers: this.getHeaders()}).pipe(
       map(result => fromJSON<string[]>(JSON.stringify(result))),
       catchError(error => of(new Err<string[]>(error)))
     );

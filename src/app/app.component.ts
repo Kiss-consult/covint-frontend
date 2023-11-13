@@ -2,6 +2,7 @@ import { Component, OnInit, ChangeDetectorRef, AfterContentChecked } from '@angu
 import { Router } from '@angular/router';
 import { LoginService } from './services/login/login.service';
 import { KutatoOrvos, Orvos, PortalAdmin, PortalVezeto } from 'src/app/models/group/group';
+import { KeycloakService } from 'keycloak-angular';
 
 @Component({
   selector: 'app-root',
