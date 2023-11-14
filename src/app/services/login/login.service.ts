@@ -12,6 +12,7 @@ import { Router } from '@angular/router';
 import { User } from 'src/app/models/user/user';
 import { UserData } from 'src/app/models/userdata/userdata';
 import { KeycloakEventType, KeycloakService } from 'keycloak-angular';
+import { Empty } from 'src/app/models/utils/empty';
 
 
 @Injectable({
@@ -23,7 +24,8 @@ export class LoginService {
   }
   url: string = "";
 
-  token: Token = new Token();
+ token_: Token = new Token();
+ token: string = "";
   id: string = "";
   email: string = "";
   uploadProgress: number;
@@ -109,6 +111,9 @@ export class LoginService {
     this.token = "";
   }
 
+  public getAccessToken(): string {
+    return this.token_.access_token;
+  }
 
   // This function inserts the new user into the Auth.
   public insertNewUser(user_: User): Observable<Result<{}>> {
@@ -191,6 +196,7 @@ export class LoginService {
 
       ;
   }
+  /*
   public login(username: string, password: string): Observable<Result<Empty>> {
 
     const url = this.url + "/login";
@@ -206,13 +212,9 @@ export class LoginService {
     );
   }
 
+*/
 
-
-  private getParams(): HttpParams {
-    return new HttpParams().set('action', 'email-test')
-
-      ;
-  }
+ 
 
   public login(): void {
     this.keycloakService.isLoggedIn().then((loggedIn) => {
