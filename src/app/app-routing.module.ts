@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { LoginComponent } from './components/pages/login/login.component';
 import { DatainputComponent } from './components/pages/datainput/datainput.component';
 import { ExportComponent } from './components/pages/export/export.component';
 import { DiagramComponent } from './components/pages/diagram/diagram.component';
@@ -17,23 +16,22 @@ import { FilterablemarkersComponent } from './components/pages/filterablemarkers
 import { MarkermanagementComponent } from './components/pages/markermanagement/markermanagement.component';
 import { AuditlogComponent } from './components/pages/auditlog/auditlog.component';
 import { RegistrationComponent } from './components/pages/registration/registration.component';
-import { GroupGuard } from './guards/group.guard';
 import { KutatoOrvos, Orvos, PortalAdmin, PortalVezeto } from './models/group/group';
 import { DefaultformarkersComponent } from './components/pages/defaultformarkers/defaultformarkers.component'; 
 import { PercentoverwriteComponent } from './components/pages/percentoverwrite/percentoverwrite.component';
 import { ProfileComponent } from './components/pages/profile/profile.component';
 import { OverrideuserComponent } from './components/pages/overrideuser/overrideuser.component';
 import { EmailTemplateComponent } from './components/pages/email-template/email-template.component';
+import { AuthGuard } from './guard/auth.guard';
 
 
 const routes: Routes = [
   { path: "", component: HomeComponent },
   { path: "home", component: HomeComponent },
 
-  { path: "login", component: LoginComponent },
-  { path: "datainput", component: DatainputComponent, canActivate: [GroupGuard], data: { groups: [Orvos, PortalAdmin, KutatoOrvos, PortalVezeto] } },
+  { path: "datainput", component: DatainputComponent, canActivate: [AuthGuard] },
 
-  { path: "export", component: ExportComponent },
+  { path: "export", component: ExportComponent, canActivate: [AuthGuard] },
   //canActivate: [GroupGuard], data: { groups: [Orvos, PortalAdmin, KutatoOrvos, PortalVezeto] } },
 
 

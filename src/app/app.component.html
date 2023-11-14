@@ -75,7 +75,9 @@
       </li> 
 
       <li class="nav-item" routerLinkActive="active">
-        <a href="/login" class="nav-link"  routerLink="login">Bejelentkezés</a>
+        <button type="button" class="btn btn-primary" (click)="this.loginService.login()">
+          Bejelentkezés
+        </button>
       </li>  
     
     </ul>
