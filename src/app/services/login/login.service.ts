@@ -23,8 +23,8 @@ export class LoginService {
   token: Token = new Token();
   id: string = "";
   email: string = "";
-  uploadProgress:number;
-    uploadSub: Subscription;
+  uploadProgress: number;
+  uploadSub: Subscription;
 
   constructor(private httpClient: HttpClient, private config: ConfigService, private router: Router) {
     this.url = this.config.config.AuthUrl;
@@ -99,17 +99,17 @@ export class LoginService {
       map(result => fromJSON<UserData[]>(JSON.stringify(result))),
       catchError(error => of(new Err<UserData[]>(error)))
     );
-   
+
   }
- // This function inserts the new user into the Auth.
- public getWaitingUsers(): Observable<Result<UserData[]>> {
-  const url = this.url + "/user/waiting";
-  return this.httpClient.get<Result<UserData[]>>(url, { headers: this.getHeaders() }).pipe(
-    map(result => fromJSON<UserData[]>(JSON.stringify(result))),
-    catchError(error => of(new Err<UserData[]>(error)))
-  );
- 
-}
+  // This function inserts the new user into the Auth.
+  public getWaitingUsers(): Observable<Result<UserData[]>> {
+    const url = this.url + "/user/waiting";
+    return this.httpClient.get<Result<UserData[]>>(url, { headers: this.getHeaders() }).pipe(
+      map(result => fromJSON<UserData[]>(JSON.stringify(result))),
+      catchError(error => of(new Err<UserData[]>(error)))
+    );
+
+  }
   // This function get  new user attributes from  Auth.
   public getUserAttributes(id_: string): Observable<Result<User>> {
     const url = this.url + "/user/attributes/" + id_;
@@ -131,8 +131,8 @@ export class LoginService {
   }
   public acceptUser(userId: string, usergroup: string[]): Observable<Result<{}>> {
     const url = this.url + "/user/approve/" + userId;
-    
-    return this.httpClient.post<Result<{}>>(url,usergroup , { headers: this.getHeaders() }).pipe(
+
+    return this.httpClient.post<Result<{}>>(url, usergroup, { headers: this.getHeaders() }).pipe(
       map(result => fromJSON<{}>(JSON.stringify(result))),
       catchError(error => of(new Err<{}>(error)))
     );
@@ -142,23 +142,21 @@ export class LoginService {
   private getHeaders(): HttpHeaders {
     return new HttpHeaders({
       "Content-Type": "application/json",
-      
-      "Authorization": "Bearer " + this.getAccessToken(),      
+
+      "Authorization": "Bearer " + this.getAccessToken(),
     });
-    
+
   }
   private getHeadersForUpload(): HttpHeaders {
     return new HttpHeaders({
-      "Content-Type": "multipart/form-data",
-      'enctype': 'multipart/form-data',
-      "Authorization": "Bearer " + this.getAccessToken(),      
+      "Authorization": "Bearer " + this.getAccessToken(),
     });
-    
+
   }
   private getParams(): HttpParams {
-    return new HttpParams().set('action','email-test') 
-      
-    ;
+    return new HttpParams().set('action', 'email-test')
+
+      ;
   }
   public login(username: string, password: string): Observable<Result<Empty>> {
 
@@ -194,44 +192,31 @@ export class LoginService {
     setTimeout(() => this.refresh().subscribe(), expire - 10000);
   }
 
-  
- uploadFile(file: File, filename: string):   Observable<Result<{}>> {
+
+  uploadFile(file: File, filename: string): Observable<Result<Empty>> {
     const url = this.url + "/templates/upload";
-    
-    console.log(`hivva uploadfile`, file)
-      let formData = new FormData();
-      formData.append('template', file); 
-      console.log(`headers`, this.getHeadersForUpload());
-      console.log("accesstoken:", this.getAccessToken);
-  
-      const upload$ = this.httpClient.post(url, formData, {
-        reportProgress: true,
-        observe: 'events',
-        headers: this.getHeadersForUpload(),        
-        params: this.getParams(),
-       
+    let formData = new FormData();
+    formData.append('template', file);
+    const upload$ = this.httpClient.post(url, formData, {
+      params: this.getParams(),
+      headers: this.getHeadersForUpload(),
     })
-    .pipe(
+      .pipe(
         finalize(() => this.reset())
-    );
-  
-    this.uploadSub = upload$.subscribe(event => {
-      if (event.type == HttpEventType.UploadProgress) {
-        this.uploadProgress = Math.round(100 * (event.loaded ));
-      }
-    })
-}
+      ).subscribe();
+    return of(new Ok<Empty>(new Empty()));
+  }
 
 
-cancelUpload() {
-this.uploadSub.unsubscribe();
-this.reset();
+  cancelUpload() {
+    this.uploadSub.unsubscribe();
+    this.reset();
+  }
+
+  reset() {
+    this.uploadProgress = 0;
+    this.uploadSub = Subscription.EMPTY;
+  }
 }
 
-reset() {
-this.uploadProgress = 0;
-this.uploadSub = Subscription.EMPTY;
-}
-    }
-   
 
