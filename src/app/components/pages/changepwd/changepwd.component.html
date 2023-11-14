@@ -6,7 +6,7 @@
  
   <div class="form-group">
 
-    <div class="form-group">
+    <div class="form-group"  *ngIf="loginService.hasAnyGroup([orvos])">
       <div>
         <label class="text" for="title">Jelenlegi jelszó:</label>
       </div>
@@ -28,7 +28,8 @@
 
    
     <div class="form-group">
-    <button id="done" (click)="changePassword()">Kész</button>
+      <button id="done"  *ngIf="loginService.hasAnyGroup([portaladmin,portalvezeto,kutatoorvos])" (click)="changePassword(true)" >Kész</button>
+      <button id="done"  *ngIf="loginService.hasAnyGroup([orvos])" (click)="changePassword(false)" >Kész</button>
     </div>
   </div>
   </div>

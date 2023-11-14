@@ -155,7 +155,7 @@ export class LoginService {
 
 
   public changePassword(currentPassword: string, newPassword: string, confirmation: string, byAdmin: boolean): Observable<Result<{}>> {
-    const url = this.url + "/user/changepassword" + this.getUserId();
+    const url = this.url + "/user/changepassword/" + this.getUserId();
     let newP = { currentPassword, newPassword, confirmation, byAdmin }
     return this.httpClient.put<Result<{}>>(url, newP, { headers: this.getHeaders() }).pipe(
       map(result => fromJSON<{}>(JSON.stringify(result))),

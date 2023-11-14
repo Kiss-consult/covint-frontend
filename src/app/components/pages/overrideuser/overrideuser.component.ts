@@ -35,7 +35,15 @@ export class OverrideuserComponent {
   newpassword: string = "";
   confirmation: string = "";
 
-  displayedColumns: string[] = ['Név']; // Itt adhatod meg az oszlopok neveit
+  expandedUser: any | null = null;
+
+  togglePopupContent(userdata: any) {
+    this.expandedUser = this.expandedUser === userdata ? null : userdata;
+    this.getUserAttributes(userdata.id);
+    
+  }
+
+  displayedColumns: string[] = ['Név',"Jelszócsere","Adatmódosítás"]; // Itt adhatod meg az oszlopok neveit
   dataSource: MatTableDataSource<UserData>;
   @ViewChild('paginator') paginator: MatPaginator;
   pageSizeOptions: number[] = [5, 10];
@@ -92,4 +100,19 @@ export class OverrideuserComponent {
   
   }
 
+
+
+ public  changepass(userdata: UserData){
+  this.userdata = userdata;
+  console.log("call button1",this.userdata)
+  this.router.navigate(['/changepwd']);
 }
+
+
+public updateattr(userdata: UserData){
+  this.userdata = userdata;
+  console.log("call button2",this.userdata)
+  return userdata
+}
+}
+
