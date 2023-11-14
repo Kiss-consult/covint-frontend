@@ -5,3 +5,13 @@
     <button style="margin-bottom: 5px;" (click)="dowloadTemplate()">Letoltes</button>
     <p>Html template</p>
   </div>
+
+  <div >
+    <input type="file" accept=".html" class="file-input" (change)="onFileSelected($event)" #fileUpload>
+    <div class="file-upload">
+        <br>
+        <button mat-mini-fab color="primary" class="upload-btn btn btn-primary" (click)="fileUpload.click()"
+            tabindex="39" >Upload file</button>
+            {{fileName || noFileMessage}}
+    </div>
+</div>

@@ -1,8 +1,11 @@
 import { Injectable } from '@angular/core';
-import { Observable, catchError, map, of } from 'rxjs';
+import { Observable, Subscription, catchError, finalize, map, of } from 'rxjs';
 import { Err, Ok, Result, fromJSON } from 'src/app/models/utils/result';
 import { ConfigService } from '../config/config.service';
-import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
+
+import { HttpClient, HttpEventType, HttpHeaders, HttpParams } from '@angular/common/http';
+import { Token } from 'src/app/models/token/token';
+
 import jwt_decode from 'jwt-decode';
 import { AccessToken } from 'src/app/models/token/accesstoken';
 import { Router } from '@angular/router';
@@ -19,7 +22,14 @@ export class LoginService {
     throw new Error('Method not implemented.');
   }
   url: string = "";
-  token: string = "";
+
+  token: Token = new Token();
+  id: string = "";
+  email: string = "";
+  uploadProgress: number;
+  uploadSub: Subscription;
+
+ 
   username: string = "";
   loggedIn: boolean = false;
   userId: string = "";
@@ -159,9 +169,44 @@ export class LoginService {
 
   private getHeaders(): HttpHeaders {
     return new HttpHeaders({
-      "Content-Type": "application/json"
+
+      "Content-Type": "application/json",
+
+      "Authorization": "Bearer " + this.getAccessToken(),
     });
+
   }
+  private getHeadersForUpload(): HttpHeaders {
+    return new HttpHeaders({
+      "Authorization": "Bearer " + this.getAccessToken(),
+
+      
+
+    });
+
+  }
+
+  private getParams(): HttpParams {
+    return new HttpParams().set('action', 'email-test')
+
+      ;
+  }
+  public login(username: string, password: string): Observable<Result<Empty>> {
+
+    const url = this.url + "/login";
+    const body = { Username: username, Password: password };
+    return this.httpClient.post<Token>(url, body).pipe(
+      map(result => {
+        const token = fromJSON<Token>(JSON.stringify(result));
+        this.saveToken(token.unwrap());
+
+        return new Ok<Empty>(new Empty());
+      }),
+      catchError(error => of(new Err<Empty>(error)))
+    );
+  }
+
+
 
   private getParams(): HttpParams {
     return new HttpParams().set('action', 'email-test')
@@ -187,4 +232,32 @@ export class LoginService {
       });
     });
   }
+
+
+  uploadFile(file: File, filename: string): Observable<Result<Empty>> {
+    const url = this.url + "/templates/upload";
+    let formData = new FormData();
+    formData.append('template', file);
+    const upload$ = this.httpClient.post(url, formData, {
+      params: this.getParams(),
+      headers: this.getHeadersForUpload(),
+    })
+      .pipe(
+        finalize(() => this.reset())
+      ).subscribe();
+    return of(new Ok<Empty>(new Empty()));
+  }
+
+
+  cancelUpload() {
+    this.uploadSub.unsubscribe();
+    this.reset();
+  }
+
+  reset() {
+    this.uploadProgress = 0;
+    this.uploadSub = Subscription.EMPTY;
+  }
 }
+
+

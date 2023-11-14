@@ -28,8 +28,8 @@ export class EmailTemplateComponent {
     
   }
 
-
-
+  noFileMessage: string = `:No file uploaded message:No file uploaded yet.`;
+  fileName: string = "";
   public dowloadTemplate() {
 
     const filename = "template.html";
@@ -50,5 +50,27 @@ export class EmailTemplateComponent {
     });
   }
 
+  async onFileSelected(event: any) {
+    const file: File = event.target.files[0];
+    
+    if (file) {
+      if (file.name.endsWith(".html") === false) {
+        alert(`:Wrong file format error message:Wrong file format. Please upload a html file.`)
+        return;
+      }
+      console.log(file.name);
+      this.fileName = file.name;
+      try {
+        let result = await this.loginService.uploadFile(file,  this.fileName);
+        
+        console.log(result)
+      }
+      catch (error) {
+        
+        alert(`:file upload error message:Failed to upload file`)
+      }
+      event.target.value = null;
+    }
+  }
 
 }
