@@ -36,6 +36,7 @@ import { OverrideuserComponent } from './components/pages/overrideuser/overrideu
 import { EmailTemplateComponent } from './components/pages/email-template/email-template.component';
 import { initializeKeycloak } from './init/keycloak-init.factory';
 import { KeycloakAngularModule, KeycloakService } from 'keycloak-angular';
+import { UpdateuserComponent } from './components/pages/updateuser/updateuser.component';
 
 
 @NgModule({
@@ -63,6 +64,7 @@ import { KeycloakAngularModule, KeycloakService } from 'keycloak-angular';
     ProfileComponent,
     OverrideuserComponent,
     EmailTemplateComponent,
+    UpdateuserComponent,
 
   ],
   imports: [

@@ -144,7 +144,7 @@ export class LoginService {
 
   }
   // This function get  new user attributes from  Auth.
-  public getUserAttributes(id_: string): Observable<Result<User>> {
+  public getUserAttributes(id_: string | null): Observable<Result<User>> {
     const url = this.url + "/user/attributes/" + id_;
     console.log("kuldtem:", id_)
     return this.httpClient.get<Result<User>>(url, { headers: this.getHeaders() }).pipe(
@@ -152,7 +152,15 @@ export class LoginService {
       catchError(error => of(new Err<User>(error)))
     );
   }
-
+// This function update user attributes on  Auth.
+public updateUserAttributes(id_: string | null, user: User): Observable<Result<{}>> {
+  const url = this.url + "/user/update/" + id_;
+  console.log("kuldtem:", id_)
+  return this.httpClient.put<Result<{}>>(url, user,  { headers: this.getHeaders() }).pipe(
+    map(result => fromJSON<{}>(JSON.stringify(result))),
+    catchError(error => of(new Err<{}>(error)))
+  );
+}
 
   public changePassword(currentPassword: string, newPassword: string, confirmation: string, byAdmin: boolean): Observable<Result<{}>> {
     const url = this.url + "/user/changepassword/" + this.getUserId();
