@@ -21,6 +21,3 @@ export class ConfigService {
       );
   }
 }
-export function initConfig(config: ConfigService): () => Observable<void> {
-  return () => config.load();
-}

@@ -25,7 +25,7 @@ import { AddnewillnessComponent } from './components/pages/addnewillness/addnewi
 import { OverwritemasteruploadComponent } from './components/pages/overwritemasterupload/overwritemasterupload.component';
 import { FilterablemarkersComponent } from './components/pages/filterablemarkers/filterablemarkers.component';
 import { MarkermanagementComponent } from './components/pages/markermanagement/markermanagement.component';
-import { ConfigService, initConfig } from './services/config/config.service';
+import { ConfigService } from './services/config/config.service';
 import { AuditlogComponent } from './components/pages/auditlog/auditlog.component';
 import { RegistrationComponent } from './components/pages/registration/registration.component';
 import { DiagramTestComponent } from './components/pages/diagram-test/diagram-test.component';
@@ -34,7 +34,7 @@ import { PercentoverwriteComponent } from './components/pages/percentoverwrite/p
 import { ProfileComponent } from './components/pages/profile/profile.component';
 import { OverrideuserComponent } from './components/pages/overrideuser/overrideuser.component';
 import { EmailTemplateComponent } from './components/pages/email-template/email-template.component';
-import { initializeKeycloak } from './init/keycloak-init.factory';
+import { initializeApp, initializeKeycloak } from './init/init';
 import { KeycloakAngularModule, KeycloakService } from 'keycloak-angular';
 import { UpdateuserComponent } from './components/pages/updateuser/updateuser.component';
 
@@ -84,18 +84,24 @@ import { UpdateuserComponent } from './components/pages/updateuser/updateuser.co
   ],
   providers: [
     ConfigService,
+    // {
+    //   provide: APP_INITIALIZER,
+    //   useFactory: initConfig,
+    //   deps: [ConfigService],
+    //   multi: true
+    // },
+    // {
+    //   provide: APP_INITIALIZER,
+    //   useFactory: initializeKeycloak,
+    //   multi: true,
+    //   deps: [KeycloakService, ConfigService],
+    // }
     {
       provide: APP_INITIALIZER,
-      useFactory: initConfig,
-      deps: [ConfigService],
-      multi: true
-    },
-    {
-      provide: APP_INITIALIZER,
-      useFactory: initializeKeycloak,
+      useFactory: initializeApp,
       multi: true,
-      deps: [KeycloakService],
-    }
+      deps: [KeycloakService, ConfigService],
+  }
   ],
   bootstrap: [AppComponent]
 })
