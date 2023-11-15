@@ -1,0 +1,172 @@
+<h1>Felhasználó adatainak módosítása</h1>  
+
+  
+
+<div class="container">  
+  <!--<form (ngSubmit)="onRegister()"> -->
+  <div style="display: flex; justify-content: space-between;">
+  
+    <div class="form-group">
+       
+    </div>
+  
+    <div class="form-group" >
+      
+      <p>Személyes adatok</p>
+
+      <div class="form-group2" style="border-top: solid 4px #848484; margin-top: 0; padding-top: 40px;">
+        <div>
+          <label class="text" for="title">Előtag</label>
+        </div>
+        <div>
+          <input class="droptextbox" type="text" id="title" name="title" [(ngModel)]="user.Title" required placeholder="Dr" title="Kérem töltse ki a mezőt">
+        </div>
+      </div>
+
+      <div class="form-group2">
+        <div>
+          <label class="text" for="firstname">Keresztnév</label>
+        </div>
+        <div>
+          <input class="droptextbox" type="text" id="firstname" name="firstname" [(ngModel)]="user.FirstName" required placeholder="János" title="Kérem töltse ki a mezőt">
+        </div>
+      </div>
+  
+      <div class="form-group2">
+        <div>
+          <label class="text" for="lastname">Vezetéknév</label>
+        </div>
+        <div>
+          <input class="droptextbox" type="text" id="lastname" name="lastname" [(ngModel)]="user.LastName" required placeholder="Covint" title="Kérem töltse ki a mezőt">
+        </div>
+      </div>
+  
+      <div class="form-group2">
+        <div>
+          <label class="text" for="stampnumber">Pecsét száma</label>
+        </div>
+        <div>
+          <input class="droptextbox" type="text" id="stampnumber" name="stampnumber" [(ngModel)]="user.SealNumber" required placeholder="???" title="Kérem töltse ki a mezőt">
+        </div>
+      </div>
+  
+      <div class="form-group2">
+        <div>
+          <label class="text" for="telephone">Telefonszám</label>
+        </div>
+        <div>
+          <input class="droptextbox" type="text" id="telephone" name="telephone" [(ngModel)]="user.Phone" required placeholder="???" title="Kérem töltse ki a mezőt">
+        </div>
+      </div>
+    
+    </div>
+<!--
+    <div>
+
+      <p>Select Your Gender:</p>
+    
+      <form [formGroup]="genderForm">
+        <input type="radio" formControlName="gender" value="Male"> Male<br>
+        <input type="radio" formControlName="gender" value="Female"> Female<br>
+        <input type="radio" formControlName="gender" value="Others"> Others<br><br>
+    
+        <button (click)="getSelectedGender()">Get Selected Gender</button>
+    
+      </form>
+    
+    </div> -->
+    
+    <div class="form-group">
+      
+      <p>Intézmény/Cég címe</p>
+
+      <div class="form-group2" style="display: block; border-top: solid 4px #848484; margin-top: 0; padding-top: 40px;">
+        <div>
+          <input style="margin-bottom: 20px;" type="radio" id="intezmenybutton" name="intezmenyOrCeg" (click)="toggleContent('intezmeny')" title="Kérem válsszon"  >
+          <label  class="text" for="institution">Intézményben dolgozom</label>          
+        </div>
+        <div>          
+          <input style="margin-bottom: 37px;" type="radio" id="cegbutton" name="intezmenyOrCeg" (click)="toggleContent('ceg')"   title="Kérem válasszon" >
+          <label class="text" for="institution">Cégként dolgozom ( Házi Orvos)</label>
+        </div>
+      </div>
+                                                           
+      
+      <div class="form-group2" *ngIf="intezmenyActive">
+        <div>
+          <label class="text" for="institution">Intézmény neve</label>
+        </div>
+        <div>
+          <input class="droptextbox" type="text" id="institution" name="institution" [(ngModel)]="user.InstitutionName" placeholder="???" title="Kérem töltse ki a mezőt">
+        </div>
+      </div>
+  
+      <div class="form-group2" *ngIf="intezmenyActive">
+        <div>
+          <label class="text" for="department">Osztály</label>
+        </div>
+        <div>
+          <input class="droptextbox" type="text" id="department" name="department" [(ngModel)]="user.InstitutionDepartment" placeholder="???" title="Kérem töltse ki a mezőt">
+        </div>
+      </div>      
+      
+      
+
+      <div class="form-group2" *ngIf="cegActive">
+        <div>
+          <label class="text" for="company">Cég neve</label>
+        </div>
+        <div>
+          <input class="droptextbox" type="text" id="company" name="company" [(ngModel)]="user.CompanyName" placeholder="???" title="Kérem töltse ki a mezőt">
+        </div>
+       
+      </div>
+    
+
+      
+      <div class="form-group2">
+       <div>
+          <label class="text" for="site">Város</label>
+         </div>
+        <div>
+          <input class="droptextbox" type="text" id="city" name="city" [(ngModel)]="site.City" required placeholder="Budapest" title="Kérem töltse ki a mezőt">
+        </div>
+      </div>
+      
+      <div class="form-group2">
+        <div>
+          <label class="text" for="postcode">Irányítószám</label>
+        </div>
+        <div>
+          <input class="droptextbox" type="number" id="postcode" name="postcode" [(ngModel)]="site.PostCode" required placeholder="1007" title="Kérem töltse ki a mezőt">
+        </div>
+      </div>  
+  
+      <div class="form-group2">
+        <div>
+          <label class="text" for="street">Utca ( közterület) neve</label>
+        </div>
+        <div>
+          <input class="droptextbox" type="text" id="street" name="street" [(ngModel)]="site.Street" required placeholder="???" title="Kérem töltse ki a mezőt">
+        </div>
+      </div>
+
+      <div class="form-group2">
+        <div>
+          <label class="text" for="housenumber">Házszám</label>
+        </div>
+        <div>
+          <input class="droptextbox" type="number" id="postcode" name="postcode" [(ngModel)]="site.HouseNumber" required placeholder="34" title="Kérem töltse ki a mezőt">
+        </div>
+      </div> 
+
+    </div>
+  </div> 
+
+  <div class="donebutton">
+    <label class="text">Regisztráció befejezése</label>
+    <button id="done" (click)="finish()">Kész</button>
+  </div>     
+    
+</div>
+

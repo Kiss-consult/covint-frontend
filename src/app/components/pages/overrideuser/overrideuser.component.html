@@ -24,10 +24,44 @@
       
       <ng-container matColumnDef="Név">
         <th mat-header-cell *matHeaderCellDef mat-sort-header>Felhasználó neve</th>
-        <td mat-cell *matCellDef="let userdata"> {{ userdata.email }} </td>
+        <td mat-cell *matCellDef="let userdata"> 
+          {{ userdata.email }}
+          <i class="material-icons" (click)="togglePopupContent(userdata)">
+            {{ expandedUser === userdata ? 'keyboard_arrow_right' : 'keyboard_arrow_down' }}
+          </i>
+          <div *ngIf="expandedUser === userdata" class="popup">
+            <!-- Tartalom csak az adott sorra érvényesítve -->
+            <span class="popuptext" id="myPopup1"> Név: {{ this.user.LastName }} {{ this.user.FirstName }}  </span> <br>
+            <span class="popuptext" id="myPopup2"> Pecsétszám: {{ this.user.SealNumber }}  </span>  <br>
+            <span class="popuptext" id="myPopup2"> Intézmény: {{ this.user.InstitutionName }}  {{ this.user.InstitutionDepartment }}</span>  <br>
+            <span class="popuptext" id="myPopup2"> Cég: {{ this.user.CompanyName }} </span>  <br>
+            <span class="popuptext" id="myPopup2"> Telefonszám: {{ this.user.Phone }} </span>  <br>
+          </div>
+        </td>
       </ng-container>
       
-      
+   
+
+    <ng-container matColumnDef="Jelszócsere">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header></th>
+        <td mat-cell *matCellDef="let userdata">
+          <div class="ratestbutton">
+          
+        <button style="margin-bottom: 5px;" (click)="changepass(userdata)">jelszócsere</button>
+       
+      </div>
+        </td>
+      </ng-container>  
+      <ng-container matColumnDef="Adatmódosítás">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header></th>
+        <td mat-cell *matCellDef="let userdata">
+          <div class="ratestbutton">
+          
+        <button style="margin-bottom: 5px;" (click)="updateattr(userdata)">adatmódosítás</button>
+       
+      </div>
+        </td>
+      </ng-container>
    
     
       <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>

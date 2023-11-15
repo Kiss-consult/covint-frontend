@@ -23,6 +23,7 @@ import { ProfileComponent } from './components/pages/profile/profile.component';
 import { OverrideuserComponent } from './components/pages/overrideuser/overrideuser.component';
 import { EmailTemplateComponent } from './components/pages/email-template/email-template.component';
 import { AuthGuard } from './guard/auth.guard';
+import { UpdateuserComponent } from './components/pages/updateuser/updateuser.component';
 
 
 const routes: Routes = [
@@ -58,7 +59,8 @@ const routes: Routes = [
   { path: "defaultformarkers", component: DefaultformarkersComponent },
   { path: "profile", component: ProfileComponent },
   { path: "overrideuser", component: OverrideuserComponent },
-  { path: "email-template", component: EmailTemplateComponent }
+  { path: "email-template", component: EmailTemplateComponent },
+  { path: "updateuser/:userdata.id", component: UpdateuserComponent } // 'product/:id
 ];
 
 @NgModule({

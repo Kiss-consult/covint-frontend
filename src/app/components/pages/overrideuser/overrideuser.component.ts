@@ -2,7 +2,7 @@
 import { Component, ViewChild } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { User } from 'src/app/models/user/user';
 import { UserData } from 'src/app/models/userdata/userdata';
 import { LoginService } from 'src/app/services/login/login.service';
@@ -35,7 +35,15 @@ export class OverrideuserComponent {
   newpassword: string = "";
   confirmation: string = "";
 
-  displayedColumns: string[] = ['Név']; // Itt adhatod meg az oszlopok neveit
+  expandedUser: any | null = null;
+
+  togglePopupContent(userdata: any) {
+    this.expandedUser = this.expandedUser === userdata ? null : userdata;
+    this.getUserAttributes(userdata.id);
+    
+  }
+
+  displayedColumns: string[] = ['Név',"Jelszócsere","Adatmódosítás"]; // Itt adhatod meg az oszlopok neveit
   dataSource: MatTableDataSource<UserData>;
   @ViewChild('paginator') paginator: MatPaginator;
   pageSizeOptions: number[] = [5, 10];
@@ -50,7 +58,7 @@ export class OverrideuserComponent {
     const filterValue = (event.target as HTMLInputElement).value;
     this.dataSource.filter = filterValue.trim().toLowerCase();
   }
-  constructor(public loginService: LoginService, private router: Router) {
+  constructor(public loginService: LoginService, private router: Router,private _Activatedroute:ActivatedRoute) {
 
 
     this.loginService.getAllUsers().subscribe(
@@ -91,5 +99,42 @@ export class OverrideuserComponent {
       });
   
   }
+  public updateUserAttributes(id : string, user: User) {
+    this.loginService.updateUserAttributes(id, user).subscribe(
+      result => {
+        if (result.isErr()) {
+          alert("Sikertelen update user attributes");
+          console.error(result.unwrapErr());
+          return;
+        }
+        
+  
+       // this.dataSource = new MatTableDataSource(this.userdatas);
+        //this.dataSource.paginator = this.paginator;
+        console.log(this.user)
+        //console.log(this.dataSource.data);
+  
+      });
+  
+  }
+  
+
+ public  changepass(userdata: UserData){
+  this.userdata = userdata;
+  console.log("call button1",this.userdata)
+  this.router.navigate(['/changepwd']);
+}
+
+
+public updateattr(userdata: UserData){
+  this.userdata = userdata;
+  console.log("call button2",this.userdata)
+   
+    this.router.navigate(
+        ['/updateuser', userdata.id]
+    ); 
+}
+  
 
 }
+

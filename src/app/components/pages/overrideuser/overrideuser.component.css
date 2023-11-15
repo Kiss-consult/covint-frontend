@@ -1,0 +1,28 @@
+.mat-mdc-form-field {
+    font-size: 14px;
+    width: 100%;
+  }
+  
+  .popup {
+    background-color: #cecece;
+    padding: 10px;
+    z-index: 1;
+  }
+  .popup .popuptext {
+    background-color: #cecece;
+    padding: 2px;
+    z-index: 1;
+  }
+  .material-icons {
+    vertical-align: middle; 
+    margin-right: 5px; 
+    cursor: pointer;
+  }
+  
+  .material-icons.right-arrow {
+    transform: rotate(90deg);
+  }
+  .ratestbutton{    
+    margin-top: 40px;
+    text-align: center;   
+}
