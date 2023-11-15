@@ -1,4 +1,5 @@
 {
     "BackendUrl": "${BACKEND_URL}",
-    "AuthUrl": "${AUTH_URL}"
+    "AuthUrl": "${AUTH_URL}",
+    "KeycloakUrl": "${KEYCLOAK_URL}"
 }
