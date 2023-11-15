@@ -1,17 +1,23 @@
 <h1>Email template</h1>
-
+<div class="container">
 <div class="exportbutton">
     <p>toltse le a tempaltet</p>      
-    <button style="margin-bottom: 5px;" (click)="dowloadTemplate()">Letoltes</button>
+    <button  (click)="dowloadTemplate()">Letoltes</button>
     <p>Html template</p>
-  </div>
+  
 
   <div >
+    <div hidden>
     <input type="file" accept=".html" class="file-input" (change)="onFileSelected($event)" #fileUpload>
+  </div>
     <div class="file-upload">
         <br>
+        <div class="exportbutton">
         <button mat-mini-fab color="primary" class="upload-btn btn btn-primary" (click)="fileUpload.click()"
-            tabindex="39" >Upload file</button>
+            tabindex="39" >File feltöltés</button>
             {{fileName || noFileMessage}}
+          </div>
     </div>
+  </div>
+</div>
 </div>
