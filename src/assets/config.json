@@ -1,4 +1,5 @@
 {
     "BackendUrl": "http://localhost:8090",
-    "AuthUrl": "http://localhost:8092"
+    "AuthUrl": "http://localhost:8092",
+    "KeycloakUrl": "http://localhost:8084"
 }
