@@ -29,13 +29,7 @@ export class EmailTemplateComponent {
   }
 
   noFileMessage: string = `nincs file még feltöltve`;
-  fileName0: string = ""; 
-  fileName1: string = "";
-  fileName2: string = ""; 
-  fileName3: string = "";
-  fileName4: string = ""; 
   fileName: string = "";
-
   submit : boolean = false;
 
   public dowloadTemplate(f:number) {
@@ -95,25 +89,7 @@ export class EmailTemplateComponent {
       }
       console.log(file.name);
       console.log(f);
-
-
-      switch (f) {
-        case 0:
-          this.fileName0 = file.name;
-          break;
-        case 1:
-          this.fileName1 = file.name;
-          break;
-        case 2:
-          this.fileName2 = file.name;
-          break;
-        case 3:
-          this.fileName3= file.name;4
-          break;
-        case 4:
-          this.fileName4 = file.name;
-      }
-      
+      //this.fileName = file.name;
       //if (this.submit = true) 
         try {
           let result =  this.loginService.uploadFile(file,  f);
