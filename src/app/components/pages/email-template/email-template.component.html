@@ -1,23 +1,96 @@
 <h1>Email template</h1>
 <div class="container">
-<div class="exportbutton">
-    <p>toltse le a tempaltet</p>      
-    <button  (click)="dowloadTemplate()">Letoltes</button>
-    <p>Html template</p>
-  
-
-  <div >
+  <div class="exportbutton">
+    <p>toltse le a reset-password tempaltet</p>
+    <button (click)="dowloadTemplate(0)"> reset-password Letoltes</button>
+    <p>Html template reset-password</p>
+    <div>
     <div hidden>
-    <input type="file" accept=".html" class="file-input" (change)="onFileSelected($event)" #fileUpload>
-  </div>
+      <input type="file" accept=".html" class="file-input" (change)="onFileSelected($event,0)" #fileUpload0>
+      <p>feltoltes  template reset-password</p>
+    </div>
+
     <div class="file-upload">
-        <br>
-        <div class="exportbutton">
-        <button mat-mini-fab color="primary" class="upload-btn btn btn-primary" (click)="fileUpload.click()"
-            tabindex="39" >File feltöltés</button>
-            {{fileName || noFileMessage}}
-          </div>
+      <br>
+      <div class="exportbutton">
+
+        <button mat-mini-fab color="primary" class="upload-btn btn btn-primary" (click)="fileUpload0.click()"
+          tabindex="39"> reset pW FELTOLT</button>
+        {{fileName || noFileMessage}}
+      </div>
     </div>
   </div>
-</div>
+  </div>
+  <div class="exportbutton">
+    <p>toltse le user-approved a tempaltet</p>
+    <button (click)="dowloadTemplate(1)"> user-approved Letoltes</button>
+    <p>Html template</p>
+    <div hidden>
+      <input type="file" accept=".html" class="file-input" (change)="onFileSelected($event, 1)" #fileUpload1>
+    </div>
+
+    <div class="file-upload">
+      <br>
+      <div class="exportbutton">
+
+        <button mat-mini-fab color="primary" class="upload-btn btn btn-primary" (click)="fileUpload1.click()"
+          tabindex="39">  USER APPR FELTOLT</button>
+        {{fileName || noFileMessage }}
+      </div>
+    </div>
+  </div>
+
+  <div class="exportbutton">
+    <p>toltse le a user-waiting tempaltet</p>
+    <button (click)="dowloadTemplate(2)">user-waiting Letoltes</button>
+    <p>Html template</p>
+    <div hidden>
+      <input type="file" accept=".html" class="file-input" (change)="onFileSelected($event,2)" #fileUpload2>
+    </div>
+
+    <div class="file-upload">
+      <br>
+      <div class="exportbutton">
+
+        <button mat-mini-fab color="primary" class="upload-btn btn btn-primary" (click)="fileUpload2.click()"
+          tabindex="39"> <mat-icon> attach_file</mat-icon></button>
+        {{fileName || noFileMessage }}
+      </div>
+    </div>
+  </div>
+
+  <div class="exportbutton">
+    <p>toltse le a verify-email tempaltet</p>
+    <button (click)="dowloadTemplate(3)">verify-email Letoltes</button>
+    <p>Html template</p>
+    <div hidden>
+      <input type="file" accept=".html" class="file-input" (change)="onFileSelected($event,3)" #fileUpload3>
+    </div>
+
+    <div class="file-upload">
+      <br>
+      <div class="exportbutton">
+
+        <button mat-mini-fab color="primary" class="upload-btn btn btn-primary" (click)="fileUpload3.click()"
+          tabindex="39"> <mat-icon> attach_file</mat-icon></button>
+        {{fileName || noFileMessage }}
+      </div>
+    </div>
+  </div>
+
+
+
+
+  <div class="progress">
+
+    <mat-progress-bar class="progress-bar" mode="determinate" [value]="loginService.uploadProgress"
+      *ngIf="loginService.uploadProgress">
+
+    </mat-progress-bar>
+
+    <mat-icon class="cancel-upload" (click)="loginService.cancelUpload()"
+      *ngIf="loginService.uploadProgress">delete_forever</mat-icon>
+
+  </div>
+
 </div>

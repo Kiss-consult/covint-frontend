@@ -24,14 +24,14 @@ export class LoginService {
   }
   url: string = "";
 
- token_: Token = new Token();
- token: string = "";
+  token_: Token = new Token();
+  token: string = "";
   id: string = "";
   email: string = "";
   uploadProgress: number;
   uploadSub: Subscription;
 
- 
+
   username: string = "";
   loggedIn: boolean = false;
   userId: string = "";
@@ -67,23 +67,24 @@ export class LoginService {
     });
   }
 
-  public downloadEmailTemplate(): Observable < Result < [any[], string] >> {
-      let options = {
-        headers: this.getHeaders(),
-        params: this.getParams(),
-        responseType: "blob" as "json"
-      };
-      return this.httpClient.get<Blob>(this.url + "/templates/download", options).pipe(
-        map(response => {
-          let dataType = response.type;
-          let binaryData = [];
-          binaryData.push(response);
-          let result: [any[], string] = [binaryData, dataType]
-          return new Ok(result);
-        }),
-        catchError(error => of(new Err<[any[], string]>(error)))
-      );
-    }
+  public downloadEmailTemplate(f: number): Observable<Result<[any[], string]>> {
+    let options = {
+      headers: this.getHeaders(),
+      params: this.getParams(f),
+      responseType: "blob" as "json"
+    };
+    return this.httpClient.get<Blob>(this.url + "/templates/download", options).pipe(
+      map(response => {
+        let dataType = response.type;
+        let binaryData = [];
+        binaryData.push(response);
+        let result: [any[], string] = [binaryData, dataType]
+        console.log(result);
+        return new Ok(result);
+      }),
+      catchError(error => of(new Err<[any[], string]>(error)))
+    );
+  }
 
   public getUsername(): string {
     return this.username;
@@ -152,15 +153,15 @@ export class LoginService {
       catchError(error => of(new Err<User>(error)))
     );
   }
-// This function update user attributes on  Auth.
-public updateUserAttributes(id_: string | null, user: User): Observable<Result<{}>> {
-  const url = this.url + "/user/update/" + id_;
-  console.log("kuldtem:", id_)
-  return this.httpClient.put<Result<{}>>(url, user,  { headers: this.getHeaders() }).pipe(
-    map(result => fromJSON<{}>(JSON.stringify(result))),
-    catchError(error => of(new Err<{}>(error)))
-  );
-}
+  // This function update user attributes on  Auth.
+  public updateUserAttributes(id_: string | null, user: User): Observable<Result<{}>> {
+    const url = this.url + "/user/update/" + id_;
+    console.log("kuldtem:", id_)
+    return this.httpClient.put<Result<{}>>(url, user, { headers: this.getHeaders() }).pipe(
+      map(result => fromJSON<{}>(JSON.stringify(result))),
+      catchError(error => of(new Err<{}>(error)))
+    );
+  }
 
   public changePassword(currentPassword: string, newPassword: string, confirmation: string, byAdmin: boolean): Observable<Result<{}>> {
     const url = this.url + "/user/changepassword/" + this.getUserId();
@@ -193,18 +194,48 @@ public updateUserAttributes(id_: string | null, user: User): Observable<Result<{
     return new HttpHeaders({
       "Authorization": "Bearer " + this.getAccessToken(),
 
-      
+
 
     });
 
   }
 
-  private getParams(): HttpParams {
-    return new HttpParams().set('action', 'email-test')
+  private getParams(f: number): HttpParams {
+
+    let actiontype = "";
+
+    switch (f) {
+      case 0:
+        actiontype = "reset-password"
+        console.log('actiontype', actiontype);
+        break;
+      case 1:
+        actiontype = "user-approved"
+        console.log('actiontype', actiontype);
+        break;
+      case 2:
+        actiontype = "user-waiting"
+        console.log('actiontype', actiontype);
+        break;
+      case 3:
+        actiontype = "verify-email"
+        console.log('actiontype', actiontype);
+        break;
+      case 4:
+        actiontype = "email-test"
+        console.log('actiontype', actiontype);
+    }
+    return new HttpParams().set('action', actiontype)
 
       ;
   }
   /*
+
+  reset-password
+user-approved
+user-waiting
+verify-email
+email-test
   public login(username: string, password: string): Observable<Result<Empty>> {
 
     const url = this.url + "/login";
@@ -222,7 +253,7 @@ public updateUserAttributes(id_: string | null, user: User): Observable<Result<{
 
 */
 
- 
+
 
   public login(): void {
     this.keycloakService.isLoggedIn().then((loggedIn) => {
@@ -244,12 +275,15 @@ public updateUserAttributes(id_: string | null, user: User): Observable<Result<{
   }
 
 
-  uploadFile(file: File, filename: string): Observable<Result<Empty>> {
+  uploadFile(file: File, f : number): Observable<Result<Empty>> {
     const url = this.url + "/templates/upload";
     let formData = new FormData();
+
+
+
     formData.append('template', file);
     const upload$ = this.httpClient.post(url, formData, {
-      params: this.getParams(),
+      params: this.getParams(f),
       headers: this.getHeadersForUpload(),
     })
       .pipe(

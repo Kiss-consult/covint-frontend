@@ -1,4 +1,5 @@
-import { APP_INITIALIZER, NgModule } from '@angular/core';
+import { APP_INITIALIZER, NgModule,CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
+
 import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -11,6 +12,7 @@ import { FormsModule , ReactiveFormsModule } from '@angular/forms';
 import { MatTableModule } from '@angular/material/table';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatSortModule } from '@angular/material/sort';
+import {MatIconModule} from '@angular/material/icon';
 
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -65,6 +67,7 @@ import { UpdateuserComponent } from './components/pages/updateuser/updateuser.co
     OverrideuserComponent,
     EmailTemplateComponent,
     UpdateuserComponent,
+    
 
   ],
   imports: [
@@ -78,10 +81,11 @@ import { UpdateuserComponent } from './components/pages/updateuser/updateuser.co
     MatSortModule, 
     MatFormFieldModule,
     MatInputModule,
-    
+    MatIconModule,
     KeycloakAngularModule,
     BrowserAnimationsModule    
   ],
+  schemas: [ CUSTOM_ELEMENTS_SCHEMA],
   providers: [
     ConfigService,
     // {
