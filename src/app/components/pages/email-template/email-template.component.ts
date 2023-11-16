@@ -1,5 +1,5 @@
 
-import { Component, ViewChild, OnInit, ChangeDetectorRef, AfterContentChecked } from '@angular/core';
+import { Component, ViewChild, OnInit, ChangeDetectorRef, AfterContentChecked ,CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { Case } from 'src/app/models/case/case';
 import { Illness } from 'src/app/models/illness/illness';
 
@@ -28,12 +28,39 @@ export class EmailTemplateComponent {
     
   }
 
-  noFileMessage: string = `:No file uploaded message:No file uploaded yet.`;
+  noFileMessage: string = `nincs file még feltöltve`;
   fileName: string = "";
-  public dowloadTemplate() {
+  submit : boolean = false;
 
-    const filename = "template.html";
-    this.loginService.downloadEmailTemplate().subscribe((result) => {
+  public dowloadTemplate(f:number) {
+   
+   
+   let filename = "template.html";
+    switch (f) {
+      case 0:
+        filename = "reset-password-template.html"      
+        
+        break;
+      case 1:
+        filename = "user-approved-template.html"
+        
+        break;
+      case 2:
+        filename = "user-waiting-template.html"
+        
+        break;
+      case 3:
+        filename = "verify-email-template.html"
+       
+        break;
+      case 4:
+        filename = "email-test-template.html"
+        
+        
+       
+    }
+    
+    this.loginService.downloadEmailTemplate(f).subscribe((result) => {
       if (result.isErr()) {
         console.error(result.unwrapErr());
         return;
@@ -50,8 +77,10 @@ export class EmailTemplateComponent {
     });
   }
 
-  async onFileSelected(event: any) {
+  async onFileSelected(event: any, f:number) {
     const file: File = event.target.files[0];
+    let F = f;
+    console.log("F:",F);
     
     if (file) {
       if (file.name.endsWith(".html") === false) {
@@ -59,18 +88,31 @@ export class EmailTemplateComponent {
         return;
       }
       console.log(file.name);
-      this.fileName = file.name;
-      try {
-        let result = await this.loginService.uploadFile(file,  this.fileName);
+      console.log(f);
+      //this.fileName = file.name;
+      //if (this.submit = true) 
+        try {
+          let result =  this.loginService.uploadFile(file,  f);
         
-        console.log(result)
-      }
-      catch (error) {
+         console.log(result)
         
-        alert(`:file upload error message:Failed to upload file`)
-      }
+        
+         
+        }
+        catch (error) {
+        
+          alert(`File feltölts sikertelen`)
+        }
       event.target.value = null;
     }
+    
   }
 
+  public setSubmit() {
+    this.submit= true;
+  }
 }
+
+
+
+

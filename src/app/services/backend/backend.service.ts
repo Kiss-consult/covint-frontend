@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Observable, catchError, map, of } from 'rxjs';
 import { Case } from 'src/app/models/case/case';
 import { Err, Ok, Result, fromJSON } from 'src/app/models/utils/result';
@@ -12,6 +12,7 @@ import { LoginService } from '../login/login.service';
 import { SavedFilter } from 'src/app/models/savedfilter/savedfilter';
 import { Override } from 'src/app/models/override/override';
 import { Default } from 'src/app/models/default/default';
+import { Auditlog } from 'src/app/models/auditlog/auditlog';
 
 
 @Injectable({
@@ -32,6 +33,25 @@ export class BackendService {
     return this.httpClient.get(this.url + "/", { responseType: "text" });
   }
 
+
+  private getParams(): HttpParams {
+    return new HttpParams().set('pagenumber', '0',).set('size', "5");  
+    
+      ;
+  }
+  // This function inserts the new user into the Auth.
+  public getAuditlogs(): Observable<Result<Auditlog[]>> {
+    let options = {
+      headers: this.getHeaders(),
+      params: this.getParams()     
+    };
+    const url = this.url + "/auditlog";
+    return this.httpClient.get<Result<Auditlog[]>>(url, options).pipe(
+      map(result => fromJSON<Auditlog[]>(JSON.stringify(result))),
+      catchError(error => of(new Err<Auditlog[]>(error)))
+    );
+
+  }
   public downloadExport(filter: Filter): Observable<Result<[any[], string]>> {
     let options = {
       headers: this.getHeaders(),
