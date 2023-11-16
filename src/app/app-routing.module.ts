@@ -1,4 +1,5 @@
 import { NgModule } from '@angular/core';
+import {CustomFormCreatorComponent } from './components/pages/custom-form-creator/custom-form-creator.component';
 import { RouterModule, Routes } from '@angular/router';
 import { DatainputComponent } from './components/pages/datainput/datainput.component';
 import { ExportComponent } from './components/pages/export/export.component';
@@ -27,6 +28,7 @@ import { UpdateuserComponent } from './components/pages/updateuser/updateuser.co
 
 
 const routes: Routes = [
+  { path: 'form', component: CustomFormCreatorComponent },
   { path: "", component: HomeComponent },
   { path: "home", component: HomeComponent },
 

@@ -1,0 +1,33 @@
+<div class="custom-form-creator">
+    <div class="question-selection">
+        <button (click)="addQuestion('text')">Add Age Question</button>
+        <button (click)="addQuestion('yesNoCovid')">Add Covid Affected Question</button>
+        <button (click)="addQuestion('yesNoHospitalized')">Add Hospitalized Question</button>
+        <button (click)="addQuestion('dropdownIllness')">Add Illness Question</button>
+    </div>
+    <div class="form-preview">
+        <form *ngIf="selectedQuestions.length > 0">
+            <ng-container *ngFor="let question of selectedQuestions">
+                <div *ngIf="question.type === 'text'">
+                    <label>{{ question.label }}</label>
+                    <input type="text" [name]="question.id">
+                </div>
+                <div *ngIf="question.type === 'yesno'">
+                    <label>{{ question.label }}</label>
+                    <div>
+                        <input type="radio" [name]="question.id" value="Yes"> Yes
+                        <input type="radio" [name]="question.id" value="No"> No
+                    </div>
+                </div>
+                <div *ngIf="question.type === 'dropdown'">
+                    <label>{{ question.label }}</label>
+                    <select [name]="question.id">
+                        <option *ngFor="let option of getDropdownOptions(question)" [value]="option">{{ option }}</option>
+                    </select>
+                </div>
+                
+                                          
+            </ng-container>
+        </form>
+    </div>
+</div>
