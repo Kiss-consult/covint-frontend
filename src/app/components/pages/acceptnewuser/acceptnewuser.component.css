@@ -1,3 +1,15 @@
+.container{
+  padding: 15px;
+  padding-top: 0;
+}
+
+.acceptuser{
+  background: rgb(224,224,224);
+  background: linear-gradient(180deg, rgba(224,224,224,1) 80%, rgb(255, 255, 255) 100%);
+  padding: 20px;
+  padding-bottom: 70px;
+}
+
 .mat-mdc-form-field {
   font-size: 14px;
   width: 100%;

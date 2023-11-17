@@ -1,8 +1,13 @@
 <h1>Email template</h1>
+
 <div class="container">
+
   <div class="exportbutton">
+    <div class="tab-button">
+      Password template
+    </div>
     <p>toltse le a reset-password tempaltet</p>
-    <button (click)="dowloadTemplate(0)"> reset-password Letoltes</button>
+    <button  (click)="dowloadTemplate(0)"> reset-password Letoltes</button>
     <p>Html template reset-password</p>
     <div>
     <div hidden>
@@ -12,16 +17,20 @@
 
     <div class="file-upload">
       <br>
-      <div class="exportbutton">
+      <div class="exportbutton2">
 
-        <button mat-mini-fab color="primary" class="upload-btn btn btn-primary" (click)="fileUpload0.click()"
-          tabindex="39"> reset pW FELTOLT</button>
-        {{fileName || noFileMessage}}
+        <button mat-mini-fab color="primary"  (click)="fileUpload0.click()"
+          tabindex="39"> reset pW FELTOLT</button>          
+          <div class="nofile">{{fileName || noFileMessage}}</div>
       </div>
     </div>
   </div>
   </div>
   <div class="exportbutton">
+
+    <div class="tab-button">
+      User approved tamplate
+    </div>
     <p>toltse le user-approved a tempaltet</p>
     <button (click)="dowloadTemplate(1)"> user-approved Letoltes</button>
     <p>Html template</p>
@@ -31,16 +40,20 @@
 
     <div class="file-upload">
       <br>
-      <div class="exportbutton">
+      <div class="exportbutton2">
 
-        <button mat-mini-fab color="primary" class="upload-btn btn btn-primary" (click)="fileUpload1.click()"
+        <button mat-mini-fab color="primary"  (click)="fileUpload1.click()"
           tabindex="39">  USER APPR FELTOLT</button>
-        {{fileName || noFileMessage }}
+        <div class="nofile">{{fileName || noFileMessage}}</div>
       </div>
     </div>
   </div>
 
   <div class="exportbutton">
+
+    <div class="tab-button">
+      User waiting template
+    </div>
     <p>toltse le a user-waiting tempaltet</p>
     <button (click)="dowloadTemplate(2)">user-waiting Letoltes</button>
     <p>Html template</p>
@@ -50,16 +63,20 @@
 
     <div class="file-upload">
       <br>
-      <div class="exportbutton">
+      <div class="exportbutton2">
 
-        <button mat-mini-fab color="primary" class="upload-btn btn btn-primary" (click)="fileUpload2.click()"
+        <button mat-mini-fab color="primary"  (click)="fileUpload2.click()"
           tabindex="39"> <mat-icon> attach_file</mat-icon></button>
-        {{fileName || noFileMessage }}
+          <div class="nofile">{{fileName || noFileMessage}}</div>
       </div>
     </div>
   </div>
 
   <div class="exportbutton">
+
+    <div class="tab-button">
+      Verify email template
+    </div>
     <p>toltse le a verify-email tempaltet</p>
     <button (click)="dowloadTemplate(3)">verify-email Letoltes</button>
     <p>Html template</p>
@@ -69,19 +86,19 @@
 
     <div class="file-upload">
       <br>
-      <div class="exportbutton">
+      <div class="exportbutton2">
 
-        <button mat-mini-fab color="primary" class="upload-btn btn btn-primary" (click)="fileUpload3.click()"
+        <button mat-mini-fab color="primary"  (click)="fileUpload3.click()"
           tabindex="39"> <mat-icon> attach_file</mat-icon></button>
-        {{fileName || noFileMessage }}
+          <div class="nofile">{{fileName || noFileMessage}}</div>
       </div>
     </div>
   </div>
+</div>
 
 
 
-
-  <div class="progress">
+  <div class="progress" >
 
     <mat-progress-bar class="progress-bar" mode="determinate" [value]="loginService.uploadProgress"
       *ngIf="loginService.uploadProgress">
@@ -93,4 +110,3 @@
 
   </div>
 
-</div>
