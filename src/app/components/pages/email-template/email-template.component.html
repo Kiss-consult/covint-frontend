@@ -7,24 +7,37 @@
       Password template
     </div>
     <p>toltse le a reset-password tempaltet</p>
-    <button  (click)="dowloadTemplate(0)"> reset-password Letoltes</button>
+    <button (click)="dowloadTemplate(0)"> reset-password Letoltes</button>
     <p>Html template reset-password</p>
     <div>
-    <div hidden>
-      <input type="file" accept=".html" class="file-input" (change)="onFileSelected($event,0)" #fileUpload0>
-      <p>feltoltes  template reset-password</p>
-    </div>
+      <div hidden>
+        <input type="file" accept=".html" class="file-input" (change)="onFileSelected($event,0)" #fileUpload0>
+        <p>feltoltes template reset-password</p>
+      </div>
 
-    <div class="file-upload">
-      <br>
-      <div class="exportbutton2">
+      <div class="file-upload">
+        <br>
+        <div class="exportbutton2">
 
-        <button mat-mini-fab color="primary"  (click)="fileUpload0.click()"
-          tabindex="39"> reset pW FELTOLT</button>          
-          <div class="nofile">{{fileName || noFileMessage}}</div>
+          <button mat-mini-fab color="primary" (click)="fileUpload0.click()" tabindex="39"> reset pW FELTOLT <mat-icon>
+              attach_file</mat-icon></button>
+        </div>
+        <div class="nofile">{{uploadedMessage0|| noFileMessage}}</div>
+      </div>
+
+
+      <div class="progress">
+
+        <mat-progress-bar class="progress-bar" mode="determinate" [value]="loginService.uploadProgress"
+          *ngIf="loginService.uploadProgress">
+
+        </mat-progress-bar>
+
+        <mat-icon class="cancel-upload" (click)="loginService.cancelUpload()"
+          *ngIf="loginService.uploadProgress">delete_forever</mat-icon>
+
       </div>
     </div>
-  </div>
   </div>
   <div class="exportbutton">
 
@@ -42,9 +55,21 @@
       <br>
       <div class="exportbutton2">
 
-        <button mat-mini-fab color="primary"  (click)="fileUpload1.click()"
-          tabindex="39">  USER APPR FELTOLT</button>
-        <div class="nofile">{{fileName || noFileMessage}}</div>
+        <button mat-mini-fab color="primary" (click)="fileUpload1.click()" tabindex="39"> USER APPR FELTOLT <mat-icon>
+            attach_file</mat-icon></button>
+        <div class="nofile">{{uploadedMessage1|| noFileMessage}}</div>
+      </div>
+
+      <div class="progress">
+
+        <mat-progress-bar class="progress-bar" mode="determinate" [value]="loginService.uploadProgress"
+          *ngIf="loginService.uploadProgress">
+
+        </mat-progress-bar>
+
+        <mat-icon class="cancel-upload" (click)="loginService.cancelUpload()"
+          *ngIf="loginService.uploadProgress">delete_forever</mat-icon>
+
       </div>
     </div>
   </div>
@@ -65,9 +90,21 @@
       <br>
       <div class="exportbutton2">
 
-        <button mat-mini-fab color="primary"  (click)="fileUpload2.click()"
-          tabindex="39"> <mat-icon> attach_file</mat-icon></button>
-          <div class="nofile">{{fileName || noFileMessage}}</div>
+        <button mat-mini-fab color="primary" (click)="fileUpload2.click()" tabindex="39"> USER wait FELTOLT <mat-icon>
+            attach_file</mat-icon></button>
+        <div class="nofile">{{uploadedMessage2|| noFileMessage}}</div>
+      </div>
+
+      <div class="progress">
+
+        <mat-progress-bar class="progress-bar" mode="determinate" [value]="loginService.uploadProgress"
+          *ngIf="loginService.uploadProgress">
+
+        </mat-progress-bar>
+
+        <mat-icon class="cancel-upload" (click)="loginService.cancelUpload()"
+          *ngIf="loginService.uploadProgress">delete_forever</mat-icon>
+
       </div>
     </div>
   </div>
@@ -88,9 +125,21 @@
       <br>
       <div class="exportbutton2">
 
-        <button mat-mini-fab color="primary"  (click)="fileUpload3.click()"
-          tabindex="39"> <mat-icon> attach_file</mat-icon></button>
-          <div class="nofile">{{fileName || noFileMessage}}</div>
+        <button mat-mini-fab color="primary" (click)="fileUpload3.click()" tabindex="39"> Verify email<mat-icon>
+            attach_file</mat-icon></button>
+        <div class="nofile">{{uploadedMessage3|| noFileMessage}}</div>
+      </div>
+
+      <div class="progress">
+
+        <mat-progress-bar class="progress-bar" mode="determinate" [value]="loginService.uploadProgress"
+          *ngIf="loginService.uploadProgress">
+
+        </mat-progress-bar>
+
+        <mat-icon class="cancel-upload" (click)="loginService.cancelUpload()"
+          *ngIf="loginService.uploadProgress">delete_forever</mat-icon>
+
       </div>
     </div>
   </div>
@@ -98,15 +147,14 @@
 
 
 
-  <div class="progress" >
+<div class="progress">
 
-    <mat-progress-bar class="progress-bar" mode="determinate" [value]="loginService.uploadProgress"
-      *ngIf="loginService.uploadProgress">
+  <mat-progress-bar class="progress-bar" mode="determinate" [value]="loginService.uploadProgress"
+    *ngIf="loginService.uploadProgress">
 
-    </mat-progress-bar>
+  </mat-progress-bar>
 
-    <mat-icon class="cancel-upload" (click)="loginService.cancelUpload()"
-      *ngIf="loginService.uploadProgress">delete_forever</mat-icon>
+  <mat-icon class="cancel-upload" (click)="loginService.cancelUpload()"
+    *ngIf="loginService.uploadProgress">delete_forever</mat-icon>
 
-  </div>
-
+</div>
