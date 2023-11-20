@@ -24,7 +24,6 @@ export class LoginService {
   }
   url: string = "";
 
-  token_: Token = new Token();
   token: string = "";
   id: string = "";
   email: string = "";
@@ -42,16 +41,8 @@ export class LoginService {
     this.url = this.config.config.AuthUrl;
     try {
       this.keycloakService.isLoggedIn().then((loggedIn) => {
-        console.log("loggedIn", loggedIn)
         if (loggedIn) {
-          this.keycloakService.loadUserProfile().then((profile) => {
-            this.loggedIn = true;
-            this.username = profile.username as string;
-            this.keycloakService.getToken().then((token) => {
-              this.token = token;
-            });
-            this.userId = profile.id as string;
-          });
+          this.getUserData();
         }
       });
     }
@@ -62,6 +53,9 @@ export class LoginService {
       next: (e) => {
         if (e.type == KeycloakEventType.OnTokenExpired) {
           keycloakService.updateToken(20).then((refreshed) => { });
+        }
+        if (e.type == KeycloakEventType.OnAuthSuccess) {
+          this.getUserData();
         }
       }
     });
@@ -112,9 +106,10 @@ export class LoginService {
     this.token = "";
   }
 
-  public getAccessToken(): string {
-    return this.token_.access_token;
-  }
+  // public getAccessToken(): string {
+  //   console.log("getAccessToken", this.token_.access_token);
+  //   return this.token_.access_token;
+  // }
 
   // This function inserts the new user into the Auth.
   public insertNewUser(user_: User): Observable<Result<{}>> {
@@ -186,13 +181,13 @@ export class LoginService {
 
       "Content-Type": "application/json",
 
-      "Authorization": "Bearer " + this.getAccessToken(),
+      // "Authorization": "Bearer " + this.getAccessToken(),
     });
 
   }
   private getHeadersForUpload(): HttpHeaders {
     return new HttpHeaders({
-      "Authorization": "Bearer " + this.getAccessToken(),
+      // "Authorization": "Bearer " + this.getAccessToken(),
 
 
 
@@ -229,53 +224,34 @@ export class LoginService {
 
       ;
   }
-  /*
 
-  reset-password
-user-approved
-user-waiting
-verify-email
-email-test
-  public login(username: string, password: string): Observable<Result<Empty>> {
-
-    const url = this.url + "/login";
-    const body = { Username: username, Password: password };
-    return this.httpClient.post<Token>(url, body).pipe(
-      map(result => {
-        const token = fromJSON<Token>(JSON.stringify(result));
-        this.saveToken(token.unwrap());
-
-        return new Ok<Empty>(new Empty());
-      }),
-      catchError(error => of(new Err<Empty>(error)))
-    );
+  private getUserData() {
+    this.loggedIn = true;
+    this.keycloakService.getToken().then((token) => {
+      this.token = token;
+    });
+    this.keycloakService.loadUserProfile().then((profile) => {
+      this.username = profile.username as string;
+      this.userId = profile.id as string;
+    });
   }
-
-*/
-
-
 
   public login(): void {
     this.keycloakService.isLoggedIn().then((loggedIn) => {
+      console.log("loggedIn from login", loggedIn)
       this.loggedIn = loggedIn;
       if (this.loggedIn === false) {
         this.keycloakService.login().then(() => {
           this.loggedIn = true;
-          this.keycloakService.loadUserProfile().then((profile) => {
-            this.username = profile.username as string;
-            this.userId = profile.id as string;
-          });
+          this.getUserData();
         });
       }
-      this.keycloakService.loadUserProfile().then((profile) => {
-        this.username = profile.username as string;
-        this.userId = profile.id as string;
-      });
+      this.getUserData();
     });
   }
 
 
-  uploadFile(file: File, f : number): Observable<Result<Empty>> {
+  uploadFile(file: File, f: number): Observable<Result<Empty>> {
     const url = this.url + "/templates/upload";
     let formData = new FormData();
 
