@@ -29,7 +29,20 @@ export class EmailTemplateComponent {
   }
 
   noFileMessage: string = `nincs file még feltöltve`;
+  uploadedMessage0 : string = "";
+  uploadedMessage1 : string = "";
+  uploadedMessage2 : string = "";
+  uploadedMessage3 : string = "";
+  uploadedMessage4 : string = "";
+
+
+  fileName0: string = "";
+  fileName1: string = "";
+  fileName2: string = ""; 
+  fileName3: string = "";
+  fileName4: string = ""; 
   fileName: string = "";
+  
   submit : boolean = false;
 
   public dowloadTemplate(f:number) {
@@ -89,11 +102,30 @@ export class EmailTemplateComponent {
       }
       console.log(file.name);
       console.log(f);
-      //this.fileName = file.name;
-      //if (this.submit = true) 
+      switch (f) {
+        case 0:
+          this.fileName0 = file.name;
+          this.uploadedMessage0 = this.fileName0 + "   "+  "feltöltve";
+          break;
+        case 1:
+          this.fileName1 = file.name;
+          this.uploadedMessage1 = this.fileName1 + "   "+  "feltöltve";
+          break;
+        case 2:
+          this.fileName2 = file.name;
+          this.uploadedMessage2 = this.fileName2 + "   "+  "feltöltve";
+          break;
+        case 3:
+          this.fileName3= file.name;
+          this.uploadedMessage3 = this.fileName3 + "   "+  "feltöltve";
+          break;
+        case 4:
+          this.fileName4 = file.name;
+          this.uploadedMessage4= this.fileName4 + "   "+  "feltöltve";
+      }
         try {
           let result =  this.loginService.uploadFile(file,  f);
-        
+         
          console.log(result)
         
         
@@ -104,6 +136,7 @@ export class EmailTemplateComponent {
           alert(`File feltölts sikertelen`)
         }
       event.target.value = null;
+
     }
     
   }
