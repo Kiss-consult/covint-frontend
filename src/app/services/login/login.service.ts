@@ -4,7 +4,6 @@ import { Err, Ok, Result, fromJSON } from 'src/app/models/utils/result';
 import { ConfigService } from '../config/config.service';
 
 import { HttpClient, HttpEventType, HttpHeaders, HttpParams } from '@angular/common/http';
-import { Token } from 'src/app/models/token/token';
 
 import jwt_decode from 'jwt-decode';
 import { AccessToken } from 'src/app/models/token/accesstoken';
@@ -178,19 +177,7 @@ export class LoginService {
 
   private getHeaders(): HttpHeaders {
     return new HttpHeaders({
-
       "Content-Type": "application/json",
-
-      // "Authorization": "Bearer " + this.getAccessToken(),
-    });
-
-  }
-  private getHeadersForUpload(): HttpHeaders {
-    return new HttpHeaders({
-      // "Authorization": "Bearer " + this.getAccessToken(),
-
-
-
     });
 
   }
@@ -260,7 +247,7 @@ export class LoginService {
     formData.append('template', file);
     const upload$ = this.httpClient.post(url, formData, {
       params: this.getParams(f),
-      headers: this.getHeadersForUpload(),
+      headers: new HttpHeaders(),
     })
       .pipe(
         finalize(() => this.reset())
