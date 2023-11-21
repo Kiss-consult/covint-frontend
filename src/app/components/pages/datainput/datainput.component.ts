@@ -52,6 +52,12 @@ export class DatainputComponent {
     }
     //const newMarker = new Marker(this.newBno, this.illnessesByBno.get(this.newBno)?.Names);
 
+    if (this.marker === "Egészséges" && this.case.Illnesses.length != 0) {
+      alert("Már van betegség hozzáadva, így nem lehet Egészséges!");
+      return;
+    }  
+
+
     if (this.case.Illnesses.filter((valami) => valami === this.marker).length > 0) {
       console.log("Marker already exists")
       alert("Ez a marker már hozzá lett adva!")

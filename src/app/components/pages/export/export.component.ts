@@ -273,6 +273,25 @@ ngAfterContentChecked(): void {
 
 
   public getMarker() {
+
+    if (this.filter.Illnesses.filter((valami) => valami === this.marker).length > 0) {
+      console.log("Marker already exists")
+      alert("Ez a marker már hozzá lett adva!")
+      //this.removeMarker(this.marker);
+      return;
+    }
+    if (this.marker === "Egészséges" && this.filter.Illnesses.length != 0) {
+      alert("Már van betegség hozzáadva, így nem lehet Egészséges!");
+      return;
+    }  
+
+
+    if (this.filter.Illnesses.filter((valami) => valami === "Egészséges").length > 0) {
+      console.log("Marker already exists")
+      alert("Egészséges jelentése: csak covidos volt, nincs más betegsége!")
+      //this.removeMarker(this.marker);
+      return;
+    }
   //const newMarker = new Marker(this.newBno, this.illnessesByBno.get(this.newBno)?.Names);
   this.filter.Illnesses.push(this.marker);
 }
