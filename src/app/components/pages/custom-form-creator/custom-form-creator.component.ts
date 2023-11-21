@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { QuestionBase, TextQuestion, YesNoQuestion, DropdownQuestion } from './form-questions.model';
+import { QuestionBase, TextQuestion, YesNoQuestion, MultiSelectQuestion } from './form-questions.model';
 import { CommonModule } from '@angular/common';
 import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
 
@@ -26,9 +26,11 @@ export class CustomFormCreatorComponent {
           case 'yesNoHospitalized':
               this.selectedQuestions.push(new YesNoQuestion('Az elmúlt egy évben került korházba COVID miatt?'));
               break;
-          case 'dropdownIllness':
-              this.selectedQuestions.push(new DropdownQuestion('Milyen ismert betegségei vannak?', ['Asztma', 'Alkoholizmus', 'Elhízás']));
+          case 'multiselect':
+              const newMultiSelectQuestion = new MultiSelectQuestion('Az alábbi lehetőségek közül kérjük válassza ki milyen betegségekkel rendelkezik', ['Elhízás', 'Asztma','Szívbetegség'], true);
+              this.selectedQuestions.push(newMultiSelectQuestion);
               break;
+
       }
   }
 
@@ -44,21 +46,22 @@ renderForm() {
       if (question.type === 'text') {
           formHtml += `<input type="text" id="${question.id}" name="${question.id}"><br>`;
       } else if (question.type === 'yesno') {
-          // Cast to YesNoQuestion to access options
           const yesNoQuestion = question as YesNoQuestion;
           yesNoQuestion.options.forEach(option => {
               formHtml += `<input type="radio" id="${question.id}-${option}" name="${question.id}" value="${option}"><label for="${question.id}-${option}">${option}</label>`;
           });
           formHtml += `<br>`;
-      } else if (question.type === 'dropdown') {
-          // Cast to DropdownQuestion to access options
-          const dropdownQuestion = question as DropdownQuestion;
-          formHtml += `<select id="${question.id}" name="${question.id}">`;
-          dropdownQuestion.options.forEach(option => {
-              formHtml += `<option value="${option}">${option}</option>`;
-          });
-          formHtml += `</select><br>`;
-      }
+      } else if (question.type === 'multiselect') {
+        this.generatedFormHtml += `<label>${question.label}</label>`;
+        this.generatedFormHtml += `<select name="${question.id}" multiple>`;
+        const MultiSelectQuestion = question as MultiSelectQuestion;
+        MultiSelectQuestion.options.forEach(option => {
+            this.generatedFormHtml += `<option value="${option}">${option}</option>`;
+        });
+
+        this.generatedFormHtml += `</select>`;
+    }
+
   });
 
   formHtml += '<input type="submit" value="Submit">';
@@ -70,20 +73,46 @@ renderForm() {
 
 
 //Drag and drop cuccok későbbre:
-  isDropdownQuestion(question: QuestionBase): question is DropdownQuestion {
-    return question.type === 'dropdown';
-  }
+isMultiSelectQuestion(question: QuestionBase): question is MultiSelectQuestion {
+  return question.type === 'multiselect';
+}
 
-  getDropdownOptions(question: QuestionBase): string[] {
-    if (this.isDropdownQuestion(question)) {
+getOptions(question: QuestionBase): string[] {
+  if (this.isMultiSelectQuestion(question)) {
       return question.options;
-    }
-    return [];
   }
+  return [];
+}
 
-  drop(event: CdkDragDrop<QuestionBase[]>) {
-    moveItemInArray(this.selectedQuestions, event.previousIndex, event.currentIndex);
+getSelectedOptions(question: QuestionBase): string[] {
+  if (this.isMultiSelectQuestion(question)) {
+      return question.selectedOptions;
   }
+  return [];
+}
+toggleSelection(question: MultiSelectQuestion, option: string) {
+  if (!question.selectedOptions) {
+      question.selectedOptions = [];
+  }
+  const index = question.selectedOptions.indexOf(option);
+  if (index > -1) {
+      question.selectedOptions.splice(index, 1);
+  } else {
+      question.selectedOptions.push(option);
+  }
+}
+
+removeSelection(question: MultiSelectQuestion, option: string) {
+  const index = question.selectedOptions.indexOf(option);
+  if (index > -1) {
+      question.selectedOptions.splice(index, 1);
+  }
+}
+
+drop(event: CdkDragDrop<QuestionBase[]>) {
+  moveItemInArray(this.selectedQuestions, event.previousIndex, event.currentIndex);
+}
+
 
 
 }

@@ -3,7 +3,7 @@
         <button (click)="addQuestion('text')">Add Age Question</button>
         <button (click)="addQuestion('yesNoCovid')">Add Covid Affected Question</button>
         <button (click)="addQuestion('yesNoHospitalized')">Add Hospitalized Question</button>
-        <button (click)="addQuestion('dropdownIllness')">Add Illness Question</button>
+        <button (click)="addQuestion('multiselect')">Add Illness Question</button>
     </div>
     <div class="form-preview">
         <div *ngFor="let question of selectedQuestions; let i = index" class="preview-item">
@@ -20,12 +20,20 @@
                             <input type="radio" [name]="question.id" value="No"> No
                         </div>
                     </ng-container>
-                    <ng-container *ngIf="question.type === 'dropdown'">
+                    <ng-container *ngIf="isMultiSelectQuestion(question)">
                         <label>{{ question.label }}</label>
-                        <select [name]="question.id">
-                            <option *ngFor="let option of getDropdownOptions(question)" [value]="option">{{ option }}</option>
-                        </select>
+                        <div *ngFor="let option of getOptions(question)">
+                            <input type="checkbox" [id]="option" (change)="toggleSelection(question, option)">
+                            <label [for]="option">{{ option }}</label>
+                        </div>
+                        <div class="selected-options">
+                            <div *ngFor="let selectedOption of getSelectedOptions(question)">
+                                {{ selectedOption }}
+                                <button (click)="removeSelection(question, selectedOption)">X</button>
+                            </div>
+                        </div>
                     </ng-container>
+                    
                     <br>
                     <button (click)="deleteQuestion(i)" class="delete-button">Delete</button>
                 </div>

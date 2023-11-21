@@ -1,7 +1,7 @@
 export interface QuestionBase {
     id: string; 
     label: string; 
-    type: 'text' | 'yesno' | 'dropdown'; 
+    type: 'text' | 'yesno' | 'multiselect'; 
 }
 export class TextQuestion implements QuestionBase {
     id: string;
@@ -34,19 +34,22 @@ export class YesNoQuestion implements QuestionBase {
     }
 }
 
-export class DropdownQuestion implements QuestionBase {
+export class MultiSelectQuestion implements QuestionBase {
     id: string;
     label: string;
-    type: 'dropdown' = 'dropdown';
+    type: 'multiselect' = 'multiselect';
     options: string[];
+    multiple: boolean = true;
+    selectedOptions: string[] = []; // Hozzáadott tulajdonság
 
-    constructor(label: string, options: string[]) {
+    constructor(label: string, options: string[], multiple: boolean = true) {
         this.id = this.generateId();
         this.label = label;
         this.options = options;
+        this.multiple = multiple;
     }
 
     private generateId(): string {
-        return 'dropdown-' + Math.random().toString(36).substr(2, 9);
+        return 'multiselect-' + Math.random().toString(36).substr(2, 9);
     }
 }
