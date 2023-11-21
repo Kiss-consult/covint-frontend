@@ -54,7 +54,15 @@ export class DatainputComponent {
 
     if (this.case.Illnesses.filter((valami) => valami === this.marker).length > 0) {
       console.log("Marker already exists")
-      this.removeMarker(this.marker);
+      alert("Ez a marker már hozzá lett adva!")
+      //this.removeMarker(this.marker);
+      return;
+    }
+
+    if (this.case.Illnesses.filter((valami) => valami === "Egészséges").length > 0) {
+      console.log("Marker already exists")
+      alert("Egészséges jelentése: csak covidos volt, nincs más betegsége!")
+      //this.removeMarker(this.marker);
       return;
     }
     this.case.Illnesses.push(this.marker);
