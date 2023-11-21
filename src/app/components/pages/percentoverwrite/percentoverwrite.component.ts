@@ -61,6 +61,25 @@ export class PercentoverwriteComponent {
       return;
     }
     //const newMarker = new Marker(this.newBno, this.illnessesByBno.get(this.newBno)?.Names);
+    if (this.override.Illnesses.filter((valami) => valami === this.marker).length > 0) {
+      console.log("Marker already exists")
+      alert("Ez a marker már hozzá lett adva!")
+      //this.removeMarker(this.marker);
+      return;
+    }
+    if (this.marker === "Egészséges" && this.override.Illnesses.length != 0) {
+      alert("Már van betegség hozzáadva, így nem lehet Egészséges!");
+      return;
+    }  
+
+
+    if (this.override.Illnesses.filter((valami) => valami === "Egészséges").length > 0) {
+      console.log("Marker already exists")
+      alert("Egészséges jelentése: csak covidos volt, nincs más betegsége!")
+      //this.removeMarker(this.marker);
+      return;
+    }
+
     
     if (this.override.Illnesses.filter((valami) => valami === this.marker).length > 0) {
       console.log("Marker already exists")
