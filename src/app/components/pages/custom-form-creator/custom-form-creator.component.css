@@ -1,4 +1,3 @@
-
 .custom-form-creator {
     padding-top: 20px;
     padding-bottom: 20px;
@@ -6,10 +5,39 @@
     flex-direction: column;
     align-items: center;
 }
+.preview-item {
+        display: flex;
+        align-items: center; /* Align items vertically */
+        margin: 10px; /* Add margin around each question */
+        padding: 10px; /* Add padding inside each question */
+        border-bottom: 1px solid #ddd; /* Add a bottom border for better visibility */
+        display: flex;
+        align-items: center; /* Align items vertically */
+        margin: 10px; /* Add margin around each question */
+        padding: 10px; /* Add padding inside each question */
+        border: 1px solid #0800ff; 
+    display: flex;
+    align-items: center; /* Align items vertically */
+    margin-bottom: 10px; /* Space between preview items */
+}
 
+.delete-button {
+    margin-right: 10px; /* Space between delete button and question */
+}
+
+.question-content {
+    flex-grow: 1; /* Allow question content to take remaining space */
+}
 .question-selection {
     width: 80%;
     margin-bottom: 20px;
+}
+.question-selection button {
+    margin-bottom: 10px; /* Add space between buttons */
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    width: 100%; /* Ensure buttons take full width */
 }
 
 .form-preview {
@@ -17,4 +45,32 @@
     border: 1px solid #0800ff;
     padding: 20px;
     margin-top: 20px;
+    display: flex;
+    flex-direction: column; /* Stack items vertically */
+    align-items: flex-start; /* Align items to the start (left) */
+}
+
+/* New styles for drag-and-drop */
+.question-list {
+    display: flex;
+    flex-direction: column; /* Align items in a row */
+    flex-wrap: wrap; /* Allow items to wrap to the next line */
+    gap: 10px; /* Add space between items */
+    justify-content: flex-start; /* Align items to the start (left) */
+    /* ... other styles ... */
+}
+
+.question-list div {
+    padding: 10px;
+    border: 1px solid #ddd;
+    margin: 5px;
+    cursor: move; /* Cursor indicates that this element is draggable */
+    background-color: #f8f9fa;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.question-list div:hover {
+    background-color: #e9ecef;
 }
