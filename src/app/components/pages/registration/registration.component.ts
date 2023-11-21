@@ -67,9 +67,14 @@ export class RegistrationComponent {
     this.user.Site = this.site;
     this.loginService.insertNewUser(this.user).subscribe(
       result => {
-        if (result.isErr()) {
-          alert("Sikertelen regisztráció");
+        if (result.isErr()) {       
+         
+          
           console.error(result.unwrapErr());
+          console.log (result.unwrapErr());
+        
+         let mess = result.unwrapErr().error.Error;
+         alert("sikertelen regisztráció :" + "  " + mess);
           return;
         }
         alert("Sikeres regisztráció");
