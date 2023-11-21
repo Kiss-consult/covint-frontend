@@ -83,6 +83,9 @@ export class EmailTemplateComponent {
       let dataType = response[1];
       let downloadLink = document.createElement('a');
       downloadLink.href = window.URL.createObjectURL(new Blob(data, { type: dataType }));
+
+      //window.open(downloadLink.href); // open downloaded file???? 
+
       if (filename)
         downloadLink.setAttribute('download', filename);
       document.body.appendChild(downloadLink);
