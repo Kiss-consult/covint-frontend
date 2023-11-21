@@ -74,6 +74,9 @@ export class DefaultformarkersComponent {
     //  return;
     //}
    // this.case.Date = this.formatDate(new Date());
+   if (this.illnesses.length< 2)
+   alert("Minimumm 2 marker szükséges! ")
+  else
     console.log(this.case);
     this.backendService.overrideCombination(this.illnesses, this.defaults).subscribe(
       result => {
