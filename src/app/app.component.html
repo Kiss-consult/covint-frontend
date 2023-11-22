@@ -46,19 +46,7 @@
           </li>
         </ul>
       </nav>
-      <nav>
-        <ul class="nav"  *ngIf="loginService.hasAnyGroup([orvos])" >
-          <li class="nav-item" routerLinkActive="active">
-            <a class="nav-link">Markerek kezelése</a>
-            <ul class="dropdown">
-              <li><a [routerLink]="['/addnewillness']" routerLinkActive="active">Új betegség hozzáadása</a></li>
-              
-              <li><a [routerLink]="['/percentoverwrite']" routerLinkActive="active">%-ok felülírása felülírása</a></li>
-              <li><a [routerLink]="['/defaultformarkers']" routerLinkActive="active">Ősfeltöltés több marker kombinációjára</a></li>
-            </ul>
-          </li>
-        </ul>
-      </nav>
+      
 
       <li class="nav-item" routerLinkActive="active" *ngIf="loginService.hasAnyGroup([portaladmin, portalvezeto, kutatoorvos])" >
         <a href="/auditlog" class="nav-link"   routerLink="auditlog">AuditLog</a>

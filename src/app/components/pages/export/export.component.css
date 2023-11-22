@@ -126,7 +126,11 @@ button {
     margin-bottom: 40px;
     z-index: 0;
 }
-
+#diagramrbutton{
+    margin-right: 45px;    
+    margin-bottom: 40px;
+    z-index: 0;
+}
 #addmarkerbutton{
     margin-left: 25px;
     margin-bottom: 40px;

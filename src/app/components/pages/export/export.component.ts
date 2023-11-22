@@ -53,6 +53,8 @@ export class ExportComponent  {
   portaladmin= PortalAdmin;
   portalvezeto = PortalVezeto;
 
+  diagramtype : string = '';
+
   toggleContent(contentType: string) {
     if (contentType === 'marker') {
       this.markerActive = true;
@@ -192,6 +194,8 @@ ngAfterContentChecked(): void {
   if (!this.checkRequiredFields()) {
     return;
   }
+
+
   const filename = "szurt_adatok_covint.xlsx";
   this.backendService.downloadExport(this.filter).subscribe((result) => {
     if (result.isErr()) {
@@ -302,7 +306,9 @@ ngAfterContentChecked(): void {
   this.filter.Illnesses = this.filter.Illnesses.filter(m => m !== illness);
 }
 
- 
+public goDiagram() {
+  return true;
+}
 
 
 
