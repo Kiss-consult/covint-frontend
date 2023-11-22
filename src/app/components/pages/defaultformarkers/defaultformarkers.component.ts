@@ -85,7 +85,7 @@ export class DefaultformarkersComponent {
           console.error(result.unwrapErr());
           return;
         }
-        alert("Sikeres adatfeltöltés");
+        alert("Sikeres adatfeltöltés");  
         console.log("Successfully inserted into database")
         this.case = new Case();
       });

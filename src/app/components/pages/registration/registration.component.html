@@ -13,7 +13,7 @@
         <div>
           <label class="text" for="email">E-mail cím <s>*</s></label>
         
-          <input class="droptextbox" type="email" id="email" name="email" [(ngModel)]="user.Email" placeholder="covint@covint.com" title="Kérem töltse ki a mezőt">
+          <input class="droptextbox" type="email" id="email" name="email" [(ngModel)]="user.Email" placeholder="covint@covint.com" title="Kérem valós email címet adjon meg!">
 
         </div>
       </div>
@@ -22,7 +22,7 @@
         <div>
           <label class="text" for="password">Jelszó <s>*</s></label>
         
-          <input class="droptextbox" type="password" id="password" name="password" [(ngModel)]="user.Password" required placeholder="jelszo12345" title="Kérem töltse ki a mezőt">
+          <input class="droptextbox" type="password" id="password" name="password" [(ngModel)]="user.Password" required placeholder="jelszo12345" title="A jelszó minimum 8 karakter, tartalmazzon : kisbetűt, nagybetűt, számot, extra karaktert!">
         </div>
       </div>
   

@@ -77,7 +77,7 @@ export class RegistrationComponent {
          alert("sikertelen regisztráció :" + "  " + mess);
           return;
         }
-        alert("Sikeres regisztráció");
+        alert("Sikeres regisztráció!\nRegisztrációját rögzítettük!\nA regisztrációját ellenőrzés után 3 napon belül elfogadjuk,\namiről emailt küldünk.\nTürelmét köszönjük! "        );
         console.log("Successfully inserted into database")
         this.site = new Site();
         this.user = new User();
