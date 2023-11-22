@@ -38,7 +38,7 @@ export class CustomFormCreatorComponent {
     this.selectedQuestions.splice(index, 1);
 }
 renderForm() {
-  let formHtml = '<form action="YOUR_SUBMISSION_ENDPOINT" method="post">';
+  let formHtml = '<form action="" method="post">';
 
   this.selectedQuestions.forEach(question => {
       formHtml += `<label for="${question.id}">${question.label}</label>`;
