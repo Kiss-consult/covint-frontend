@@ -79,7 +79,11 @@ export class RegistrationComponent {
             alert("Sikertelen regisztráció! \nEzzel a felhasználó névvel már regisztráltak korábban!")
             console.log("már regisztártak ezzel a névvel")
           }
-          //alert("sikertelen regisztráció :" + "  " + mess);
+          if (mess === "Phone number must start with +36 or 06") {
+            alert("Sikertelen regisztráció! \nA telefonszám formátuma +36.... vagy  06....    ")
+            console.log("már regisztártak ezzel a névvel")
+          }
+          //"Phone number must start with +36 or 06"
           //alert("sikertelen regisztráció ");
           return;
         }
