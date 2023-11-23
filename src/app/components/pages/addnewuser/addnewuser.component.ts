@@ -53,6 +53,10 @@ export class AddnewuserComponent {
             alert("Sikertelen regisztráció! \nEzzel a felhasználó névvel már regisztráltak korábban!")
             console.log("már regisztártak ezzel a névvel")
           }
+          if (mess === "Phone number must start with +36 or 06") {
+            alert("Sikertelen regisztráció! \nA telefonszám formátuma +36.... vagy  06....    ")
+            console.log("már regisztártak ezzel a névvel")
+          }
           return;
         }
         alert("Sikeresen Új felhasználót regisztrált!\nA 'Új felhasználó elfogadása' menűpontban a regisztrált felhasználóhoz jogosultságot tud rendelni! ");
