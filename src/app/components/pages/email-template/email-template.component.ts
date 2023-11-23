@@ -93,6 +93,30 @@ export class EmailTemplateComponent {
     });
   }
 
+  public setEmailToDefault(f: number)
+  {
+  
+  this.loginService.setEmailToDeafult(f).subscribe(
+    result => {
+      if (result.isErr()) {
+        alert("email template visszaállítás sikertelen!");
+        console.error(result.unwrapErr());
+        return;
+      }
+     
+      //for (let illness of result.unwrap()) {
+       // illness.BnoCodes.forEach((bnoCode) => {
+       //   this.illnessesByBno.set(bnoCode, illness);
+       // });
+     // }
+     // this.dataSource.data = this.illnesses; // Az adatforrás frissítése
+      console.log("Sikeresen visszaállítottuk a tempaltet!");
+      alert("email template visszaállítás sikeres!");
+      //this.dataSource.paginator = this.paginator;
+
+    });
+
+  }
   async onFileSelected(event: any, f:number) {
     const file: File = event.target.files[0];
     let F = f;
