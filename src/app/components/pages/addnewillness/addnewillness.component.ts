@@ -34,7 +34,7 @@ export class AddnewillnessComponent {
 
 
 
-
+/*
   public setDefaultSexFemale(d: Default): string {
 
     this.default.Sex = "Nő";
@@ -47,8 +47,8 @@ export class AddnewillnessComponent {
     this.default.Sex = "Férfi";
     return d.Sex;;
   }
-
-  // Function to add bno. If the newly typed bno is already in the case,
+*/
+  /*// Function to add bno. If the newly typed bno is already in the case,
   // it removes it. Otherwise it adds it to the case.
   public addDefault() {
 
@@ -81,7 +81,7 @@ export class AddnewillnessComponent {
     console.log(this.newIllness.Defaults)
     //this.newAlternativeName = '';
   }
-
+*/
   // Function to add bno. If the newly typed bno is already in the case,
   // it removes it. Otherwise it adds it to the case.
   public addAlternativeName() {
@@ -113,10 +113,16 @@ export class AddnewillnessComponent {
   // If any of the required fields are not filled, it alerts the user and returns false.
   private checkRequiredFields(): boolean {
     if (this.newIllness.GroupName === null || this.newIllness.GroupName === "") {
-      alert("A 'Nem' mező kitöltése kötelező");
+      alert("A 'Betegség' mező kitöltése kötelező");
       return false;
     }
-
+    for (let i = 0; i <= this.defaults.length-1; i++) {
+      console.log("eljut idaig", this.defaults[i], this.defaults[i].Dead )
+      if ((this.defaults[i].Dead === undefined) || (this.defaults[i].Hospitalized === undefined) || (this.defaults[i].Dead === null)||(this.defaults[i].Hospitalized === null)){
+        alert("Minden mező kitöltése kötelező! ")
+        return false;
+      }
+    }
     return true;
   }
 
@@ -124,13 +130,13 @@ export class AddnewillnessComponent {
   public removeAlternativeName(bno: string) {
     this.newIllness.AlternativeNames = this.newIllness.AlternativeNames.filter(m => m !== bno);
   }
-
+  
 
 
   public finish() {
-    //if (!this.checkRequiredFields()) {
-    //return;
-    // }
+    if (!this.checkRequiredFields()) {
+    return;
+     }
     console.log("finish", this.defaults)
     this.newIllness.Defaults = this.defaults;
     this.backendService.insertIllness(this.newIllness).subscribe(
