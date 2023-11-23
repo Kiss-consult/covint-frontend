@@ -79,6 +79,24 @@ export class LoginService {
     );
   }
 
+  public setEmailToDeafult(f: number): Observable<Result<{}>> {
+    
+    
+    const url = this.url + "/templates/default";
+    return this.httpClient.post(url, "", {
+      params: this.getParams(f),
+      headers: new HttpHeaders(),
+    })
+    
+    .pipe(
+      map(result => fromJSON<{}>(JSON.stringify(result))),
+      catchError(error => of(new Err<{}>(error)))
+    );
+  }
+
+
+
+
   public getUsername(): string {
     return this.username;
   }
