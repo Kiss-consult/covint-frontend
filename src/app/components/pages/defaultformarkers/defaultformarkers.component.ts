@@ -10,7 +10,7 @@ import { BackendService } from 'src/app/services/backend/backend.service';
 })
 export class DefaultformarkersComponent {
 
-
+ 
   marker: string = ''; 
   markers: string[] = [];
   case: Case = new Case();
@@ -52,6 +52,10 @@ export class DefaultformarkersComponent {
       return;
     }
     //const newMarker = new Marker(this.newBno, this.illnessesByBno.get(this.newBno)?.Names);
+    if (this.marker === "Egészséges") {
+      alert("Egészséges itt nem választható!")
+      return ;
+    }
 
     if (this.illnesses.filter((valami) => valami === this.marker).length > 0) {
       console.log("Marker already exists")
@@ -70,14 +74,13 @@ export class DefaultformarkersComponent {
   // adds the current date to the case, and inserts the case into the database.
   // It also clears the form for the next case.
   public finish() {
-    //if (!this.checkRequiredFields()) {
-    //  return;
-    //}
+    if (!this.checkRequiredFields()) {
+      return;
+    }
    // this.case.Date = this.formatDate(new Date());
-   if (this.illnesses.length< 2)
-   alert("Minimumm 2 marker szükséges! ")
-  else
+  
     console.log(this.case);
+    console.log("milyen hosszu", this.defaults.length);
     this.backendService.overrideCombination(this.illnesses, this.defaults).subscribe(
       result => {
         if (result.isErr()) {
@@ -113,7 +116,29 @@ export class DefaultformarkersComponent {
     console.log("mindegy", this.defaults)
   }
 
+  
 
+   
+    private checkRequiredFields(): boolean {
+
+      if (this.illnesses.length< 2) {
+        alert("Minimumm 2 marker szükséges! ")
+        return false;
+      }
+      
+      for (let i = 0; i <= this.defaults.length-1; i++) {
+        console.log("eljut idaig", this.defaults[i], this.defaults[i].Dead )
+        if ((this.defaults[i].Dead === undefined) || (this.defaults[i].Hospitalized === undefined) || (this.defaults[i].Dead === null)||(this.defaults[i].Hospitalized === null)){
+          alert("Minden mező kitöltése kötelező! ")
+          return false;
+        }
+      }
+      
+      return true;
+    }
+   
+  
+    
 
 
 
