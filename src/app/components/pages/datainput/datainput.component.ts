@@ -47,7 +47,7 @@ export class DatainputComponent {
   // it removes it. Otherwise it adds it to the case.
   public addMarker() {
     if (this.marker === '') {
-      alert("Kérem adjon meg egy markert!");
+      alert("Kérem adjon meg minimum egy markert!");
       return;
     }
     //const newMarker = new Marker(this.newBno, this.illnessesByBno.get(this.newBno)?.Names);
@@ -118,20 +118,15 @@ export class DatainputComponent {
       return false;
     }
     if (this.case.Dead === null) {
-      alert("A 'Meghalt' mező kitöltése kötelező");
+      alert("A 'Elhunyt' mező kitöltése kötelező");
+      return false;
+    }
+    if (this.case.Illnesses.length === 0) {
+      alert("Minimum 1 betegség ( marker) felvitele kötelező! \n Ha nincs társ-betegség, kérem válassza az Egészséges - markert!");
       return false;
     }
     return true;
   }
-
-
-
-
-
-
-
-
-
 
 
   // Format date to YYYY-MM-DD
