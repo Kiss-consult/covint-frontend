@@ -35,7 +35,7 @@ export class BackendService {
 
 
   private getParams(): HttpParams {
-    return new HttpParams().set('pagenumber', '0',).set('size', "5");  
+    return new HttpParams().set('pagenumber', '0',).set('size', "100");  
     
       ;
   }
