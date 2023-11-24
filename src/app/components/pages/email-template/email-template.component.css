@@ -15,14 +15,14 @@
     background: linear-gradient(180deg, rgba(240,240,240,1) 50%, rgba(255,255,255,0) 70%);
 }
 
+.container2{
+    display: grid;
+    grid-template-columns: repeat(4, 1fr); 
+    justify-content: center; 
+}
+
 .container{
-    
-    display: flex;
-    padding-top: 0;
-    justify-content: space-between;
-    padding-left: 15px;
-    padding-right: 15px;
-    padding-bottom: 25px;
+    padding-top: 0;    
 }
 
 .tab-button {
