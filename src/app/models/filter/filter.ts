@@ -3,8 +3,8 @@
 export class Filter {
     Validated: string = "";
     Sex: string = "";
-    AgeFrom: number = 0;
-    AgeTo: number = 0;
+    AgeFrom: number  ;
+    AgeTo: number  ;
     Illnesses: string[] = [];
     Source: string = "";
     DateFrom: string = "";

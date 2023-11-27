@@ -147,3 +147,7 @@ footer {
     margin-left: 20px;
     margin-bottom: 40px;
 }
+
+.mat-elevation-z8 {
+    box-shadow: none; 
+  }
