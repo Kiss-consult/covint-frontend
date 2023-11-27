@@ -1,30 +1,55 @@
 import { Component } from '@angular/core';
-import { QuestionBase, TextQuestion, YesNoQuestion, MultiSelectQuestion } from './form-questions.model';
+import { QuestionBase, TextQuestion, YesNoQuestion, MultiSelectQuestion, yesnohospitalQuestion } from './form-questions.model';
 import { CommonModule } from '@angular/common';
 import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
+import { ColorPickerModule } from 'ngx-color-picker';
+import { FormsModule } from '@angular/forms';
 
 
 @Component({
   selector: 'app-custom-form-creator',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, FormsModule,ColorPickerModule ],
   templateUrl: './custom-form-creator.component.html',
   styleUrls: ['./custom-form-creator.component.css']
 })
 export class CustomFormCreatorComponent {
+  backgroundColor: string = '#ffffff'; // Default white
+  textColor: string = '#000000'; // Default black
   selectedQuestions: QuestionBase[] = [];
   generatedFormHtml: string = '';
+
+  availableQuestions: { label: string, type: string, selected: boolean }[] = [
+  { label: 'Kor kérdés', type: 'text', selected: false },
+  { label: 'Covid kérdés', type: 'yesno', selected: false },
+  { label: 'Korház Kérdés', type: 'yesnohospital', selected: false },
+  { label: 'Betegség kérdés', type: 'multiselect', selected: false }
+];
+
+
+  toggleQuestionSelection(question: { label: string, type: string, selected: boolean }) {
+    if (question.selected) {
+      if (!this.selectedQuestions.some(q => q.type === question.type)) {
+        this.addQuestion(question.type);
+      }
+    } else {
+      this.deleteQuestion(question.type);
+    }
+  }
+  
+
+
   
   addQuestion(type: string) {
       switch (type) {
           case 'text':
               this.selectedQuestions.push(new TextQuestion('Kérjük adja meg a korát'));
               break;
-          case 'yesNoCovid':
+          case 'yesno':
               this.selectedQuestions.push(new YesNoQuestion('Elkapta a COVID vírust az elmúlt egy évben?'));
               break;
-          case 'yesNoHospitalized':
-              this.selectedQuestions.push(new YesNoQuestion('Az elmúlt egy évben került korházba COVID miatt?'));
+          case 'yesnohospital':
+              this.selectedQuestions.push(new yesnohospitalQuestion('Az elmúlt egy évben került korházba COVID miatt?'));
               break;
           case 'multiselect':
               const newMultiSelectQuestion = new MultiSelectQuestion('Az alábbi lehetőségek közül kérjük válassza ki milyen betegségekkel rendelkezik', ['Elhízás', 'Asztma','Szívbetegség'], true);
@@ -34,9 +59,13 @@ export class CustomFormCreatorComponent {
       }
   }
 
-  deleteQuestion(index: number) {
-    this.selectedQuestions.splice(index, 1);
-}
+  deleteQuestion(type: string) {
+    const index = this.selectedQuestions.findIndex(q => q.type === type);
+    if (index > -1) {
+      this.selectedQuestions.splice(index, 1);
+    }
+  }
+  
 renderForm() {
   let formHtml = '<form action="" method="post">';
 
@@ -115,4 +144,4 @@ drop(event: CdkDragDrop<QuestionBase[]>) {
 
 
 
-}
+} 

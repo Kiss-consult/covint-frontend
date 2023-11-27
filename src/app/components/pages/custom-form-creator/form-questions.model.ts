@@ -1,7 +1,7 @@
 export interface QuestionBase {
     id: string; 
     label: string; 
-    type: 'text' | 'yesno' | 'multiselect'; 
+    type: 'text' | 'yesno' | 'yesnohospital' | 'multiselect'; 
 }
 export class TextQuestion implements QuestionBase {
     id: string;
@@ -31,6 +31,22 @@ export class YesNoQuestion implements QuestionBase {
 
     private generateId(): string {
         return 'yesno-' + Math.random().toString(36).substr(2, 9);
+    }
+}
+
+export class yesnohospitalQuestion implements QuestionBase {
+    id: string;
+    label: string;
+    type: 'yesnohospital' = 'yesnohospital';
+    options: ['Yes', 'No'] = ['Yes', 'No'];
+
+    constructor(label: string) {
+        this.id = this.generateId();
+        this.label = label;
+    }
+
+    private generateId(): string {
+        return 'yesnohospital-' + Math.random().toString(36).substr(2, 9);
     }
 }
 

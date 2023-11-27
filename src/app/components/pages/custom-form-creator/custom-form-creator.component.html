@@ -1,19 +1,38 @@
 <div class="custom-form-creator">
     <div class="question-selection">
-        <button (click)="addQuestion('text')">Kor kérdés</button>
-        <button (click)="addQuestion('yesNoCovid')">Covid kérdés</button>
-        <button (click)="addQuestion('yesNoHospitalized')">Korház Kérdés</button>
-        <button (click)="addQuestion('multiselect')">Betegség kérdés</button>
+        <!-- Question Selection with Checkboxes -->
+        <div *ngFor="let question of availableQuestions">
+            <input type="checkbox" id="{{question.type}}" 
+                   [(ngModel)]="question.selected" 
+                   (change)="toggleQuestionSelection(question)">
+            <label for="{{question.type}}">{{question.label}}</label>
+        </div>
     </div>
-    <div class="form-preview">
+    <div>
+        <label for="backgroundColorPicker">Background Color:</label>
+        <input [(colorPicker)]="backgroundColor" [style.background]="backgroundColor" id="backgroundColorPicker">
+      </div>
+      <div>
+        <label for="textColorPicker">Text Color:</label>
+        <input [(colorPicker)]="textColor" [style.background]="textColor" id="textColorPicker">
+      </div>
+    <div class="form-preview" [ngStyle]="{'background-color': backgroundColor, 'color': textColor}">
         <div *ngFor="let question of selectedQuestions; let i = index" class="preview-item">
             <div class="preview-content">
                 <div class="question-content">
+                    <!-- Existing code for displaying questions -->
                     <ng-container *ngIf="question.type === 'text'">
                         <label>{{ question.label }}</label>
                         <input type="text" [name]="question.id">
                     </ng-container>
                     <ng-container *ngIf="question.type === 'yesno'">
+                        <label>{{ question.label }}</label>
+                        <div>
+                            <input type="radio" [name]="question.id" value="Yes"> Igen
+                            <input type="radio" [name]="question.id" value="No"> Nem
+                        </div>
+                    </ng-container>
+                    <ng-container *ngIf="question.type === 'yesnohospital'">
                         <label>{{ question.label }}</label>
                         <div>
                             <input type="radio" [name]="question.id" value="Yes"> Igen
@@ -27,9 +46,7 @@
                             <label [for]="option">{{ option }}</label>
                         </div>
                     </ng-container>
-                    
                     <br>
-                    <button (click)="deleteQuestion(i)" class="delete-button">Törlés</button>
                 </div>
             </div>
         </div>

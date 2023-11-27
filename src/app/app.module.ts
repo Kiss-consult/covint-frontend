@@ -12,6 +12,7 @@ import { MatTableModule } from '@angular/material/table';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatSortModule } from '@angular/material/sort';
 import { DragDropModule } from '@angular/cdk/drag-drop';
+import { ColorPickerModule } from 'ngx-color-picker';
 
 
 import { MatInputModule } from '@angular/material/input';
@@ -39,6 +40,7 @@ import { EmailTemplateComponent } from './components/pages/email-template/email-
 import { initializeApp, initializeKeycloak } from './init/init';
 import { KeycloakAngularModule, KeycloakService } from 'keycloak-angular';
 import { UpdateuserComponent } from './components/pages/updateuser/updateuser.component';
+
 
 
 @NgModule({
@@ -82,6 +84,7 @@ import { UpdateuserComponent } from './components/pages/updateuser/updateuser.co
     MatInputModule,
     DragDropModule,
     KeycloakAngularModule,
+    ColorPickerModule,
     BrowserAnimationsModule    
   ],
   providers: [
