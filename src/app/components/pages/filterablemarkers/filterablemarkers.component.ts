@@ -84,12 +84,7 @@ export class FilterablemarkersComponent {
       });
       
   }
-  /*
-  ngAfterViewInit() {
-    this.dataSource = new MatTableDataSource(this.illnesses);
-    this.dataSource.paginator = this.paginator;
-  }
-*/
+ 
   public setMarker() {
 
 

@@ -96,7 +96,8 @@ export class ExportComponent  {
 
         console.log("Sikeresen lekérdezve a betegségek az adatbázisból");
         console.log(this.markers);
-
+        this.dataSource = new MatTableDataSource(this.exports);
+        this.dataSource.paginator = this.paginator;
 
       });
 
@@ -105,11 +106,13 @@ export class ExportComponent  {
 
 
 
-
+/*
 ngAfterViewInit() {
   this.dataSource = new MatTableDataSource(this.exports);
   this.dataSource.paginator = this.paginator;
 }
+*/
+
 
   private checkRequiredFields(): boolean {
 
