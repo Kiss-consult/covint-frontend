@@ -4,63 +4,58 @@
 <div class="container">
   <div class="content">
     <div class="content2">
-
-  <div class="newillnessclass">
-    <div>
-      <label for="newillness">Új betegség: <s>*</s></label>
-    </div>
-    <div>
-      <input class="droptextbox" type="text" id="newillness" name="newillness"[(ngModel)]="newIllness.GroupName" title="Kérem töltse ki a mezőt">
-    </div>
-  </div>
-
-  <div class="ismarker">
-    <div>
-      <label class="text">Az új betegség egyben marker is? <s>*</s></label>
-    </div>
-    <div>
-      <label for="trueMark">Igen</label>
-      <input type="radio" id="trueMArk" name="ismarker" [value]="true" [(ngModel)]="newIllness.IsMarker" title="Kérem válasszon">
-
-      <label for="falseMark">Nem</label>
-      <input type="radio" id="falseMark" name="ismarker" [value]="false" [(ngModel)]="newIllness.IsMarker" title="Kérem válasszon">
-    </div>
-  </div>
-
-
-
-  <div class="content3">
-
-    <div class="bnoclass">    
+      <div class="newillnessclass">
+        <div>
+          <label for="newillness">Új betegség: <s>*</s></label>
+        </div>
       <div>
-        <label for="bno">Alternatív név bevitele</label>
-      </div>      
+        <input class="droptextbox" type="text" id="newillness" name="newillness"[(ngModel)]="newIllness.GroupName" placeholder="Betegség neve..." title="Kérem töltse ki a mezőt">
+      </div>
+    </div>
+
+    <div class="ismarker">
       <div>
-        <input class="droptextbox" type="text" id="bno" name="bno" [(ngModel)]="newAlternativeName" title="Kérem töltse ki a mezőt">
+        <label class="text">Az új betegség egyben marker is? <s>*</s></label>
       </div>
       <div>
-        <button (click)="addAlternativeName()">Hozzáadás</button>
-      </div>      
+        <label for="trueMark">Igen</label>
+        <input type="radio" id="trueMArk" name="ismarker" [value]="true" [(ngModel)]="newIllness.IsMarker" title="Kérem válasszon">
+
+        <label for="falseMark">Nem</label>
+        <input type="radio" id="falseMark" name="ismarker" [value]="false" [(ngModel)]="newIllness.IsMarker" title="Kérem válasszon">
+      </div>
     </div>
+
+    <div class="content3">
+      <div class="bnoclass">    
+        <div>
+          <label for="bno">Alternatív név bevitele</label>
+        </div>      
+        <div>
+          <input class="droptextbox" type="text" id="bno" name="bno" [(ngModel)]="newAlternativeName" placeholder="Alternativ betegség neve..." title="Kérem töltse ki a mezőt">
+        </div>
+        <div>
+          <button (click)="addAlternativeName()">Hozzáadás</button>
+        </div>      
+      </div>
   
-    <div class="addedtext" *ngFor="let newillness of newIllness.AlternativeNames">  
-      <div>
-        <label>{{newillness}}</label>
+      <div class="addedtext" *ngFor="let newillness of newIllness.AlternativeNames">  
+        <div>
+          <label>{{newillness}}</label>
+        </div>
+        <div>
+          <button (click)="removeAlternativeName(newillness)">Törlés</button>
+        </div>    
       </div>
-      <div>
-        <button (click)="removeAlternativeName(newillness)">Törlés</button>
-      </div>    
     </div>
 
   </div>
-
-</div>
 
   <div class="scrollable-container">
     <mat-form-field style="width: 100%;">
       <mat-label>Keresés</mat-label>
     <input matInput placeholder="Keresés" [(ngModel)]="searchValue">
-  </mat-form-field>
+    </mat-form-field>
     <table mat-table class="mat-table" [dataSource]="defaults">
       <ng-container matColumnDef="sex">
         <th mat-header-cell class="mat-header-cell" *matHeaderCellDef>Nem</th>
