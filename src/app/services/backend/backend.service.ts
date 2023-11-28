@@ -13,6 +13,7 @@ import { SavedFilter } from 'src/app/models/savedfilter/savedfilter';
 import { Override } from 'src/app/models/override/override';
 import { Default } from 'src/app/models/default/default';
 import { Auditlog } from 'src/app/models/auditlog/auditlog';
+import { Diagram } from 'src/app/models/diagram/diagram';
 
 
 @Injectable({
@@ -113,6 +114,16 @@ export class BackendService {
     );
   }
 
+
+ // This function save  the  given filter.
+ public getFilterDiagram(diagramtype: string, filter: Filter): Observable<Result<Diagram>> {
+  const url = this.url + "/diagram/get";
+  let savedfilter = { diagramtype, filter }
+  return this.httpClient.post<Result<Diagram>>(url, savedfilter,{ headers: this.getHeaders() }).pipe(
+    map(result => fromJSON<Diagram>(JSON.stringify(result))),
+    catchError(error => of(new Err<Diagram>(error)))
+  );
+}
  // This function save  the  given filter.
  public changeIllness(name: string, ismarker: boolean): Observable<Result<{}>> {
   const url = this.url + "/illnesses/change";

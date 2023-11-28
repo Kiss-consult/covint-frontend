@@ -15,6 +15,7 @@ import { LoginService } from 'src/app/services/login/login.service';
 
 import { ActivatedRouteSnapshot, RouterStateSnapshot, UrlTree, Router } from '@angular/router';
 import { Observable } from 'rxjs/internal/Observable';
+import { Diagram } from 'src/app/models/diagram/diagram';
 
 @Component({
   selector: 'app-export',
@@ -56,8 +57,8 @@ export class ExportComponent  {
   portalvezeto = PortalVezeto;
 
   diagramtype : string = '';
-
-
+  url ="";
+  iframe ="";
   
   toggleContent(contentType: string) {
     if (contentType === 'marker') {
@@ -116,6 +117,10 @@ ngAfterViewInit() {
     alert("A 'Nem' mező kitöltése kötelező");
     return false;
   }
+  if (this.filter.Validated === null || this.filter.Validated === "") {
+    alert("A 'Validitás' mező kitöltése kötelező");
+    return false;
+  }
   if (this.filter.AgeFrom === null || this.filter.AgeFrom < 18 || this.filter.AgeFrom > 88) {
     alert("A 'Páciens kora -tól' mező kitöltése kötelező, és 18 és 88 között kell lennie");
     return false;
@@ -168,7 +173,7 @@ ngAfterContentChecked(): void {
   if (!this.checkRequiredFields()) {
     return;
   }
-
+console.log("filter",this.filter)
   this.backendService.filterExports(this.filter).subscribe(
     result => {
       if (result.isErr()) {
@@ -205,6 +210,52 @@ ngAfterContentChecked(): void {
 
     });
 }
+public getFilterDiagram(t : number) {
+  //if (!this.checkRequiredFields()) {
+  //  return;
+  //}
+  let filtertype = "";
+  switch (t) {
+    case 0:
+      filtertype = "pie"  ;    
+      
+      break;
+    case 1:
+      filtertype = "line";
+      
+      break;
+    case 2:
+      filtertype = "bar";
+}
+      
+
+    console.log( "filtertype",filtertype)
+this.diagramtype = filtertype;
+  this.backendService.getFilterDiagram(this.diagramtype, this.filter).subscribe(
+    result => {
+      if (result.isErr()) {
+        alert("Sikertelen diagram url és iframe lekérés");
+        console.error(result.unwrapErr());
+        return;
+      }
+      alert("Sikeres diagram url és iframe lekérés");
+      console.log("Successfully get diagram  URl and Iframe")
+      console.log(result.unwrap());
+      let diagramdata = new Diagram;
+      diagramdata = result.unwrap();     
+      this.url = diagramdata.Url;
+      this.iframe= diagramdata.Iframe;
+      window.open(this.url);
+
+    });
+}
+
+public openLink(){
+  window.open(this.url)
+
+}
+
+
 
   public export () {
   if (!this.checkRequiredFields()) {
@@ -293,7 +344,10 @@ ngAfterContentChecked(): void {
 
 
   public getMarker() {
-
+    if (this.marker === '') {
+      alert("Kérem adjon meg minimum egy markert!");
+      return;
+    }
     if (this.filter.Illnesses.filter((valami) => valami === this.marker).length > 0) {
       console.log("Marker already exists")
       alert("Ez a marker már hozzá lett adva!")
@@ -321,11 +375,6 @@ ngAfterContentChecked(): void {
   public removeMarker(illness: string) {
   this.filter.Illnesses = this.filter.Illnesses.filter(m => m !== illness);
 }
-
-public goDiagram() {
-  return true;
-}
-
 
 
 
