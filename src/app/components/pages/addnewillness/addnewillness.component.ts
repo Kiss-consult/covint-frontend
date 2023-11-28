@@ -4,6 +4,9 @@ import { Default } from 'src/app/models/default/default';
 import { Illness } from 'src/app/models/illness/illness';
 import { NewIllness } from 'src/app/models/newillness/newillness';
 import { BackendService } from 'src/app/services/backend/backend.service';
+import { MatTableDataSource } from '@angular/material/table';
+import { MatPaginator } from '@angular/material/paginator';
+
 @Component({
   selector: 'app-addnewillness',
   templateUrl: './addnewillness.component.html',
@@ -21,8 +24,16 @@ export class AddnewillnessComponent {
   newIsmarker: number = 0;
   ages: number[] = [];
   selectedRows: boolean[] = [];
+  searchValue: string = '';
 
-
+  matchesFilter(row: Default): boolean {
+    const searchFields: (keyof Default)[] = ['Sex', 'Age', 'Hospitalized', 'Dead']; // Specify the field names of Default
+  
+    return searchFields.some(field => {
+      const cellValue = String(row[field]).toLowerCase();
+      return cellValue.includes(this.searchValue.toLowerCase());
+    });
+  }
 
   // This is only stored for faster access to the illnesses by BNO code
   //illnessesByBno: Map<string, Illness> = new Map();
@@ -153,7 +164,7 @@ export class AddnewillnessComponent {
   }
 
   ngOnInit(): void {
-    // Töltsd fel az "ages" tömböt a kívánt életkorokkal.
+   
     let default_: Default = new Default;
     let defaults_: Default[] = [];
 
