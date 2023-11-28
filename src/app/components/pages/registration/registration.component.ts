@@ -31,7 +31,7 @@ export class RegistrationComponent {
       this.cegActive = false;
       this.intezmenyActive = true;
       this.user.IsCompany = false;
-      console.log("intezmenyt vaálasztottam:", this.user.IsCompany)
+      console.log("intezmenyt választottam:", this.user.IsCompany)
     }
 
   }

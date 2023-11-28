@@ -1,7 +1,9 @@
 .table {
     height: auto;
-    margin-bottom: 40px;
-    margin-top: 40px;
+    margin-bottom: 40px;    
+    padding: 15px; 
+    background: rgba(224,224,224);
+    background: linear-gradient(180deg, rgba(224,224,224,1) 40%, rgba(255,255,255,0) 80%);
 }
 
 .active-button {
@@ -16,31 +18,23 @@
     margin-top: 60px;
 }
 
-#filtersavebutton{
-    margin-left: 25px;
-}
-
 .content{
     display: flex;
-    background: rgb(224,224,224);
-    background: linear-gradient(180deg, rgba(224,224,224,1) 60%, rgb(255, 255, 255) 90%);
-    justify-content: space-around;
-    padding-bottom: 40px;
+    background: rgba(224,224,224);
+    justify-content: space-between;
+    padding-left: 60px;
+    padding-right: 60px;
 }
 
 .container{
     padding-top: 0;
 }
 
-.container2{
-    
-    padding-top: 60px;
-    
+.container2{    
+    padding-top: 60px;    
     flex-direction: column;
     align-items: center;    
-    padding-left: 15px;
-    padding-right: 15px;
-    padding-bottom: 60px;
+    padding-bottom: 40px;
 }
 
 #markerbutton{
@@ -49,5 +43,86 @@
 
 .content2{
     display: flex;
-    justify-content: space-around;
+    left: 0;
+    right: 0;
+    justify-content: space-between;
+}
+
+.content3{
+    margin-top: 60px;
+    padding-right: 60px;
+    padding-left: 60px;
+}
+
+.markerbno2{
+    display: flex; 
+    border-bottom: solid 3px #0800ff; 
+    align-items: center; 
+    padding: 10px; 
+    margin-top: 5px;
+    border-start-end-radius: 7px;
+    border-start-start-radius: 7px;
+    color: black;    
+}
+
+.markerbno{
+    display: flex; 
+    border-bottom: solid 3px #848484; 
+    align-items: center; 
+    padding: 10px; 
+    margin-top: 5px;
+    border-start-end-radius: 7px;
+    border-start-start-radius: 7px;
+    color: black;    
+}
+
+#okebutton{
+    margin-left: 0;
+    margin-top: 60px;
+    box-shadow: 0 0 0 20px rgba(224,224,224);
+}
+
+.container4{
+    background: rgb(224,224,224);
+    padding-right: 60px;
+    padding-left: 60px;
+    padding-bottom: 40px;
+    padding-top: 40px;
+}
+
+.diagrambutton{
+    margin-bottom: 20px;
+    margin-top: 20px;
+    text-align: center;
+    justify-content: center;
+}
+
+.content6{    
+    justify-content: space-evenly;
+    background: rgba(224,224,224);
+    background: linear-gradient(180deg, rgba(255,255,255,0)0%, rgba(224,224,224) 30%, rgba(224,224,224) 70%, rgba(255,255,255,0) 100%);
+    padding-right: 60px;
+    padding-left: 60px;
+    padding-bottom: 40px;
+    padding-top: 60px;
+    text-align: center;
+}
+
+.container5{  
+    justify-content: center;  
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+}
+
+.content6:nth-child(even) {
+    background: rgba(240,240,240,1);
+    background: linear-gradient(180deg, rgba(255,255,255,0) 00%, rgba(240,240,240,1) 30%, rgba(240,240,240,1) 70%, rgba(255,255,255,0) 100%);
+}
+
+#timeradioTime{
+    margin-left: 20px;
+}
+
+#timeradioRelative{
+    margin-left: 20px;
 }
