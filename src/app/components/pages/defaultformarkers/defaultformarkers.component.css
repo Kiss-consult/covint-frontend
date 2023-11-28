@@ -1,149 +1,5 @@
-
-
-.sexclass{
-    display: block;
-    flex-direction: column;
-    
-    margin-bottom: 20px;
-}
-
-#source {
-    display: block;
-    flex-direction: column;
-    margin-right: 200px;
-    margin-bottom: 20px;
-    width: 200px;
-}
-
-button {
-    margin: 0;
-    margin-left: 0px;
-}
-
-#okebutton{
-    margin-left: 0;
-    margin-bottom: 50px;
-    margin-top: 20px;
-}
-
-.addedtext { 
-    margin-top: 20px;
-    padding: 0;
-    margin-bottom: 40px;
-  }
-
-#text00 {
-    border: 1px solid #42a160;
-    border-radius: 5px;
-    width: 87%;
-    height: 40px;
-    margin-left: 20px;
-    padding: 0;
-}
-
-.ageclass{
-    display: block;
-    flex-direction: column;
-    margin-top: 20px;
-}
-
-#trueHosp{
-    margin-left: 10px;
-    margin-right: 70px;
-}
-
-#falseHosp{
-    margin-left: 10px;
-}
-
-#trueDead{
-    margin-left: 10px;
-    margin-right: 70px;
-    border-left: solid 1px #0800ff;
-}
-
-#falseDead{
-    margin-left: 10px;
-}
-
-.text{
-    margin: 0;  
-}
-
-.markerclass{
-    display: block;
-    flex-direction: column;
-    margin-bottom: 20px;
-}
-
-#markers{
-    margin-right: 20px;
-    
-}
-
-#age{
-    width: 200px;
-}
-
-.hospitalized{
-    margin: top 20px;
-    margin-bottom:20px ;
-}
-
-.dead{
-    margin: top 20px;
-    margin-bottom:20px ;
-}
-
-.bnoclass{
-    display: block;
-    flex-direction: column;
-    margin-bottom: 20px;
-    margin-top: 0;
-}
-
-#bno{
-    margin-top: 0; 
-    margin-right: 20px;
-    width: 200px;
-}
-.newillnessclass{
-    display: block;
-    flex-direction: column;
-    
-    margin-bottom: 20px;
-}
-
-.ismarker{
-    margin: top 20px;
-    margin-bottom:20px ;
-}
-
-#trueMArk{
-    margin-left: 10px;
-    margin-right: 70px;
-}
-
-#falseMark{
-    margin-left: 10px;
-}
-
-.bnoclass{
-    margin-top: 0; 
-    margin-right: 20px;
-    width: 200px;
-}
-
-#bno{
-    margin-top: 0; 
-    margin-right: 20px;
-    width: 200px;
-}
-
-#okebutton{
-    margin-left: 0;
-    margin-bottom: 50px;
-    margin-top: 20px;
+.container{
+    padding-top: 0;
 }
 
 .button{
@@ -153,21 +9,83 @@ button {
 .scrollable-container {
     overflow: auto;
     max-height: 500px; 
-    padding: 20px;
-  }
+    padding: 20px;  
+    padding: 15px;
+    padding-top: 0;
+    
+}
 
 table {
     width: 100%;
-    
-  }
-  
-  th, td {
-    width: 25%; 
-    text-align: center;
-  }
+     
+}
 
-  th{
-    background-color: rgb(101, 147, 253);
-    padding: 5px;
-  }
+.content{
+    display: flex;
+    background: rgba(224,224,224);
+    background: linear-gradient(180deg, rgba(224,224,224,1) 60%, rgba(255,255,255,0) 90%);    
+    justify-content: space-between;
+    padding-left: 60px;
+    padding-right: 60px;
+    padding-top: 60px;     
+    padding-bottom: 40px;
+}
 
+.content2{
+    display: flex;
+    flex-direction: column;   
+}
+
+.content3{
+    display: flex;
+    justify-content: space-between;
+}
+
+.bnoclass{
+    margin-right: 200px;
+}
+
+#okebutton{
+    margin-left: 0;
+    margin-top: 60px;
+    box-shadow: 0 0 0 20px white;
+}
+
+#trueMArk{
+    margin-top: 20px;
+    margin-right: 20px;
+    margin-left: 10px;
+}
+
+#falseMark{
+    margin-top: 20px;
+    margin-left: 10px;
+}
+
+.markerbno{
+    min-width: 420px;
+    display: flex; 
+    border-bottom: solid 3px #848484; 
+    align-items: center; 
+    padding: 10px; 
+    margin-top: 5px;
+    border-start-end-radius: 7px;
+    border-start-start-radius: 7px;
+    color: black;    
+}
+
+.markerbno2{
+    min-width: 500px;
+    display: flex; 
+    border-bottom: solid 3px #0800ff; 
+    align-items: center; 
+    padding: 10px; 
+    margin-top: 5px;
+    border-start-end-radius: 7px;
+    border-start-start-radius: 7px;
+    color: black;    
+}
+
+#markers{
+    margin-right: 20px;
+}

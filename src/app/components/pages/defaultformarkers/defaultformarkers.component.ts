@@ -2,6 +2,8 @@ import { Component } from '@angular/core';
 import { Case } from 'src/app/models/case/case';
 import { Default } from 'src/app/models/default/default';
 import { BackendService } from 'src/app/services/backend/backend.service';
+import { MatTableDataSource } from '@angular/material/table';
+import { MatPaginator } from '@angular/material/paginator';
 
 @Component({
   selector: 'app-defaultformarkers',
@@ -18,9 +20,18 @@ export class DefaultformarkersComponent {
   illnesses :  string[] = [];
   defaults : Default[] = [];
   default : Default = new Default;
-
-
-
+  searchValue: string = '';
+  selectedRows: boolean[] = [];
+  
+  matchesFilter(row: Default): boolean {
+    const searchFields: (keyof Default)[] = ['Sex', 'Age', 'Hospitalized', 'Dead']; // Specify the field names of Default
+  
+    return searchFields.some(field => {
+      const cellValue = String(row[field]).toLowerCase();
+      return cellValue.includes(this.searchValue.toLowerCase());
+    });
+  }
+  
   constructor(private backendService: BackendService) {
     // query all the illnesses formn the database
     this.backendService.getMarkers().subscribe(
