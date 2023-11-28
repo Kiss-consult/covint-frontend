@@ -267,25 +267,23 @@
           <label>Nézze meg a szűréshez tartozó diagrammot!</label> 
         </div>
         <div class="diagrambutton"> 
-          <div>             
-            <button class="button" (click)="goDiagram()">Diagram - PIE<mat-icon>pie_chart</mat-icon></button>
-          </div> 
-          <div>
-            <label>Diagram megnyitása</label>
-          </div>
+          <div>            
+            <button class="button" (click)="getFilterDiagram(0)" >Diagram - PIE<mat-icon>pie_chart</mat-icon></button>
+          </div>            
+          
         </div>
         <div class="diagrambutton">                
-          <button class="button" (click)="goDiagram()">Diagram - LINE<mat-icon>show_chart</mat-icon></button>
-          <div>
-            <label>Diagram megnyitása</label>
-          </div>
+          <button class="button" (click)="getFilterDiagram(1)">Diagram - LINE<mat-icon>show_chart</mat-icon></button>
+         
         </div>
         <div class="diagrambutton">               
-          <button class="button" (click)="goDiagram()">Diagram - BAR<mat-icon>table_chart</mat-icon></button>
-          <div>
-            <label>Diagram megnyitása</label>
-          </div>
+          <button class="button" (click)="getFilterDiagram(2)">Diagram - BAR<mat-icon>table_chart</mat-icon></button>
+         
         </div>
+        <div>  
+          <p>Iframe : </p>        
+          <p>{{this.iframe}}</p>
+         </div>
       </div>
 
       <div class="content6">
