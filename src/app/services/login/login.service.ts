@@ -38,16 +38,6 @@ export class LoginService {
   constructor(private httpClient: HttpClient, private config: ConfigService,
     private router: Router, private keycloakService: KeycloakService) {
     this.url = this.config.config.AuthUrl;
-    try {
-      this.keycloakService.isLoggedIn().then((loggedIn) => {
-        if (loggedIn) {
-          this.getUserData();
-        }
-      });
-    }
-    catch (e: any) {
-      console.log("e", e);
-    }
     keycloakService.keycloakEvents$.subscribe({
       next: (e) => {
         if (e.type == KeycloakEventType.OnTokenExpired) {

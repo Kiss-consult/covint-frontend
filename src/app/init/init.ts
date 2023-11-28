@@ -14,8 +14,10 @@ export function initializeKeycloak(
           clientId: "covint-auth"
         },
         initOptions: {
-          checkLoginIframe: false
+          checkLoginIframe: false,
+          onLoad: "check-sso"
         },
+        loadUserProfileAtStartUp: true
       });
     }
 }
