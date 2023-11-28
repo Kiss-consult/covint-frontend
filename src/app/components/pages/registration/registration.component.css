@@ -1,11 +1,6 @@
 .container{
-    padding-top: 0;
-    justify-content: space-between;
-    padding-left: 15px;
-    padding-right: 15px;
-    padding-bottom: 45px;    
+    padding-top: 0;        
 }
-
 
 .form-group2{
     display: flex;
@@ -30,21 +25,16 @@
     opacity: 0.5;
 }
 
-
 #okebutton{
     margin-left: 0;
     box-shadow: 0 0 0 20px white;
     margin-top: 60px;
 }
 
-.reg-container {
-    justify-content: start;
-    display: flex;
-    max-width: 100%;
-    width: 63.75%;
-    margin-left: 20%;
-    margin-right: 30%;
-    margin-top: 0;
+.container2{
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); 
+    justify-content: center; 
 }
 
 .form-group {
@@ -52,15 +42,13 @@
     flex-direction: column;
     align-items: center;
     background: rgb(224,224,224);
-    background: linear-gradient(180deg, rgba(224,224,224,1) 80%, rgba(255,255,255,0) 100%);
-    padding-left: 3.4%;
-    padding-right: 3.4%;
+    background: linear-gradient(180deg, rgba(224,224,224,1) 80%, rgb(255, 255, 255) 100%);
     padding-bottom: 60px;
 }
 
 .form-group:nth-child(even) {
     background: rgb(240,240,240);
-    background: linear-gradient(180deg, rgba(240,240,240,1) 80%, rgba(255,255,255,0) 100%);
+    background: linear-gradient(180deg, rgba(240,240,240,1) 80%, rgb(255, 255, 255) 100%);
 }
 
 .text {

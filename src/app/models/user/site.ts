@@ -1,8 +1,8 @@
 export class Site {
    
     City: string = "";
-    PostCode: number = 0;
+    PostCode: number ;
     Street: string = "";
-    HouseNumber: number = 0;
+    HouseNumber: number ;
 
 }

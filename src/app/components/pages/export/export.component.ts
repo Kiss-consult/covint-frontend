@@ -25,6 +25,8 @@ import { Observable } from 'rxjs/internal/Observable';
 
 export class ExportComponent  {
 
+  timeActive: boolean = false;
+  relativtimeActive: boolean = false;
   markerActive: boolean = false;
   filterActive: boolean = false;
   filter: Filter = new Filter();
@@ -55,6 +57,8 @@ export class ExportComponent  {
 
   diagramtype : string = '';
 
+
+  
   toggleContent(contentType: string) {
     if (contentType === 'marker') {
       this.markerActive = true;
@@ -63,6 +67,18 @@ export class ExportComponent  {
       this.markerActive = false;
       this.filterActive = true;
       this.getFilters();
+    }
+
+
+    
+    if (contentType === 'time') {
+      this.timeActive = true;
+      this.relativtimeActive = false;
+      console.log("Dátumot választottam");
+    } else if (contentType === 'relativtime') {
+      this.timeActive = false;
+      this.relativtimeActive = true;
+      console.log("Relativ dátumot választottam");
     }
 
   }

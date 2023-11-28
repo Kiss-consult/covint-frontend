@@ -1,139 +1,9 @@
-.sexclass{
-    display: block;
-    flex-direction: column;
-    margin-right: 200px;
-    margin-bottom: 20px;
-}
-.relativeclass{
-    display: block;
-    flex-direction: column;
-    margin-right:400px;
-    margin-bottom: 20px;
-}
-.source{    
-    margin-top: 20px;
-    margin-right: 200px;
-    margin-bottom: 20px;
-}
-
-.source2{
-    margin-bottom: 60px;
-    align-items: flex-start;
-    border-right: solid 4px #b8b8b8a6;
-    padding-right: 90px;
-    padding-top: 40px;
-}
-
-#source{
-    display: flex;
-    width: 200px;
-}
-
-button {
-    margin: 0;
-    margin-left: 0  ;
-}
-
-.exportbutton{    
-    margin-left: 20%; 
-    margin-top: 40px;
-    text-align: center;
-}
-.ratestbutton{    
-    margin-top: 40px;
-    text-align: center;   
-}
-
-.savebutton{
-    margin-top: 40px;
-}
-.addedtext { 
-    margin-top: 20px;
-    padding: 0;
-  }
-
-#text00 {
-    border: 1px solid #42a160;
-    border-radius: 5px;
-    width: 87%;
-    height: 40px;
-    margin-left: 20px;
-    padding: 0;
-}
-
-.ageclass{
-    display: block;
-    flex-direction: column;
-    margin-right: 50px;
-    margin-bottom: 20px;
-}
-
-.text{
-    margin: 0;  
-    display: flex;
-}
-
-.validclass{
-    display: flex;
-    flex-direction: column;
-    
-}
-
-.markerclass{
-    display: block;
-    flex-direction: column;
-    margin-bottom: 40px;
-}
-
-#markers{
-    margin-right: 20px;
-}
-
-#agefrom{
-    width: 200px;
-    margin-right: 5px;
-}
-
-#ageto{
-    width: 200px;
-    margin-right: 5px;
-}
-
 .table {
     height: auto;
-    margin-bottom: 40px;
-    margin-top: 40px;
-}
-
-#dateto{
-    margin-left:10px;
-    margin-right: 2px;
-}
-
-#datefrom{
-    margin-right: 2px;
-}
-
-#okebutton {
-    margin-left: auto;
-    float: left;
-    margin-bottom: 20px;
-    margin-top: 40px;
-}
-
-#markerbutton{
-    margin-right: 45px;    
-    margin-bottom: 40px;
-    z-index: 0;
-}
-#diagramrbutton{
-    margin-right: 45px;    
-    margin-bottom: 40px;
-    z-index: 0;
-}
-#addmarkerbutton{
-    margin-left: 25px;
-    margin-bottom: 40px;
+    margin-bottom: 40px;    
+    padding: 15px; 
+    background: rgba(224,224,224);
+    background: linear-gradient(180deg, rgba(224,224,224,1) 40%, rgba(255,255,255,0) 80%);
 }
 
 .active-button {
@@ -148,6 +18,111 @@ button {
     margin-top: 60px;
 }
 
-#filtersavebutton{
-    margin-left: 25px;
+.content{
+    display: flex;
+    background: rgba(224,224,224);
+    justify-content: space-between;
+    padding-left: 60px;
+    padding-right: 60px;
+}
+
+.container{
+    padding-top: 0;
+}
+
+.container2{    
+    padding-top: 60px;    
+    flex-direction: column;
+    align-items: center;    
+    padding-bottom: 40px;
+}
+
+#markerbutton{
+    margin-right: 20px;
+}
+
+.content2{
+    display: flex;
+    left: 0;
+    right: 0;
+    justify-content: space-between;
+}
+
+.content3{
+    margin-top: 60px;
+    padding-right: 60px;
+    padding-left: 60px;
+}
+
+.markerbno2{
+    display: flex; 
+    border-bottom: solid 3px #0800ff; 
+    align-items: center; 
+    padding: 10px; 
+    margin-top: 5px;
+    border-start-end-radius: 7px;
+    border-start-start-radius: 7px;
+    color: black;    
+}
+
+.markerbno{
+    display: flex; 
+    border-bottom: solid 3px #848484; 
+    align-items: center; 
+    padding: 10px; 
+    margin-top: 5px;
+    border-start-end-radius: 7px;
+    border-start-start-radius: 7px;
+    color: black;    
+}
+
+#okebutton{
+    margin-left: 0;
+    margin-top: 60px;
+    box-shadow: 0 0 0 20px rgba(224,224,224);
+}
+
+.container4{
+    background: rgb(224,224,224);
+    padding-right: 60px;
+    padding-left: 60px;
+    padding-bottom: 40px;
+    padding-top: 40px;
+}
+
+.diagrambutton{
+    margin-bottom: 20px;
+    margin-top: 20px;
+    text-align: center;
+    justify-content: center;
+}
+
+.content6{    
+    justify-content: space-evenly;
+    background: rgba(224,224,224);
+    background: linear-gradient(180deg, rgba(255,255,255,0)0%, rgba(224,224,224) 30%, rgba(224,224,224) 70%, rgba(255,255,255,0) 100%);
+    padding-right: 60px;
+    padding-left: 60px;
+    padding-bottom: 40px;
+    padding-top: 60px;
+    text-align: center;
+}
+
+.container5{  
+    justify-content: center;  
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+}
+
+.content6:nth-child(even) {
+    background: rgba(240,240,240,1);
+    background: linear-gradient(180deg, rgba(255,255,255,0) 00%, rgba(240,240,240,1) 30%, rgba(240,240,240,1) 70%, rgba(255,255,255,0) 100%);
+}
+
+#timeradioTime{
+    margin-left: 20px;
+}
+
+#timeradioRelative{
+    margin-left: 20px;
 }
