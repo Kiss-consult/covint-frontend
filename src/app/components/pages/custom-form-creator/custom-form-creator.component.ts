@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { QuestionBase, TextQuestion, YesNoQuestion, MultiSelectQuestion, yesnohospitalQuestion } from './form-questions.model';
 import { CommonModule } from '@angular/common';
-import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
+import { CdkDragDrop, CdkDropList, CdkDrag, moveItemInArray } from '@angular/cdk/drag-drop';
 import { ColorPickerModule } from 'ngx-color-picker';
 import { FormsModule } from '@angular/forms';
 
@@ -9,7 +9,7 @@ import { FormsModule } from '@angular/forms';
 @Component({
   selector: 'app-custom-form-creator',
   standalone: true,
-  imports: [CommonModule, FormsModule,ColorPickerModule ],
+  imports: [CommonModule, FormsModule,ColorPickerModule],
   templateUrl: './custom-form-creator.component.html',
   styleUrls: ['./custom-form-creator.component.css']
 })
@@ -38,12 +38,14 @@ export class CustomFormCreatorComponent {
   }
   
 
-
+  drop(event: CdkDragDrop<QuestionBase[]>) {
+    moveItemInArray(this.selectedQuestions, event.previousIndex, event.currentIndex);
+}
   
   addQuestion(type: string) {
       switch (type) {
           case 'text':
-              this.selectedQuestions.push(new TextQuestion('Kérjük adja meg a korát'));
+              this.selectedQuestions.push(new TextQuestion('Kérjük adja meg a korát:'));
               break;
           case 'yesno':
               this.selectedQuestions.push(new YesNoQuestion('Elkapta a COVID vírust az elmúlt egy évben?'));
@@ -52,7 +54,7 @@ export class CustomFormCreatorComponent {
               this.selectedQuestions.push(new yesnohospitalQuestion('Az elmúlt egy évben került korházba COVID miatt?'));
               break;
           case 'multiselect':
-              const newMultiSelectQuestion = new MultiSelectQuestion('Az alábbi lehetőségek közül kérjük válassza ki milyen betegségekkel rendelkezik', ['Elhízás', 'Asztma','Szívbetegség'], true);
+              const newMultiSelectQuestion = new MultiSelectQuestion('Az alábbi lehetőségek közül kérjük válassza ki milyen betegségekkel rendelkezik:', ['Elhízás', 'Asztma','Szívbetegség'], true);
               this.selectedQuestions.push(newMultiSelectQuestion);
               break;
 
@@ -67,39 +69,86 @@ export class CustomFormCreatorComponent {
   }
   
 renderForm() {
-  let formHtml = '<form action="" method="post">';
+  let formHtml = '<form style="background-color: id="generatedForm"' + this.backgroundColor + '; color: ' + this.textColor + ';">';
 
   this.selectedQuestions.forEach(question => {
-      formHtml += `<label for="${question.id}">${question.label}</label>`;
-
       if (question.type === 'text') {
-          formHtml += `<input type="text" id="${question.id}" name="${question.id}"><br>`;
-      } else if (question.type === 'yesno') {
-          const yesNoQuestion = question as YesNoQuestion;
-          yesNoQuestion.options.forEach(option => {
-              formHtml += `<input type="radio" id="${question.id}-${option}" name="${question.id}" value="${option}"><label for="${question.id}-${option}">${option}</label>`;
-          });
-          formHtml += `<br>`;
+          formHtml += '<label style="color: ' + this.textColor + ';">' + question.label + '</label>';
+          formHtml += '<input type="text" style="background-color: ' + this.backgroundColor + '; color: ' + this.textColor + ';" name="' + question.id + '">';
+      } else if (question.type === 'yesno' || question.type === 'yesnohospital') {
+          formHtml += '<label style="color: ' + this.textColor + ';">' + question.label + '</label>';
+          formHtml += '<input type="radio" name="' + question.id + '" value="Yes"> Yes ';
+          formHtml += '<input type="radio" name="' + question.id + '" value="No"> No';
       } else if (question.type === 'multiselect') {
-        this.generatedFormHtml += `<label>${question.label}</label>`;
-        this.generatedFormHtml += `<select name="${question.id}" multiple>`;
-        const MultiSelectQuestion = question as MultiSelectQuestion;
-        MultiSelectQuestion.options.forEach(option => {
-            this.generatedFormHtml += `<option value="${option}">${option}</option>`;
-        });
-
-        this.generatedFormHtml += `</select>`;
-    }
-
+          formHtml += '<label style="color: ' + this.textColor + ';">' + question.label + '</label>';
+          const MultiSelectQuestion = question as MultiSelectQuestion;
+          MultiSelectQuestion.options.forEach(option => {
+              formHtml += '<input type="checkbox" name="' + question.id + '" value="' + option + '"> ' + option;
+          });
+      }
   });
+
 
   formHtml += '<input type="submit" value="Submit">';
   formHtml += '</form>';
-  this.generatedFormHtml = formHtml;
+  formHtml += `
+        <script>
+        function submitForm() {
+            var formElement = document.getElementById('generatedForm'); 
+            var formData = new FormData(formElement);
+            var formValues = {};
+
+            formData.forEach(function(value, key) {
+                formValues[key] = value;
+            });
+
+            
+            fetch('ENDPOINT_URL', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(formValues),
+            })
+            .then(function(response) { return response.json(); })
+            .then(function(data) { console.log('Success:', data); })
+            .catch(function(error) { console.error('Error:', error); });
+        }
+        </script>
+    `;
+
+    this.generatedFormHtml += '<button type="button" onclick="submitForm()">Submit</button>';
+    this.generatedFormHtml = formHtml;
 
 }
+sendFormData(data: any) {
+  fetch('YOUR_ENDPOINT_URL', {
+      method: 'POST',
+      headers: {
+          'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(data),
+  })
+  .then(response => response.json())
+  .then(data => {
+      console.log('Success:', data);
+  })
+  .catch((error) => {
+      console.error('Error:', error);
+  });
+}
+submitForm() {
+  const formElement = document.createElement('form');
+  formElement.innerHTML = this.generatedFormHtml;
+  const formData = new FormData(formElement);
+  const formValues = {};
 
+  formData.forEach((value, key) => {
+ //     formValues[key] = value;
+  });
 
+  this.sendFormData(formValues);
+}
 
 //Drag and drop cuccok későbbre:
 isMultiSelectQuestion(question: QuestionBase): question is MultiSelectQuestion {
@@ -138,9 +187,6 @@ removeSelection(question: MultiSelectQuestion, option: string) {
   }
 }
 
-drop(event: CdkDragDrop<QuestionBase[]>) {
-  moveItemInArray(this.selectedQuestions, event.previousIndex, event.currentIndex);
-}
 
 
 
