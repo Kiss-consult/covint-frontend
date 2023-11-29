@@ -116,6 +116,7 @@ ngAfterViewInit() {
 
   private checkRequiredFields(): boolean {
 
+    
   if (this.filter.Sex === null || this.filter.Sex === "") {
     alert("A 'Nem' mező kitöltése kötelező");
     return false;

@@ -33,13 +33,13 @@
           <label class="text"> Halálozási % <s>*</s></label>
         </div>
         <div>        
-          <input class="droptextbox" type="number" id="deadpercent" name="deadpercent" min="0" max="1" [(ngModel)]="override.Dead" placeholder="12%" title="Kérem töltse ki a mezőt">    
+          <input class="droptextbox" type="number" id="deadpercent" name="deadpercent" min = '1' max = '100' [(ngModel)]="override.Dead" placeholder="12%" title="Kérem töltse ki a mezőt 1-100 ">    
         </div>  
         <div>
           <label class="text"> Kórházba kerülési % <s>*</s></label>
         </div>
         <div>
-          <input class="droptextbox" type="number" id="hosppercent" name="hosppercent" min="0" max="1" [(ngModel)]="override.Hospitalized" placeholder="34%" title="Kérem töltse ki a mezőt">
+          <input class="droptextbox" type="number" id="hosppercent" name="hosppercent" min = '1' max = '100' [(ngModel)]="override.Hospitalized" placeholder="34%" title="Kérem töltse ki a mezőt">
         </div>
       </div>
     </div>

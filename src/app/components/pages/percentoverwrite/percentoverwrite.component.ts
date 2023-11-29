@@ -39,9 +39,9 @@ export class PercentoverwriteComponent {
 
 
   public overridePercent() {
-    //if (!this.checkRequiredFields()) {
-    //  return;
-    //}
+    if (!this.checkRequiredFields()) {
+      return;
+    }
 
     this.backendService.insertOverride(this.override).subscribe(
       result => {
@@ -94,5 +94,22 @@ export class PercentoverwriteComponent {
  public removeMarker(illness: string) {
   this.override.Illnesses = this.override.Illnesses.filter(m => m !== illness);
 }
+private checkRequiredFields(): boolean {
+
+  if  (
+    (this.override.Dead  < 1 || this.override.Dead  > 100)
+  || (this.override.Hospitalized  < 1 || this.override.Hospitalized  > 100)
+  )
+   {
+    alert("A mező értéke 1-100 között lehetséges! ")
+    return false;
+  }
+    
+  return true;
+}
+
+
+
+
 
 }
