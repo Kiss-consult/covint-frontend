@@ -139,9 +139,18 @@ export class DefaultformarkersComponent {
       
       for (let i = 0; i <= this.defaults.length-1; i++) {
         console.log("eljut idaig", this.defaults[i], this.defaults[i].Dead )
-        if ((this.defaults[i].Dead === undefined) || (this.defaults[i].Hospitalized === undefined) || (this.defaults[i].Dead === null)||(this.defaults[i].Hospitalized === null)){
-          alert("Minden mező kitöltése kötelező! ")
+        if ((this.defaults[i].Dead === undefined)
+         || (this.defaults[i].Hospitalized === undefined) 
+        || (this.defaults[i].Dead === null)
+        ||(this.defaults[i].Hospitalized === null)
+
+        || (this.defaults[i].Dead  < 1 || this.defaults[i].Dead  > 100)
+        || (this.defaults[i].Hospitalized  < 1 || this.defaults[i].Hospitalized  > 100))
+        {
+          alert("Minden mező kitöltése kötelező! A mezők értéke 1 -100 között lehet! ")
           return false;
+          
+
         }
       }
       

@@ -63,14 +63,14 @@
       <ng-container matColumnDef="hospitalized">
         <th mat-header-cell class="mat-header-cell" *matHeaderCellDef>Halálozás</th>
         <td mat-cell class="mat-cell" *matCellDef="let default">
-          <input type="number" [(ngModel)]="default.Hospitalized" name="hospitalized" id="hospitalized" class="form-control">
+          <input type="number" [(ngModel)]="default.Hospitalized" min = '1' max = '100' name="hospitalized" id="hospitalized" class="form-control">
         </td>
       </ng-container>
     
       <ng-container matColumnDef="dead">
         <th mat-header-cell class="mat-header-cell" *matHeaderCellDef>Kórház</th>
         <td mat-cell class="mat-cell" *matCellDef="let default">
-          <input type="number" [(ngModel)]="default.Dead" name="dead" id="dead" class="form-control">
+          <input type="number" [(ngModel)]="default.Dead"  min = '1' max = '100' name="dead" id="dead" class="form-control">
         </td>
       </ng-container>
     
