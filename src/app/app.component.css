@@ -8,9 +8,9 @@
     border-top-left-radius: 7px;
     color: #ffffff;
     position: relative;
-    margin: 0; 
-    
+    margin: 0;     
   }
+
   .nav-link.active {
     background-color: #0080ff; 
     
@@ -43,9 +43,9 @@
 }
 
 #covint_logo{
-    width: 150px;
-    margin-right: 5%;
-    
+    min-width: 150px;
+    max-width: 150px;
+    margin-right: 5%;    
 }
  
 .navbar{
@@ -64,7 +64,7 @@
   
   .nav-link {
     text-decoration: none;
-    color: #333;
+    color: #000000;    
   }
   
   .dropdown {
@@ -80,14 +80,48 @@
     display: block;
   }
   
-  
-  
-  
-
-  
   ul, ol {
     list-style-type: none;
     padding: 0;
     margin: 0;
     text-align: center;
+  }
+
+
+
+/* Médialeképző: ha az ablak szélessége 1300px alá csökken */
+@media (max-width: 1300px) {
+  .navbar-nav {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    width: 150px;
+    background-color: #ffffff;
+    position: fixed;
+    height: auto;
+    margin-left: 0;
+    display: flex;
+    flex-direction: column;
+    top:122px;
+    border-left: 7px #0080ff solid;
+    left:0;
+    padding-top: 7px;
+    min-height: 400px;
+    z-index: 0;
+  }
+
+  .nav-item:hover{    
+    border-top-right-radius:0;
+    border-top-left-radius: 0;    
+  }
+
+  .nav-item.active a {
+    border-top-right-radius: 0;
+    border-top-left-radius: 0;    
+  }
+
+  .container{
+    margin-left:130px;
+  }
+  
   }

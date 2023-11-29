@@ -20,18 +20,6 @@
         <a href="/diagram" class="nav-link"  routerLink="diagram">Diagramok</a>
       </li>
       
-      <nav>
-        <ul class="nav" *ngIf="loginService.hasAnyGroup([portaladmin, portalvezeto, kutatoorvos])">
-          <li class="nav-item" routerLinkActive="active">
-            <a class="nav-link" >Felhasználók kezelése</a>
-            <ul class="dropdown">
-              <li><p class="nav-link" [routerLink]="['/addnewuser']" routerLinkActive="active">Új felhasználó hozzáadása</p></li>
-              <li><p class="nav-link" [routerLink]="['/acceptnewuser']" routerLinkActive="active">Új felhasználó elfogadása</p></li>
-              <li><p class="nav-link" [routerLink]="['/overrideuser']" routerLinkActive="active">Felhasználók</p></li>
-            </ul>
-          </li>
-        </ul>
-      </nav>
 
       <nav>
         <ul class="nav"  *ngIf="loginService.hasAnyGroup([portaladmin, portalvezeto, kutatoorvos])" >
@@ -54,9 +42,24 @@
       <li class="nav-item" routerLinkActive="active" *ngIf="loginService.hasAnyGroup([portaladmin, portalvezeto, kutatoorvos])" >
         <a href="/email-template" class="nav-link"   routerLink="email-template">Email template</a>
       </li>
+
+      <nav>
+        <ul class="nav" *ngIf="loginService.hasAnyGroup([portaladmin, portalvezeto, kutatoorvos])">
+          <li class="nav-item" routerLinkActive="active">
+            <a class="nav-link" >Felhasználók kezelése</a>
+            <ul class="dropdown">
+              <li><p class="nav-link" [routerLink]="['/addnewuser']" routerLinkActive="active">Új felhasználó hozzáadása</p></li>
+              <li><p class="nav-link" [routerLink]="['/acceptnewuser']" routerLinkActive="active">Új felhasználó elfogadása</p></li>
+              <li><p class="nav-link" [routerLink]="['/overrideuser']" routerLinkActive="active">Felhasználók</p></li>
+            </ul>
+          </li>
+        </ul>
+      </nav>
     </ul>
 
-    <ul class="navbar-nav ml-auto" *ngIf="!loginService.isLoggedIn()">      
+
+    
+    <ul class="navbar-nav2 ml-auto" *ngIf="!loginService.isLoggedIn()">      
       
       <li class="nav-item" routerLinkActive="active">
         <a href="/registration" class="nav-link"  routerLink="registration">Regisztráció</a>
@@ -68,10 +71,10 @@
     
     </ul>
 
-    <ul class="navbar-nav ml-auto" *ngIf="loginService.isLoggedIn()">      
+    <ul class="navbar-nav2 ml-auto" *ngIf="loginService.isLoggedIn()">      
       
       <li>
-        <a class="nav-link" style="color: black;">{{ loginService.getUsername() }}</a>
+        <a class="nav-link" id="emailprofil">{{ loginService.getUsername() }}</a>
       </li>
      
       <li class="nav-item" routerLinkActive="active">

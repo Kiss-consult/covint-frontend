@@ -24,7 +24,7 @@ table {
     display: flex;
     background: rgba(224,224,224);
     background: linear-gradient(180deg, rgba(224,224,224,1) 60%, rgba(255,255,255,0) 90%);    
-    justify-content: space-between;
+    justify-content: space-around;
     padding-left: 60px;
     padding-right: 60px;
     padding-top: 60px;     
