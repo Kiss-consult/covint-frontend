@@ -81,7 +81,11 @@ export class RegistrationComponent {
           }
           if (mess === "Phone number must start with +36 or 06") {
             alert("Sikertelen regisztráció! \nA telefonszám formátuma +36.... vagy  06....    ")
-            console.log("már regisztártak ezzel a névvel")
+            console.log("rossz telefonszám")
+          }
+          if (mess === "error creating user: 400 Bad Request: Password policy not met") {
+            alert("Sikertelen regisztráció! \nA jeszó minimum 8 karakter és tartalmaznia kell:  \nkis és nagy betűt, számot és extra karatert! ")
+            console.log("rossz jelszó")
           }
           //"Phone number must start with +36 or 06"
           //alert("sikertelen regisztráció ");
