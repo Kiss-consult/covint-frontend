@@ -25,6 +25,12 @@ export class ChangepwdComponent {
 
   public changePassword(byAdmin: boolean) {
     this.byAdmin = byAdmin;
+
+
+    if (!this.checkRequiredFields()) {
+      return;
+    }
+
     if (this.byAdmin == true)
     {
       
@@ -46,12 +52,32 @@ export class ChangepwdComponent {
         this.loginService.isLoggedIn()
       } else {
         console.log('Jelszócsere sikertelen');
-        alert('Jelszócsere sikertelen');
+      
+        let mess = result.unwrapErr().error.Error;
+          
+          if (mess === "error changing password: 400 Bad Request: Could not update user!") {
+            alert("Sikertelen jelszócsere! \nA jeszó minimum 8 karakter és tartalmaznia kell:  \nkis és nagy betűt, számot és extra karatert! ")
+            console.log("rossz jelszó")
+          }
       }
     });
   }
 
+  private checkRequiredFields(): boolean {
 
+    
+    if (this.newpassword === "") {
+      alert("A 'Jelszó' mező kitöltése kötelező!");
+      return false;
+    }
+    if (this.confirmation!== this.newpassword) {
+      alert("A 'Jelszó ismét ' mezőnek meg kell egyeznie a 'jelszó' mezővel!");
+      return false;
+    }
+   
+
+    return true;
+  }
 
 
   
