@@ -3,6 +3,8 @@ import { Site } from 'src/app/models/user/site';
 import { User } from 'src/app/models/user/user';
 import { LoginService } from 'src/app/services/login/login.service';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-registration',
@@ -35,7 +37,10 @@ export class RegistrationComponent {
     }
 
   }
-  constructor(private loginService: LoginService, private fb: FormBuilder) {
+  goBackToPrevPage(): void {
+    this.location.back();
+  }
+  constructor(private loginService: LoginService, private fb: FormBuilder, private router: Router,private location: Location) {
     // this.user.IsCompany = false;
     //console.log("Iscompany start:", this.user.IsCompany)
     this.genderForm = this.fb.group({
@@ -89,10 +94,12 @@ export class RegistrationComponent {
           }
           //"Phone number must start with +36 or 06"
           //alert("sikertelen regisztráció ");
+         
           return;
         }
         alert("Sikeres regisztráció!\nRegisztrációját rögzítettük!\nA regisztrációját ellenőrzés után 3 napon belül elfogadjuk,\namiről emailt küldünk.\nTürelmét köszönjük! ");
         console.log("Successfully inserted into database")
+        this.router.navigate(['/home']);
         this.site = new Site();
         this.user = new User();
       });

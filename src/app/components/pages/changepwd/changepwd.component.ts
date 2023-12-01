@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { KutatoOrvos, Orvos, PortalAdmin, PortalVezeto } from 'src/app/models/group/group';
 import { LoginService } from 'src/app/services/login/login.service';
-
+import { Location } from '@angular/common'
 @Component({
   selector: 'app-changepwd',
   templateUrl: './changepwd.component.html',
@@ -20,8 +20,10 @@ export class ChangepwdComponent {
   portaladmin= PortalAdmin;
   portalvezeto = PortalVezeto;
 
-
-  constructor(public loginService: LoginService, private router: Router) {}
+  goBackToPrevPage(): void {
+    this.location.back();
+  }
+  constructor(public loginService: LoginService, private router: Router,private location: Location) {}
 
   public changePassword(byAdmin: boolean) {
     this.byAdmin = byAdmin;

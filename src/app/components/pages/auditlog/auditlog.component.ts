@@ -3,7 +3,7 @@ import { MatTableDataSource } from '@angular/material/table';
 import { Auditlog } from 'src/app/models/auditlog/auditlog';
 import { BackendService } from 'src/app/services/backend/backend.service';
 import { MatPaginator } from '@angular/material/paginator';
-
+import { Location } from '@angular/common'
 
 
 @Component({
@@ -29,8 +29,10 @@ illnessFilter(event: Event) {
   this.dataSource.filter = filterValue.trim().toLowerCase();
 }
 
-
-  constructor(private backendService: BackendService ) {
+goBackToPrevPage(): void {
+  this.location.back();
+}
+  constructor(private backendService: BackendService,private location: Location ) {
 
 
       

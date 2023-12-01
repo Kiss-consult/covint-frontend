@@ -6,7 +6,7 @@ import { NewIllness } from 'src/app/models/newillness/newillness';
 import { BackendService } from 'src/app/services/backend/backend.service';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatPaginator } from '@angular/material/paginator';
-
+import { Location } from '@angular/common'
 @Component({
   selector: 'app-addnewillness',
   templateUrl: './addnewillness.component.html',
@@ -34,10 +34,12 @@ export class AddnewillnessComponent {
       return cellValue.includes(this.searchValue.toLowerCase());
     });
   }
-
+  goBackToPrevPage(): void {
+    this.location.back();
+  }
   // This is only stored for faster access to the illnesses by BNO code
   //illnessesByBno: Map<string, Illness> = new Map();
-  constructor(private backendService: BackendService) {
+  constructor(private backendService: BackendService,private location: Location) {
     this.backendService.hello().subscribe((data) => {
       console.log(data);
     });

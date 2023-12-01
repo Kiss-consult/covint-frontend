@@ -5,8 +5,8 @@ import { User } from 'src/app/models/user/user';
 import { LoginService } from 'src/app/services/login/login.service';
 import { FormBuilder, FormGroup,  ReactiveFormsModule ,Validators } from '@angular/forms';
 import { UserData } from 'src/app/models/userdata/userdata';
-import { ActivatedRoute } from '@angular/router';
-
+import { ActivatedRoute, Router } from '@angular/router';
+import { Location } from '@angular/common'
 @Component({
   selector: 'app-updateuser',
   templateUrl: './updateuser.component.html',
@@ -44,7 +44,11 @@ export class UpdateuserComponent {
     }
 
     }
-  constructor(public loginService: LoginService,private fb: FormBuilder, private _Activatedroute:ActivatedRoute
+    goBackToPrevPage(): void {
+      this.location.back();
+    }
+  constructor(public loginService: LoginService,private fb: FormBuilder,
+     private _Activatedroute:ActivatedRoute,private router: Router,private location: Location
   )  {
    // this.user.IsCompany = false;
     //console.log("Iscompany start:", this.user.IsCompany)
@@ -122,6 +126,7 @@ export class UpdateuserComponent {
           return;
         }
         alert("Sikeres update");
+        this.router.navigate(['/overrideuser']);
         console.log("Successfully updated  database")
         console.log(this.user)
         this.site = new Site();

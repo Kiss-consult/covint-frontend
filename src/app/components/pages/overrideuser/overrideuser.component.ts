@@ -8,7 +8,7 @@ import { UserData } from 'src/app/models/userdata/userdata';
 import { LoginService } from 'src/app/services/login/login.service';
 import { BackendService } from 'src/app/services/backend/backend.service';
 import { KutatoOrvos, Orvos, PortalAdmin, PortalVezeto } from 'src/app/models/group/group';
-
+import { Location } from '@angular/common'
 
 
 @Component({
@@ -42,7 +42,9 @@ export class OverrideuserComponent {
     this.getUserAttributes(userdata.id);
     
   }
-
+  goBackToPrevPage(): void {
+    this.location.back();
+  }
   displayedColumns: string[] = ['Név',"Jelszócsere","Adatmódosítás"]; // Itt adhatod meg az oszlopok neveit
   dataSource: MatTableDataSource<UserData>;
   @ViewChild('paginator') paginator: MatPaginator;
@@ -58,7 +60,7 @@ export class OverrideuserComponent {
     const filterValue = (event.target as HTMLInputElement).value;
     this.dataSource.filter = filterValue.trim().toLowerCase();
   }
-  constructor(public loginService: LoginService, private router: Router,private _Activatedroute:ActivatedRoute) {
+  constructor(public loginService: LoginService, private router: Router,private _Activatedroute:ActivatedRoute,private location: Location) {
 
 
     this.loginService.getAllUsers().subscribe(

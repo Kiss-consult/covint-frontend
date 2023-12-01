@@ -3,7 +3,7 @@ import { Router } from '@angular/router';
 import { User } from 'src/app/models/user/user';
 import { UserData } from 'src/app/models/userdata/userdata';
 import { LoginService } from 'src/app/services/login/login.service';
-
+import { Location } from '@angular/common'
 @Component({
   selector: 'app-profile',
   templateUrl: './profile.component.html',
@@ -19,8 +19,10 @@ export class ProfileComponent {
   currentpassword: string = "";
   newpassword: string = "";
   confirmation: string = "";
-
-  constructor(public loginService: LoginService, private router: Router) { 
+  goBackToPrevPage(): void {
+    this.location.back();
+  }
+  constructor(public loginService: LoginService, private router: Router,private location: Location) { 
 
   
     let id = this.loginService.getUserId();

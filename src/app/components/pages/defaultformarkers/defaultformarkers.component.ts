@@ -4,7 +4,7 @@ import { Default } from 'src/app/models/default/default';
 import { BackendService } from 'src/app/services/backend/backend.service';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatPaginator } from '@angular/material/paginator';
-
+import { Location } from '@angular/common'
 @Component({
   selector: 'app-defaultformarkers',
   templateUrl: './defaultformarkers.component.html',
@@ -31,8 +31,10 @@ export class DefaultformarkersComponent {
       return cellValue.includes(this.searchValue.toLowerCase());
     });
   }
-  
-  constructor(private backendService: BackendService) {
+  goBackToPrevPage(): void {
+    this.location.back();
+  }
+  constructor(private backendService: BackendService,private location: Location) {
     // query all the illnesses formn the database
     this.backendService.getMarkers().subscribe(
       result => {
