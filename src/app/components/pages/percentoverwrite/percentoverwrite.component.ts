@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { Override } from 'src/app/models/override/override';
 import { BackendService } from 'src/app/services/backend/backend.service';
-
+import { Location } from '@angular/common'
 @Component({
   selector: 'app-percentoverwrite',
   templateUrl: './percentoverwrite.component.html',
@@ -13,9 +13,11 @@ export class PercentoverwriteComponent {
   override: Override = new Override;
   markers: string[] = [];
   marker: string = '';
+  goBackToPrevPage(): void {
+    this.location.back();
+  }
 
-
-  constructor(private backendService: BackendService) {
+  constructor(private backendService: BackendService,private location: Location) {
     this.backendService.getMarkers().subscribe(
       result => {
         if (result.isErr()) {

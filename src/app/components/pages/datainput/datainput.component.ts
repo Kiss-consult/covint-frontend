@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { Case } from 'src/app/models/case/case';
 import { Illness } from 'src/app/models/illness/illness';
-
+import { Location } from '@angular/common'
 import { BackendService } from 'src/app/services/backend/backend.service';
 
 @Component({
@@ -19,8 +19,10 @@ export class DatainputComponent {
   markers: string[] = [];
   // This is only stored for faster access to the illnesses by BNO code
   illnessesByBno: Map<string, Illness> = new Map();
-
-  constructor(private backendService: BackendService) {
+  goBackToPrevPage(): void {
+    this.location.back();
+  }
+  constructor(private backendService: BackendService,private location: Location) {
     // query all the illnesses formn the database
     this.backendService.getMarkers().subscribe(
       result => {

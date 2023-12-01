@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { Site } from 'src/app/models/user/site';
 import { User } from 'src/app/models/user/user';
 import { LoginService } from 'src/app/services/login/login.service';
-
+import { Location } from '@angular/common'
 @Component({
   selector: 'app-addnewuser',
   templateUrl: './addnewuser.component.html',
@@ -32,7 +32,10 @@ export class AddnewuserComponent {
     }
 
   }
-  constructor(private loginService: LoginService) {
+  goBackToPrevPage(): void {
+    this.location.back();
+  }
+  constructor(private loginService: LoginService,private location: Location) {
     
   }
 

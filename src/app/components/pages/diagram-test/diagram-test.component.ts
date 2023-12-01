@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { Orvos, PortalAdmin, KutatoOrvos, PortalVezeto} from 'src/app/models/group/group'
 import { LoginService } from 'src/app/services/login/login.service';
-
+import { Location } from '@angular/common'
 @Component({
   selector: 'app-diagram-test',
   templateUrl: './diagram-test.component.html',

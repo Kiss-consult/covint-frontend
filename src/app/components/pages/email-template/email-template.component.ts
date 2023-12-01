@@ -13,7 +13,7 @@ import { SavedFilter } from 'src/app/models/savedfilter/savedfilter';
 import { GroupGuard } from 'src/app/guards/group.guard';
 import { KutatoOrvos, Orvos, PortalAdmin, PortalVezeto } from 'src/app/models/group/group';
 import { LoginService } from 'src/app/services/login/login.service';
-
+import { Location } from '@angular/common'
 import { ActivatedRouteSnapshot, RouterStateSnapshot, UrlTree, Router } from '@angular/router';
 import { Observable } from 'rxjs/internal/Observable';
 
@@ -22,8 +22,13 @@ import { Observable } from 'rxjs/internal/Observable';
   templateUrl: './email-template.component.html',
   styleUrls: ['./email-template.component.css']
 })
+
 export class EmailTemplateComponent {
-  constructor( public loginService: LoginService) {
+
+  goBackToPrevPage(): void {
+    this.location.back();
+  }
+  constructor( public loginService: LoginService,private location: Location) {
    
     
   }

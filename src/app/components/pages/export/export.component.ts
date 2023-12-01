@@ -16,6 +16,8 @@ import { LoginService } from 'src/app/services/login/login.service';
 import { ActivatedRouteSnapshot, RouterStateSnapshot, UrlTree, Router } from '@angular/router';
 import { Observable } from 'rxjs/internal/Observable';
 import { Diagram } from 'src/app/models/diagram/diagram';
+import { Location } from '@angular/common'
+
 
 @Component({
   selector: 'app-export',
@@ -83,7 +85,12 @@ export class ExportComponent  {
     }
 
   }
-  constructor(private backendService: BackendService, public loginService: LoginService, private router: Router,   private changeDetector: ChangeDetectorRef) {
+
+  goBackToPrevPage(): void {
+    this.location.back();
+  }
+  constructor(private backendService: BackendService, public loginService: LoginService, private router: Router,  
+     private changeDetector: ChangeDetectorRef,private location: Location) {
    
     this.backendService.getMarkers().subscribe(
       result => {
