@@ -40,6 +40,9 @@
         <a href="/auditlog" class="nav-link"   routerLink="auditlog">AuditLog</a>
       </li>
       <li class="nav-item" routerLinkActive="active" *ngIf="loginService.hasAnyGroup([portaladmin, portalvezeto, kutatoorvos])" >
+        <a href="/form" class="nav-link"   routerLink="form">Form</a>
+      </li>
+      <li class="nav-item" routerLinkActive="active" *ngIf="loginService.hasAnyGroup([portaladmin, portalvezeto, kutatoorvos])" >
         <a href="/email-template" class="nav-link"   routerLink="email-template">Email template</a>
       </li>
 

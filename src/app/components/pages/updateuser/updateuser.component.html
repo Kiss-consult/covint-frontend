@@ -119,7 +119,7 @@
        <div>
           <label class="text" for="site">Város <s>*</s></label>
          
-          <input class="droptextbox" type="text" id="city" name="city" [(ngModel)]="site.City" required placeholder="Budapest" title="Kérem töltse ki a mezőt">
+          <input class="droptextbox" type="text" id="city" name="city" [(ngModel)]="user.Site.City" required placeholder="Budapest" title="Kérem töltse ki a mezőt">
         </div>
       </div>
       
@@ -127,7 +127,7 @@
         <div>
           <label class="text" for="postcode">Irányítószám <s>*</s></label>
         
-          <input class="droptextbox" type="number" id="postcode" name="postcode" [(ngModel)]="site.PostCode" required placeholder="1007" title="Kérem töltse ki a mezőt">
+          <input class="droptextbox" type="number" id="postcode" name="postcode" [(ngModel)]="user.Site.PostCode" required placeholder="1007" title="Kérem töltse ki a mezőt">
         </div>
       </div>  
   
@@ -135,7 +135,7 @@
         <div>
           <label class="text" for="street">Utca ( közterület) neve <s>*</s></label>
         
-          <input class="droptextbox" type="text" id="street" name="street" [(ngModel)]="site.Street" required placeholder="???" title="Kérem töltse ki a mezőt">
+          <input class="droptextbox" type="text" id="street" name="street" [(ngModel)]="user.Site.Street" required placeholder="???" title="Kérem töltse ki a mezőt">
         </div>
       </div>
 
@@ -143,7 +143,7 @@
         <div>
           <label class="text" for="housenumber">Házszám <s>*</s></label>
         
-          <input class="droptextbox" type="number" id="postcode" name="postcode" [(ngModel)]="site.HouseNumber" required placeholder="34" title="Kérem töltse ki a mezőt">
+          <input class="droptextbox" type="number" id="postcode" name="postcode" [(ngModel)]="user.Site.HouseNumber" required placeholder="34" title="Kérem töltse ki a mezőt">
         </div>
       </div> 
 
