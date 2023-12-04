@@ -1,9 +1,11 @@
-<h1>Marker Szűrő</h1>
+<h1>Marker Szűrő
+  <button  (click)="goBackToPrevPage()" >Vissza</button> 
+</h1>
 <h2>Markerek szűrhetőségének beállitása</h2>
   <div class="container">
    <!--TABLE-->
    
-   <div >
+   <div class="filtermarker" >
     <mat-form-field>
         <mat-label>Keresés</mat-label>
         <input matInput (keyup)="illnessFilter($event)" placeholder="Betegség" #input title="Kérem töltse ki a mezőt">

@@ -1,98 +1,118 @@
 <h1>
   Export
-</h1>
-
-<h2>
-  Exportáladnó(nem tudom van-e ilyen szó) adatok
-</h2>
+    
+  <button  (click)="goBackToPrevPage()" >Vissza</button>  
+ 
+  </h1>
 
 <div class="container">
+
   <div class="content">
-    <div class="sexclass">
-      <div>
-        <label class="text" for="sex">Páciens neme</label>
+    <div class="container2">
+      <div class="sexclass">
+        <div>
+          <label class="text" for="sex">Páciens neme <s>*</s></label>
+        </div>
+        <div>
+          <select class="droptextbox" name="sex" id="sex" [(ngModel)]="filter.Sex" title="Kérem válasszon.">
+            <option value="" disabled selected hidden>Válasszon nemet...</option>
+            <option value="Férfi">Férfi</option>
+            <option value="Nő">Nő</option>
+            <option value="Kumulált">Kumulált</option>
+          </select>
+        </div>
       </div>
-      <div>
-        <select class="droptextbox" name="sex" id="sex" [(ngModel)]="filter.Sex" title="Kérem válasszon.">
-        <option value="Férfi">Férfi</option>
-        <option value="Nő">Nő</option>
-        <option value="Kumulált">Kumulált</option>
-        </select>
-      </div>
-    </div>
-
-    <div class="ageclass">      
-      <div>
-        <label class="text" for="age">Páciens kora</label>
-      </div>
-      <div>
-        <input class="droptextbox" type="number" id="agefrom" name="agefrom" min="1" [(ngModel)]="filter.AgeFrom" title="Kérem töltse ki a mezőt"><label style="margin-right: 20px;"> - tól</label>
-        <input class="droptextbox" type="number" id="ageto" name="ageto" min="1" [(ngModel)]="filter.AgeTo" title="Kérem töltse ki a mezőt"><label> - ig</label>
-      </div>
-    </div>
   
+      <div class="ageclass">      
+        <div>
+          <label class="text" for="age">Páciens kora <s>*</s></label>
+        </div>
+        <div>
+          <input class="droptextbox" type="number" id="agefrom" name="agefrom" min="1" [(ngModel)]="filter.AgeFrom" placeholder="Minimum 18..." title="Kérem töltse ki a mezőt"> - tól
+        
+          <input class="droptextbox" type="number" id="ageto" name="ageto" min="1" [(ngModel)]="filter.AgeTo" placeholder="Maximum 88..." title="Kérem töltse ki a mezőt"> - ig
+        </div>
+      </div>
+    </div>
 
-    <div class="validclass">
-      <div>
-        <label class="text"> Validált</label>
-     </div>
-      <div>
-        <select class="droptextbox" name="validity" id="validity" [(ngModel)]="filter.Validated" title="Kérem válasszon">
-        <option value="validált">Validált</option>
-        <option value="nem validált">Nem validált</option>
-        <option value="kumulált">Kumulált</option>
-        </select>
+    <div class="container2">    
+      <div class="validclass">
+        <div>
+          <label class="text"> Validált <s>*</s></label>
+        </div>
+        <div>
+          <select class="droptextbox" name="validity" id="validity" [(ngModel)]="filter.Validated" title="Kérem válasszon">
+            <option value="" disabled selected hidden>Válasszon validitást...</option>
+            <option value="Validált">Validált</option>
+            <option value="Nem validált">Nem validált</option>
+            <option value="Kumulált">Kumulált</option>
+          </select>
+        </div>
+      </div>
+    
+      <div class="source"  *ngIf="loginService.hasAnyGroup([portaladmin, portalvezeto, kutatoorvos])">
+        <div>
+          <label for="source">Forrás:</label>
+        </div>
+        <div>
+          <input class="droptextbox" type="text" id="source" name="source" [(ngModel)]="filter.Source" placeholder="???" title="Kérem töltse ki a mezőt">
+        </div>
+      </div>
+    </div>
+
+    <div class="container2">
+      <div class="source" [ngClass]="{'active': timeActive, 'inactive': !timeActive}">
+        <label for="timeradioTime">Szűrés dátumra <s>*</s></label>
+        <input id="timeradioTime" type="radio" name="timeorrelativ" (click)="toggleContent('time')">
+      
+        <form [ngStyle]="{'opacity': timeActive ? '1' : '0.3'}">      
+          <input class="droptextbox" type="date" id="datefrom" name="datefrom" [disabled]="relativtimeActive" [(ngModel)]="filter.DateFrom" title="Kérem válasszon"> - tól       
+          <input class="droptextbox" type="date" id="dateto" name="dateto" [disabled]="relativtimeActive"  [(ngModel)]="filter.DateTo" title="Kérem válasszon"> - ig
+        </form>
+      </div>
+    
+      <div class="relativeclass" [ngClass]="{'active': relativtimeActive, 'inactive': !relativtimeActive, 'disabled': timeActive}">
+        <div>
+          <label for="timeradioRelative">Szűrés relativ időre <s>*</s></label>
+          <input id="timeradioRelative" type="radio" name="timeorrelativ" (click)="toggleContent('relativtime')" >
+        </div>
+        <div [ngStyle]="{'opacity': relativtimeActive ? '1' : '0.3'}">
+          <select class="droptextbox" name="relative" id="relative" [disabled]="timeActive" [(ngModel)]="filter.RelativeDate" title="Kérem válasszon">
+            <option value="" disabled selected hidden>Válasszon...</option>
+            <option value="yesterday">tegnap</option>
+            <option value="this_week">ez a hét</option>
+            <option value="last_week">múlt hét</option>
+            <option value="last_month">múlt hónap</option>
+            <option value="last_3_months">utolsó 3 hónap</option>
+          </select>
+          
+        </div>
       </div>
     </div>
     
-    <div class="source"  *ngIf="loginService.hasAnyGroup([portaladmin, portalvezeto, kutatoorvos])">
-      <div>
-        <label style="margin-bottom: 0;" for="source">Forrás:</label>
-      </div>
-      <div>
-        <input class="droptextbox" type="text" id="source" name="source" [(ngModel)]="filter.Source" placeholder="???" title="Kérem töltse ki a mezőt">
-      </div>
-    </div>
+    
+    
+    
+    
+  </div>
 
-
-
-    <div class="source">
-      <label style="margin-bottom: 0;" for="datefrom">Dátum szűrés</label>
-      <form>      
-        <input class="droptextbox" type="date" id="datefrom" name="datefrom" [(ngModel)]="filter.DateFrom" title="Kérem válasszon"> - tól       
-        <input class="droptextbox" type="date" id="dateto" name="dateto"  [(ngModel)]="filter.DateTo" title="Kérem válasszon"> - ig
-      </form>
-    </div>
-
-    <div class="relativeclass">
-      <div>
-        <label class="text" for="relative">relatív idő választása</label>
-      </div>
-      <div>
-        <select class="droptextbox" name="relative" id="relative" [(ngModel)]="filter.RelativeDate" title="Kérem válasszon">
-        <option value="yesterday">tegnap</option>
-        <option value="this_week">ez a hét</option>
-        <option value="last_week">múlt hét</option>
-        <option value="last_month">múlt hónap</option>
-        <option value="last_3_months">utolsó 3 hónap</option>
-        </select>
-      </div>
-    </div>
-
-    <p style="margin-top: 40px;">Marker hozzáadása vagy egy mentett szürő kiválasztása</p>
-
-    <div>
   
-     <button id="markerbutton" (click)="toggleContent('marker')" [ngClass]="{'active-button': markerActive, 'inactive-button': !markerActive }">Marker hozzáadása</button>
-     <button (click)="toggleContent('filter')" [ngClass]="{'active-button': filterActive, 'inactive-button': !filterActive }">Filter kiválasztása</button>
+  <div class="container4">
+    <div class="content2">
 
-      <div class="markerfiltercontent">
-       <div *ngIf="markerActive">
+      <div class="container3">
         <div>
-          <label class="text">Marker</label>
+          <label>Marker hozzáadása vagy egy mentett szürő kiválasztása</label>
         </div>
-        <div style="display: flex;">
-          <select class="droptextbox" type="text" id="markers" name="markers" [(ngModel)]="marker" title="Kérem válasszon">
+        <button id="markerbutton" (click)="toggleContent('marker')" [ngClass]="{'active-button': markerActive, 'inactive-button': !markerActive }">Marker hozzáadása</button>
+        <button (click)="toggleContent('filter')" [ngClass]="{'active-button': filterActive, 'inactive-button': !filterActive }">Filter kiválasztása</button>
+      </div>
+      <div *ngIf="markerActive" class="container3">
+        <div >        
+            <label class="text">Marker</label>
+        </div>
+        <div>
+          <select style="margin-right: 20px;" class="droptextbox" type="text" id="markers" name="markers" [(ngModel)]="marker" title="Kérem válasszon">
             <ng-container *ngFor="let marker of markers">
               <option value="{{marker}}">{{marker}}</option>
             </ng-container>
@@ -101,37 +121,29 @@
         </div>
       </div>  
     
-      <div *ngIf="filterActive">
-        <div>
-          <p>Meglévő szűrő lekérdezése</p>
-        </div>
-        <div style="display: flex;" >
-          <!--
-          <div style="margin-right: 40px; margin-bottom: 40px;">
-            <label class="text">Szűrők lekérdezése</label>
-            <button (click)="getFilters()">Lekérdezés</button>
-          </div>
-          -->
+      <div *ngIf="filterActive" class="container3">
+        <div >
           <div>
-            <label class="text">Válasszon a mentett filterek közül!</label>
-            <select class="droptextbox" type="text" id="filters" name="filters"  [(ngModel)]="filter" title="Kérem válasszon" >
-              <ng-container *ngFor="let filter of savedfilters">                
-                <option [ngValue]="filter.Filter">{{filter.FilterName}}</option>
-              </ng-container>
-            </select>
+            <label>Meglévő szűrő lekérdezése</label>
           </div>
+          <div style="display: flex;" >
+            <div>
+              <label style="margin-right: 20px;" class="text">Válasszon a mentett filterek közül!</label>
+              <select class="droptextbox" type="text" id="filters" name="filters"  [(ngModel)]="filter" title="Kérem válasszon" >
+                <ng-container *ngFor="let filter of savedfilters">                
+                  <option [ngValue]="filter.Filter">{{filter.FilterName}}</option>
+                </ng-container>
+              </select>
+            </div>
           </div>
         </div>
       </div>
     </div>
-  
-  
-
  
-    <div class="content2">
+    <div class="content3">
       <ng-container *ngIf="filter.Illnesses && filter.Illnesses.length > 0; else noMarkers">
-        <p style="border-bottom: solid 3px #64afffa6; display: flex; align-items: center; padding-bottom: 5px; margin-top: 5px;">Hozzáadott Markerek</p>
-        <div style="max-height: 265px; overflow-y: auto;">
+        <p *ngIf="markerActive" class="markerbno2">Markerek</p>
+        <div style="max-height: 265px; overflow-y: auto; min-width: 700px; margin-left: 100px; ">
           <div *ngFor="let illness of filter.Illnesses; let i = index" style="border-bottom: solid 3px #b8b8b8a6; display: flex; align-items: center; padding-bottom: 5px; margin-top: 5px;">
             <div style="flex-grow: 1;">
               <p style="margin: 0;">{{ illness }}</p>
@@ -142,21 +154,32 @@
           </div>
         </div>
         <div *ngIf="filter.Illnesses.length > 5">
-          <p style=" margin-top: 20px; opacity: 70%;">(További Markerek megtekintéséhez görgessen lefele(vagy valami szöveget ide lehet irni))</p>
+          <p style="margin-top: 20px; opacity: 70%;">(További Markerek megtekintéséhez görgessen lefele (vagy valami szöveget ide lehet írni))</p>
         </div>
       </ng-container>
       <ng-template #noMarkers>
-        <p style="border-bottom: solid 3px #64afffa6; display: flex; align-items: center; padding-bottom: 5px; margin-top: 5px;">Még nem adott hozzá Markert</p>
+        <p *ngIf="markerActive" class="markerbno">Még nem adott hozzá Markert</p>
       </ng-template>
-    </div>  
+    </div>
   
-    <button id="okebutton" *ngIf="markerActive" (click)="finish()">Kész</button>  
-    <button id="okebutton" *ngIf="filterActive" (click)="finish()">Kész</button>  
+    <div *ngIf="markerActive" style="text-align: center; position: relative; z-index: 1; display: flex; flex-direction: column; align-items: center;">   
+      <button id="okebutton"  (click)="finish()" style="z-index: 2; position: relative;">Kész</button>  
+      <div style="position: absolute; bottom: 0; width: 50%; z-index: 1; text-align: center;">
+        <hr style="margin-top: 10px; width: 100%; height: 1px; background-color: #0080ff; box-shadow:0px 1px 0px #848484;">
+      </div>
+    </div>
+    <div *ngIf="filterActive" style="text-align: center; position: relative; z-index: 1; display: flex; flex-direction: column; align-items: center;">   
+      <button id="okebutton"  (click)="finish()" style="z-index: 2; position: relative;">Kész</button>  
+      <div style="position: absolute; bottom: 0; width: 50%; z-index: 1; text-align: center;">
+        <hr style="margin-top: 10px; width: 100%; height: 1px; background-color: #0080ff; box-shadow:0px 1px 0px #848484;">
+      </div>
+    </div>  
+  </div>
 
     <!--TABLE-->
 
-    <div class="table">
-      <table mat-table [dataSource]="dataSource" class="mat-elevation-z8" matSort>
+  <div class="table">
+    <table mat-table [dataSource]="dataSource" class="mat-elevation-z8" matSort>
       
 
       <!-- Position Column -->
@@ -220,33 +243,78 @@
       <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
       <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
 
-      </table>
-      <mat-paginator #paginator [pageSizeOptions]="pageSizeOptions" showFirstLastButtons></mat-paginator> 
+    </table>
+    <mat-paginator #paginator [pageSizeOptions]="pageSizeOptions" showFirstLastButtons></mat-paginator> 
 
-    </div>
+  </div>
+  
 
-    <div style="display: flex; justify-content: space-around; text-align: center;">
-      <div class="savebutton">      
-        <p style="align-items: start;">Jelenlegi Szűrő mentése</p>        
-        <div>        
-          <input style="margin-bottom: 5px;" class="droptextbox" type="text" id="filtername" name="filtername" [(ngModel)]="filtername" placeholder="Új szürő" title="Kérem töltse ki a mezőt">    
-          <button id="filtersavebutton" (click)="saveFilter()">Szűrő mentése</button>
-        </div> 
-        <p>Adja meg a szürő nevét a mentéshez</p>
+    <div class="container5">
+
+      <div class="content6"> 
+        <div>     
+          <label>Jelenlegi Szűrő mentése</label>  
+        </div>      
+        <div class="diagrambutton"> 
+          <div>      
+            <input class="droptextbox" type="text" id="filtername" name="filtername" [(ngModel)]="filtername" placeholder="Új szürő" title="Kérem töltse ki a mezőt"> 
+          </div> 
+          <div> 
+            <button id="filtersavebutton" (click)="saveFilter()">Szűrő mentése</button>
+          </div> 
+        </div>        
       </div> 
-
-      <div class="exportbutton">
-        <p>Exportálja a szűrt táblázatot</p>      
-        <button style="margin-bottom: 5px;" (click)="export()">Export</button>
-        <p>XLSX Export Szűrt adatok</p>
+      
+      <div class="content6">
+        <div>
+          <label>Nézze meg a szűréshez tartozó diagrammot!</label> 
+        </div>
+        <div class="diagrambutton"> 
+          <div>            
+            <button class="button" (click)="getFilterDiagram(0)" >Diagram - PIE<mat-icon>pie_chart</mat-icon></button>
+          </div>            
+          
+        </div>
+        <div class="diagrambutton">                
+          <button class="button" (click)="getFilterDiagram(1)">Diagram - LINE<mat-icon>show_chart</mat-icon></button>
+         
+        </div>
+        <div class="diagrambutton">               
+          <button class="button" (click)="getFilterDiagram(2)">Diagram - BAR<mat-icon>table_chart</mat-icon></button>
+         
+        </div>
+        <div>  
+          <p>Iframe : </p>        
+          <p>{{this.iframe}}</p>
+         </div>
       </div>
 
-      <div class="ratestbutton">
-        <p>Exportálja a teljes eredmény adatokat</p>      
-        <button style="margin-bottom: 5px;" (click)="rates()">Export</button>
-        <p> XLSX Export Teljes eredmény adatok</p>
-      </div>    
-    </div>       
-  </div>
+      <div class="content6">
+        <label>Exportálja a szűrt táblázatot</label>
+        <div class="diagrambutton" style="margin-bottom: 60px;">  
+          <div>   
+            <button (click)="export()">Export</button>
+          </div> 
+          <div>
+            <label>XLSX Export Szűrt adatok</label>
+          </div>
+        </div>
+
+        <label>Exportálja a teljes eredmény adatokat</label> 
+        <div class="diagrambutton"> 
+          <div>           
+            <button (click)="rates()">Export</button>
+          </div> 
+          <div>
+            <label> XLSX Export Teljes eredmény adatok</label>
+          </div>
+        </div> 
+      </div>   
+    </div> 
+
+  <footer>   
+    <p>A "*" -al jelölt mezők kitöltése kötelező !</p>
+  </footer>
+  
 </div>
 

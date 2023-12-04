@@ -1,10 +1,12 @@
-<h1>Új felhasználó elfogadása</h1>
+<h1>Új felhasználó elfogadása
+  <button  (click)="goBackToPrevPage()" >Vissza</button> 
+</h1>
 
 
 <div class="container">
    <!--TABLE-->
    
-   <div >
+   <div class="acceptuser"  >
     <mat-form-field>
         <mat-label>Keresés</mat-label>
         <input matInput (keyup)="illnessFilter($event)" placeholder="Felhasználók" #input>

@@ -1,9 +1,9 @@
 export class Override {
     Sex: string = "";
-    Age: number = 0;
+    Age: number ;
     Illnesses: string[] = [];    
-    Dead: boolean = false;
-    Hospitalized: boolean = false;
+    Dead: number;
+    Hospitalized: number;
     
     
     constructor() {

@@ -1,5 +1,5 @@
-.form-group{     
-    height: auto;   
+.container{
+    padding-top: 0;        
 }
 
 .form-group2{
@@ -10,6 +10,7 @@
 .droptextbox{
     text-align: center;
     margin-bottom: 20px;
+    margin-top: 0;
 }
  
 .text{
@@ -24,52 +25,38 @@
     opacity: 0.5;
 }
 
-input[type="radio"]{
-    margin-right: 10px;      
+#okebutton{
+    margin-left: 0;
+    box-shadow: 0 0 0 20px white;
+    margin-top: 60px;
 }
 
-#done{
-    margin-top: 40px;    
-}
-
-.donebutton{
-    justify-self: center;
-    align-content: center;
-}
-
-p{
-    background-color: #0080ff;
-    padding: 10px;
-    margin-bottom: 0;
-    color: white;
-    border-start-end-radius: 7px;
-    border-start-start-radius: 7px;
-    width: 250px;
-}
-
-.reg-container {
-    justify-content: start;
-    display: flex;
-    max-width: 100%;
-    width: 63.75%;
-    margin-left: 20%;
-    margin-right: 30%;
-    margin-top: 0;
+.container2{
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); 
+    justify-content: center; 
 }
 
 .form-group {
-    display: block;
+    display: flex;
     flex-direction: column;
-    padding: 20px;
+    align-items: center;
+    background: rgb(224,224,224);
+    background: linear-gradient(180deg, rgba(224,224,224,1) 80%, rgb(255, 255, 255) 100%);
+    padding-bottom: 60px;
+}
+
+.form-group:nth-child(even) {
+    background: rgb(240,240,240);
+    background: linear-gradient(180deg, rgba(240,240,240,1) 80%, rgb(255, 255, 255) 100%);
 }
 
 .text {
     margin-bottom: 0;
-    margin-top: 20px;
+    
 }
 
-.container02 {
-    margin-top: 99px;
+.container02 {   
     padding-left: 19%;
 }
 
@@ -80,4 +67,23 @@ p{
     margin-right: 20%;
     margin-top: 10px;
     padding-left: 20px;
+}
+
+.tab-button {    
+    color: white;
+    border-bottom-right-radius: 7px;
+    border-bottom-left-radius: 7px;
+    background: #848484;
+    margin: 0;
+    padding: 10px;
+    font-size: 1.5rem;
+    font-weight: 500;
+    width: 400px;
+    text-align: center;
+    margin-bottom: 80px;       
+    line-height: 1.2;     
+}
+
+#intezmenybutton{
+    margin-left: 10px;
 }

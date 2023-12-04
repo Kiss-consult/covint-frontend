@@ -1,8 +1,11 @@
-<h1>Felhasználói profil</h1>
+<h1>Felhasználói profil
+  <button  (click)="goBackToPrevPage()" >Vissza</button> 
+</h1>
 
 <div class="container">
- 
-  <table>
+
+ <div class="content">
+    <table>
     <tr>
       <td>
         <label for="name">Felhasználó neve:</label>
@@ -59,7 +62,7 @@
 
     <tr>
       <td>
-        <label>Adatmódosítási igény kérése</label>
+        <label>Adatmódosítási igény esetén keresse a portálkezelőket! Köszönjük!</label>
       </td>
       <td>
         <!--
@@ -76,6 +79,6 @@
         <button id="done" (click)="gotoChangePassword()">Jelszócsere</button>
       </td>
     </tr>
-  </table>
-
+    </table>
+  </div>
 </div>

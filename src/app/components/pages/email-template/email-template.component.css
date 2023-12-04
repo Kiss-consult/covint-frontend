@@ -1,9 +1,52 @@
-.exportbutton{    
-    margin-left: 20%; 
-    margin-top: 40px;
+.exportbutton {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     text-align: center;
+    background: rgb(224,224,224);
+    background: linear-gradient(180deg, rgba(224,224,224,1) 50%, rgba(255,255,255,0) 70%);
+    padding-left: 5%;
+    padding-right: 5%;
+    padding-bottom: 60px;
 }
+
+.exportbutton:nth-child(even) {
+    background: rgb(240,240,240);
+    background: linear-gradient(180deg, rgba(240,240,240,1) 50%, rgba(255,255,255,0) 70%);
+}
+
+.container2{
+    display: grid;
+    grid-template-columns: repeat(4, 1fr); 
+    justify-content: center; 
+}
+
 .container{
-    margin-top: 70px;
-    padding-top: 40px;
+    padding-top: 0;    
+}
+
+.tab-button {
+    
+    color: white;
+    border-bottom-right-radius: 7px;
+    border-bottom-left-radius: 7px;
+    background: #848484;
+    margin: 0;
+    padding: 10px;
+    font-size: 1.5rem;
+    font-weight: 500;
+    width: 200px;    
+    margin-bottom: 80px;    
+    line-height: 1.2;     
+}
+
+.file-upload{
+    margin-top: 0;
+    padding-top: 0;
+}
+
+.nofile{
+    opacity: 70%;
+    font-size: 0.8rem;
+    margin-top: 5px;
 }

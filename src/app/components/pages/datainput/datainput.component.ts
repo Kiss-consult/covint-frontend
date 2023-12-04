@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { Case } from 'src/app/models/case/case';
 import { Illness } from 'src/app/models/illness/illness';
-
+import { Location } from '@angular/common'
 import { BackendService } from 'src/app/services/backend/backend.service';
 
 @Component({
@@ -19,8 +19,10 @@ export class DatainputComponent {
   markers: string[] = [];
   // This is only stored for faster access to the illnesses by BNO code
   illnessesByBno: Map<string, Illness> = new Map();
-
-  constructor(private backendService: BackendService) {
+  goBackToPrevPage(): void {
+    this.location.back();
+  }
+  constructor(private backendService: BackendService,private location: Location) {
     // query all the illnesses formn the database
     this.backendService.getMarkers().subscribe(
       result => {
@@ -47,14 +49,28 @@ export class DatainputComponent {
   // it removes it. Otherwise it adds it to the case.
   public addMarker() {
     if (this.marker === '') {
-      alert("Kérem adjon meg egy markert!");
+      alert("Kérem adjon meg minimum egy markert!");
       return;
     }
     //const newMarker = new Marker(this.newBno, this.illnessesByBno.get(this.newBno)?.Names);
 
+    if (this.marker === "Egészséges" && this.case.Illnesses.length != 0) {
+      alert("Már van betegség hozzáadva, így nem lehet Egészséges!");
+      return;
+    }  
+
+
     if (this.case.Illnesses.filter((valami) => valami === this.marker).length > 0) {
       console.log("Marker already exists")
-      this.removeMarker(this.marker);
+      alert("Ez a marker már hozzá lett adva!")
+      //this.removeMarker(this.marker);
+      return;
+    }
+
+    if (this.case.Illnesses.filter((valami) => valami === "Egészséges").length > 0) {
+      console.log("Marker already exists")
+      alert("Egészséges jelentése: csak covidos volt, nincs más betegsége!")
+      //this.removeMarker(this.marker);
       return;
     }
     this.case.Illnesses.push(this.marker);
@@ -104,20 +120,15 @@ export class DatainputComponent {
       return false;
     }
     if (this.case.Dead === null) {
-      alert("A 'Meghalt' mező kitöltése kötelező");
+      alert("A 'Elhunyt' mező kitöltése kötelező");
+      return false;
+    }
+    if (this.case.Illnesses.length === 0) {
+      alert("Minimum 1 betegség ( marker) felvitele kötelező! \n Ha nincs társ-betegség, kérem válassza az Egészséges - markert!");
       return false;
     }
     return true;
   }
-
-
-
-
-
-
-
-
-
 
 
   // Format date to YYYY-MM-DD

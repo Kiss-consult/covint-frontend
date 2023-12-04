@@ -1,5 +1,5 @@
 #diagram{
-  margin-top: 140px;
+  margin-top: 40px;
   padding: 30px;
   padding-bottom: 50px;
   width: 100%;
@@ -7,7 +7,12 @@
   border: none;
 }
 
-
+.container{
+    background: rgba(224,224,224);
+    background: linear-gradient(180deg, rgba(224,224,224,1) 60%, rgba(255,255,255,0) 90%);    
+    
+    
+}
 
 .tab-button {
   cursor: pointer;
@@ -19,7 +24,7 @@
   padding: 10px;
   font-size: 1.5rem;
   font-weight: 500;
-  margin-top: 65px;
+ 
   margin-left: 7%;
   margin-right: 0;
   width: auto;

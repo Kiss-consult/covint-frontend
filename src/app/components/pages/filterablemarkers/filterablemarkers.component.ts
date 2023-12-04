@@ -5,7 +5,7 @@ import { Illness } from 'src/app/models/illness/illness';
 import { BackendService } from 'src/app/services/backend/backend.service';
 import { KutatoOrvos, Orvos, PortalAdmin, PortalVezeto } from 'src/app/models/group/group';
 import { LoginService } from 'src/app/services/login/login.service';
-
+import { Location } from '@angular/common'
 @Component({
   selector: 'app-filterablemarkers',
   templateUrl: './filterablemarkers.component.html',
@@ -36,8 +36,10 @@ export class FilterablemarkersComponent {
     const filterValue = (event.target as HTMLInputElement).value;
     this.dataSource.filter = filterValue.trim().toLowerCase();
   }
-  
-    constructor(private backendService: BackendService ,public loginService: LoginService) {
+  goBackToPrevPage(): void {
+    this.location.back();
+  }
+    constructor(private backendService: BackendService ,public loginService: LoginService,private location: Location) {
 
 
       
@@ -84,12 +86,7 @@ export class FilterablemarkersComponent {
       });
       
   }
-  /*
-  ngAfterViewInit() {
-    this.dataSource = new MatTableDataSource(this.illnesses);
-    this.dataSource.paginator = this.paginator;
-  }
-*/
+ 
   public setMarker() {
 
 

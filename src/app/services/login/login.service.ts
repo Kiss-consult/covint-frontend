@@ -4,7 +4,6 @@ import { Err, Ok, Result, fromJSON } from 'src/app/models/utils/result';
 import { ConfigService } from '../config/config.service';
 
 import { HttpClient, HttpEventType, HttpHeaders, HttpParams } from '@angular/common/http';
-import { Token } from 'src/app/models/token/token';
 
 import jwt_decode from 'jwt-decode';
 import { AccessToken } from 'src/app/models/token/accesstoken';
@@ -24,14 +23,13 @@ export class LoginService {
   }
   url: string = "";
 
- token_: Token = new Token();
- token: string = "";
+  token: string = "";
   id: string = "";
   email: string = "";
   uploadProgress: number;
   uploadSub: Subscription;
 
- 
+
   username: string = "";
   loggedIn: boolean = false;
   userId: string = "";
@@ -40,50 +38,54 @@ export class LoginService {
   constructor(private httpClient: HttpClient, private config: ConfigService,
     private router: Router, private keycloakService: KeycloakService) {
     this.url = this.config.config.AuthUrl;
-    try {
-      this.keycloakService.isLoggedIn().then((loggedIn) => {
-        console.log("loggedIn", loggedIn)
-        if (loggedIn) {
-          this.keycloakService.loadUserProfile().then((profile) => {
-            this.loggedIn = true;
-            this.username = profile.username as string;
-            this.keycloakService.getToken().then((token) => {
-              this.token = token;
-            });
-            this.userId = profile.id as string;
-          });
-        }
-      });
-    }
-    catch (e: any) {
-      console.log("e", e);
-    }
     keycloakService.keycloakEvents$.subscribe({
       next: (e) => {
         if (e.type == KeycloakEventType.OnTokenExpired) {
           keycloakService.updateToken(20).then((refreshed) => { });
         }
+        if (e.type == KeycloakEventType.OnAuthSuccess) {
+          this.getUserData();
+        }
       }
     });
   }
 
-  public downloadEmailTemplate(): Observable < Result < [any[], string] >> {
-      let options = {
-        headers: this.getHeaders(),
-        params: this.getParams(),
-        responseType: "blob" as "json"
-      };
-      return this.httpClient.get<Blob>(this.url + "/templates/download", options).pipe(
-        map(response => {
-          let dataType = response.type;
-          let binaryData = [];
-          binaryData.push(response);
-          let result: [any[], string] = [binaryData, dataType]
-          return new Ok(result);
-        }),
-        catchError(error => of(new Err<[any[], string]>(error)))
-      );
-    }
+  public downloadEmailTemplate(f: number): Observable<Result<[any[], string]>> {
+    let options = {
+      headers: this.getHeaders(),
+      params: this.getParams(f),
+      responseType: "blob" as "json"
+    };
+    return this.httpClient.get<Blob>(this.url + "/templates/download", options).pipe(
+      map(response => {
+        let dataType = response.type;
+        let binaryData = [];
+        binaryData.push(response);
+        let result: [any[], string] = [binaryData, dataType]
+        console.log(result);
+        return new Ok(result);
+      }),
+      catchError(error => of(new Err<[any[], string]>(error)))
+    );
+  }
+
+  public setEmailToDeafult(f: number): Observable<Result<{}>> {
+    
+    
+    const url = this.url + "/templates/default";
+    return this.httpClient.post(url, "", {
+      params: this.getParams(f),
+      headers: new HttpHeaders(),
+    })
+    
+    .pipe(
+      map(result => fromJSON<{}>(JSON.stringify(result))),
+      catchError(error => of(new Err<{}>(error)))
+    );
+  }
+
+
+
 
   public getUsername(): string {
     return this.username;
@@ -111,9 +113,10 @@ export class LoginService {
     this.token = "";
   }
 
-  public getAccessToken(): string {
-    return this.token_.access_token;
-  }
+  // public getAccessToken(): string {
+  //   console.log("getAccessToken", this.token_.access_token);
+  //   return this.token_.access_token;
+  // }
 
   // This function inserts the new user into the Auth.
   public insertNewUser(user_: User): Observable<Result<{}>> {
@@ -152,15 +155,15 @@ export class LoginService {
       catchError(error => of(new Err<User>(error)))
     );
   }
-// This function update user attributes on  Auth.
-public updateUserAttributes(id_: string | null, user: User): Observable<Result<{}>> {
-  const url = this.url + "/user/update/" + id_;
-  console.log("kuldtem:", id_)
-  return this.httpClient.put<Result<{}>>(url, user,  { headers: this.getHeaders() }).pipe(
-    map(result => fromJSON<{}>(JSON.stringify(result))),
-    catchError(error => of(new Err<{}>(error)))
-  );
-}
+  // This function update user attributes on  Auth.
+  public updateUserAttributes(id_: string | null, user: User): Observable<Result<{}>> {
+    const url = this.url + "/user/update/" + id_;
+    console.log("kuldtem:", id_)
+    return this.httpClient.put<Result<{}>>(url, user, { headers: this.getHeaders() }).pipe(
+      map(result => fromJSON<{}>(JSON.stringify(result))),
+      catchError(error => of(new Err<{}>(error)))
+    );
+  }
 
   public changePassword(currentPassword: string, newPassword: string, confirmation: string, byAdmin: boolean): Observable<Result<{}>> {
     const url = this.url + "/user/changepassword/" + this.getUserId();
@@ -182,75 +185,77 @@ public updateUserAttributes(id_: string | null, user: User): Observable<Result<{
 
   private getHeaders(): HttpHeaders {
     return new HttpHeaders({
-
       "Content-Type": "application/json",
-
-      "Authorization": "Bearer " + this.getAccessToken(),
-    });
-
-  }
-  private getHeadersForUpload(): HttpHeaders {
-    return new HttpHeaders({
-      "Authorization": "Bearer " + this.getAccessToken(),
-
-      
-
     });
 
   }
 
-  private getParams(): HttpParams {
-    return new HttpParams().set('action', 'email-test')
+  private getParams(f: number): HttpParams {
+
+    let actiontype = "";
+
+    switch (f) {
+      case 0:
+        actiontype = "reset-password"
+        console.log('actiontype', actiontype);
+        break;
+      case 1:
+        actiontype = "user-approved"
+        console.log('actiontype', actiontype);
+        break;
+      case 2:
+        actiontype = "user-waiting"
+        console.log('actiontype', actiontype);
+        break;
+      case 3:
+        actiontype = "verify-email"
+        console.log('actiontype', actiontype);
+        break;
+      case 4:
+        actiontype = "email-test"
+        console.log('actiontype', actiontype);
+    }
+    return new HttpParams().set('action', actiontype)
 
       ;
   }
-  /*
-  public login(username: string, password: string): Observable<Result<Empty>> {
 
-    const url = this.url + "/login";
-    const body = { Username: username, Password: password };
-    return this.httpClient.post<Token>(url, body).pipe(
-      map(result => {
-        const token = fromJSON<Token>(JSON.stringify(result));
-        this.saveToken(token.unwrap());
-
-        return new Ok<Empty>(new Empty());
-      }),
-      catchError(error => of(new Err<Empty>(error)))
-    );
+  private getUserData() {
+    this.loggedIn = true;
+    this.keycloakService.getToken().then((token) => {
+      this.token = token;
+    });
+    this.keycloakService.loadUserProfile().then((profile) => {
+      this.username = profile.username as string;
+      this.userId = profile.id as string;
+    });
   }
-
-*/
-
- 
 
   public login(): void {
     this.keycloakService.isLoggedIn().then((loggedIn) => {
+      console.log("loggedIn from login", loggedIn)
       this.loggedIn = loggedIn;
       if (this.loggedIn === false) {
         this.keycloakService.login().then(() => {
           this.loggedIn = true;
-          this.keycloakService.loadUserProfile().then((profile) => {
-            this.username = profile.username as string;
-            this.userId = profile.id as string;
-          });
+          this.getUserData();
         });
       }
-      this.keycloakService.loadUserProfile().then((profile) => {
-        this.username = profile.username as string;
-        this.userId = profile.id as string;
-      });
+      this.getUserData();
     });
   }
 
 
-  uploadFile(file: File, filename: string): Observable<Result<Empty>> {
+  uploadFile(file: File, f: number): Observable<Result<Empty>> {
     const url = this.url + "/templates/upload";
     let formData = new FormData();
+
+
+
     formData.append('template', file);
     const upload$ = this.httpClient.post(url, formData, {
-      params: this.getParams(),
-      headers: this.getHeadersForUpload(),
+      params: this.getParams(f),
+      headers: new HttpHeaders(),
     })
       .pipe(
         finalize(() => this.reset())

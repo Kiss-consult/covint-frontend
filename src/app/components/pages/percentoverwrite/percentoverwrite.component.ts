@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { Override } from 'src/app/models/override/override';
 import { BackendService } from 'src/app/services/backend/backend.service';
-
+import { Location } from '@angular/common'
 @Component({
   selector: 'app-percentoverwrite',
   templateUrl: './percentoverwrite.component.html',
@@ -13,9 +13,11 @@ export class PercentoverwriteComponent {
   override: Override = new Override;
   markers: string[] = [];
   marker: string = '';
+  goBackToPrevPage(): void {
+    this.location.back();
+  }
 
-
-  constructor(private backendService: BackendService) {
+  constructor(private backendService: BackendService,private location: Location) {
     this.backendService.getMarkers().subscribe(
       result => {
         if (result.isErr()) {
@@ -39,9 +41,9 @@ export class PercentoverwriteComponent {
 
 
   public overridePercent() {
-    //if (!this.checkRequiredFields()) {
-    //  return;
-    //}
+    if (!this.checkRequiredFields()) {
+      return;
+    }
 
     this.backendService.insertOverride(this.override).subscribe(
       result => {
@@ -61,6 +63,25 @@ export class PercentoverwriteComponent {
       return;
     }
     //const newMarker = new Marker(this.newBno, this.illnessesByBno.get(this.newBno)?.Names);
+    if (this.override.Illnesses.filter((valami) => valami === this.marker).length > 0) {
+      console.log("Marker already exists")
+      alert("Ez a marker már hozzá lett adva!")
+      //this.removeMarker(this.marker);
+      return;
+    }
+    if (this.marker === "Egészséges" && this.override.Illnesses.length != 0) {
+      alert("Már van betegség hozzáadva, így nem lehet Egészséges!");
+      return;
+    }  
+
+
+    if (this.override.Illnesses.filter((valami) => valami === "Egészséges").length > 0) {
+      console.log("Marker already exists")
+      alert("Egészséges jelentése: csak covidos volt, nincs más betegsége!")
+      //this.removeMarker(this.marker);
+      return;
+    }
+
     
     if (this.override.Illnesses.filter((valami) => valami === this.marker).length > 0) {
       console.log("Marker already exists")
@@ -75,5 +96,22 @@ export class PercentoverwriteComponent {
  public removeMarker(illness: string) {
   this.override.Illnesses = this.override.Illnesses.filter(m => m !== illness);
 }
+private checkRequiredFields(): boolean {
+
+  if  (
+    (this.override.Dead  < 1 || this.override.Dead  > 100)
+  || (this.override.Hospitalized  < 1 || this.override.Hospitalized  > 100)
+  )
+   {
+    alert("A mező értéke 1-100 között lehetséges! ")
+    return false;
+  }
+    
+  return true;
+}
+
+
+
+
 
 }

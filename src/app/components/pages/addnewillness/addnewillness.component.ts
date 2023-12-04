@@ -4,6 +4,9 @@ import { Default } from 'src/app/models/default/default';
 import { Illness } from 'src/app/models/illness/illness';
 import { NewIllness } from 'src/app/models/newillness/newillness';
 import { BackendService } from 'src/app/services/backend/backend.service';
+import { MatTableDataSource } from '@angular/material/table';
+import { MatPaginator } from '@angular/material/paginator';
+import { Location } from '@angular/common'
 @Component({
   selector: 'app-addnewillness',
   templateUrl: './addnewillness.component.html',
@@ -21,12 +24,22 @@ export class AddnewillnessComponent {
   newIsmarker: number = 0;
   ages: number[] = [];
   selectedRows: boolean[] = [];
+  searchValue: string = '';
 
-
-
+  matchesFilter(row: Default): boolean {
+    const searchFields: (keyof Default)[] = ['Sex', 'Age', 'Hospitalized', 'Dead']; // Specify the field names of Default
+  
+    return searchFields.some(field => {
+      const cellValue = String(row[field]).toLowerCase();
+      return cellValue.includes(this.searchValue.toLowerCase());
+    });
+  }
+  goBackToPrevPage(): void {
+    this.location.back();
+  }
   // This is only stored for faster access to the illnesses by BNO code
   //illnessesByBno: Map<string, Illness> = new Map();
-  constructor(private backendService: BackendService) {
+  constructor(private backendService: BackendService,private location: Location) {
     this.backendService.hello().subscribe((data) => {
       console.log(data);
     });
@@ -34,7 +47,7 @@ export class AddnewillnessComponent {
 
 
 
-
+/*
   public setDefaultSexFemale(d: Default): string {
 
     this.default.Sex = "Nő";
@@ -47,8 +60,8 @@ export class AddnewillnessComponent {
     this.default.Sex = "Férfi";
     return d.Sex;;
   }
-
-  // Function to add bno. If the newly typed bno is already in the case,
+*/
+  /*// Function to add bno. If the newly typed bno is already in the case,
   // it removes it. Otherwise it adds it to the case.
   public addDefault() {
 
@@ -81,7 +94,7 @@ export class AddnewillnessComponent {
     console.log(this.newIllness.Defaults)
     //this.newAlternativeName = '';
   }
-
+*/
   // Function to add bno. If the newly typed bno is already in the case,
   // it removes it. Otherwise it adds it to the case.
   public addAlternativeName() {
@@ -113,10 +126,25 @@ export class AddnewillnessComponent {
   // If any of the required fields are not filled, it alerts the user and returns false.
   private checkRequiredFields(): boolean {
     if (this.newIllness.GroupName === null || this.newIllness.GroupName === "") {
-      alert("A 'Nem' mező kitöltése kötelező");
+      alert("A 'Betegség' mező kitöltése kötelező");
       return false;
     }
+    for (let i = 0; i <= this.defaults.length-1; i++) {
+      console.log("eljut idaig", this.defaults[i], this.defaults[i].Dead )
+      if ((this.defaults[i].Dead === undefined)
+       || (this.defaults[i].Hospitalized === undefined) 
+      || (this.defaults[i].Dead === null)
+      ||(this.defaults[i].Hospitalized === null)
 
+      || (this.defaults[i].Dead  < 1 || this.defaults[i].Dead  > 100)
+      || (this.defaults[i].Hospitalized  < 1 || this.defaults[i].Hospitalized  > 100))
+      {
+        alert("Minden mező kitöltése kötelező! A mezők értéke 1 -100 között lehet! ")
+        return false;
+        
+
+      }
+    }
     return true;
   }
 
@@ -124,13 +152,13 @@ export class AddnewillnessComponent {
   public removeAlternativeName(bno: string) {
     this.newIllness.AlternativeNames = this.newIllness.AlternativeNames.filter(m => m !== bno);
   }
-
+  
 
 
   public finish() {
-    //if (!this.checkRequiredFields()) {
-    //return;
-    // }
+    if (!this.checkRequiredFields()) {
+    return;
+     }
     console.log("finish", this.defaults)
     this.newIllness.Defaults = this.defaults;
     this.backendService.insertIllness(this.newIllness).subscribe(
@@ -147,7 +175,7 @@ export class AddnewillnessComponent {
   }
 
   ngOnInit(): void {
-    // Töltsd fel az "ages" tömböt a kívánt életkorokkal.
+   
     let default_: Default = new Default;
     let defaults_: Default[] = [];
 

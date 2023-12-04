@@ -20,18 +20,6 @@
         <a href="/diagram" class="nav-link"  routerLink="diagram">Diagramok</a>
       </li>
       
-      <nav>
-        <ul class="nav" *ngIf="loginService.hasAnyGroup([portaladmin, portalvezeto, kutatoorvos])">
-          <li class="nav-item" routerLinkActive="active">
-            <a class="nav-link" >Felhasználók kezelése</a>
-            <ul class="dropdown">
-              <li><p class="nav-link" [routerLink]="['/addnewuser']" routerLinkActive="active">Új felhasználó hozzáadása</p></li>
-              <li><p class="nav-link" [routerLink]="['/acceptnewuser']" routerLinkActive="active">Új felhasználó elfogadása</p></li>
-              <li><p class="nav-link" [routerLink]="['/overrideuser']" routerLinkActive="active">Felhasználók</p></li>
-            </ul>
-          </li>
-        </ul>
-      </nav>
 
       <nav>
         <ul class="nav"  *ngIf="loginService.hasAnyGroup([portaladmin, portalvezeto, kutatoorvos])" >
@@ -46,19 +34,7 @@
           </li>
         </ul>
       </nav>
-      <nav>
-        <ul class="nav"  *ngIf="loginService.hasAnyGroup([orvos])" >
-          <li class="nav-item" routerLinkActive="active">
-            <a class="nav-link">Markerek kezelése</a>
-            <ul class="dropdown">
-              <li><a [routerLink]="['/addnewillness']" routerLinkActive="active">Új betegség hozzáadása</a></li>
-              
-              <li><a [routerLink]="['/percentoverwrite']" routerLinkActive="active">%-ok felülírása felülírása</a></li>
-              <li><a [routerLink]="['/defaultformarkers']" routerLinkActive="active">Ősfeltöltés több marker kombinációjára</a></li>
-            </ul>
-          </li>
-        </ul>
-      </nav>
+      
 
       <li class="nav-item" routerLinkActive="active" *ngIf="loginService.hasAnyGroup([portaladmin, portalvezeto, kutatoorvos])" >
         <a href="/auditlog" class="nav-link"   routerLink="auditlog">AuditLog</a>
@@ -66,26 +42,39 @@
       <li class="nav-item" routerLinkActive="active" *ngIf="loginService.hasAnyGroup([portaladmin, portalvezeto, kutatoorvos])" >
         <a href="/email-template" class="nav-link"   routerLink="email-template">Email template</a>
       </li>
+
+      <nav>
+        <ul class="nav" *ngIf="loginService.hasAnyGroup([portaladmin, portalvezeto, kutatoorvos])">
+          <li class="nav-item" routerLinkActive="active">
+            <a class="nav-link" >Felhasználók kezelése</a>
+            <ul class="dropdown">
+              <li><p class="nav-link" [routerLink]="['/addnewuser']" routerLinkActive="active">Új felhasználó hozzáadása</p></li>
+              <li><p class="nav-link" [routerLink]="['/acceptnewuser']" routerLinkActive="active">Új felhasználó elfogadása</p></li>
+              <li><p class="nav-link" [routerLink]="['/overrideuser']" routerLinkActive="active">Felhasználók</p></li>
+            </ul>
+          </li>
+        </ul>
+      </nav>
     </ul>
 
-    <ul class="navbar-nav ml-auto" *ngIf="!loginService.isLoggedIn()">      
+
+    
+    <ul class="navbar-nav2 ml-auto" *ngIf="!loginService.isLoggedIn()">      
       
       <li class="nav-item" routerLinkActive="active">
         <a href="/registration" class="nav-link"  routerLink="registration">Regisztráció</a>
       </li> 
 
       <li class="nav-item" routerLinkActive="active">
-        <button type="button" class="btn btn-primary" (click)="this.loginService.login()">
-          Bejelentkezés
-        </button>
+        <a type="button" class="nav-link" (click)="this.loginService.login()">Bejelentkezés</a>
       </li>  
     
     </ul>
 
-    <ul class="navbar-nav ml-auto" *ngIf="loginService.isLoggedIn()">      
+    <ul class="navbar-nav2 ml-auto" *ngIf="loginService.isLoggedIn()">      
       
-      <li class="nav-item" routerLinkActive="active">
-        <a class="nav-link">{{ loginService.getUsername() }}</a>
+      <li>
+        <a class="nav-link" id="emailprofil">{{ loginService.getUsername() }}</a>
       </li>
      
       <li class="nav-item" routerLinkActive="active">

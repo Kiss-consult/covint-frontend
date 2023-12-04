@@ -1,89 +1,104 @@
-<h1>Adatbevitel</h1>
+<h1>Adatbevitel
+  <button  (click)="goBackToPrevPage()" >Vissza</button> 
+</h1>
 
-<h2>Töltsön fel új betegség adatokat</h2>
+<h2>Töltsön fel új beteg adatlapot! </h2>
 
 <div class="container">  
 
-  <div style="display: flex; justify-content: space-between;">
+  <div class="container2">
 
-    <div class="sexclass">
+    <div class="container3">
       <div>
-        <label class="text" for="sex">Páciens neme  <s>*</s></label>
-      </div>
-      <div>
-        <select class="droptextbox" name="sex" id="sex" [(ngModel)]="case.Sex" placeholder="Férfi/Nő" title="Kérem válasszon.">
-          <option value="Férfi">Férfi</option>
-          <option value="Nő">Nő</option>
-        </select>
-      </div>
+        <div>
+          <label class="text" for="sex">Páciens neme <s>*</s></label>
+        </div>
+        <div>
+          <select class="droptextbox" name="sex" id="sex" [(ngModel)]="case.Sex" placeholder="Férfi/Nő" title="Kérem válasszon.">
+            <option value="" disabled selected hidden>Válasszon nemet...</option>
+            <option value="Férfi">Férfi</option>
+            <option value="Nő">Nő</option>
+          </select>
+        </div>
     
-      <div>
-        <label class="text" for="age">Páciens kora  <s>*</s></label>
+        <div>
+          <label class="text" for="age">Páciens kora  <s>*</s></label>
+        </div>
+        <div>
+          <input class="droptextbox" type="number" id="age" name="age" min="1" [(ngModel)]="case.Age" placeholder="18-88" title="Kérem töltse ki a mezőt">
+        </div>      
       </div>
-      <div>
-        <input class="droptextbox" type="number" id="age" name="age" min="1" [(ngModel)]="case.Age" placeholder="35" title="Kérem töltse ki a mezőt">
-      </div>      
     </div>
-  
-    <div class="hospitalized">      
-      <div>
-        <label class="text" style="margin-bottom: 10px;">Kórházba került  <s>*</s></label>
-      </div>
-      <div>
-        <div>
-          <label  class="text" for="trueHosp">Igen</label>
-          <input  type="radio" id="trueHosp" name="hospitalized" [value]="true" [(ngModel)]="case.Hospitalized" title="Kérem válasszon">
-        </div>
-        <div>
-          <label class="text" for="falseHosp">Nem</label>
-          <input type="radio" id="falseHosp" name="hospitalized" [value]="false" [(ngModel)]="case.Hospitalized" title="Kérem válasszon">
-        </div>
-      </div>
-    
-      <div>
-        <label class="text" style="margin-bottom: 10px; margin-top: 20px;"> Meghalt <s>*</s></label>
-      </div>
-      <div>
-        <div>
-          <label class="text" for="trueDead">Igen</label>
-          <input type="radio" id="trueDead" name="dead" [value]="true" [(ngModel)]="case.Dead" title="Kérem válasszon">
-        </div>
-        <div>
-          <label class="text" for="falseDead">Nem</label>
-          <input type="radio" id="falseDead" name="dead" [value]="false" [(ngModel)]="case.Dead" title="Kérem válasszon">
-        </div>
-      </div>
-    </div>  
-
-    <div class="markerclass">         
+       
+      <!--
       <div>
         <label class="text" for="source">Forrás:</label>
       </div>
       <div>      
         <input class="droptextbox" type="text" id="source" name="source" [(ngModel)]="case.Source" placeholder="???" title="Kérem töltse ki a mezőt">
       </div>
+      -->
+    <div class="container3"> 
       <div>
-        <label class="text"> Marker <s>*</s></label>
-      </div>
-      <div>
-        <select class="droptextbox" type="text" id="markers" name="markers" [(ngModel)]="marker" placeholder="Asztma" title="Kérem válasszon">
-          <ng-container *ngFor="let marker of markers">
-            <option value="{{marker}}">{{marker}}</option>
-          </ng-container>
-        </select>      
-        <button (click)="addMarker()">Hozzáadás</button>
-      </div>      
+        <div>
+          <label class="text"> Marker <s>*</s></label>
+        </div>
+        <div>
+          <select class="droptextbox" type="text" id="markers" name="markers" [(ngModel)]="marker" placeholder="Asztma" title="Kérem válasszon">
+            <ng-container *ngFor="let marker of markers">
+              <option value="" disabled selected hidden>Válasszon markert...</option>
+              <option value="{{marker}}">{{marker}}</option>
+            </ng-container>
+          </select>      
+          <button (click)="addMarker()">Hozzáadás</button>
+        </div> 
+      </div>     
     
       <div>
         <div>
-          <label for="bno">BNO Kódok bevitele</label>
+          <label class="text" for="bno">BNO Kódok bevitele</label>
         </div>
         <div>
-          <input class="droptextbox" type="text" id="bno" name="bno" [(ngModel)]="newBno" placeholder="345667" title="Kérem töltse ki a mezőt">
+          <input class="droptextbox" type="text" id="bno" name="bno" [(ngModel)]="newBno" placeholder="345667..." title="Kérem töltse ki a mezőt">
           <button (click)="addBno()">Hozzáadás</button>
         </div>
       </div>
     </div>
+
+    <div class="container3">  
+      <div style="display: flex;">
+      <div style="margin-right: 30px;">  
+        <div style="margin-bottom: 20px;">
+          <label class="text">Kórházba került  <s>*</s></label>
+        </div>
+        <div>
+          <div>
+            <label  class="text" for="trueHosp">Igen</label>
+            <input  type="radio" id="trueHosp" name="hospitalized" [value]="true" [(ngModel)]="case.Hospitalized" title="Kérem válasszon">
+          </div>
+          <div>
+            <label class="text" for="falseHosp">Nem</label>
+            <input type="radio" id="falseHosp" name="hospitalized" [value]="false" [(ngModel)]="case.Hospitalized" title="Kérem válasszon">
+          </div>
+        </div>
+      </div> 
+      <div style="margin-left: 30px;">
+        <div style="margin-bottom: 20px;">
+          <label class="text">Elhunyt <s>*</s></label>
+        </div>
+        <div>
+          <div>
+            <label class="text" for="trueDead">Igen</label>
+            <input type="radio" id="trueDead" name="dead" [value]="true" [(ngModel)]="case.Dead" title="Kérem válasszon">
+          </div>
+          <div>
+            <label class="text" for="falseDead">Nem</label>
+            <input type="radio" id="falseDead" name="dead" [value]="false" [(ngModel)]="case.Dead" title="Kérem válasszon">
+          </div>
+        </div>
+      </div>
+    </div>
+    </div> 
 
   </div>
   <div>
@@ -139,10 +154,12 @@
       <div style="position: absolute; bottom: 0; width: 50%; z-index: 1; text-align: center;">
           <hr style="margin-top: 10px; width: 100%; height: 1px; background-color: #0080ff; box-shadow:0px 1px 0px #848484;">
       </div>
-  </div>  
+    </div>  
 
   </div>
 
-  <p style="font-size: 0.8rem; margin-top: 20px;">A "*" -al jelölt mezők kitöltése kötelező ???????</p>
+  <footer>   
+    <p>A "*" -al jelölt mezők kitöltése kötelező !</p>
+  </footer>
 
 </div>
