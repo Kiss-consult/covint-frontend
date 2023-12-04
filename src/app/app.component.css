@@ -89,7 +89,7 @@
 
 
 
-/* Médialeképző: ha az ablak szélessége 1300px alá csökken */
+
 @media (max-width: 1300px) {
   .navbar-nav {
     list-style-type: none;
@@ -98,21 +98,22 @@
     width: 150px;
     background-color: #ffffff;
     position: fixed;
-    height: auto;
+    height: 100%;
     margin-left: 0;
     display: flex;
     flex-direction: column;
-    top:122px;
+    top:110px;
     border-left: 7px #0080ff solid;
     left:0;
     padding-top: 7px;
     min-height: 400px;
     z-index: 0;
+    box-shadow: 2px 10px 5px #8484844f;
   }
 
   .nav-item:hover{    
     border-top-right-radius:0;
-    border-top-left-radius: 0;    
+    border-top-left-radius: 0;   
   }
 
   .nav-item.active a {
@@ -120,8 +121,9 @@
     border-top-left-radius: 0;    
   }
 
-  .container{
-    margin-left:130px;
+  .dropdown {     
+    left: 144px;   
+    top: 0;
   }
   
   }

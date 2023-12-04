@@ -43,30 +43,38 @@
         <div>
           <label class="text"> Marker <s>*</s></label>
         </div>
-        <div>
-          <select class="droptextbox" type="text" id="markers" name="markers" [(ngModel)]="marker" placeholder="Asztma" title="Kérem válasszon">
-            <ng-container *ngFor="let marker of markers">
-              <option value="" disabled selected hidden>Válasszon markert...</option>
-              <option value="{{marker}}">{{marker}}</option>
-            </ng-container>
-          </select>      
-          <button (click)="addMarker()">Hozzáadás</button>
+        <div id="markerbnoclass">
+          <div>
+            <select class="droptextbox" type="text" id="markers" name="markers" [(ngModel)]="marker" placeholder="Asztma" title="Kérem válasszon">
+              <ng-container *ngFor="let marker of markers">
+                <option value="" disabled selected hidden>Válasszon markert...</option>
+                <option value="{{marker}}">{{marker}}</option>
+              </ng-container>
+            </select>  
+          </div>
+          <div>   
+            <button id="addbutton" (click)="addMarker()">Hozzáadás</button>
+          </div>
         </div> 
-      </div>     
+      </div>    
     
       <div>
         <div>
           <label class="text" for="bno">BNO Kódok bevitele</label>
         </div>
-        <div>
-          <input class="droptextbox" type="text" id="bno" name="bno" [(ngModel)]="newBno" placeholder="345667..." title="Kérem töltse ki a mezőt">
-          <button (click)="addBno()">Hozzáadás</button>
-        </div>
+        <div id="markerbnoclass">
+          <div>
+            <input class="droptextbox" type="text" id="bno" name="bno" [(ngModel)]="newBno" placeholder="345667..." title="Kérem töltse ki a mezőt">
+          </div>
+          <div>
+            <button (click)="addBno()">Hozzáadás</button>
+          </div> 
+        </div>         
       </div>
     </div>
 
     <div class="container3">  
-      <div style="display: flex;">
+      <div id="hospdead" style="display: flex;">
       <div style="margin-right: 30px;">  
         <div style="margin-bottom: 20px;">
           <label class="text">Kórházba került  <s>*</s></label>
@@ -82,7 +90,7 @@
           </div>
         </div>
       </div> 
-      <div style="margin-left: 30px;">
+      <div id="dead">
         <div style="margin-bottom: 20px;">
           <label class="text">Elhunyt <s>*</s></label>
         </div>

@@ -6,10 +6,6 @@
     text-align: center;
 }
 
-button{
-    margin-left: 20px;
-}
-
 #okebutton{
     margin-left: 0;
     margin-top: 60px;
@@ -25,6 +21,10 @@ button{
     border-start-end-radius: 7px;
     border-start-start-radius: 7px;
     color: black;    
+}
+
+.droptextbox{
+    margin-right: 20px;
 }
 
 .markerbno2{
@@ -79,3 +79,31 @@ button{
     padding-bottom: 60px;
 }
 
+#markerbnoclass{
+    display: flex;
+}
+
+#dead{
+    margin-left: 30px;
+}
+
+@media (max-width: 1200px){
+    #markerbnoclass{
+        text-align: left;
+        display: flex;
+        flex-direction: column; 
+        margin-bottom: 40px;        
+    }
+
+    #markers{
+        margin-left: 0;
+    }  
+    
+    #hospdead{
+        flex-direction: column;
+    }
+
+    #dead{
+        margin-left: 0;
+    }
+}
