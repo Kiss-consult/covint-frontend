@@ -1,5 +1,5 @@
 <h1>Email template
-  <button  (click)="goBackToPrevPage()" >Vissza</button> 
+  
 </h1>
 
 <div class="container">
@@ -7,9 +7,11 @@
   <div class="container2">
 
   <div class="exportbutton">
+    <h2><button id="backbutton" (click)="goBackToPrevPage()">&#11148;</button></h2>
     <div class="tab-button">
       Password template
     </div>
+    
     <p>Töltse le a reset-password template-t</p>
     <button (click)="dowloadTemplate(0)"> reset-password Letöltes</button>
     <p>Html template reset-password</p>
