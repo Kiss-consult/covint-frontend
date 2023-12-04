@@ -12,7 +12,13 @@ import { FormsModule , ReactiveFormsModule } from '@angular/forms';
 import { MatTableModule } from '@angular/material/table';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatSortModule } from '@angular/material/sort';
+
+import { DragDropModule } from '@angular/cdk/drag-drop';
+import { ColorPickerModule } from 'ngx-color-picker';
+
+
 import {MatIconModule} from '@angular/material/icon';
+
 
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -41,6 +47,8 @@ import { KeycloakAngularModule, KeycloakService } from 'keycloak-angular';
 import { UpdateuserComponent } from './components/pages/updateuser/updateuser.component';
 
 
+
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -67,7 +75,6 @@ import { UpdateuserComponent } from './components/pages/updateuser/updateuser.co
     OverrideuserComponent,
     EmailTemplateComponent,
     UpdateuserComponent,
-    
 
   ],
   imports: [
@@ -81,8 +88,13 @@ import { UpdateuserComponent } from './components/pages/updateuser/updateuser.co
     MatSortModule, 
     MatFormFieldModule,
     MatInputModule,
+
+    DragDropModule,
+
     MatIconModule,
+
     KeycloakAngularModule,
+    ColorPickerModule,
     BrowserAnimationsModule    
   ],
   schemas: [ CUSTOM_ELEMENTS_SCHEMA],
