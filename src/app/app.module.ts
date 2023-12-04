@@ -43,6 +43,7 @@ import { UpdateuserComponent } from './components/pages/updateuser/updateuser.co
 
 
 
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -69,7 +70,6 @@ import { UpdateuserComponent } from './components/pages/updateuser/updateuser.co
     OverrideuserComponent,
     EmailTemplateComponent,
     UpdateuserComponent,
-
   ],
   imports: [
     BrowserModule,

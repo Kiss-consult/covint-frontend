@@ -9,7 +9,7 @@
         display: flex;
         align-items: center; /* Align items vertically */
         margin: 10px; /* Add margin around each question */
-        padding: 10px; /* Add padding inside each question */
+        padding: 9px; /* Add padding inside each question */
         border-bottom: 1px solid #ddd; /* Add a bottom border for better visibility */
         display: flex;
         align-items: center; /* Align items vertically */
