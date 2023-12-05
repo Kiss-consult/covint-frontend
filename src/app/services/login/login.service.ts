@@ -12,6 +12,7 @@ import { User } from 'src/app/models/user/user';
 import { UserData } from 'src/app/models/userdata/userdata';
 import { KeycloakEventType, KeycloakService } from 'keycloak-angular';
 import { Empty } from 'src/app/models/utils/empty';
+import { UserWithGroups } from 'src/app/models/user/userwithgroups';
 
 
 @Injectable({
@@ -110,6 +111,8 @@ export class LoginService {
   public logout() {
     this.keycloakService.logout();
     this.keycloakService.clearToken();
+    this.router.navigate(['/home']);
+
     this.token = "";
   }
 
@@ -120,16 +123,16 @@ export class LoginService {
 
   // This function inserts the new user into the Auth.
   public insertNewUser(user_: User,): Observable<Result<{}>> {
-    const url = this.url + "/user/create";
+    const url = this.url + "/registration";
     return this.httpClient.post<Result<{}>>(url, user_).pipe(
       map(result => fromJSON<{}>(JSON.stringify(result))),
       catchError(error => of(new Err<{}>(error)))
     );
   }
 
-  public insertNewUserbyAdmin(user_: User, usergroups: string[]): Observable<Result<{}>> {
-    const url = this.url + "/registration";
-    let userwithgroups = { user_, usergroups }
+  public insertNewUserbyAdmin(userwithgroups : UserWithGroups): Observable<Result<{}>> {
+    const url = this.url + "/user/create";
+    
     return this.httpClient.post<Result<{}>>(url, userwithgroups).pipe(
       map(result => fromJSON<{}>(JSON.stringify(result))),
       catchError(error => of(new Err<{}>(error)))

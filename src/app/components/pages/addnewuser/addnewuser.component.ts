@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { Site } from 'src/app/models/user/site';
 import { User } from 'src/app/models/user/user';
+import { UserWithGroups } from 'src/app/models/user/userwithgroups';
 import { LoginService } from 'src/app/services/login/login.service';
 import { Location } from '@angular/common'
 import { KutatoOrvos, Orvos, PortalAdmin, PortalVezeto } from 'src/app/models/group/group';
@@ -14,7 +15,7 @@ export class AddnewuserComponent {
 
   cegActive: boolean = false;
   intezmenyActive: boolean = false;
-
+  userwithgroups : UserWithGroups = new UserWithGroups;
   user: User = new User;
   site: Site = new Site;
   password2: string = "" ;
@@ -95,7 +96,10 @@ export class AddnewuserComponent {
      return;
    }
     this.user.Site = this.site;
-    this.loginService.insertNewUserbyAdmin(this.user, this.usergroup).subscribe(
+    this.userwithgroups.User = this.user;
+    this.userwithgroups.Groups = this.usergroup;
+    
+    this.loginService.insertNewUserbyAdmin(this.userwithgroups).subscribe(
       result => {
         if (result.isErr()) {
          
