@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
-import { Orvos, PortalAdmin, KutatoOrvos, PortalVezeto} from 'src/app/models/group/group'
+import { Orvos, PortalKezelo, KutatoOrvos, PortalVezeto} from 'src/app/models/group/group'
 import { LoginService } from 'src/app/services/login/login.service';
 import { Location } from '@angular/common'
 @Component({
@@ -12,7 +12,7 @@ export class DiagramTestComponent {
   activeTab: number = 0;
   orvos = Orvos;
   kutatoorvos = KutatoOrvos;
-  portaladmin= PortalAdmin;
+  portaladmin= PortalKezelo;
   portalvezeto = PortalVezeto;
   
   constructor(private router: Router,public loginService: LoginService) { }
@@ -24,7 +24,7 @@ export class DiagramTestComponent {
         path.push(Orvos);
         break;
       case 2:
-        path.push(PortalAdmin);
+        path.push(PortalKezelo);
         break;
       case 3:
         path.push(KutatoOrvos);

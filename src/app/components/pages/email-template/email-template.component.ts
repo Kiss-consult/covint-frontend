@@ -11,7 +11,7 @@ import { Filter } from 'src/app/models/filter/filter';
 import { Export } from 'src/app/models/export/export';
 import { SavedFilter } from 'src/app/models/savedfilter/savedfilter';
 import { GroupGuard } from 'src/app/guards/group.guard';
-import { KutatoOrvos, Orvos, PortalAdmin, PortalVezeto } from 'src/app/models/group/group';
+import { KutatoOrvos, Orvos, PortalKezelo, PortalVezeto } from 'src/app/models/group/group';
 import { LoginService } from 'src/app/services/login/login.service';
 import { Location } from '@angular/common'
 import { ActivatedRouteSnapshot, RouterStateSnapshot, UrlTree, Router } from '@angular/router';

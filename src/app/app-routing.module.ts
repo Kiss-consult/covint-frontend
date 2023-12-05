@@ -17,7 +17,7 @@ import { FilterablemarkersComponent } from './components/pages/filterablemarkers
 import { MarkermanagementComponent } from './components/pages/markermanagement/markermanagement.component';
 import { AuditlogComponent } from './components/pages/auditlog/auditlog.component';
 import { RegistrationComponent } from './components/pages/registration/registration.component';
-import { KutatoOrvos, Orvos, PortalAdmin, PortalVezeto } from './models/group/group';
+import { KutatoOrvos, Orvos, PortalKezelo, PortalVezeto } from './models/group/group';
 import { DefaultformarkersComponent } from './components/pages/defaultformarkers/defaultformarkers.component'; 
 import { PercentoverwriteComponent } from './components/pages/percentoverwrite/percentoverwrite.component';
 import { ProfileComponent } from './components/pages/profile/profile.component';
@@ -41,7 +41,7 @@ const routes: Routes = [
 
   { path: "diagram", component: DiagramComponent, children: [
     {path: Orvos, component: DiagramComponent },
-    {path: PortalAdmin, component: DiagramComponent },
+    {path: PortalKezelo, component: DiagramComponent },
     {path: KutatoOrvos, component: DiagramComponent },
     {path: PortalVezeto, component: DiagramComponent },
     {path: "", component: DiagramComponent}

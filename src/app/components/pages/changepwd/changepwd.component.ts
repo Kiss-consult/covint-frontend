@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
-import { KutatoOrvos, Orvos, PortalAdmin, PortalVezeto } from 'src/app/models/group/group';
+import { KutatoOrvos, Orvos, PortalKezelo, PortalVezeto } from 'src/app/models/group/group';
 import { LoginService } from 'src/app/services/login/login.service';
 import { Location } from '@angular/common'
 @Component({
@@ -17,7 +17,7 @@ export class ChangepwdComponent {
   byAdmin : boolean = false;
   orvos = Orvos;
   kutatoorvos = KutatoOrvos;
-  portaladmin= PortalAdmin;
+  portaladmin= PortalKezelo;
   portalvezeto = PortalVezeto;
 
   goBackToPrevPage(): void {

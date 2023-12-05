@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 
 import { ActivatedRoute, Router } from '@angular/router';
-import { KutatoOrvos, Orvos, PortalAdmin, PortalVezeto } from 'src/app/models/group/group';
+import { KutatoOrvos, Orvos, PortalKezelo, PortalVezeto } from 'src/app/models/group/group';
 import { LoginService } from 'src/app/services/login/login.service';
 import { Location } from '@angular/common'
 import { UserData } from 'src/app/models/userdata/userdata';
@@ -21,7 +21,7 @@ export class ChangepwdbyadminComponent {
   byAdmin: boolean = false;
   orvos = Orvos;
   kutatoorvos = KutatoOrvos;
-  portaladmin = PortalAdmin;
+  portaladmin = PortalKezelo;
   portalvezeto = PortalVezeto;
   id: any;
 
