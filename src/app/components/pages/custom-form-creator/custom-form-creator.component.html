@@ -5,40 +5,44 @@
                    [(ngModel)]="question.selected" 
                    (change)="toggleQuestionSelection(question)">
             <label for="{{question.type}}">{{question.label}}</label>
+            
         </div>
-    </div>
-    <div style="text-align: left;">
-        <label for="backgroundColorPicker">Háttérszín:</label>
+        <label for="backgroundColorPicker">Háttérszín: </label>
         <input [(colorPicker)]="backgroundColor" [style.background]="backgroundColor" id="backgroundColorPicker" style="align-items:start;">
-        <label for="textColorPicker">Betűszín</label>
+        <br>
+        <label for="textColorPicker">Betűszín: </label>
         <input [(colorPicker)]="textColor" [style.background]="textColor" id="textColorPicker">
-      </div>
+        <br>
+        <label>Kérdőív neve:</label>
+        <input type="text" [(ngModel)]="formName" placeholder="Kérdőív">
+        <br>
+    </div>
       <div class="form-preview" [ngStyle]="{'background-color': backgroundColor, 'color': textColor}" style="align-items: center;">
         <img src="https://covint.hu/wp-content/uploads/2022/02/covint-b.png" alt="alternatetext" >
-        <h4 style="font-size:45px">Kérdőív Készítő</h4>
+        <h4 style="font-size:45px">{{ formName }}</h4>
         <div *ngFor="let question of selectedQuestions; let i = index" cdkDrag class="preview-item">
             <div class="preview-content">
                 <div class="question-content">
-                    <ng-container *ngIf="question.type === 'text'">
+                    <ng-container *ngIf="question.type === 'text'"  class="question-container">
                         <label class="question-label">{{ question.label }}</label>
                         <br>
                         <input type="text" [name]="question.id">
                     </ng-container>
-                    <ng-container *ngIf="question.type === 'yesno'">
+                    <ng-container *ngIf="question.type === 'yesno'"  class="question-container" >
                         <label class="question-label">{{ question.label }}</label>
                         <div>
                             <input type="radio" [name]="question.id" value="Yes"> Igen
                             <input type="radio" [name]="question.id" value="No"> Nem
                         </div>
                     </ng-container>
-                    <ng-container *ngIf="question.type === 'yesnohospital'">
+                    <ng-container *ngIf="question.type === 'yesnohospital'" class="question-container">
                         <label class="question-label">{{ question.label }}</label>
                         <div>
                             <input type="radio" [name]="question.id" value="Yes"> Igen
                             <input type="radio" [name]="question.id" value="No"> Nem
                         </div>
                     </ng-container>
-                    <ng-container *ngIf="isMultiSelectQuestion(question)">
+                    <ng-container *ngIf="isMultiSelectQuestion(question)" class="question-container">
                         <label class="question-label">{{ question.label }}</label>
                         <div *ngFor="let option of getOptions(question)">
                             <input type="checkbox" [id]="option" (change)="toggleSelection(question, option)">
@@ -51,6 +55,6 @@
         </div>
         <button type="button" disabled>Küldés</button>
     </div>    
-    <button (click)="renderForm()">Generálás</button>
-    <textarea rows="20" cols="150" readonly>{{ generatedFormHtml }}</textarea>
+    <button (click)="submitForm()">Generálás</button>
+    <textarea rows="4" cols="150" readonly>{{ displayResponse }}</textarea>
 </div>

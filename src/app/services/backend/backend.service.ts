@@ -200,4 +200,16 @@ public insertOverride(override: Override): Observable<Result<{}>> {
   );
 }
 
+public sendFormHtml(htmlData: string, formName: string): Observable<Result<{}>> {
+  const url = `${this.url}/forms/add/${formName}`;
+  console.log("Sending HTML Data:", htmlData);
+  const headers = new HttpHeaders({ 'Content-Type': 'text/html' });
+
+  return this.httpClient.post<Result<{}>>(url, htmlData, { headers: headers }).pipe(
+    map(result => fromJSON<{}>(JSON.stringify(result))),
+    catchError(error => of(new Err<{}>(error)))
+  );
+}
+
+
 }
