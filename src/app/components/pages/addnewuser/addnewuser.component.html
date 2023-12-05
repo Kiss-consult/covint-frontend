@@ -36,6 +36,15 @@
         </div>
       </div>
   
+<div>
+  <input  *ngIf="loginService.hasAnyGroup([portalvezeto, kutatoorvos])" type="checkbox"  [checked]="doctorgroup"  [(ngModel)]="doctorgroup"  (change)="isDoctor(doctorgroup) "   id="doctor" >
+  <input  *ngIf="loginService.hasAnyGroup([portalvezeto, kutatoorvos])" type="checkbox"  [checked]="researchergroup" [(ngModel)]="researchergroup"  (change)="isResearcher(researchergroup) "  id="researcher" >
+  <input  *ngIf="loginService.hasAnyGroup([portalvezeto, kutatoorvos])" type="checkbox"  [checked]="portaladmingroup" [(ngModel)]="portaladmingroup"  (change)="isPortalAdmin(portaladmingroup) "  id="portaladmin" >
+  <input  *ngIf="loginService.hasAnyGroup([portalvezeto, kutatoorvos])" type="checkbox"  [checked]="portalmanagergroup" [(ngModel)]="portalmanagergroup"  (change)="isPortalManager(portalmanagergroup) "  id="portelmanager" >
+
+</div>
+
+
     </div>
   
     <div class="form-group" >

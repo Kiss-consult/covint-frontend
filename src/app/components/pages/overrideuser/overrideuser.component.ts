@@ -124,7 +124,7 @@ export class OverrideuserComponent {
  public  changepass(userdata: UserData){
   this.userdata = userdata;
   console.log("call button1",this.userdata)
-  this.router.navigate(['/changepwd']);
+  this.router.navigate(['/changepwdbyadmin', userdata.id]);
 }
 
 

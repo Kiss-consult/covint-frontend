@@ -25,6 +25,7 @@ import { OverrideuserComponent } from './components/pages/overrideuser/overrideu
 import { EmailTemplateComponent } from './components/pages/email-template/email-template.component';
 import { AuthGuard } from './guard/auth.guard';
 import { UpdateuserComponent } from './components/pages/updateuser/updateuser.component';
+import { ChangepwdbyadminComponent } from './components/pages/changepwdbyadmin/changepwdbyadmin.component';
 
 
 const routes: Routes = [
@@ -62,7 +63,8 @@ const routes: Routes = [
   { path: "profile", component: ProfileComponent },
   { path: "overrideuser", component: OverrideuserComponent },
   { path: "email-template", component: EmailTemplateComponent },
-  { path: "updateuser/:userdata.id", component: UpdateuserComponent } // 'product/:id
+  { path: "updateuser/:userdata.id", component: UpdateuserComponent },// 'product/:id 
+  { path: "changepwdbyadmin/:userdata.id", component: ChangepwdbyadminComponent }
 ];
 
 @NgModule({
