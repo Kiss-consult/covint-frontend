@@ -12,9 +12,9 @@ export class LoginComponent {
   password: string = "";
 
   constructor(private loginService: LoginService, private router: Router) {}
-
+/*
   onLogin() {
-    this.loginService.login(this.username, this.password).subscribe(result => {
+    this.loginService.login().subscribe(result => {
             
       if (result.isOk()) {
         console.log('Bejelentkezés sikeres');
@@ -26,5 +26,5 @@ export class LoginComponent {
         console.log('Bejelentkezés sikertelen');
       }
     });
-  }
+  }*/
 }

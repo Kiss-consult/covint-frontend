@@ -43,7 +43,7 @@ export class ChangepwdComponent {
 
     console.log('byAdmin', this.byAdmin);
 
-    this.loginService.changePassword(this.currentpassword, this.newpassword, this.confirmation, this.byAdmin).subscribe(result => {
+    this.loginService.changePassword(this.currentpassword, this.newpassword, this.confirmation, this.byAdmin, "").subscribe(result => {
             
       if (result.isOk()) {
         console.log('Jelszócsere sikeres');

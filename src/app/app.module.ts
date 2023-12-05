@@ -45,6 +45,7 @@ import { EmailTemplateComponent } from './components/pages/email-template/email-
 import { initializeApp, initializeKeycloak } from './init/init';
 import { KeycloakAngularModule, KeycloakService } from 'keycloak-angular';
 import { UpdateuserComponent } from './components/pages/updateuser/updateuser.component';
+import { ChangepwdbyadminComponent } from './components/pages/changepwdbyadmin/changepwdbyadmin.component';
 
 
 
@@ -75,6 +76,7 @@ import { UpdateuserComponent } from './components/pages/updateuser/updateuser.co
     OverrideuserComponent,
     EmailTemplateComponent,
     UpdateuserComponent,
+    ChangepwdbyadminComponent,
 
   ],
   imports: [

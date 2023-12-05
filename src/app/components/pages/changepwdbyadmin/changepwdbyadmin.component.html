@@ -1,0 +1,38 @@
+
+<h1>Jelszócsere Felhasználónak
+    <button  (click)="goBackToPrevPage()" >Vissza</button> 
+  </h1>
+  
+  
+    <div class="container">
+   
+    <div class="form-group1">
+  <!--
+      <div class="form-group"  *ngIf="loginService.hasAnyGroup([orvos])">
+        -->
+       
+      <div class="form-group">
+        <div>
+          <label class="text" for="firstname">Új jelszó:</label>
+        </div>
+        <input class="droptextbox" type="text" id="firstname" name="firstname" [(ngModel)]="newpassword" required 
+        title="A jeszó minimum 8 karakter és tartalmaznia kell: kis és nagy betűt, számot és extra karatert! ">
+      </div>
+  
+      <div class="form-group">
+        <div>
+          <label class="text" for="lastname">Új jelszó ismét:</label>
+        </div>
+        <input class="droptextbox" type="text" id="lastname" name="lastname" [(ngModel)]="confirmation" required title="Az ismételt jelszónak meg kell egyeznie a jelszóval!">
+      </div>
+  
+     
+      <div class="form-group">
+        <!--
+       <button id="done"  *ngIf="loginService.hasAnyGroup([portaladmin,portalvezeto,kutatoorvos])" (click)="changePassword(true)" >Kész</button>
+        -->
+       
+        <button id="done"  (click)="changePassword(true)" >Kész</button>
+      </div>
+    </div>
+    </div>

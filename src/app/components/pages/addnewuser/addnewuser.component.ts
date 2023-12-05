@@ -3,6 +3,8 @@ import { Site } from 'src/app/models/user/site';
 import { User } from 'src/app/models/user/user';
 import { LoginService } from 'src/app/services/login/login.service';
 import { Location } from '@angular/common'
+import { KutatoOrvos, Orvos, PortalAdmin, PortalVezeto } from 'src/app/models/group/group';
+
 @Component({
   selector: 'app-addnewuser',
   templateUrl: './addnewuser.component.html',
@@ -17,6 +19,17 @@ export class AddnewuserComponent {
   site: Site = new Site;
   password2: string = "" ;
  
+  usergroup: string[] = [];
+  orvos = Orvos;
+  kutatoorvos = KutatoOrvos;
+  portaladmin = PortalAdmin;
+  portalvezeto = PortalVezeto;
+
+  doctorgroup: boolean = false;
+  researchergroup: boolean = false;
+  portaladmingroup: boolean = false;
+  portalmanagergroup: boolean = false;
+
   toggleContent(contentType: string) {
     if (contentType === 'ceg') {
       this.cegActive = true;
@@ -35,17 +48,54 @@ export class AddnewuserComponent {
   goBackToPrevPage(): void {
     this.location.back();
   }
-  constructor(private loginService: LoginService,private location: Location) {
+  constructor(public loginService: LoginService,private location: Location) {
     
   }
 
+  public isDoctor(doctorgroup: boolean) {
+
+    this.doctorgroup = doctorgroup;
+    if (this.doctorgroup)
+      this.usergroup.push("doctor");
+    this.doctorgroup = false;
+    console.log(this.usergroup);
+
+  }
+  public isResearcher(researchergroup: boolean) {
+
+    this.researchergroup = researchergroup;
+    if (this.researchergroup)
+      this.usergroup.push("researcher");
+    this.researchergroup = false;
+    console.log(this.researchergroup);
+    console.log(this.usergroup);
+
+  }
+  public isPortalAdmin(portaladmingroup: boolean) {
+
+    this.portaladmingroup = portaladmingroup;
+    if (this.portaladmingroup)
+      this.usergroup.push("portal-admin");
+    this.portaladmingroup = false;
+    console.log(this.usergroup);
+
+  }
+  public isPortalManager(portalmanagergroup: boolean) {
+
+    this.portalmanagergroup = portalmanagergroup;
+    if (this.portalmanagergroup)
+      this.usergroup.push("portal-manager");
+    this.portalmanagergroup = false;
+    console.log(this.usergroup);
+
+  }
 
   public finish() {
     if (!this.checkRequiredFields()) {
      return;
    }
     this.user.Site = this.site;
-    this.loginService.insertNewUser(this.user).subscribe(
+    this.loginService.insertNewUserbyAdmin(this.user, this.usergroup).subscribe(
       result => {
         if (result.isErr()) {
          
@@ -66,6 +116,7 @@ export class AddnewuserComponent {
         console.log("Successfully inserted into database")
         this.site = new Site();
         this.user = new User();
+        this.usergroup = [];
       });
   }
 

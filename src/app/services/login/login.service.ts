@@ -70,18 +70,18 @@ export class LoginService {
   }
 
   public setEmailToDeafult(f: number): Observable<Result<{}>> {
-    
-    
+
+
     const url = this.url + "/templates/default";
     return this.httpClient.post(url, "", {
       params: this.getParams(f),
       headers: new HttpHeaders(),
     })
-    
-    .pipe(
-      map(result => fromJSON<{}>(JSON.stringify(result))),
-      catchError(error => of(new Err<{}>(error)))
-    );
+
+      .pipe(
+        map(result => fromJSON<{}>(JSON.stringify(result))),
+        catchError(error => of(new Err<{}>(error)))
+      );
   }
 
 
@@ -119,14 +119,22 @@ export class LoginService {
   // }
 
   // This function inserts the new user into the Auth.
-  public insertNewUser(user_: User): Observable<Result<{}>> {
-    const url = this.url + "/registration";
+  public insertNewUser(user_: User,): Observable<Result<{}>> {
+    const url = this.url + "/user/create";
     return this.httpClient.post<Result<{}>>(url, user_).pipe(
       map(result => fromJSON<{}>(JSON.stringify(result))),
       catchError(error => of(new Err<{}>(error)))
     );
   }
 
+  public insertNewUserbyAdmin(user_: User, usergroups: string[]): Observable<Result<{}>> {
+    const url = this.url + "/registration";
+    let userwithgroups = { user_, usergroups }
+    return this.httpClient.post<Result<{}>>(url, userwithgroups).pipe(
+      map(result => fromJSON<{}>(JSON.stringify(result))),
+      catchError(error => of(new Err<{}>(error)))
+    );
+  }
 
   // This function inserts the new user into the Auth.
   public getAllUsers(): Observable<Result<UserData[]>> {
@@ -165,8 +173,20 @@ export class LoginService {
     );
   }
 
-  public changePassword(currentPassword: string, newPassword: string, confirmation: string, byAdmin: boolean): Observable<Result<{}>> {
-    const url = this.url + "/user/changepassword/" + this.getUserId();
+  public changePassword(currentPassword: string, newPassword: string, confirmation: string, byAdmin: boolean, id : string): Observable<Result<{}>> {
+    let userID = "";
+
+    if (byAdmin) {
+      userID =  id;
+     
+      
+    }
+    if (!byAdmin) {
+      userID = this.getUserId()
+
+    }
+
+    const url = this.url + "/user/changepassword/" + userID;
     let newP = { currentPassword, newPassword, confirmation, byAdmin }
     return this.httpClient.put<Result<{}>>(url, newP, { headers: this.getHeaders() }).pipe(
       map(result => fromJSON<{}>(JSON.stringify(result))),
