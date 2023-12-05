@@ -3,7 +3,7 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatTableModule, MatTableDataSource } from '@angular/material/table';
 import { Illness } from 'src/app/models/illness/illness';
 import { BackendService } from 'src/app/services/backend/backend.service';
-import { KutatoOrvos, Orvos, PortalAdmin, PortalVezeto } from 'src/app/models/group/group';
+import { KutatoOrvos, Orvos, PortalKezelo, PortalVezeto } from 'src/app/models/group/group';
 import { LoginService } from 'src/app/services/login/login.service';
 import { Location } from '@angular/common'
 @Component({
@@ -29,7 +29,7 @@ export class FilterablemarkersComponent {
 
   orvos = Orvos;
   kutatoorvos = KutatoOrvos;
-  portaladmin= PortalAdmin;
+  portaladmin= PortalKezelo;
   portalvezeto = PortalVezeto;
 
   illnessFilter(event: Event) {

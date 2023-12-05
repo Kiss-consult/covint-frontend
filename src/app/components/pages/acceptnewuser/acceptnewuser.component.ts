@@ -6,7 +6,7 @@ import { User } from 'src/app/models/user/user';
 import { UserData } from 'src/app/models/userdata/userdata';
 import { LoginService } from 'src/app/services/login/login.service';
 import { BackendService } from 'src/app/services/backend/backend.service';
-import { KutatoOrvos, Orvos, PortalAdmin, PortalVezeto } from 'src/app/models/group/group';
+import { KutatoOrvos, Orvos, PortalKezelo, PortalVezeto } from 'src/app/models/group/group';
 import { Location } from '@angular/common'
 
 
@@ -51,7 +51,7 @@ export class AcceptnewuserComponent {
 
   orvos = Orvos;
   kutatoorvos = KutatoOrvos;
-  portaladmin = PortalAdmin;
+  portaladmin = PortalKezelo;
   portalvezeto = PortalVezeto;
 
 
@@ -88,7 +88,7 @@ export class AcceptnewuserComponent {
 
     this.doctorgroup = doctorgroup;
     if (this.doctorgroup)
-      this.usergroup.push("doctor");
+      this.usergroup.push(Orvos);
     this.doctorgroup = false;
     console.log(this.usergroup);
 
@@ -97,7 +97,7 @@ export class AcceptnewuserComponent {
 
     this.researchergroup = researchergroup;
     if (this.researchergroup)
-      this.usergroup.push("researcher");
+      this.usergroup.push(KutatoOrvos);
     this.researchergroup = false;
     console.log(this.researchergroup);
     console.log(this.usergroup);
@@ -107,7 +107,7 @@ export class AcceptnewuserComponent {
 
     this.portaladmingroup = portaladmingroup;
     if (this.portaladmingroup)
-      this.usergroup.push("portal-admin");
+      this.usergroup.push(PortalVezeto);
     this.portaladmingroup = false;
     console.log(this.usergroup);
 
@@ -116,7 +116,7 @@ export class AcceptnewuserComponent {
 
     this.portalmanagergroup = portalmanagergroup;
     if (this.portalmanagergroup)
-      this.usergroup.push("portal-manager");
+      this.usergroup.push(PortalKezelo);
     this.portalmanagergroup = false;
     console.log(this.usergroup);
 

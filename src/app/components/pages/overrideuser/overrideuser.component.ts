@@ -7,7 +7,7 @@ import { User } from 'src/app/models/user/user';
 import { UserData } from 'src/app/models/userdata/userdata';
 import { LoginService } from 'src/app/services/login/login.service';
 import { BackendService } from 'src/app/services/backend/backend.service';
-import { KutatoOrvos, Orvos, PortalAdmin, PortalVezeto } from 'src/app/models/group/group';
+import { KutatoOrvos, Orvos, PortalKezelo, PortalVezeto } from 'src/app/models/group/group';
 import { Location } from '@angular/common'
 
 
@@ -52,7 +52,7 @@ export class OverrideuserComponent {
 
   orvos = Orvos;
   kutatoorvos = KutatoOrvos;
-  portaladmin = PortalAdmin;
+  portaladmin = PortalKezelo;
   portalvezeto = PortalVezeto;
 
 

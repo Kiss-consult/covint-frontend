@@ -4,7 +4,7 @@ import { User } from 'src/app/models/user/user';
 import { UserWithGroups } from 'src/app/models/user/userwithgroups';
 import { LoginService } from 'src/app/services/login/login.service';
 import { Location } from '@angular/common'
-import { KutatoOrvos, Orvos, PortalAdmin, PortalVezeto } from 'src/app/models/group/group';
+import { KutatoOrvos, Orvos, PortalKezelo, PortalVezeto } from 'src/app/models/group/group';
 
 @Component({
   selector: 'app-addnewuser',
@@ -23,7 +23,7 @@ export class AddnewuserComponent {
   usergroup: string[] = [];
   orvos = Orvos;
   kutatoorvos = KutatoOrvos;
-  portaladmin = PortalAdmin;
+  portaladmin = PortalKezelo;
   portalvezeto = PortalVezeto;
 
   doctorgroup: boolean = false;
@@ -57,7 +57,7 @@ export class AddnewuserComponent {
 
     this.doctorgroup = doctorgroup;
     if (this.doctorgroup)
-      this.usergroup.push("doctor");
+      this.usergroup.push(Orvos);
     this.doctorgroup = false;
     console.log(this.usergroup);
 
@@ -66,7 +66,7 @@ export class AddnewuserComponent {
 
     this.researchergroup = researchergroup;
     if (this.researchergroup)
-      this.usergroup.push("researcher");
+      this.usergroup.push(KutatoOrvos);
     this.researchergroup = false;
     console.log(this.researchergroup);
     console.log(this.usergroup);
@@ -76,7 +76,7 @@ export class AddnewuserComponent {
 
     this.portaladmingroup = portaladmingroup;
     if (this.portaladmingroup)
-      this.usergroup.push("portal-admin");
+      this.usergroup.push(PortalVezeto);
     this.portaladmingroup = false;
     console.log(this.usergroup);
 
@@ -85,7 +85,7 @@ export class AddnewuserComponent {
 
     this.portalmanagergroup = portalmanagergroup;
     if (this.portalmanagergroup)
-      this.usergroup.push("portal-manager");
+      this.usergroup.push(PortalKezelo);
     this.portalmanagergroup = false;
     console.log(this.usergroup);
 
@@ -98,7 +98,7 @@ export class AddnewuserComponent {
     this.user.Site = this.site;
     this.userwithgroups.User = this.user;
     this.userwithgroups.Groups = this.usergroup;
-    
+
     this.loginService.insertNewUserbyAdmin(this.userwithgroups).subscribe(
       result => {
         if (result.isErr()) {
@@ -116,7 +116,7 @@ export class AddnewuserComponent {
           }
           return;
         }
-        alert("Sikeresen Új felhasználót regisztrált!\nA 'Új felhasználó elfogadása' menűpontban a regisztrált felhasználóhoz jogosultságot tud rendelni! ");
+        alert("Sikeresen Új felhasználót regisztrált! ");
         console.log("Successfully inserted into database")
         this.site = new Site();
         this.user = new User();
