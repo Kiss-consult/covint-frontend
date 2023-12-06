@@ -13,14 +13,14 @@
 
 
   <div class="tab" *ngIf="activeTab === 2"><iframe id="diagram"
-      src="https://covint.kisscloud.eu/dashboard/app/dashboards?security_tenant=global#/view/0ab39040-60f8-11ee-b73b-9399ce6d330a?embed=true&_g=(filters%3A!()%2CrefreshInterval%3A(pause%3A!t%2Cvalue%3A0)%2Ctime%3A(from%3Anow-15m%2Cto%3Anow))&hide-filter-bar=true%22"></iframe>
+      [src]="getDoctorDashboardUrl() | safe:'url'"></iframe>
   </div>
 
 
 
 
   <div class="tab" *ngIf="activeTab === 3"><iframe id="diagram"
-      src="https://covint.kisscloud.eu/dashboard/app/dashboards?security_tenant=global#/view/00583240-60f8-11ee-b73b-9399ce6d330a?embed=true&_g=(filters%3A!()%2CrefreshInterval%3A(pause%3A!t%2Cvalue%3A0)%2Ctime%3A(from%3Anow-15m%2Cto%3Anow))&hide-filter-bar=true%22"></iframe>
+      [src]="getResearcherDashboardUrl() | safe:'url'"></iframe>
   </div>
 
 

@@ -16,6 +16,7 @@ export class ConfigService {
       .get<Config>('assets/config.json')
       .pipe(
         map(config => {
+          console.log('config', config)
           this.config = config;
         })
       );

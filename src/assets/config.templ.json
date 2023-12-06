@@ -1,5 +1,7 @@
 {
     "BackendUrl": "${BACKEND_URL}",
     "AuthUrl": "${AUTH_URL}",
-    "KeycloakUrl": "${KEYCLOAK_URL}"
+    "KeycloakUrl": "${KEYCLOAK_URL}",
+    "OpensearchDashboardUrlDoctor": "${OPENSEARCH_DASHBOARD_URL_DOCTOR}",
+    "OpensearchDashboardUrlResearcher": "${OPENSEARCH_DASHBOARD_URL_RESEARCHER}"
 }
