@@ -1,5 +1,7 @@
 {
     "BackendUrl": "http://localhost:8090",
     "AuthUrl": "http://localhost:8092",
-    "KeycloakUrl": "http://localhost:8084"
+    "KeycloakUrl": "http://localhost:8084",
+    "OpensearchDashboardUrlDoctor": "https://covint.kisscloud.eu/dashboard/app/dashboards?security_tenant=global#/view/43ddaba0-8e9b-11ee-8309-11cf2b7c9f5d?embed=true&_g=(filters%3A!()%2CrefreshInterval%3A(pause%3A!t%2Cvalue%3A0)%2Ctime%3A(from%3A'2022-12-31T23%3A00%3A00.000Z'%2Cto%3Anow))",
+    "OpensearchDashboardUrlResearcher": "https://covint.kisscloud.eu/dashboard/app/dashboards?security_tenant=global#/view/aa61f460-8e9d-11ee-8309-11cf2b7c9f5d?embed=true&_g=(filters%3A!()%2CrefreshInterval%3A(pause%3A!t%2Cvalue%3A0)%2Ctime%3A(from%3A'2022-12-31T23%3A00%3A00.000Z'%2Cto%3Anow))"
 }

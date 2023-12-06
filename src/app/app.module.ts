@@ -1,4 +1,4 @@
-import { APP_INITIALIZER, NgModule,CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
+import { APP_INITIALIZER, NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 
 import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
@@ -8,7 +8,7 @@ import { ExportComponent } from './components/pages/export/export.component';
 import { DatainputComponent } from './components/pages/datainput/datainput.component';
 import { HomeComponent } from './components/pages/home/home.component';
 import { HttpClientModule } from '@angular/common/http';
-import { FormsModule , ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatTableModule } from '@angular/material/table';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatSortModule } from '@angular/material/sort';
@@ -17,7 +17,7 @@ import { DragDropModule } from '@angular/cdk/drag-drop';
 import { ColorPickerModule } from 'ngx-color-picker';
 
 
-import {MatIconModule} from '@angular/material/icon';
+import { MatIconModule } from '@angular/material/icon';
 
 
 import { MatInputModule } from '@angular/material/input';
@@ -42,10 +42,11 @@ import { PercentoverwriteComponent } from './components/pages/percentoverwrite/p
 import { ProfileComponent } from './components/pages/profile/profile.component';
 import { OverrideuserComponent } from './components/pages/overrideuser/overrideuser.component';
 import { EmailTemplateComponent } from './components/pages/email-template/email-template.component';
-import { initializeApp, initializeKeycloak } from './init/init';
+import { initializeApp } from './init/init';
 import { KeycloakAngularModule, KeycloakService } from 'keycloak-angular';
 import { UpdateuserComponent } from './components/pages/updateuser/updateuser.component';
 import { ChangepwdbyadminComponent } from './components/pages/changepwdbyadmin/changepwdbyadmin.component';
+import { SafePipe } from './pipes/Safepipe';
 
 
 
@@ -77,17 +78,17 @@ import { ChangepwdbyadminComponent } from './components/pages/changepwdbyadmin/c
     EmailTemplateComponent,
     UpdateuserComponent,
     ChangepwdbyadminComponent,
-
+    SafePipe
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     FormsModule,
-    ReactiveFormsModule ,
+    ReactiveFormsModule,
     HttpClientModule,
     MatTableModule,       // A táblázat moduljának importálása
     MatPaginatorModule,  // Az oldalazás moduljának importálása
-    MatSortModule, 
+    MatSortModule,
     MatFormFieldModule,
     MatInputModule,
 
@@ -97,9 +98,9 @@ import { ChangepwdbyadminComponent } from './components/pages/changepwdbyadmin/c
 
     KeycloakAngularModule,
     ColorPickerModule,
-    BrowserAnimationsModule    
+    BrowserAnimationsModule
   ],
-  schemas: [ CUSTOM_ELEMENTS_SCHEMA],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA],
   providers: [
     ConfigService,
     // {
@@ -119,7 +120,8 @@ import { ChangepwdbyadminComponent } from './components/pages/changepwdbyadmin/c
       useFactory: initializeApp,
       multi: true,
       deps: [KeycloakService, ConfigService],
-  }
+    },
+    SafePipe
   ],
   bootstrap: [AppComponent]
 })
