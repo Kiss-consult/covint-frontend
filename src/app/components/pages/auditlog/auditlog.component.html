@@ -2,10 +2,10 @@
    Auditlog
    
   </h1>
-
+  <h2>Auditlogok  ( szintek ->  INFO : informális üzenetek, ALLERT : figyelmeztetések , ERROR : hibák ) </h2>
   <div class="container">
    <!--TABLE-->
-   <h3><button  (click)="goBackToPrevPage()" >Vissza</button></h3> 
+   <h3><button id="backbutton" (click)="goBackToPrevPage()">&#11148;</button></h3>
    
    <div class="acceptuser"  >
     <mat-form-field>
@@ -13,7 +13,7 @@
         <input matInput (keyup)="illnessFilter($event)" placeholder="Felhasználók" #input>
       </mat-form-field>
 
-      <table mat-table [dataSource]="dataSource" class="mat-elevation-z8" matSort>  
+      <table mat-table [dataSource]="dataSource" class="mat-elevation-z8" matSort #empTbSort="matSort">  
 
      
      
@@ -36,28 +36,30 @@
         </td>
       </ng-container>
    -->
-      <ng-container matColumnDef="Dátum">
+   
+
+      <ng-container matColumnDef="Date">
         <th mat-header-cell *matHeaderCellDef mat-sort-header>Dátum</th>
         <td mat-cell *matCellDef="let auditlog">
          {{ auditlog.Date}}
         </td>
       </ng-container>     
      
-      <ng-container matColumnDef="Idő">
-         <th mat-header-cell *matHeaderCellDef mat-sort-header>Idő</th>
+      <ng-container matColumnDef="Time">
+         <th mat-header-cell *matHeaderCellDef mat-sort-header>idő</th>
          <td mat-cell *matCellDef="let auditlog">
           {{ auditlog.Time}}
          </td>
        </ng-container>    
 
-       <ng-container matColumnDef="Szint">
+       <ng-container matColumnDef="Level">
          <th mat-header-cell *matHeaderCellDef mat-sort-header>Szint</th>
          <td mat-cell *matCellDef="let auditlog">
           {{ auditlog.Level}}
          </td>
        </ng-container>    
 
-       <ng-container matColumnDef="Üzenet">
+       <ng-container matColumnDef="Message">
          <th mat-header-cell *matHeaderCellDef mat-sort-header>Üzenet</th>
          <td mat-cell *matCellDef="let auditlog">
           {{ auditlog.Message}}

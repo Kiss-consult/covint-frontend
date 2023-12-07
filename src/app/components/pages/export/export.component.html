@@ -1,12 +1,12 @@
 <h1>
-  Export
-    
-  <button  (click)="goBackToPrevPage()" >Vissza</button>  
- 
+  Export    
   </h1>
+  
+<h2>Szűrés -> Exportálás -> Diagram / teljes eredmény export </h2>
+ 
 
 <div class="container">
-
+  <h3><button id="backbutton" (click)="goBackToPrevPage()">&#11148;</button></h3>
   <div class="content">
     <div class="container2">
       <div class="sexclass">
@@ -84,6 +84,7 @@
             <option value="last_week">múlt hét</option>
             <option value="last_month">múlt hónap</option>
             <option value="last_3_months">utolsó 3 hónap</option>
+            <option value="this_year">ez az év</option>
           </select>
           
         </div>
