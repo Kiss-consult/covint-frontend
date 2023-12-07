@@ -1,48 +1,52 @@
 <h1>Marker Szűrő
-  <button  (click)="goBackToPrevPage()" >Vissza</button> 
+
 </h1>
-<h2>Markerek szűrhetőségének beállitása</h2>
-  <div class="container">
-   <!--TABLE-->
-   
-   <div class="filtermarker" >
-    <mat-form-field>
+<h2>Betegségeket állíthat be markerré, vagy kiveheti a markerek közül( marker: szürhető és kereshető ) </h2>
+<div class="container">
+  <h3><button id="backbutton" (click)="goBackToPrevPage()">&#11148;</button></h3>
+  <!--TABLE-->
+  <div class="container2">
+    <div class="filtermarker">
+      <mat-form-field>
         <mat-label>Keresés</mat-label>
         <input matInput (keyup)="illnessFilter($event)" placeholder="Betegség" #input title="Kérem töltse ki a mezőt">
       </mat-form-field>
 
       <table mat-table [dataSource]="dataSource" class="mat-elevation-z8" matSort>
-      
 
-      <!-- Position Column 
+
+        <!-- Position Column 
       
        <label for="falseHosp">Nem</label>
       <input type="radio" id="falseHosp" name="hospitalized" [value]="false" [(ngModel)]="case.Hospitalized">
       {{ illness.IsMarker }}
       -->
-       
-     
-      
-      <ng-container matColumnDef="groupname">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header>Betegség Neve</th>
-        <td mat-cell *matCellDef="let illness">{{ illness.GroupName }}</td>        
-      </ng-container>
 
-      <ng-container matColumnDef="ismarker">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header>Marker</th>
-        <td mat-cell *matCellDef="let illness">
-          <input  *ngIf="loginService.hasAnyGroup([portalvezeto, kutatoorvos])" type="checkbox" [checked]="illness.IsMarker" [(ngModel)]="illness.IsMarker" (change)="change(illness) "  id="ismarker" >
-          <input *ngIf="loginService.hasAnyGroup([portaladmin])" type="checkbox"  disabled="disabled" [checked]="illness.IsMarker"  id="ismarker" >
-        </td>
-      </ng-container>     
-      
-    
-   
-    
-      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-    </table>
 
-    <mat-paginator #paginator [pageSizeOptions]="pageSizeOptions" showFirstLastButtons></mat-paginator> 
-</div>
+
+        <ng-container matColumnDef="groupname">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>Betegség Neve</th>
+          <td mat-cell *matCellDef="let illness">{{ illness.GroupName }}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="ismarker">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>Marker</th>
+          <td mat-cell *matCellDef="let illness">
+            <input *ngIf="loginService.hasAnyGroup([portalvezeto, kutatoorvos])" type="checkbox"
+              [checked]="illness.IsMarker" [(ngModel)]="illness.IsMarker" (change)="change(illness) " id="ismarker">
+            <input *ngIf="loginService.hasAnyGroup([portaladmin])" type="checkbox" disabled="disabled"
+              [checked]="illness.IsMarker" id="ismarker">
+          </td>
+        </ng-container>
+
+
+
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+      </table>
+
+      <mat-paginator #paginator [pageSizeOptions]="pageSizeOptions" showFirstLastButtons></mat-paginator>
+    </div>
+  </div>
 </div>

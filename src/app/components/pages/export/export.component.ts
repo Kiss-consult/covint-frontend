@@ -196,6 +196,7 @@ console.log("filter",this.filter)
       console.log("Successfully filtered export data")
       this.exports = result.unwrap();
       this.updateTable();
+      this.filterActive= false;
     });
 }
 

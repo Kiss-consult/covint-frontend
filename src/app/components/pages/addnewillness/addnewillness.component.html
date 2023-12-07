@@ -1,8 +1,8 @@
-<h1>Marker hozzáadás</h1>
-
+<h1>Új betegség hozzáadás</h1>
+<h2>Új betegség rögzítése kiinduló értékekkel  ( kiinduló értékek ( % ) kitöltése kötelező!) </h2>
 
 <div class="container">
-  <h3><button  (click)="goBackToPrevPage()" >Vissza</button></h3>
+  <h3><button id="backbutton" (click)="goBackToPrevPage()">&#11148;</button></h3>
   <div class="content">
     <div class="content2">
       <div class="newillnessclass">
@@ -16,7 +16,7 @@
 
     <div class="ismarker">
       <div>
-        <label class="text">Az új betegség egyben marker is? <s>*</s></label>
+        <label class="text" title="Ha markernek jelöli kereshető és szürhető lesz!">Az új betegség egyben marker is? <s>*</s></label>
       </div>
       <div>
         <label for="trueMark">Igen</label>
@@ -33,7 +33,7 @@
           <label for="bno">Alternatív név bevitele</label>
         </div>      
         <div>
-          <input class="droptextbox" type="text" id="bno" name="bno" [(ngModel)]="newAlternativeName" placeholder="Alternativ betegség neve..." title="Kérem töltse ki a mezőt">
+          <input class="droptextbox" type="text" id="bno" name="bno" [(ngModel)]="newAlternativeName" placeholder="Alternativ betegség neve..." title="Több alternatív nevet is megadhat, a kitöltés opcionális!">
         </div>
         <div>
           <button (click)="addAlternativeName()">Hozzáadás</button>
