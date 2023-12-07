@@ -1,10 +1,10 @@
-<h1>Új felhasználó regisztrálása
-  <button  (click)="goBackToPrevPage()" >Vissza</button> 
-</h1>  
+<h1>Új felhasználó regisztrálása</h1>  
 
   
 
 <div class="container">  
+
+  <h3><button id="backbutton" (click)="goBackToPrevPage()">&#11148;</button></h3>
   <!--<form (ngSubmit)="onRegister()"> -->
   <div class="container2" >
   
@@ -112,16 +112,20 @@
       
       <div class="tab-button">Intézmény/Cég címe</div>
 
-      <div class="form-group2" style="display: block; text-align: left; width: 300px; margin-right: 100px;">
-        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; margin-top: 7px;">
-            <label for="institution">Intézményben dolgozik</label>
-            <input type="radio" id="intezmenybutton" name="intezmenyOrCeg" (click)="toggleContent('intezmeny')" title="Kérem válasszon">
+      <div id="intmez" class="form-group2" >
+        <div>
+          <label for="institution">Intézményben dolgozik</label>
+          <input type="radio" id="intezmenybutton" name="intezmenyOrCeg" (click)="toggleContent('intezmeny')" title="Kérem válasszon">
         </div>
-        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 28px; margin-top: 35px;">
-            <label for="institution">Cég tulajdonos (Házi Orvos)</label>
-            <input type="radio" id="cegbutton" name="intezmenyOrCeg" (click)="toggleContent('ceg')" title="Kérem válasszon">
+      </div>
+
+      <div id="ceg" class="form-group2" >
+        <div>
+          <label for="institution">Cég tulajdonos (Házi Orvos)</label>
+          <input type="radio" id="cegbutton" name="intezmenyOrCeg" (click)="toggleContent('ceg')" title="Kérem válasszon">
         </div>
-    </div>
+      </div>
+      
                                                            
       
       <div class="form-group2" *ngIf="intezmenyActive">
