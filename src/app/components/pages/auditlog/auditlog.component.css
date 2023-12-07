@@ -36,10 +36,6 @@
     transform: rotate(90deg);
   }
 
-  h3{
-    margin-top: 5px;
-  }
-
   @media (max-width: 1400px){
     .container{
       padding-left:165px

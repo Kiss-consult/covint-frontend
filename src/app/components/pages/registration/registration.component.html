@@ -3,6 +3,8 @@
   
 
 <div class="container">  
+
+  <h3><button id="backbutton" (click)="goBackToPrevPage()">&#11148;</button></h3>
   <!--<form (ngSubmit)="onRegister()"> -->
   <div class="container2" >
   
@@ -22,8 +24,7 @@
         <div>
           <label class="text" for="password">Jelszó <s>*</s></label>
         
-          <input class="droptextbox" type="password" id="password" name="password" [(ngModel)]="user.Password" required placeholder="jelszo12345"
-           title="A jeszó minimum 8 karakter és tartalmaznia kell: kis és nagy betűt, számot és extra karatert! ">
+          <input class="droptextbox" type="password" id="password" name="password" [(ngModel)]="user.Password" required placeholder="jelszo12345" title="Kérem töltse ki a mezőt">
         </div>
       </div>
   
@@ -34,7 +35,8 @@
           <input class="droptextbox" type="password" id="password2" name="password2" [(ngModel)]="password2" required required placeholder="jelszo12345" title="Kérem töltse ki a mezőt">
         </div>
       </div>
-  
+
+
     </div>
   
     <div class="form-group" >
@@ -47,7 +49,7 @@
        
           <input class="droptextbox" type="text" id="title" name="title" [(ngModel)]="user.Title" required placeholder="Dr" title="Kérem töltse ki a mezőt">
         </div>
-      </div>      
+      </div>
   
       <div class="form-group2">
         <div>
@@ -64,7 +66,7 @@
           <input class="droptextbox" type="text" id="firstname" name="firstname" [(ngModel)]="user.FirstName" required placeholder="János" title="Kérem töltse ki a mezőt">
         </div>
       </div>
-      
+  
       <div class="form-group2">
         <div>
           <label class="text" for="stampnumber">Pecsét száma <s>*</s></label>
@@ -82,7 +84,7 @@
       </div>
     
     </div>
-    <!--
+<!--
     <div>
 
       <p>Select Your Gender:</p>
@@ -102,16 +104,20 @@
       
       <div class="tab-button">Intézmény/Cég címe</div>
 
-      <div class="form-group2" style="display: block; text-align: left; width: 300px; margin-right: 100px;">
-        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; margin-top: 7px;">
-            <label for="institution">Intézményben dolgozom</label>
-            <input type="radio" id="intezmenybutton" name="intezmenyOrCeg" (click)="toggleContent('intezmeny')" title="Kérem válasszon">
+      <div id="intmez" class="form-group2" >
+        <div>
+          <label for="institution">Intézményben dolgozom</label>
+          <input type="radio" id="intezmenybutton" name="intezmenyOrCeg" (click)="toggleContent('intezmeny')" title="Kérem válasszon">
         </div>
-        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 28px; margin-top: 35px;">
-            <label for="institution">Cég tulajdonos (Házi Orvos) vagyok</label>
-            <input type="radio" id="cegbutton" name="intezmenyOrCeg" (click)="toggleContent('ceg')" title="Kérem válasszon">
+      </div>
+
+      <div id="ceg" class="form-group2" >
+        <div>
+          <label for="institution">Cég tulajdonos/Háziorvos vagyok </label>
+          <input type="radio" id="cegbutton" name="intezmenyOrCeg" (click)="toggleContent('ceg')" title="Kérem válasszon">
         </div>
-    </div>
+      </div>
+      
                                                            
       
       <div class="form-group2" *ngIf="intezmenyActive">

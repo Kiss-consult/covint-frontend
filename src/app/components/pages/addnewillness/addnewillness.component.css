@@ -69,20 +69,6 @@ table {
     padding-top: 60px;
 }
 
-h3{
-    z-index: 1;  
-    position: absolute;  
-    position: fixed;
-    color: white;   
-    background: linear-gradient(90deg, rgb(255, 255, 255) 60%, rgba(255, 255, 255, 0) 90%);
-    padding: 10px;
-    font-size: 1.5rem;
-    font-weight: 500;
-    width: 700px;     
-    padding-left: 30px;
-    margin-top: 5px;
-}
-
 .addedtext{
     margin-top: 40px;
     margin-left: 40px;

@@ -9,6 +9,7 @@
     background: linear-gradient(180deg, rgba(224,224,224,1) 80%, rgb(255, 255, 255) 100%);
     padding: 20px;
     padding-bottom: 70px;
+    padding-top: 100px;
 }
 
 .container{
@@ -16,8 +17,15 @@
   padding-top: 0;
 }
 .container2{    
-  padding-top: 60px;    
+  
+     
   flex-direction: column;
   align-items: center;    
   padding-bottom: 40px;
+}
+
+@media (max-width: 1400px){
+  .container{
+    padding-left:165px
+  }
 }
