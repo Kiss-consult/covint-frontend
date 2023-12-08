@@ -29,13 +29,13 @@ import { ChangepwdbyadminComponent } from './components/pages/changepwdbyadmin/c
 
 
 const routes: Routes = [
-  { path: 'form', component: CustomFormCreatorComponent },
+  { path: 'form', component: CustomFormCreatorComponent, canActivate: [AuthGuard] , data: { roles: [ PortalKezelo, KutatoOrvos, PortalVezeto] }  },
   { path: "", component: HomeComponent },
   { path: "home", component: HomeComponent },
 
-  { path: "datainput", component: DatainputComponent, canActivate: [AuthGuard] },
+  { path: "datainput", component: DatainputComponent, canActivate: [AuthGuard] , data: { roles: [Orvos, PortalKezelo, KutatoOrvos, PortalVezeto] }  },
 
-  { path: "export", component: ExportComponent, canActivate: [AuthGuard] },
+  { path: "export", component: ExportComponent,  canActivate: [AuthGuard] , data: { roles: [Orvos, PortalKezelo, KutatoOrvos, PortalVezeto]} },
   //canActivate: [GroupGuard], data: { groups: [Orvos, PortalAdmin, KutatoOrvos, PortalVezeto] } },
 
 
@@ -46,25 +46,25 @@ const routes: Routes = [
     {path: PortalVezeto, component: DiagramComponent },
     {path: "", component: DiagramComponent}
   ] },
-  { path: "usermanagement", component: UsermanagementComponent },
-  { path: "addnewuser", component: AddnewuserComponent },
-  { path: "acceptnewuser", component: AcceptnewuserComponent },
-  { path: "changepwd", component: ChangepwdComponent },
-  { path: "users", component: UsersComponent },
-  { path: "waitingusers", component: WaitingusersComponent },
-  { path: "addnewillness", component: AddnewillnessComponent },
-  { path: "overwritemasterupload", component: OverwritemasteruploadComponent },
-  { path: "filterablemarkers", component: FilterablemarkersComponent },
-  { path: "markermanagement", component: MarkermanagementComponent },
-  { path: "auditlog", component: AuditlogComponent },
-  { path: "registration", component: RegistrationComponent },
-  { path: "percentoverwrite", component: PercentoverwriteComponent },
-  { path: "defaultformarkers", component: DefaultformarkersComponent },
-  { path: "profile", component: ProfileComponent },
-  { path: "overrideuser", component: OverrideuserComponent },
-  { path: "email-template", component: EmailTemplateComponent },
-  { path: "updateuser/:userdata.id", component: UpdateuserComponent },// 'product/:id 
-  { path: "changepwdbyadmin/:userdata.id", component: ChangepwdbyadminComponent }
+  { path: "usermanagement", component: UsermanagementComponent, canActivate: [AuthGuard] , data: { roles: [ PortalKezelo, KutatoOrvos, PortalVezeto] }  },
+  { path: "addnewuser", component: AddnewuserComponent , canActivate: [AuthGuard] , data: { roles: [ PortalKezelo, KutatoOrvos, PortalVezeto] } },
+  { path: "acceptnewuser", component: AcceptnewuserComponent, canActivate: [AuthGuard] , data: { roles: [ PortalKezelo, KutatoOrvos, PortalVezeto] }  },
+  { path: "changepwd", component: ChangepwdComponent , canActivate: [AuthGuard] , data: { roles: [Orvos, PortalKezelo, KutatoOrvos, PortalVezeto] } },
+  { path: "users", component: UsersComponent, canActivate: [AuthGuard] , data: { roles: [ PortalKezelo, KutatoOrvos, PortalVezeto] }  },
+  { path: "waitingusers", component: WaitingusersComponent, canActivate: [AuthGuard] , data: { roles: [ PortalKezelo, KutatoOrvos, PortalVezeto] }  },
+  { path: "addnewillness", component: AddnewillnessComponent , canActivate: [AuthGuard] , data: { roles: [ PortalKezelo, KutatoOrvos, PortalVezeto] } },
+  { path: "overwritemasterupload", component: OverwritemasteruploadComponent, canActivate: [AuthGuard] , data: { roles: [ PortalKezelo, KutatoOrvos, PortalVezeto] }  },
+  { path: "filterablemarkers", component: FilterablemarkersComponent, canActivate: [AuthGuard] , data: { roles: [ PortalKezelo, KutatoOrvos, PortalVezeto] }  },
+  { path: "markermanagement", component: MarkermanagementComponent, canActivate: [AuthGuard] , data: { roles: [ PortalKezelo, KutatoOrvos, PortalVezeto] }  },
+  { path: "auditlog", component: AuditlogComponent , canActivate: [AuthGuard] , data: { roles: [ PortalKezelo, KutatoOrvos, PortalVezeto] } },
+  { path: "registration", component: RegistrationComponent  },
+  { path: "percentoverwrite", component: PercentoverwriteComponent, canActivate: [AuthGuard] , data: { roles: [ PortalKezelo, KutatoOrvos, PortalVezeto] }  },
+  { path: "defaultformarkers", component: DefaultformarkersComponent , canActivate: [AuthGuard] , data: { roles: [ PortalKezelo, KutatoOrvos, PortalVezeto] } },
+  { path: "profile", component: ProfileComponent, canActivate: [AuthGuard] , data: { roles: [Orvos, PortalKezelo, KutatoOrvos, PortalVezeto] }  },
+  { path: "overrideuser", component: OverrideuserComponent, canActivate: [AuthGuard] , data: { roles: [ PortalKezelo, KutatoOrvos, PortalVezeto] }  },
+  { path: "email-template", component: EmailTemplateComponent , canActivate: [AuthGuard] , data: { roles: [ PortalKezelo, KutatoOrvos, PortalVezeto] } },
+  { path: "updateuser/:userdata.id", component: UpdateuserComponent, canActivate: [AuthGuard] , data: { roles: [ PortalKezelo, KutatoOrvos, PortalVezeto] }  },// 'product/:id 
+  { path: "changepwdbyadmin/:userdata.id", component: ChangepwdbyadminComponent , canActivate: [AuthGuard] , data: { roles: [ PortalKezelo, KutatoOrvos, PortalVezeto] } }
 ];
 
 @NgModule({
