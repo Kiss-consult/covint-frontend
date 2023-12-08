@@ -1,7 +1,7 @@
 <div style="display: flex; justify-content: flex-start;">
   
   <div class="tab-button" *ngIf="loginService.hasAnyGroup([portaladmin, portalvezeto, kutatoorvos])" (click)="showTab(2)" [ngClass]="{ 'selected': activeTab === 2 }">Forrás - diagram</div>
-  <div class="tab-button" style="margin-left: 10px;" *ngIf="loginService.hasAnyGroup([portaladmin, portalvezeto, kutatoorvos,orvos])" (click)="showTab(3)" [ngClass]="{ 'selected': activeTab === 3 }">Orvos - daigram</div>
+  <div class="tab-button" style="margin-left: 10px;" *ngIf="loginService.hasAnyGroup([portaladmin, portalvezeto, kutatoorvos,orvos])" (click)="showTab(3)" [ngClass]="{ 'selected': activeTab === 3 }">Orvos - diagram</div>
   <div class="tab-button" style="margin-left: 10px;" *ngIf="loginService.hasAnyGroup([portaladmin, portalvezeto, kutatoorvos])" (click)="showTab(4)" [ngClass]="{ 'selected': activeTab === 4 }">Kutató - diagram</div>
   
 
