@@ -1,5 +1,5 @@
 <h1>Új felhasználó regisztrálása</h1>  
-
+<h2>Új felhasználó regisztrálása. Kérem adja hozzá a megfelelő jogosultsági csoportot/csoportokat! </h2>
   
 
 <div class="container">  
@@ -37,10 +37,24 @@
       </div>
   
 <div>
-  <input  *ngIf="loginService.hasAnyGroup([portalvezeto, kutatoorvos])" type="checkbox"  [checked]="doctorgroup"  [(ngModel)]="doctorgroup"  (change)="isDoctor(doctorgroup) "   id="doctor" >
-  <input  *ngIf="loginService.hasAnyGroup([portalvezeto, kutatoorvos])" type="checkbox"  [checked]="researchergroup" [(ngModel)]="researchergroup"  (change)="isResearcher(researchergroup) "  id="researcher" >
-  <input  *ngIf="loginService.hasAnyGroup([portalvezeto, kutatoorvos])" type="checkbox"  [checked]="portaladmingroup" [(ngModel)]="portaladmingroup"  (change)="isPortalAdmin(portaladmingroup) "  id="portaladmin" >
-  <input  *ngIf="loginService.hasAnyGroup([portalvezeto, kutatoorvos])" type="checkbox"  [checked]="portalmanagergroup" [(ngModel)]="portalmanagergroup"  (change)="isPortalManager(portalmanagergroup) "  id="portelmanager" >
+ 
+  <div>
+    <input  *ngIf="loginService.hasAnyGroup([portalvezeto, kutatoorvos])" type="checkbox"  [checked]="doctorgroup"  [(ngModel)]="doctorgroup"  (change)="isDoctor(doctorgroup) "   id="doctor" > Orvos
+  </div>
+  <div>
+    <input  *ngIf="loginService.hasAnyGroup([portalvezeto, kutatoorvos])" type="checkbox"  [checked]="researchergroup" [(ngModel)]="researchergroup"  (change)="isResearcher(researchergroup) "  id="researcher" > Kutató
+  </div>
+  <div>
+    <input  *ngIf="loginService.hasAnyGroup([portalvezeto, kutatoorvos])" type="checkbox"  [checked]="portalmanagergroup" [(ngModel)]="portalmanagergroup"  (change)="isPortalManager(portalmanagergroup) "  id="portelmanager" > Portál-kezelő
+
+  </div>
+  
+  <div>
+    <input  *ngIf="loginService.hasAnyGroup([portalvezeto, kutatoorvos])" type="checkbox"  [checked]="portaladmingroup" [(ngModel)]="portaladmingroup"  (change)="isPortalAdmin(portaladmingroup) "  id="portaladmin" > Portál-vezető
+
+  </div>
+ 
+ 
 
 </div>
 

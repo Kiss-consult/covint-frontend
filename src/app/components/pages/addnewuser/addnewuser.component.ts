@@ -171,7 +171,10 @@ export class AddnewuserComponent {
       alert("Az 'Utca' mező kitöltése kötelező!");
       return false;
     }
-
+    if (this.usergroup.length === 0) {
+      alert("Kérem adjon meg jogosultsági csoportot!");
+      return false;
+    }
     return true;
   }
 
