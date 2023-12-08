@@ -1,31 +1,22 @@
-<div style="display: flex; justify-content: flex-start;">
-  
-  <div class="tab-button" *ngIf="loginService.hasAnyGroup([portaladmin, portalvezeto, kutatoorvos])" (click)="showTab(2)" [ngClass]="{ 'selected': activeTab === 2 }">Orvos - diagram</div>
-  <div class="tab-button" style="margin-left: 10px;" *ngIf="loginService.hasAnyGroup([portaladmin, portalvezeto, kutatoorvos,orvos])" (click)="showTab(3)" [ngClass]="{ 'selected': activeTab === 3 }">Kutató - diagram</div>
-  <div class="tab-button" style="margin-left: 10px;" *ngIf="loginService.hasAnyGroup([portaladmin, portalvezeto, kutatoorvos])" (click)="showTab(4)" [ngClass]="{ 'selected': activeTab === 4 }">Kutató - diagram</div>
-  
 
-</div>
 
- 
+<h2 *ngIf="loginService.hasAnyGroup([orvos])">Orvokonak összeállított diagram dashboard </h2>
+<h2 *ngIf="loginService.hasAnyGroup([portaladmin, portalvezeto, kutatoorvos])">Kutatóknak összeállított diagram dashboard  </h2>
 
 
 
-
-  <div class="tab" *ngIf="activeTab === 2"><iframe id="diagram"
+  <div class="tab" *ngIf="loginService.hasAnyGroup([orvos])"><iframe id="diagram"
       [src]="getDoctorDashboardUrl() | safe:'url'"></iframe>
   </div>
 
 
 
 
-  <div class="tab" *ngIf="activeTab === 3"><iframe id="diagram"
+  <div class="tab" *ngIf="loginService.hasAnyGroup([portaladmin, portalvezeto, kutatoorvos])"><iframe id="diagram"
       [src]="getResearcherDashboardUrl() | safe:'url'"></iframe>
   </div>
 
 
-  <div class="tab" *ngIf="activeTab === 4"><iframe id="diagram"
-      src="https://covint.kisscloud.eu/dashboard/app/dashboards?security_tenant=global#/view/12aa9cc0-61da-11ee-b73b-9399ce6d330a?embed=true&_g=(filters%3A!()%2CrefreshInterval%3A(pause%3A!t%2Cvalue%3A0)%2Ctime%3A(from%3Anow-15m%2Cto%3Anow))&hide-filter-bar=true%22"></iframe>
-  </div>
+
 
   

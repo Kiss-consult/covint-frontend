@@ -39,13 +39,7 @@ const routes: Routes = [
   //canActivate: [GroupGuard], data: { groups: [Orvos, PortalAdmin, KutatoOrvos, PortalVezeto] } },
 
 
-  { path: "diagram", component: DiagramComponent, children: [
-    {path: Orvos, component: DiagramComponent },
-    {path: PortalKezelo, component: DiagramComponent },
-    {path: KutatoOrvos, component: DiagramComponent },
-    {path: PortalVezeto, component: DiagramComponent },
-    {path: "", component: DiagramComponent}
-  ] },
+  { path: "diagram", component: DiagramComponent, data: { roles: [Orvos, PortalKezelo, KutatoOrvos, PortalVezeto]}    },
   { path: "usermanagement", component: UsermanagementComponent, canActivate: [AuthGuard] , data: { roles: [ PortalKezelo, KutatoOrvos, PortalVezeto] }  },
   { path: "addnewuser", component: AddnewuserComponent , canActivate: [AuthGuard] , data: { roles: [ PortalKezelo, KutatoOrvos, PortalVezeto] } },
   { path: "acceptnewuser", component: AcceptnewuserComponent, canActivate: [AuthGuard] , data: { roles: [ PortalKezelo, KutatoOrvos, PortalVezeto] }  },
