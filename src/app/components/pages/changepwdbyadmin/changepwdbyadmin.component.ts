@@ -69,6 +69,10 @@ export class ChangepwdbyadminComponent {
           alert("Sikertelen jelszócsere! \nA jeszó minimum 8 karakter és tartalmaznia kell:  \nkis és nagy betűt, számot és extra karatert! ")
           console.log("rossz jelszó")
         }
+        if (mess === "Current password is wrong") {
+          alert("Sikertelen jelszócsere! \nA jelenlegi jelszó hibás!")
+          console.log("rossz jelnlegi jelszó ")
+        }
       }
     });
   }

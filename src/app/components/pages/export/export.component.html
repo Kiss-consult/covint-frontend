@@ -284,7 +284,7 @@
           <button class="button" (click)="getFilterDiagram(2)">Diagram - BAR<mat-icon>table_chart</mat-icon></button>
          
         </div>
-        <div>  
+        <div  *ngIf="loginService.hasAnyGroup([portaladmin, portalvezeto, kutatoorvos])">  
           <p>Iframe : </p>        
           <p>{{this.iframe}}</p>
          </div>
