@@ -96,10 +96,10 @@ export class LoginService {
     return this.userId;
   }
   public hasAnyGroup(expectedGroups: string[]): boolean {
-    if (!this.isLoggedIn()) {
+    /*if (!this.isLoggedIn()) {
       this.router.navigate(['/login']);
       return false;
-    }
+    }*/
     const decoded = jwt_decode<AccessToken>(this.token);
     return decoded.groups.some(group => expectedGroups.includes(group));
   }
@@ -109,10 +109,11 @@ export class LoginService {
   }
 
   public logout() {
-    this.keycloakService.logout();
+    
+ 
+    this.keycloakService.logout(window.location.origin)
     this.keycloakService.clearToken();
-    this.router.navigate(['/home']);
-
+   
     this.token = "";
   }
 
