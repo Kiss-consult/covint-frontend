@@ -1,5 +1,5 @@
 <h1>%-os értékek felülírása</h1>
-
+<h2> Az adatbázisban szereplő %-os értékek felülírása. Felülírás után ez az érték lesz elérhető, függetlenül az eredeti vagy számolt értéktől! </h2>
 <div class="container">
   <h3><button id="backbutton" (click)="goBackToPrevPage()">&#11148;</button></h3>
   <div class="container2">
@@ -51,7 +51,7 @@
         <label class="text"> Marker <s>*</s></label>
       </div>
       <div>
-        <select class="droptextbox" type="text" id="markers" name="markers" [(ngModel)]="marker" title="Kérem válasszon">
+        <select class="droptextbox" type="text" id="markers" name="markers" [(ngModel)]="marker" title="Ha a betegnek nem volt társ betegsége, válassza az 'Egészséges' markert! ">
           <ng-container *ngFor="let marker of markers">
             <option value="" disabled selected hidden>Válasszon markert...</option>
             <option value="{{marker}}">{{marker}}</option>
@@ -95,7 +95,7 @@
         </div>
       </ng-container>
       <ng-template #noMarkers>
-        <p class="markerbno">Még nem adott hozzá Markert</p>
+        <p class="markerbno"  title="Ha a betegnek nem volt társ betegsége, válassza az 'Egészséges' markert! ">Még nem adott hozzá Markert</p>
       </ng-template>
     </div>
   

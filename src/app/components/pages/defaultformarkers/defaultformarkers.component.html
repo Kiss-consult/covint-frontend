@@ -1,5 +1,5 @@
 <h1>Ősfeltöltés</h1>
-<h2>Ősfeltöltés több marker kombinációjára</h2>
+<h2>Ősfeltöltés több marker kombinációjára  ( kiinduló értékek megadása ) </h2>
 
 <div class="container">
   <h3><button id="backbutton" (click)="goBackToPrevPage()">&#11148;</button></h3>
@@ -10,7 +10,7 @@
           <label class="text"> Marker <s>*</s></label>
         </div>
         <div>
-          <select class="droptextbox" type="text" id="markers" name="markers" [(ngModel)]="marker" title="Kérem válasszon">
+          <select class="droptextbox" type="text" id="markers" name="markers" [(ngModel)]="marker" title="Ha a betegnek nem volt társ betegsége, válassza az 'Egészséges' markert! ">
             <ng-container *ngFor="let marker of markers">
               <option value="" disabled selected hidden>Válasszon markert...</option>
               <option value="{{marker}}">{{marker}}</option>
@@ -40,7 +40,7 @@
       </div>
     </ng-container>
     <ng-template #noMarkers>
-      <p class="markerbno">Még nem adott hozzá Markert</p>
+      <p class="markerbno" title="Minimum 2 marker megadása szükséges ">Még nem adott hozzá Markert</p>
     </ng-template>
   </div>
 </div>
