@@ -8,7 +8,7 @@
 <div class="container">
   <h3><button id="backbutton" (click)="goBackToPrevPage()">&#11148;</button></h3>
   <div class="content">
-    <div class="container2">
+    <div class="container2 container-width">
       <div class="sexclass">
         <div>
           <label class="text" for="sex">Páciens neme <s>*</s></label>
@@ -28,14 +28,17 @@
           <label class="text" for="age">Páciens kora <s>*</s></label>
         </div>
         <div>
+          <div>
           <input class="droptextbox" type="number" id="agefrom" name="agefrom" min="1" [(ngModel)]="filter.AgeFrom" placeholder="Minimum 18..." title="Kérem töltse ki a mezőt"> - tól
-        
+        </div>
+        <div>
           <input class="droptextbox" type="number" id="ageto" name="ageto" min="1" [(ngModel)]="filter.AgeTo" placeholder="Maximum 88..." title="Kérem töltse ki a mezőt"> - ig
         </div>
       </div>
+      </div>
     </div>
 
-    <div class="container2">    
+    <div class="container2 container-width">    
       <div class="validclass">
         <div>
           <label class="text"> Validált <s>*</s></label>
@@ -60,14 +63,18 @@
       </div>
     </div>
 
-    <div class="container2">
+    <div class="container2 container-width">
       <div class="source" [ngClass]="{'active': timeActive, 'inactive': !timeActive}">
         <label for="timeradioTime">Szűrés dátumra <s>*</s></label>
         <input id="timeradioTime" type="radio" name="timeorrelativ" (click)="toggleContent('time')">
       
-        <form [ngStyle]="{'opacity': timeActive ? '1' : '0.3'}">      
-          <input class="droptextbox" type="date" id="datefrom" name="datefrom" [disabled]="relativtimeActive" [(ngModel)]="filter.DateFrom" title="Kérem válasszon"> - tól       
+        <form [ngStyle]="{'opacity': timeActive ? '1' : '0.3'}">  
+          <div>   
+          <input class="droptextbox" type="date" id="datefrom" name="datefrom" [disabled]="relativtimeActive" [(ngModel)]="filter.DateFrom" placeholder="" title="Kérem válasszon"> - tól       
+          </div> 
+          <div>
           <input class="droptextbox" type="date" id="dateto" name="dateto" [disabled]="relativtimeActive"  [(ngModel)]="filter.DateTo" title="Kérem válasszon"> - ig
+          </div>
         </form>
       </div>
     
