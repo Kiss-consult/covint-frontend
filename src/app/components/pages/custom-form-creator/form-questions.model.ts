@@ -1,7 +1,7 @@
 export interface QuestionBase {
     id: string; 
     label: string; 
-    type: 'text' | 'yesno' | 'yesnohospital' | 'multiselect'; 
+    type: 'text' | 'yesno' | 'yesnohospital' | 'multiselect' | 'sex' | 'relative'; 
 }
 export class TextQuestion implements QuestionBase {
     id: string;
@@ -69,3 +69,37 @@ export class MultiSelectQuestion implements QuestionBase {
         return 'multiselect-' + Math.random().toString(36).substr(2, 9);
     }
 }
+
+export class SexQuestion implements QuestionBase {
+    id: string;
+    label: string;
+    type: 'sex' = 'sex';
+    options: ['Férfi', 'Nő'] = ['Férfi', 'Nő'];
+
+    constructor(label: string) {
+        this.id = this.generateId();
+        this.label = label;
+    }
+
+    private generateId(): string {
+        return 'sex-' + Math.random().toString(36).substr(2, 9);
+    }
+
+}
+export class RelativeQuestion implements QuestionBase {
+    id: string;
+    label: string;
+    type: 'relative' = 'relative';
+    options: ['Igen', 'Nem'] = ['Igen', 'Nem'];
+
+    constructor(label: string) {
+        this.id = this.generateId();
+        this.label = label;
+    }
+
+    private generateId(): string {
+        return 'relative-' + Math.random().toString(36).substr(2, 9);
+    }
+}
+
+

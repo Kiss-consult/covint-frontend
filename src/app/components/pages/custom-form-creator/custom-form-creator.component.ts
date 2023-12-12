@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { QuestionBase, TextQuestion, YesNoQuestion, MultiSelectQuestion, yesnohospitalQuestion } from './form-questions.model';
+import { QuestionBase, TextQuestion, YesNoQuestion, MultiSelectQuestion, yesnohospitalQuestion, SexQuestion, RelativeQuestion  } from './form-questions.model';
 import { CommonModule } from '@angular/common';
 import { CdkDragDrop, CdkDropList, CdkDrag, moveItemInArray } from '@angular/cdk/drag-drop';
 import { ColorPickerModule } from 'ngx-color-picker';
@@ -25,12 +25,16 @@ export class CustomFormCreatorComponent {
   generatedFormHtml: string = '';
   formName: string = 'Kérdőív';
   displayResponse: string = '';
+  showFollowUpQuestion: boolean = false;
 
   availableQuestions: { label: string, type: string, selected: boolean }[] = [
   { label: 'Kor kérdés', type: 'text', selected: false },
   { label: 'Covid kérdés', type: 'yesno', selected: false },
   { label: 'Korház Kérdés', type: 'yesnohospital', selected: false },
-  { label: 'Betegség kérdés', type: 'multiselect', selected: false }
+  { label: 'Betegség kérdés', type: 'multiselect', selected: false },
+  { label: 'Nem kérdés', type: 'sex', selected: false },
+  { label: 'Hozzátartozóként tölti ki a kérdőívet?', type: 'relative', selected: false }
+
 ];
 
 
@@ -63,9 +67,21 @@ export class CustomFormCreatorComponent {
           case 'multiselect':
               const newMultiSelectQuestion = new MultiSelectQuestion('Az alábbi lehetőségek közül kérjük válassza ki milyen betegségekkel rendelkezik:', ['Elhízás', 'Asztma','Szívbetegség'], true);
               this.selectedQuestions.push(newMultiSelectQuestion);
-              break;
+              break;   
+          case 'sex':
+            this.selectedQuestions.push(new SexQuestion('Kérjük válassza ki a nemét:'));
+            break;
+          case 'relative':
+            this.selectedQuestions.push(new RelativeQuestion('Hozzátartozóként tölti ki a kérdőívet?'));
+            break;
+          
+              
 
       }
+      
+  }
+  onRelativeAnswerChange(answer: string) {
+    this.showFollowUpQuestion = answer === 'Yes';
   }
 
   deleteQuestion(type: string) {
@@ -98,62 +114,118 @@ renderForm() {
       <div style="display: flex; justify-content: center; align-items: center; height: 100%; padding: 20px;">
         <form style="background-color: ${this.backgroundColor}; color: ${this.textColor}; padding: 20px; border: 1px solid #0800ff; border-radius: 10px; box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.4); width: 50%;" id="${uniqueFormName}">
           <h4 style="font-size:45px; font-family: 'Arial'; text-align: center;">${this.formName}</h4>`;
+          let questionContainerStyle = `display: flex; flex-direction: column; align-items: flex-start; margin: 10px; padding: 5px; border: 1px solid #0800ff; border-radius: 10px; box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.4); background-color: ${this.questionBackgroundColor};`;
+          let labelStyle = `font-weight: bold; font-family: 'Arial', sans-serif; font-size: 16px; color: ${this.textColor};`; // Removed margin-bottom
+          let inputStyle = `background-color: ${this.backgroundColor}; color: ${this.textColor}; width: 100%;`; // Set width to 100% for full width
 
   this.selectedQuestions.forEach(question => {
-      let questionContainerStyle = `display: flex; flex-direction: column; align-items: flex-start; margin: 10px; padding: 5px; border: 1px solid #0800ff; border-radius: 10px; box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.4); background-color: ${this.questionBackgroundColor};`;
-      let labelStyle = `font-weight: bold; font-family: 'Arial', sans-serif; font-size: 16px; color: ${this.textColor};`; // Removed margin-bottom
-      let inputStyle = `background-color: ${this.backgroundColor}; color: ${this.textColor}; width: 100%;`; // Set width to 100% for full width
+      
 
       formHtml += `<div style="${questionContainerStyle}">`;
 
       if (question.type === 'text') {
           formHtml += `<label style="${labelStyle}">${question.label}</label>`;
-          formHtml += `<input type="text" style="${inputStyle}" name="${question.id}">`;
-      } else if (question.type === 'yesno' || question.type === 'yesnohospital') {
+          formHtml += `<input type="text" style="${inputStyle}" name="Age">`;
+      } else if (question.type === 'yesnohospital') {
           formHtml += `<label style="${labelStyle}">${question.label}</label>`;
-          formHtml += `<input type="radio" name="${question.id}" value="Yes" style="${inputStyle}"> Igen `;
-          formHtml += `<input type="radio" name="${question.id}" value="No" style="${inputStyle}"> Nem`;
-      } else if (question.type === 'multiselect') {
+          formHtml += `<input type="radio" name="Hospitalized" value="Yes" style="${inputStyle}"> Igen `;
+          formHtml += `<input type="radio" name="Hospitalized" value="No" style="${inputStyle}"> Nem`;
+      }
+        else if (question.type === "yesno" ) {
+          formHtml += `<label style="${labelStyle}">${question.label}</label>`;
+          formHtml += `<input type="radio" name="Covid" value="Yes" style="${inputStyle}"> Igen `;
+          formHtml += `<input type="radio" name="Covid" value="No" style="${inputStyle}"> Nem`;
+      }
+        else if (question.type === "sex"){
+          formHtml += `<label style="${labelStyle}">${question.label}</label>`;
+          formHtml += `<input type="radio" name="Sex" value="Férfi" style="${inputStyle}"> Férfi `;
+          formHtml += `<input type="radio" name="Sex" value="Nő" style="${inputStyle}"> Nő`;
+        }
+        else if (question.type === 'relative'){
+          formHtml += `<label style="${labelStyle}">${question.label}</label>`
+          formHtml += `<input type="radio" name="${question.id}" value="Yes" style="${inputStyle}" onchange="toggleFollowUpQuestion(this.value)"> Igen`
+          formHtml += `<input type="radio" name="${question.id}" value="No" style="${inputStyle}" onchange="toggleFollowUpQuestion(this.value)"> Nem`
+        }
+        else if (question.type === 'multiselect') {
           formHtml += `<label style="${labelStyle}">${question.label}</label>`;
           const MultiSelectQuestion = question as MultiSelectQuestion;
           MultiSelectQuestion.options.forEach(option => {
-              formHtml += `<input type="checkbox" name="${question.id}" value="${option}" style="${inputStyle}"> ${option}`;
+              formHtml += `<input type="checkbox" name="Illnesses" value="${option}" style="${inputStyle}"> ${option}`;
           });
       }
       formHtml += `</div>`; // Close the question container
   });
+  formHtml += `<div id="followUpQuestion" style="display:none; flex; flex-direction: column; align-items: flex-start; margin: 10px; padding: 5px; border: 1px solid #0800ff; border-radius: 10px; box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.4); background-color: ${this.questionBackgroundColor};">`
+  formHtml += `<label style="${labelStyle}">A hozzátartozója elhunyt Covidban?</label>`
+  formHtml += `<input type="radio" name="relativeDiedOfCovid" value="Yes" style="${inputStyle}"> Igen`
+  formHtml += `<input type="radio" name="relativeDiedOfCovid" value="No" style="${inputStyle}"> Nem`
+  formHtml += `</div>`
+
   let buttonStyle = `width: 200px; height: 40px; background-color: #0080ff; border-color: #0080ff; border-radius: 5px; color: white; text-align: center; text-decoration: none; display: inline-block; font-size: 1rem; cursor: pointer;`;
 
   // Wrap the button in a div for center alignment
-  formHtml += `<div style="text-align: center; margin-top: 20px;"><input type="submit" value="Küldés" style="${buttonStyle}"></div></form></div>`;
+  formHtml += `<div style="text-align: center; margin-top: 20px;"><input type="submit" onclick="submitForm()" value="Küldés" style="${buttonStyle}"></div></form></div>`;
 
 
   // Script for form submission
   formHtml += `
-      <script>
-      function submitForm() {
-          var formElement = document.getElementById('${uniqueFormName}'); 
-          var formData = new FormData(formElement);
-          var formValues = {};
-
-          formData.forEach(function(value, key) {
-              formValues[key] = value;
-          });
-
-          fetch('ENDPOINT_URL', {
-              method: 'POST',
-              headers: {
-                  'Content-Type': 'application/json',
-              },
-              body: JSON.stringify(formValues),
-          })
-          .then(function(response) { return response.json(); })
-          .then(function(data) { console.log('Success:', data); })
-          .catch(function(error) { console.error('Error:', error); });
+  <script>
+  function toggleFollowUpQuestion(value) {
+    var followUpQuestion = document.getElementById('followUpQuestion');
+    followUpQuestion.style.display = value === 'Yes' ? 'block' : 'none';
+  }
+  document.addEventListener('DOMContentLoaded', function() {
+    var relativeRadioButtons = document.getElementsByName('relative');
+    for (var i = 0; i < relativeRadioButtons.length; i++) {
+      if (relativeRadioButtons[i].checked) {
+        toggleFollowUpQuestion(relativeRadioButtons[i]);
       }
-      </script>
-    </body>
-    </html>`;
+    }
+  });
+
+  function submitForm() {
+    var formElement = document.getElementById('${uniqueFormName}');
+    var formData = new FormData(formElement);
+    var formValues = {
+        "Sex": formData.get("Sex"),
+        "Age": parseInt(formData.get("Age")),
+        "Hospitalized": formData.get("Hospitalized") === "Yes",
+        "Dead": formData.get("Dead") === "Yes",
+        "Illnesses": [],
+        "Source": "form",
+        "Date": new Date().toISOString().split('T')[0]
+    };
+
+    // Handle multi-select (Illnesses)
+    formData.getAll("Illnesses").forEach(function(value) {
+        formValues.Illnesses.push(value);
+    });
+
+    fetch('http://localhost:8090/cases/nonvalidated/upload', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formValues),
+    })
+    .then(function(response) { 
+        if (!response.ok) {
+            throw new Error('Network response was not ok');
+        }
+        return response.json(); 
+    })
+    .then(function(data) {
+        console.log('Success:', data);  
+        alert('Köszönjük, válaszát rögzítettük'); // Show alert on success
+    })
+    .catch(function(error) {
+        console.error('Error:', error);
+    });
+    alert('Köszönjük, válaszát rögzítettük'); 
+  }
+  </script>
+</body>
+</html>`;
 
   this.generatedFormHtml = formHtml;
 }

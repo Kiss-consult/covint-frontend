@@ -49,6 +49,28 @@
                             <label [for]="option">{{ option }}</label>
                         </div>
                     </ng-container>
+                    <ng-container *ngIf="question.type === 'sex'" class="question-container">
+                        <label class="question-label">{{ question.label }}</label>
+                        <div>
+                            <input type="radio" [name]="question.id" value="Férfi"> Férfi
+                            <input type="radio" [name]="question.id" value="Nő"> Nő
+                        </div>
+                    </ng-container>
+                    <ng-container *ngIf="question.type === 'relative'" class="question-container">
+                        <label class="question-label">{{ question.label }}</label>
+                        <div>
+                            <input type="radio" [name]="question.id" value="Yes" (change)="onRelativeAnswerChange('Yes')"> Igen
+                            <input type="radio" [name]="question.id" value="No" (change)="onRelativeAnswerChange('No')"> Nem
+                        </div>
+                    </ng-container>
+                    
+                    <ng-container *ngIf="showFollowUpQuestion" class="question-container">
+                        <label class="question-label">A hozzátartozója elhunyt Covidban?</label>
+                        <div>
+                            <input type="radio" name="relativeDiedOfCovid" value="Yes"> Igen
+                            <input type="radio" name="relativeDiedOfCovid" value="No"> Nem
+                        </div>
+                    </ng-container>
                     <br>
                 </div>
             </div>
