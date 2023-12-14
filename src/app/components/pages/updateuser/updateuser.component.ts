@@ -62,6 +62,12 @@ export class UpdateuserComponent {
       this.loginService.getUserAttributes(id).subscribe(result => {
   
         if (result.isErr()) {
+          let mess = result.unwrapErr().error.Error;
+          if (mess === "You are not allowed to interact the data of this user") {
+            alert("Sikertelen adatlekérés \nÖn nem jogosult az adatok lekérésére !")
+            console.log("jogosultsági probléma")
+          }
+          else
           alert("useradatok lekérdezése  sikertelen ");
           console.error(result.unwrapErr());
           return;
@@ -109,7 +115,7 @@ export class UpdateuserComponent {
   console.log("before finish is company", this.user.IsCompany)
   console.log("before finish user", this.user)
   console.log("before finish id", id)
-    this.user.Site = this.site;
+   // this.user.Site = this.site;
     this.loginService.updateUserAttributes(id,this.user).subscribe(
       result => {
         if (result.isErr()) {
@@ -164,19 +170,22 @@ export class UpdateuserComponent {
       alert("Az 'Intézmény neve' vagy  a 'Cég neve' mező kitöltése kötelező!");
       return false;
     }
-    if (this.site.City === "") {
+    
+    if (this.user.Site.City === "") {
       alert("A 'Város' mező kitöltése kötelező!");
       return false;
     }
-    if (this.site.PostCode === 0 || this.user.Site.PostCode === null) {
+     
+    if (this.user.Site.PostCode === 0 || this.user.Site.PostCode === null) {
       alert("Az 'Irányítószám' mező kitöltése kötelező!");
       return false;
     }
-    if (this.site.HouseNumber === 0 || this.user.Site.HouseNumber === null) {
+    if (this.user.Site.HouseNumber === 0 || this.user.Site.HouseNumber === null) {
       alert("A 'Házszám' mező kitöltése kötelező!");
       return false;
     }
-    if (this.site.Street === "") {
+    if (this.user.Site.Street === "") {
+      console.log(this.site.Street)
       alert("Az 'Utca' mező kitöltése kötelező!");
       return false;
     }

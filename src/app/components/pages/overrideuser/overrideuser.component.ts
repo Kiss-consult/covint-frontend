@@ -87,7 +87,13 @@ export class OverrideuserComponent {
     this.loginService.getUserAttributes(id).subscribe(
       result => {
         if (result.isErr()) {
-          alert("Sikertelen userlist");
+          let mess = result.unwrapErr().error.Error;
+          if (mess === "You are not allowed to interact the data of this user") {
+            alert("Sikertelen adatlekérés \nÖn nem jogosult az adatok lekérésére !")
+            console.log("jogosultsági probléma")
+          }
+         else
+          alert("Sikertelen adatlekérés");
           console.error(result.unwrapErr());
           return;
         }
