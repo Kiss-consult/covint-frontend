@@ -4,6 +4,7 @@ import { LoginService } from './services/login/login.service';
 import { KutatoOrvos, Orvos, PortalKezelo, PortalVezeto } from 'src/app/models/group/group';
 import { KeycloakService } from 'keycloak-angular';
 
+
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -16,6 +17,7 @@ export class AppComponent {
   kutatoorvos = KutatoOrvos;
   portaladmin = PortalKezelo;
   portalvezeto = PortalVezeto;
+  isMenuOpen = false;
 
   constructor(public loginService: LoginService, private router: Router) { }
 
@@ -32,8 +34,9 @@ export class AppComponent {
 
     this.router.navigate(["/profile"]);
   }
-
-
+  toggleMenu() {
+    this.isMenuOpen = !this.isMenuOpen;
+  }
 
   /*
     ngOnInit(): void {
