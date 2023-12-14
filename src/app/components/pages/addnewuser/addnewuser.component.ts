@@ -23,7 +23,7 @@ export class AddnewuserComponent {
   usergroup: string[] = [];
   orvos = Orvos;
   kutatoorvos = KutatoOrvos;
-  portaladmin = PortalKezelo;
+  portalkezelo = PortalKezelo;
   portalvezeto = PortalVezeto;
 
   doctorgroup: boolean = false;

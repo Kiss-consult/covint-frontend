@@ -39,18 +39,18 @@
 <div>
  
   <div>
-    <input  *ngIf="loginService.hasAnyGroup([portalvezeto, kutatoorvos])" type="checkbox"  [checked]="doctorgroup"  [(ngModel)]="doctorgroup"  (change)="isDoctor(doctorgroup) "   id="doctor" > Orvos
+    <input  *ngIf="loginService.hasAnyGroup([portalvezeto,portalkezelo, kutatoorvos])" type="checkbox"  [checked]="doctorgroup"  [(ngModel)]="doctorgroup"  (change)="isDoctor(doctorgroup) "   id="doctor" > Orvos
   </div>
   <div>
-    <input  *ngIf="loginService.hasAnyGroup([portalvezeto, kutatoorvos])" type="checkbox"  [checked]="researchergroup" [(ngModel)]="researchergroup"  (change)="isResearcher(researchergroup) "  id="researcher" > Kutató
+    <input  *ngIf="loginService.hasAnyGroup([portalvezeto,portalkezelo, kutatoorvos])" type="checkbox"  [checked]="researchergroup" [(ngModel)]="researchergroup"  (change)="isResearcher(researchergroup) "  id="researcher" > Kutató
   </div>
   <div>
-    <input  *ngIf="loginService.hasAnyGroup([portalvezeto, kutatoorvos])" type="checkbox"  [checked]="portalmanagergroup" [(ngModel)]="portalmanagergroup"  (change)="isPortalManager(portalmanagergroup) "  id="portelmanager" > Portál-kezelő
+    <input  *ngIf="loginService.hasAnyGroup([portalvezeto,portalkezelo, kutatoorvos])" type="checkbox"  [checked]="portalmanagergroup" [(ngModel)]="portalmanagergroup"  (change)="isPortalManager(portalmanagergroup) "  id="portelmanager" > Portál-kezelő
 
   </div>
   
   <div>
-    <input  *ngIf="loginService.hasAnyGroup([portalvezeto, kutatoorvos])" type="checkbox"  [checked]="portaladmingroup" [(ngModel)]="portaladmingroup"  (change)="isPortalAdmin(portaladmingroup) "  id="portaladmin" > Portál-vezető
+    <input  *ngIf="loginService.hasAnyGroup([portalvezeto, portalkezelo,kutatoorvos])" type="checkbox"  [checked]="portaladmingroup" [(ngModel)]="portaladmingroup"  (change)="isPortalAdmin(portaladmingroup) "  id="portaladmin" > Portál-vezető
 
   </div>
  
