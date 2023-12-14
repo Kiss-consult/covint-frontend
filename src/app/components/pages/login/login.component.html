@@ -1,0 +1,35 @@
+<h1>Bejelentkezés</h1>
+
+
+<div class="container">
+
+    <form (ngSubmit)="onLogin()">
+
+      <div class="form-group">
+<p>Üdvözöljük</p>
+        <div>
+          <label class="text" for="email">Felhasználónév</label>
+        </div>
+        <input class="droptextbox" type="email" id="email" name="email" [(ngModel)]="username" required placeholder="covint@covint.com" title="Kérem töltse ki a mezőt">
+      </div>
+      
+      <div class="form-group">
+        <div>
+          <label class="text" for="password">Jelszó</label>
+        </div>
+        <input class="droptextbox" type="password" id="password" name="password" [(ngModel)]="password" required placeholder="jelszó" title="Kérem töltse ki a mezőt">
+      </div>
+
+      <div class="form-group" style="margin-right: 5px; font-size: 0.8rem" >
+        <label class="text" >Még nem regisztrált?</label><a href="/registration"  routerLink="registration">Regisztráció</a>
+      </div>
+
+      <div class="form-group">
+        <button type="submit">Bejelentkezés</button>
+      </div>
+    </form>
+    <div class="form-group">
+      <a routerLink="/forgot-password">Elfelejtetted a jelszavad?</a>
+    </div>
+ 
+</div>
