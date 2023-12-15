@@ -27,8 +27,8 @@
 }
 
 .container-width {
-    width: 33.33%; /* Az azonos szélesség beállítása: 33.33% három azonos oszlop eléréséhez */
-    box-sizing: border-box; /* A padding és a border beleférjen a szélességbe */
+    width: 33.33%; 
+    box-sizing: border-box; 
   }
 
 .container{

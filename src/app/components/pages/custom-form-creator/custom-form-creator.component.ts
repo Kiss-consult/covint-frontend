@@ -36,6 +36,7 @@ export class CustomFormCreatorComponent {
   { label: 'Hozzátartozóként tölti ki a kérdőívet?', type: 'relative', selected: false }
 
 ];
+  location: any;
 
 
   toggleQuestionSelection(question: { label: string, type: string, selected: boolean }) {

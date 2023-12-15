@@ -147,6 +147,13 @@ input[type="radio"] {
     cursor: pointer;
 }
 
+input[type="checkbox"] {
+    transform: scale(1.5);
+    border:solid 1px #0080ff;
+    z-index: 0;
+    cursor: pointer;
+}
+
 html, body {
     height: 100%;
     margin: 0;
@@ -200,3 +207,6 @@ footer {
     }
 
 }
+
+
+
