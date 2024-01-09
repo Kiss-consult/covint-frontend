@@ -15,13 +15,13 @@
       <div>
         <label class="text" for="title">Jelenlegi jelszó:</label>
       </div>
-      <input class="droptextbox" type="text" id="title" name="title" [(ngModel)]="currentpassword" required title="Kérem töltse ki a mezőt">
+      <input class="droptextbox" type="password" id="title" name="title" [(ngModel)]="currentpassword" required title="Kérem töltse ki a mezőt">
     </div>
     <div class="form-group">
       <div>
         <label class="text" for="firstname">Új jelszó:</label>
       </div>
-      <input class="droptextbox" type="text" id="firstname" name="firstname" [(ngModel)]="newpassword" required 
+      <input class="droptextbox" type="password" id="firstname" name="firstname" [(ngModel)]="newpassword" required 
       title="A jeszó minimum 8 karakter és tartalmaznia kell: kis és nagy betűt, számot és extra karatert! ">
     </div>
 
@@ -29,7 +29,7 @@
       <div>
         <label class="text" for="lastname">Új jelszó ismét:</label>
       </div>
-      <input class="droptextbox" type="text" id="lastname" name="lastname" [(ngModel)]="confirmation" required title="Az ismételt jelszónak meg kell egyeznie a jelszóval!">
+      <input class="droptextbox" type="password" id="lastname" name="lastname" [(ngModel)]="confirmation" required title="Az ismételt jelszónak meg kell egyeznie a jelszóval!">
     </div>
 
    
