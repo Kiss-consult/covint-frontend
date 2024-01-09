@@ -109,9 +109,9 @@ export class LoginService {
   }
 
   public logout() {
-    
+    let home = window.location.toString().replace(this.router.url, '')
  
-    this.keycloakService.logout(window.location.origin)
+    this.keycloakService.logout(home)
     this.keycloakService.clearToken();
    
     this.token = "";
