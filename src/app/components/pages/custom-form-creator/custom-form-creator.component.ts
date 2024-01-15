@@ -1,19 +1,22 @@
-import { Component } from '@angular/core';
+import { Component, ViewEncapsulation  } from '@angular/core';
 import { QuestionBase, TextQuestion, YesNoQuestion, MultiSelectQuestion, yesnohospitalQuestion, SexQuestion, RelativeQuestion  } from './form-questions.model';
 import { CommonModule } from '@angular/common';
 import { CdkDragDrop, CdkDropList, CdkDrag, moveItemInArray } from '@angular/cdk/drag-drop';
 import { ColorPickerModule } from 'ngx-color-picker';
 import { FormsModule } from '@angular/forms';
+import { NgSelectModule } from '@ng-select/ng-select';
 import { BackendService } from 'src/app/services/backend/backend.service'; 
 import { Ok } from 'src/app/models/utils/result';
+import { ChangeDetectorRef } from '@angular/core';
 
 
 @Component({
   selector: 'app-custom-form-creator',
   standalone: true,
-  imports: [CommonModule, FormsModule,ColorPickerModule],
+  imports: [CommonModule, FormsModule,ColorPickerModule,NgSelectModule],
   templateUrl: './custom-form-creator.component.html',
-  styleUrls: ['./custom-form-creator.component.css']
+  styleUrls: ['./custom-form-creator.component.css'],
+  encapsulation: ViewEncapsulation.None,
 })
 
 
@@ -26,12 +29,14 @@ export class CustomFormCreatorComponent {
   formName: string = 'Kérdőív';
   displayResponse: string = '';
   showFollowUpQuestion: boolean = false;
+  allIllnessOptions: string[] = ['Elhízás', 'Asztma','Szívbetegség', 'Asztma2','Szívbetegség2', 'Asztma3','Szívbetegség3', 'Asztma4','Szívbetegség4', 'Asztma5','Szívbetegség5'];
+  selectedOptions: string[] =[];
 
-  availableQuestions: { label: string, type: string, selected: boolean }[] = [
+  availableQuestions: { label: string, type: string, selected: boolean, selectedOptions?: string[] }[] = [
   { label: 'Kor kérdés', type: 'text', selected: false },
   { label: 'Covid kérdés', type: 'yesno', selected: false },
   { label: 'Korház Kérdés', type: 'yesnohospital', selected: false },
-  { label: 'Betegség kérdés', type: 'multiselect', selected: false },
+  { label: 'Betegség kérdés', type: 'multiselect', selected: false, selectedOptions: [] },
   { label: 'Nem kérdés', type: 'sex', selected: false },
   { label: 'Hozzátartozóként tölti ki a kérdőívet?', type: 'relative', selected: false }
 
@@ -47,7 +52,29 @@ export class CustomFormCreatorComponent {
     } else {
       this.deleteQuestion(question.type);
     }
+    console.log('ToggleQuestion Meg lett hivva')
   }
+
+  onOptionsChange(question: any) {
+    if (question.type === 'multiselect') {
+      const multiSelectQuestion = question as MultiSelectQuestion; // Cast to 'any' to bypass type checking
+  
+      const index = this.selectedQuestions.findIndex(q => q.id === question.id);
+      if (index !== -1) {
+        this.selectedQuestions[index] = {
+          ...this.selectedQuestions[index],
+          ...multiSelectQuestion // Spread operator to copy all properties
+        };
+        const multiSelectQuestionke = this.selectedQuestions[index] as MultiSelectQuestion;
+        multiSelectQuestionke.selectedOptions = [...question.selectedOptions];
+        this.selectedOptions.push()
+      }
+    }
+    console.log('Updated selectedQuestions:', question);
+    console.log('Updated selectedQuestions:', this.selectedQuestions);
+
+  }
+
   
 
   drop(event: CdkDragDrop<QuestionBase[]>) {
@@ -66,7 +93,7 @@ export class CustomFormCreatorComponent {
               this.selectedQuestions.push(new yesnohospitalQuestion('Az elmúlt egy évben került korházba COVID miatt?'));
               break;
           case 'multiselect':
-              const newMultiSelectQuestion = new MultiSelectQuestion('Az alábbi lehetőségek közül kérjük válassza ki milyen betegségekkel rendelkezik:', ['Elhízás', 'Asztma','Szívbetegség'], true);
+              const newMultiSelectQuestion = new MultiSelectQuestion('Az alábbi lehetőségek közül kérjük válassza ki milyen betegségekkel rendelkezik:',this.allIllnessOptions , true,[]);
               this.selectedQuestions.push(newMultiSelectQuestion);
               break;   
           case 'sex':
@@ -80,6 +107,32 @@ export class CustomFormCreatorComponent {
 
       }
       
+  }
+  toggleSelection(question: MultiSelectQuestion, option: string) {
+    const maxSelection = 10;
+    if (!question.selectedOptions) {
+      question.selectedOptions = this.selectedOptions;
+    }
+    const index = question.selectedOptions.indexOf(option);
+    if (index > -1) {
+      // Option already selected, remove it
+      question.selectedOptions.splice(index, 1);
+    } else {
+      // New selection
+      if (question.selectedOptions.length < maxSelection) {
+        // Add new option if under limit
+        question.selectedOptions.push(option);
+      } else {
+        // Maybe show an error message or replace the earliest selection
+        console.log("You can only select up to " + maxSelection + " options.");
+      }
+    }
+  }
+  removeSelection(question: MultiSelectQuestion, option: string) {
+    const index = question.selectedOptions.indexOf(option);
+    if (index > -1) {
+        question.selectedOptions.splice(index, 1);
+    }
   }
   onRelativeAnswerChange(answer: string) {
     this.showFollowUpQuestion = answer === 'Yes';
@@ -282,7 +335,7 @@ submitForm() {
 }
 
 //Drag and drop cuccok későbbre:
-isMultiSelectQuestion(question: QuestionBase): question is MultiSelectQuestion {
+isMultiSelectQuestion(question: any): question is MultiSelectQuestion {
   return question.type === 'multiselect';
 }
 
@@ -299,24 +352,7 @@ getSelectedOptions(question: QuestionBase): string[] {
   }
   return [];
 }
-toggleSelection(question: MultiSelectQuestion, option: string) {
-  if (!question.selectedOptions) {
-      question.selectedOptions = [];
-  }
-  const index = question.selectedOptions.indexOf(option);
-  if (index > -1) {
-      question.selectedOptions.splice(index, 1);
-  } else {
-      question.selectedOptions.push(option);
-  }
-}
 
-removeSelection(question: MultiSelectQuestion, option: string) {
-  const index = question.selectedOptions.indexOf(option);
-  if (index > -1) {
-      question.selectedOptions.splice(index, 1);
-  }
-}
 
 
 

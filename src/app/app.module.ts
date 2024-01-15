@@ -12,6 +12,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatTableModule } from '@angular/material/table';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatSortModule } from '@angular/material/sort';
+import { NgSelectModule } from '@ng-select/ng-select';
 
 import { DragDropModule } from '@angular/cdk/drag-drop';
 import { ColorPickerModule } from 'ngx-color-picker';
@@ -79,12 +80,11 @@ import { SafePipe } from './pipes/Safepipe';
     EmailTemplateComponent,
     UpdateuserComponent,
     ChangepwdbyadminComponent,
-    SafePipe
+    SafePipe,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    FormsModule,
     ReactiveFormsModule,
     HttpClientModule,
     MatTableModule,       // A táblázat moduljának importálása
@@ -92,14 +92,13 @@ import { SafePipe } from './pipes/Safepipe';
     MatSortModule,
     MatFormFieldModule,
     MatInputModule,
-
     DragDropModule,
-
     MatIconModule,
-
     KeycloakAngularModule,
     ColorPickerModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    FormsModule,
+    NgSelectModule
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   providers: [

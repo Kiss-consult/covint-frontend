@@ -95,3 +95,28 @@ h5 {
 #uoqu{
     margin-top: 30px;
 }
+/* Style the dropdown container */
+.ng-select {
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+/* Style the selected items */
+.ng-select .ng-value {
+    background-color: #ffffff;
+    color: rgb(0, 0, 0);
+}
+
+/* Style the dropdown panel */
+.ng-select .ng-dropdown-panel {
+    background-color: #f8f9fa;
+    border-color: #dee2e6;
+}
+
+/* Style individual options in the dropdown */
+.ng-select .ng-option {
+    padding: 10px;
+    &:hover {
+        background-color: #e9ecef;
+    }
+}
