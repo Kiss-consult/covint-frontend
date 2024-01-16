@@ -29,7 +29,7 @@ export class CustomFormCreatorComponent {
   formName: string = 'Kérdőív';
   displayResponse: string = '';
   showFollowUpQuestion: boolean = false;
-  allIllnessOptions: string[] = ['Elhízás', 'Asztma','Szívbetegség', 'Asztma2','Szívbetegség2', 'Asztma3','Szívbetegség3', 'Asztma4','Szívbetegség4', 'Asztma5','Szívbetegség5'];
+  allIllnessOptions: string[] = ['Egészséges','Daganatos betegségek','Krónikus vesebetegség','Krónikus májbetegség','Mentális és viselkedési zavar','Hiperlipidémia','Immunhiányos állapot','Anyagcserezavar','Idegrendszeri betegség','COPD és emphysema','Elhízás','Szervátültetés','Hasnyálmirigy-gyulladás','Cukorbetegség (I. és II. Típus)','Immunszuppresszív gyógyszer szedése','Súlyos szívbetegség','Asztma'];
   selectedOptions: string[] =[];
 
   availableQuestions: { label: string, type: string, selected: boolean, selectedOptions?: string[] }[] = [
@@ -52,28 +52,36 @@ export class CustomFormCreatorComponent {
     } else {
       this.deleteQuestion(question.type);
     }
-    console.log('ToggleQuestion Meg lett hivva')
+    this.selectedQuestions = [...this.selectedQuestions];
   }
-
+  
   onOptionsChange(question: any) {
     if (question.type === 'multiselect') {
-      const multiSelectQuestion = question as MultiSelectQuestion; // Cast to 'any' to bypass type checking
-  
-      const index = this.selectedQuestions.findIndex(q => q.id === question.id);
-      if (index !== -1) {
-        this.selectedQuestions[index] = {
-          ...this.selectedQuestions[index],
-          ...multiSelectQuestion // Spread operator to copy all properties
-        };
-        const multiSelectQuestionke = this.selectedQuestions[index] as MultiSelectQuestion;
-        multiSelectQuestionke.selectedOptions = [...question.selectedOptions];
-        this.selectedOptions.push()
-      }
-    }
-    console.log('Updated selectedQuestions:', question);
-    console.log('Updated selectedQuestions:', this.selectedQuestions);
+        // Find the question in the selectedQuestions array
+        const index = this.selectedQuestions.findIndex(q => q.type === question.type);
 
-  }
+        console.log ('Index:',index)
+
+        if (index !== -1) {
+            // Update the existing question's selectedOptions directly
+            (this.selectedQuestions[index] as MultiSelectQuestion).selectedOptions = question.selectedOptions
+            console.log ('Index:',index)
+        } else {
+            // If the question is not found, it's a new selection, so add it
+            // Use the existing question object as it already has a generated ID
+            this.selectedQuestions.push(question);
+            console.log ('Index:',index)
+        }
+    }
+
+    // Trigger change detection manually to update the view
+    this.selectedQuestions = [...this.selectedQuestions];
+
+    console.log('Updated selectedQuestions:', this.selectedQuestions);
+}
+
+
+
 
   
 
@@ -93,7 +101,7 @@ export class CustomFormCreatorComponent {
               this.selectedQuestions.push(new yesnohospitalQuestion('Az elmúlt egy évben került korházba COVID miatt?'));
               break;
           case 'multiselect':
-              const newMultiSelectQuestion = new MultiSelectQuestion('Az alábbi lehetőségek közül kérjük válassza ki milyen betegségekkel rendelkezik:',this.allIllnessOptions , true,[]);
+              const newMultiSelectQuestion = new MultiSelectQuestion('Az alábbi lehetőségek közül kérjük válassza ki milyen betegségekkel rendelkezik:',this.allIllnessOptions , true, []);
               this.selectedQuestions.push(newMultiSelectQuestion);
               break;   
           case 'sex':
@@ -168,9 +176,9 @@ renderForm() {
       <div style="display: flex; justify-content: center; align-items: center; height: 100%; padding: 20px;">
         <form style="background-color: ${this.backgroundColor}; color: ${this.textColor}; padding: 20px; border: 1px solid #0800ff; border-radius: 10px; box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.4); width: 50%;" id="${uniqueFormName}">
           <h4 style="font-size:45px; font-family: 'Arial'; text-align: center;">${this.formName}</h4>`;
-          let questionContainerStyle = `display: flex; flex-direction: column; align-items: flex-start; margin: 10px; padding: 5px; border: 1px solid #0800ff; border-radius: 10px; box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.4); background-color: ${this.questionBackgroundColor};`;
+          let questionContainerStyle = `display: flex; flex-direction: column; align-items: flex-start; margin: 10px; padding: 5px; border: 1px solid #0800ff; border-radius: 10px; box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.4); background-color: ${this.questionBackgroundColor}; font-family: 'Arial', sans-serif;`;
           let labelStyle = `font-weight: bold; font-family: 'Arial', sans-serif; font-size: 16px; color: ${this.textColor};`; // Removed margin-bottom
-          let inputStyle = `background-color: ${this.backgroundColor}; color: ${this.textColor}; width: 100%;`; // Set width to 100% for full width
+          let inputStyle = `background-color: ${this.backgroundColor}; color: ${this.textColor}; width: 100%; font-family: 'Arial', sans-serif; font-size: 14px;` ; // Set width to 100% for full width
 
   this.selectedQuestions.forEach(question => {
       
@@ -203,7 +211,7 @@ renderForm() {
         else if (question.type === 'multiselect') {
           formHtml += `<label style="${labelStyle}">${question.label}</label>`;
           const MultiSelectQuestion = question as MultiSelectQuestion;
-          MultiSelectQuestion.options.forEach(option => {
+          MultiSelectQuestion.selectedOptions.forEach(option => {
               formHtml += `<input type="checkbox" name="Illnesses" value="${option}" style="${inputStyle}"> ${option}`;
           });
       }

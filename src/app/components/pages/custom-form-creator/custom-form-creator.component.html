@@ -12,18 +12,16 @@
         </div>
 
         <div *ngFor="let question of availableQuestions">
-            <!-- Existing checkbox for the question -->
             <input type="checkbox" id="{{question.type}}" 
                    [(ngModel)]="question.selected" 
                    (change)="toggleQuestionSelection(question)">
             <label style="margin-left: 10px;" for="{{question.type}}">{{question.label}}</label>
           
-            <!-- Additional section for illness options -->
             <div *ngIf="question.type === 'multiselect' && question.selected">
                 <ng-select [items]="allIllnessOptions"
                            [multiple]="true"
                            [maxSelectedItems]="10"
-                           (change)="question.selectedOptions?.push"
+                           (change)="onOptionsChange(question)"
                            bindLabel="name"
                            [(ngModel)]="question.selectedOptions">
                 <br>
@@ -80,9 +78,9 @@
                         </div>
                     </ng-container>
                     <ng-container *ngIf="isMultiSelectQuestion(question)">
-                        <label>{{ question.label }}</label>
+                        <label class="question-label">{{ question.label }}</label>
                         <div *ngFor="let option of question.selectedOptions">
-                            <span>{{ option }}</span>
+                            <input type="checkbox"> {{ option }}
                         </div>
                       </ng-container>
                     <ng-container *ngIf="question.type === 'sex'" class="question-container">
