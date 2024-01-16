@@ -1,19 +1,22 @@
-import { Component } from '@angular/core';
+import { Component, ViewEncapsulation  } from '@angular/core';
 import { QuestionBase, TextQuestion, YesNoQuestion, MultiSelectQuestion, yesnohospitalQuestion, SexQuestion, RelativeQuestion  } from './form-questions.model';
 import { CommonModule } from '@angular/common';
 import { CdkDragDrop, CdkDropList, CdkDrag, moveItemInArray } from '@angular/cdk/drag-drop';
 import { ColorPickerModule } from 'ngx-color-picker';
 import { FormsModule } from '@angular/forms';
+import { NgSelectModule } from '@ng-select/ng-select';
 import { BackendService } from 'src/app/services/backend/backend.service'; 
 import { Ok } from 'src/app/models/utils/result';
+import { ChangeDetectorRef } from '@angular/core';
 
 
 @Component({
   selector: 'app-custom-form-creator',
   standalone: true,
-  imports: [CommonModule, FormsModule,ColorPickerModule],
+  imports: [CommonModule, FormsModule,ColorPickerModule,NgSelectModule],
   templateUrl: './custom-form-creator.component.html',
-  styleUrls: ['./custom-form-creator.component.css']
+  styleUrls: ['./custom-form-creator.component.css'],
+  encapsulation: ViewEncapsulation.None,
 })
 
 
@@ -26,12 +29,14 @@ export class CustomFormCreatorComponent {
   formName: string = 'Kérdőív';
   displayResponse: string = '';
   showFollowUpQuestion: boolean = false;
+  allIllnessOptions: string[] = ['Egészséges','Daganatos betegségek','Krónikus vesebetegség','Krónikus májbetegség','Mentális és viselkedési zavar','Hiperlipidémia','Immunhiányos állapot','Anyagcserezavar','Idegrendszeri betegség','COPD és emphysema','Elhízás','Szervátültetés','Hasnyálmirigy-gyulladás','Cukorbetegség (I. és II. Típus)','Immunszuppresszív gyógyszer szedése','Súlyos szívbetegség','Asztma'];
+  selectedOptions: string[] =[];
 
-  availableQuestions: { label: string, type: string, selected: boolean }[] = [
+  availableQuestions: { label: string, type: string, selected: boolean, selectedOptions?: string[] }[] = [
   { label: 'Kor kérdés', type: 'text', selected: false },
   { label: 'Covid kérdés', type: 'yesno', selected: false },
   { label: 'Korház Kérdés', type: 'yesnohospital', selected: false },
-  { label: 'Betegség kérdés', type: 'multiselect', selected: false },
+  { label: 'Betegség kérdés', type: 'multiselect', selected: false, selectedOptions: [] },
   { label: 'Nem kérdés', type: 'sex', selected: false },
   { label: 'Hozzátartozóként tölti ki a kérdőívet?', type: 'relative', selected: false }
 
@@ -47,7 +52,37 @@ export class CustomFormCreatorComponent {
     } else {
       this.deleteQuestion(question.type);
     }
+    this.selectedQuestions = [...this.selectedQuestions];
   }
+  
+  onOptionsChange(question: any) {
+    if (question.type === 'multiselect') {
+        // Find the question in the selectedQuestions array
+        const index = this.selectedQuestions.findIndex(q => q.type === question.type);
+
+        console.log ('Index:',index)
+
+        if (index !== -1) {
+            // Update the existing question's selectedOptions directly
+            (this.selectedQuestions[index] as MultiSelectQuestion).selectedOptions = question.selectedOptions
+            console.log ('Index:',index)
+        } else {
+            // If the question is not found, it's a new selection, so add it
+            // Use the existing question object as it already has a generated ID
+            this.selectedQuestions.push(question);
+            console.log ('Index:',index)
+        }
+    }
+
+    // Trigger change detection manually to update the view
+    this.selectedQuestions = [...this.selectedQuestions];
+
+    console.log('Updated selectedQuestions:', this.selectedQuestions);
+}
+
+
+
+
   
 
   drop(event: CdkDragDrop<QuestionBase[]>) {
@@ -66,7 +101,7 @@ export class CustomFormCreatorComponent {
               this.selectedQuestions.push(new yesnohospitalQuestion('Az elmúlt egy évben került korházba COVID miatt?'));
               break;
           case 'multiselect':
-              const newMultiSelectQuestion = new MultiSelectQuestion('Az alábbi lehetőségek közül kérjük válassza ki milyen betegségekkel rendelkezik:', ['Elhízás', 'Asztma','Szívbetegség'], true);
+              const newMultiSelectQuestion = new MultiSelectQuestion('Az alábbi lehetőségek közül kérjük válassza ki milyen betegségekkel rendelkezik:',this.allIllnessOptions , true, []);
               this.selectedQuestions.push(newMultiSelectQuestion);
               break;   
           case 'sex':
@@ -80,6 +115,32 @@ export class CustomFormCreatorComponent {
 
       }
       
+  }
+  toggleSelection(question: MultiSelectQuestion, option: string) {
+    const maxSelection = 10;
+    if (!question.selectedOptions) {
+      question.selectedOptions = this.selectedOptions;
+    }
+    const index = question.selectedOptions.indexOf(option);
+    if (index > -1) {
+      // Option already selected, remove it
+      question.selectedOptions.splice(index, 1);
+    } else {
+      // New selection
+      if (question.selectedOptions.length < maxSelection) {
+        // Add new option if under limit
+        question.selectedOptions.push(option);
+      } else {
+        // Maybe show an error message or replace the earliest selection
+        console.log("You can only select up to " + maxSelection + " options.");
+      }
+    }
+  }
+  removeSelection(question: MultiSelectQuestion, option: string) {
+    const index = question.selectedOptions.indexOf(option);
+    if (index > -1) {
+        question.selectedOptions.splice(index, 1);
+    }
   }
   onRelativeAnswerChange(answer: string) {
     this.showFollowUpQuestion = answer === 'Yes';
@@ -115,9 +176,9 @@ renderForm() {
       <div style="display: flex; justify-content: center; align-items: center; height: 100%; padding: 20px;">
         <form style="background-color: ${this.backgroundColor}; color: ${this.textColor}; padding: 20px; border: 1px solid #0800ff; border-radius: 10px; box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.4); width: 50%;" id="${uniqueFormName}">
           <h4 style="font-size:45px; font-family: 'Arial'; text-align: center;">${this.formName}</h4>`;
-          let questionContainerStyle = `display: flex; flex-direction: column; align-items: flex-start; margin: 10px; padding: 5px; border: 1px solid #0800ff; border-radius: 10px; box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.4); background-color: ${this.questionBackgroundColor};`;
+          let questionContainerStyle = `display: flex; flex-direction: column; align-items: flex-start; margin: 10px; padding: 5px; border: 1px solid #0800ff; border-radius: 10px; box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.4); background-color: ${this.questionBackgroundColor}; font-family: 'Arial', sans-serif;`;
           let labelStyle = `font-weight: bold; font-family: 'Arial', sans-serif; font-size: 16px; color: ${this.textColor};`; // Removed margin-bottom
-          let inputStyle = `background-color: ${this.backgroundColor}; color: ${this.textColor}; width: 100%;`; // Set width to 100% for full width
+          let inputStyle = `background-color: ${this.backgroundColor}; color: ${this.textColor}; width: 100%; font-family: 'Arial', sans-serif; font-size: 14px;` ; // Set width to 100% for full width
 
   this.selectedQuestions.forEach(question => {
       
@@ -150,7 +211,7 @@ renderForm() {
         else if (question.type === 'multiselect') {
           formHtml += `<label style="${labelStyle}">${question.label}</label>`;
           const MultiSelectQuestion = question as MultiSelectQuestion;
-          MultiSelectQuestion.options.forEach(option => {
+          MultiSelectQuestion.selectedOptions.forEach(option => {
               formHtml += `<input type="checkbox" name="Illnesses" value="${option}" style="${inputStyle}"> ${option}`;
           });
       }
@@ -282,7 +343,7 @@ submitForm() {
 }
 
 //Drag and drop cuccok későbbre:
-isMultiSelectQuestion(question: QuestionBase): question is MultiSelectQuestion {
+isMultiSelectQuestion(question: any): question is MultiSelectQuestion {
   return question.type === 'multiselect';
 }
 
@@ -299,24 +360,7 @@ getSelectedOptions(question: QuestionBase): string[] {
   }
   return [];
 }
-toggleSelection(question: MultiSelectQuestion, option: string) {
-  if (!question.selectedOptions) {
-      question.selectedOptions = [];
-  }
-  const index = question.selectedOptions.indexOf(option);
-  if (index > -1) {
-      question.selectedOptions.splice(index, 1);
-  } else {
-      question.selectedOptions.push(option);
-  }
-}
 
-removeSelection(question: MultiSelectQuestion, option: string) {
-  const index = question.selectedOptions.indexOf(option);
-  if (index > -1) {
-      question.selectedOptions.splice(index, 1);
-  }
-}
 
 
 

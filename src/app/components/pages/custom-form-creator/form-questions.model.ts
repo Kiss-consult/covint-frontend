@@ -56,13 +56,14 @@ export class MultiSelectQuestion implements QuestionBase {
     type: 'multiselect' = 'multiselect';
     options: string[];
     multiple: boolean = true;
-    selectedOptions: string[] = []; // Hozzáadott tulajdonság
+    selectedOptions: string[] = []; 
 
-    constructor(label: string, options: string[], multiple: boolean = true) {
+    constructor(label: string, options: string[], multiple: boolean = true,selectedOptions: string []) {
         this.id = this.generateId();
         this.label = label;
         this.options = options;
         this.multiple = multiple;
+        this.selectedOptions = selectedOptions;
     }
 
     private generateId(): string {

@@ -13,11 +13,22 @@
 
         <div *ngFor="let question of availableQuestions">
             <input type="checkbox" id="{{question.type}}" 
-                [(ngModel)]="question.selected" 
-                (change)="toggleQuestionSelection(question)">
+                   [(ngModel)]="question.selected" 
+                   (change)="toggleQuestionSelection(question)">
             <label style="margin-left: 10px;" for="{{question.type}}">{{question.label}}</label>
-            
-        </div>
+          
+            <div *ngIf="question.type === 'multiselect' && question.selected">
+                <ng-select [items]="allIllnessOptions"
+                           [multiple]="true"
+                           [maxSelectedItems]="10"
+                           (change)="onOptionsChange(question)"
+                           bindLabel="name"
+                           [(ngModel)]="question.selectedOptions">
+                <br>
+                </ng-select>
+              </div>
+
+          </div>
 
         <div>
             <label for="backgroundColorPicker">Háttérszín: </label>
@@ -66,13 +77,12 @@
                             <input id="radio" type="radio" [name]="question.id" value="No"> Nem
                         </div>
                     </ng-container>
-                    <ng-container *ngIf="isMultiSelectQuestion(question)" class="question-container">
+                    <ng-container *ngIf="isMultiSelectQuestion(question)">
                         <label class="question-label">{{ question.label }}</label>
-                        <div *ngFor="let option of getOptions(question)">
-                            <input id="radio" type="checkbox" [id]="option" (change)="toggleSelection(question, option)">
-                            <label style="margin-left: 10px;" [for]="option">{{ option }}</label>
+                        <div *ngFor="let option of question.selectedOptions">
+                            <input type="checkbox"> {{ option }}
                         </div>
-                    </ng-container>
+                      </ng-container>
                     <ng-container *ngIf="question.type === 'sex'" class="question-container">
                         <label class="question-label">{{ question.label }}</label>
                         <div>
