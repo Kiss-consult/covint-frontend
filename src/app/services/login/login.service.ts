@@ -49,6 +49,13 @@ export class LoginService {
         }
       }
     });
+    keycloakService.isLoggedIn().then((loggedIn) => {
+      if (loggedIn) {
+        this.getUserData();
+      } else {
+        this.loggedIn = false;
+      }
+    })
   }
 
   public downloadEmailTemplate(f: number): Observable<Result<[any[], string]>> {
@@ -259,13 +266,18 @@ export class LoginService {
     this.keycloakService.isLoggedIn().then((loggedIn) => {
       console.log("loggedIn from login", loggedIn)
       this.loggedIn = loggedIn;
-      if (this.loggedIn === false) {
-        this.keycloakService.login().then(() => {
-          this.loggedIn = true;
-          this.getUserData();
-        });
+      if (this.loggedIn === true) {
+        this.getUserData();
+        return;
       }
-      this.getUserData();
+      this.keycloakService.login().then(() => {
+        this.keycloakService.isLoggedIn().then((loggedIn) => {
+          this.loggedIn = loggedIn;
+          if (this.loggedIn === true) {
+            this.getUserData();
+          }
+        });
+      });
     });
   }
 
