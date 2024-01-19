@@ -99,6 +99,7 @@ h5 {
 .ng-select {
     border: 1px solid #ccc;
     border-radius: 4px;
+    background: #bdd6ef;
 }
 
 /* Style the selected items */

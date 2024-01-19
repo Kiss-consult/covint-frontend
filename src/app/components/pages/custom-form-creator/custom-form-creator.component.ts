@@ -29,7 +29,7 @@ export class CustomFormCreatorComponent {
   formName: string = 'Kérdőív';
   displayResponse: string = '';
   showFollowUpQuestion: boolean = false;
-  allIllnessOptions: string[] = ['Egészséges','Daganatos betegségek','Krónikus vesebetegség','Krónikus májbetegség','Mentális és viselkedési zavar','Hiperlipidémia','Immunhiányos állapot','Anyagcserezavar','Idegrendszeri betegség','COPD és emphysema','Elhízás','Szervátültetés','Hasnyálmirigy-gyulladás','Cukorbetegség (I. és II. Típus)','Immunszuppresszív gyógyszer szedése','Súlyos szívbetegség','Asztma'];
+  allIllnessOptions: string[] = [' Egészséges ',' Daganatos betegségek ',' Krónikus vesebetegség ',' Krónikus májbetegség ',' Mentális és viselkedési zavar ',' Hiperlipidémia ',' Immunhiányos állapot ',' Anyagcserezavar ',' Idegrendszeri betegség ',' COPD és emphysema ',' Elhízás ',' Szervátültetés ',' Hasnyálmirigy-gyulladás ',' Cukorbetegség (I. és II. Típus) ',' Immunszuppresszív gyógyszer szedése ',' Súlyos szívbetegség ',' Asztma '];
   // ha kell ide be kell olvasni a markereket
   selectedOptions: string[] =[];
 
