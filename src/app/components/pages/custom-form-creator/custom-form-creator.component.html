@@ -10,20 +10,24 @@
             <label>Kérdőív neve:</label>
             <input class="droptextbox" type="text" [(ngModel)]="formName" id="kerdoiv" placeholder="Kérdőív">
         </div>
-
+       
         <div *ngFor="let question of availableQuestions">
             <input type="checkbox" id="{{question.type}}" 
                    [(ngModel)]="question.selected" 
                    (change)="toggleQuestionSelection(question)">
             <label style="margin-left: 10px;" for="{{question.type}}">{{question.label}}</label>
-          
+           
             <div *ngIf="question.type === 'multiselect' && question.selected">
+                <div>
+                    <label class="text" for="bno">Lehetséges társbetegségek: </label>
+                  </div>
                 <ng-select [items]="allIllnessOptions"
                            [multiple]="true"
                            [maxSelectedItems]="10"
                            (change)="onOptionsChange(question)"
                            bindLabel="name"
-                           [(ngModel)]="question.selectedOptions">
+                           [(ngModel)]="question.selectedOptions"
+                           title="Klikkeljen ide és válasszon a betegségek hozzáadásához!" >
                 <br>
                 </ng-select>
               </div>
@@ -80,7 +84,8 @@
                     <ng-container *ngIf="isMultiSelectQuestion(question)">
                         <label class="question-label">{{ question.label }}</label>
                         <div *ngFor="let option of question.selectedOptions">
-                            <input type="checkbox"> {{ option }}
+                            
+                           <input type="checkbox"> {{ option }} 
                         </div>
                       </ng-container>
                     <ng-container *ngIf="question.type === 'sex'" class="question-container">
