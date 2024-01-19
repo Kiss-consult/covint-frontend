@@ -5,7 +5,7 @@ import { ConfigService } from '../config/config.service';
 
 import { HttpClient, HttpEventType, HttpHeaders, HttpParams } from '@angular/common/http';
 
-import jwt_decode from 'jwt-decode';
+import { jwtDecode } from 'jwt-decode';
 import { AccessToken } from 'src/app/models/token/accesstoken';
 import { Router } from '@angular/router';
 import { User } from 'src/app/models/user/user';
@@ -49,13 +49,15 @@ export class LoginService {
         }
       }
     });
-    keycloakService.isLoggedIn().then((loggedIn) => {
-      if (loggedIn) {
-        this.getUserData();
-      } else {
-        this.loggedIn = false;
-      }
-    })
+
+
+
+    if (keycloakService.isLoggedIn()) {
+      this.getUserData();
+    } else {
+      this.loggedIn = false;
+
+    }
   }
 
   public downloadEmailTemplate(f: number): Observable<Result<[any[], string]>> {
@@ -107,7 +109,7 @@ export class LoginService {
       this.router.navigate(['/login']);
       return false;
     }*/
-    const decoded = jwt_decode<AccessToken>(this.token);
+    const decoded = jwtDecode<AccessToken>(this.token);
     return decoded.groups.some(group => expectedGroups.includes(group));
   }
 
@@ -117,10 +119,10 @@ export class LoginService {
 
   public logout() {
     let home = window.location.toString().replace(this.router.url, '')
- 
+
     this.keycloakService.logout(home)
     this.keycloakService.clearToken();
-   
+
     this.token = "";
   }
 
@@ -138,9 +140,9 @@ export class LoginService {
     );
   }
 
-  public insertNewUserbyAdmin(userwithgroups : UserWithGroups): Observable<Result<{}>> {
+  public insertNewUserbyAdmin(userwithgroups: UserWithGroups): Observable<Result<{}>> {
     const url = this.url + "/user/create";
-    
+
     return this.httpClient.post<Result<{}>>(url, userwithgroups).pipe(
       map(result => fromJSON<{}>(JSON.stringify(result))),
       catchError(error => of(new Err<{}>(error)))
@@ -184,13 +186,13 @@ export class LoginService {
     );
   }
 
-  public changePassword(currentPassword: string, newPassword: string, confirmation: string, byAdmin: boolean, id : string): Observable<Result<{}>> {
+  public changePassword(currentPassword: string, newPassword: string, confirmation: string, byAdmin: boolean, id: string): Observable<Result<{}>> {
     let userID = "";
 
     if (byAdmin) {
-      userID =  id;
-     
-      
+      userID = id;
+
+
     }
     if (!byAdmin) {
       userID = this.getUserId()
@@ -263,21 +265,18 @@ export class LoginService {
   }
 
   public login(): void {
-    this.keycloakService.isLoggedIn().then((loggedIn) => {
-      console.log("loggedIn from login", loggedIn)
-      this.loggedIn = loggedIn;
+
+    this.loggedIn = this.keycloakService.isLoggedIn();
+    if (this.loggedIn === true) {
+      this.getUserData();
+      return;
+    }
+    this.keycloakService.login().then(() => {
+
+      this.loggedIn = this.keycloakService.isLoggedIn();
       if (this.loggedIn === true) {
         this.getUserData();
-        return;
       }
-      this.keycloakService.login().then(() => {
-        this.keycloakService.isLoggedIn().then((loggedIn) => {
-          this.loggedIn = loggedIn;
-          if (this.loggedIn === true) {
-            this.getUserData();
-          }
-        });
-      });
     });
   }
 
