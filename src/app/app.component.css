@@ -64,7 +64,7 @@
   
   .nav-link {
     text-decoration: none;
-    color: #000000;    
+    color: #000000; 
   }
   
   .dropdown {
@@ -105,7 +105,7 @@
     top:110px;
     border-left: 7px #0080ff solid;
     left:0;
-    padding-top: 7px;
+    padding-top: 10px;
     min-height: 400px;
     z-index: 0;
     box-shadow: 2px 10px 5px #8484844f;
@@ -125,5 +125,131 @@
     left: 144px;   
     top: 0;
   }
-  
+
+}
+
+
+@media (max-width: 500px){
+
+  #login{
+    margin-left: 5px;
   }
+
+  #logout{
+    margin-left: 20px;
+  }
+
+  .navbar-nav {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    background-color: #ffffff;
+    position: fixed;
+    height: 0;
+    margin-left: 0;
+    display: flex;
+    flex-direction:row;
+    top:60px;
+    border-left:none;
+    left:0;
+    padding-top:0;
+    min-height:0;
+    z-index: 0;
+    box-shadow: 2px 10px 5px #8484844f;
+  }
+
+  .custom-bg{
+    background-color: #ffffff;
+  }
+
+  .nav-item.active a {
+    background-color: #0080ff; 
+    border-top-right-radius: 7px;
+    border-top-left-radius: 7px;
+    color: #ffffff;
+    position: relative;
+    margin: 0;     
+  }
+
+  .nav-link.active {
+    background-color: #0080ff;     
+    color: #ffffff;
+  }  
+
+  .nav-item p{
+    color: black;
+    margin: 0;
+  }
+
+  .nav-item a{
+    color: black;
+    margin: 0;
+  }
+
+  .nav-item p:hover {
+    background-color: #9dc3ff;
+    color: #ffffff; 
+  }
+
+  .nav-item:hover{
+    background-color:#9dc3ff ;
+    border-top-right-radius:7px;
+    border-top-left-radius: 7px;
+    color: #000000;
+    margin: 0;    
+    cursor: pointer;
+  }
+
+  #covint_logo{
+    min-width: 150px;
+    max-width: 150px;
+    margin-right: 5%;    
+  }
+  
+  .navbar{
+    padding-bottom: 0;
+    margin-bottom: 5px;
+    display: flex;
+  }
+
+  .nav {
+    list-style-type: none;
+    padding: 0;
+  }
+  
+  .nav-item {
+    position: relative;
+    display: inline-block;
+  }
+  
+  .nav-link {
+    text-decoration: none;
+    color: #000000; 
+    padding: 0;  
+  }
+
+  #datainput{
+    padding: 8px;
+  }
+  
+  .dropdown {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    background-color: white;
+    box-shadow: 0px 2px 5px #848484;
+  }
+  
+  .nav-item:hover .dropdown {
+    display: block;
+  }
+  
+  ul, ol {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+    text-align: center;
+  }
+}

@@ -72,10 +72,10 @@
       </div>
     </div>
 
-    <div class="container3">  
-      <div id="hospdead" style="display: flex;">
-      <div style="margin-right: 30px;">  
-        <div style="margin-bottom: 20px;">
+    <div id="élvagyhal" class="container3">  
+      <div id="hospdead">
+      <div >  
+        <div >
           <label class="text">Kórházba került  <s>*</s></label>
         </div>
         <div>
@@ -90,7 +90,7 @@
         </div>
       </div> 
       <div id="dead">
-        <div style="margin-bottom: 20px;">
+        <div >
           <label class="text">Elhunyt <s>*</s></label>
         </div>
         <div>
@@ -113,7 +113,7 @@
     <div class="content2" style="margin-top: 60px;">
       <ng-container *ngIf="case.Illnesses && case.Illnesses.length > 0; else noMarkers">
         <p class="markerbno2">Markerek</p>
-        <div style="max-height: 265px; overflow-y: auto; min-width: 700px; margin-left: 100px; margin-bottom: 60px;">
+        <div id="marker">
           <div *ngFor="let illness of case.Illnesses; let i = index" style="border-bottom: solid 3px #b8b8b8a6; display: flex; align-items: center; padding-bottom: 5px; margin-top: 5px;">
             <div style="flex-grow: 1;">
               <p style="margin: 0;">{{ illness }}</p>
@@ -135,7 +135,7 @@
     <div class="content2">
       <ng-container *ngIf="case.BnoCodes && case.BnoCodes.length > 0; else noBnos">
         <p class="markerbno2">BNO Kódok</p>
-        <div style="max-height: 265px; overflow-y: auto; min-width: 700px; margin-left: 100px; margin-bottom: 60px;">
+        <div id="marker" >
           <div *ngFor="let bno of case.BnoCodes; let i = index" style="border-bottom: solid 3px #b8b8b8a6; display: flex; align-items: center; padding-bottom: 5px; margin-top: 5px;">
             <div style="flex-grow: 1;">
               <p style="margin: 0;">{{ bno }}</p>

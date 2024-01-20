@@ -5,26 +5,26 @@
     <ul class="navbar-nav mr-auto" *ngIf="loginService.isLoggedIn()">
       
       <li class="nav-item" routerLinkActive="active">
-        <a href="/home" class="nav-link"  routerLink="home">Kezdőlap</a>
+        <a href="/home" id="home" class="nav-link"  routerLink="home">Kezdőlap</a>
       </li>
       
       <li class="nav-item" routerLinkActive="active" *ngIf="loginService.hasAnyGroup([orvos,portaladmin, portalvezeto, kutatoorvos])">
-        <a href="/datainput" class="nav-link"    routerLink="datainput">Adatbevitel</a>
+        <a href="/datainput" id="datainput" class="nav-link"    routerLink="datainput">Adatbevitel</a>
       </li>
       
       <li class="nav-item"  routerLinkActive="active">
-        <a href="/export" class="nav-link"  routerLink="export">Export</a>
+        <a href="/export" id="export" class="nav-link"  routerLink="export">Export</a>
       </li>
       
       <li class="nav-item"  routerLinkActive="active">
-        <a href="/diagram" class="nav-link"  routerLink="diagram">Diagramok</a>
+        <a href="/diagram" id="diagram" class="nav-link"  routerLink="diagram">Diagramok</a>
       </li>
       
 
       <nav>
         <ul class="nav"  *ngIf="loginService.hasAnyGroup([portaladmin, portalvezeto, kutatoorvos])" >
           <li class="nav-item" routerLinkActive="active">
-            <a class="nav-link">Markerek kezelése</a>
+            <a class="nav-link" id="marker">Markerek kezelése</a>
             <ul class="dropdown">
               <li><p class="nav-link" [routerLink]="['/addnewillness']" routerLinkActive="active">Új betegség hozzáadása</p></li>
               <li><p class="nav-link" [routerLink]="['/filterablemarkers']" routerLinkActive="active">Marker szűrhető-e</p></li>
@@ -37,19 +37,19 @@
       
 
       <li class="nav-item" routerLinkActive="active" *ngIf="loginService.hasAnyGroup([portaladmin, portalvezeto, kutatoorvos])" >
-        <a href="/auditlog" class="nav-link"   routerLink="auditlog">AuditLog</a>
+        <a href="/auditlog" id="auditlog" class="nav-link"   routerLink="auditlog">AuditLog</a>
       </li>
       <li class="nav-item" routerLinkActive="active" *ngIf="loginService.hasAnyGroup([portaladmin, portalvezeto, kutatoorvos])" >
-        <a href="/form" class="nav-link"   routerLink="form">Form</a>
+        <a href="/form" id="form" class="nav-link"   routerLink="form">Form</a>
       </li>
       <li class="nav-item" routerLinkActive="active" *ngIf="loginService.hasAnyGroup([portaladmin, portalvezeto, kutatoorvos])" >
-        <a href="/email-template" class="nav-link"   routerLink="email-template">Email template</a>
+        <a href="/email-template" id="email" class="nav-link"   routerLink="email-template">Email template</a>
       </li>
 
       <nav>
         <ul class="nav" *ngIf="loginService.hasAnyGroup([portaladmin, portalvezeto, kutatoorvos])">
           <li class="nav-item" routerLinkActive="active">
-            <a class="nav-link" >Felhasználók kezelése</a>
+            <a class="nav-link" id="profil" >Felhasználók kezelése</a>
             <ul class="dropdown">
               <li><p class="nav-link" [routerLink]="['/addnewuser']" routerLinkActive="active">Új felhasználó hozzáadása</p></li>
               <li><p class="nav-link" [routerLink]="['/acceptnewuser']" routerLinkActive="active">Új felhasználó elfogadása</p></li>
@@ -69,7 +69,7 @@
       </li> 
 
       <li class="nav-item" routerLinkActive="active">
-        <a type="button" class="nav-link" (click)="this.loginService.login()">Bejelentkezés</a>
+        <a type="button" id="login" class="nav-link" (click)="this.loginService.login()">Bejelentkezés</a>
       </li>  
     
     </ul>
@@ -81,10 +81,10 @@
       </li>
      
       <li class="nav-item" routerLinkActive="active">
-        <a [routerLink]="" class="nav-link" (click)="getUserAttributes()">Profil</a>
+        <a [routerLink]=""  class="nav-link" (click)="getUserAttributes()">Profil</a>
       </li>
       <li class="nav-item" routerLinkActive="active">
-        <a [routerLink]="" class="nav-link" (click)="logout()">Kijelentkezés</a>
+        <a [routerLink]="" id="logout" class="nav-link" (click)="logout()">Kijelentkezés</a>
       </li>    
     
     </ul>

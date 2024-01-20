@@ -16,3 +16,22 @@
     display: flex;
     
 }
+
+@media (max-width: 1400px){
+    #covint_logo{
+        display: none;
+    }
+
+    .container{
+        
+        padding-right: 0;
+    }
+
+    .covinttext{
+        width: 100%;
+        flex: 1;
+        margin: 10px;
+    }
+}
+
+
