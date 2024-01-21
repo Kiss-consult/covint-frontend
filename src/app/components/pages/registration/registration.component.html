@@ -1,90 +1,98 @@
-<h1>Új felhasználó regisztrálása</h1>  
+<h1>Új felhasználó regisztrálása</h1>
 
-  
 
-<div class="container">  
+
+<div class="container">
 
   <h3><button id="backbutton" (click)="goBackToPrevPage()">&#11148;</button></h3>
   <!--<form (ngSubmit)="onRegister()"> -->
-  <div class="container2" >
-  
+  <div class="container2">
+
     <div class="form-group">
       <div class="tab-button">Regisztrációs adatok</div>
 
       <div class="form-group2">
         <div>
           <label class="text" for="email">E-mail cím <s>*</s></label>
-        
-          <input class="droptextbox" type="email" id="email" name="email" [(ngModel)]="user.Email" placeholder="covint@covint.com" title="Kérem töltse ki a mezőt">
+
+          <input class="droptextbox" type="email" id="email" name="email" [(ngModel)]="user.Email"
+            placeholder="covint@covint.com" title="Kérem töltse ki a mezőt">
 
         </div>
       </div>
-  
+
       <div class="form-group2">
         <div>
           <label class="text" for="password">Jelszó <s>*</s></label>
-        
-          <input class="droptextbox" type="password" id="password" name="password" [(ngModel)]="user.Password" required placeholder="jelszo12345" title="Kérem töltse ki a mezőt">
+
+          <input class="droptextbox" type="password" id="password" name="password" [(ngModel)]="user.Password" required
+            placeholder="jelszo12345" title="Kérem töltse ki a mezőt">
         </div>
       </div>
-  
+
       <div class="form-group2">
         <div>
           <label class="text" for="password2">Jelszó ismét <s>*</s></label>
-        
-          <input class="droptextbox" type="password" id="password2" name="password2" [(ngModel)]="password2" required required placeholder="jelszo12345" title="Kérem töltse ki a mezőt">
+
+          <input class="droptextbox" type="password" id="password2" name="password2" [(ngModel)]="password2" required
+            required placeholder="jelszo12345" title="Kérem töltse ki a mezőt">
         </div>
       </div>
 
 
     </div>
-  
-    <div class="form-group" >
-      
+
+    <div class="form-group">
+
       <div class="tab-button">Személyes adatok</div>
 
-      <div class="form-group2" >
+      <div class="form-group2">
         <div>
           <label class="text" for="title">Előtag</label>
-       
-          <input class="droptextbox" type="text" id="title" name="title" [(ngModel)]="user.Title" required placeholder="Dr" title="Kérem töltse ki a mezőt">
+
+          <input class="droptextbox" type="text" id="title" name="title" [(ngModel)]="user.Title" required
+            placeholder="Dr" title="Kérem töltse ki a mezőt">
         </div>
       </div>
-  
+
       <div class="form-group2">
         <div>
           <label class="text" for="lastname">Vezetéknév <s>*</s></label>
-        
-          <input class="droptextbox" type="text" id="lastname" name="lastname" [(ngModel)]="user.LastName" required placeholder="Covint" title="Kérem töltse ki a mezőt">
+
+          <input class="droptextbox" type="text" id="lastname" name="lastname" [(ngModel)]="user.LastName" required
+            placeholder="Covint" title="Kérem töltse ki a mezőt">
         </div>
       </div>
 
       <div class="form-group2">
         <div>
           <label class="text" for="firstname">Keresztnév <s>*</s></label>
-        
-          <input class="droptextbox" type="text" id="firstname" name="firstname" [(ngModel)]="user.FirstName" required placeholder="János" title="Kérem töltse ki a mezőt">
+
+          <input class="droptextbox" type="text" id="firstname" name="firstname" [(ngModel)]="user.FirstName" required
+            placeholder="János" title="Kérem töltse ki a mezőt">
         </div>
       </div>
-  
+
       <div class="form-group2">
         <div>
           <label class="text" for="stampnumber">Pecsét száma <s>*</s></label>
-        
-          <input class="droptextbox" type="text" id="stampnumber" name="stampnumber" [(ngModel)]="user.SealNumber" required placeholder="???" title="Kérem töltse ki a mezőt">
+
+          <input class="droptextbox" type="text" id="stampnumber" name="stampnumber" [(ngModel)]="user.SealNumber"
+            required placeholder="???" title="Kérem töltse ki a mezőt">
         </div>
       </div>
-  
+
       <div class="form-group2">
         <div>
           <label class="text" for="telephone">Telefonszám <s>*</s></label>
-        
-          <input class="droptextbox" type="text" id="telephone" name="telephone" [(ngModel)]="user.Phone" required placeholder="???" title="Kérem töltse ki a mezőt">
+
+          <input class="droptextbox" type="text" id="telephone" name="telephone" [(ngModel)]="user.Phone" required
+            placeholder="???" title="Kérem töltse ki a mezőt">
         </div>
       </div>
-    
+
     </div>
-<!--
+    <!--
     <div>
 
       <p>Select Your Gender:</p>
@@ -99,100 +107,119 @@
       </form>
     
     </div> -->
-    
+
     <div class="form-group">
-      
+
       <div class="tab-button">Intézmény/Cég címe</div>
 
-      <div id="intmez" class="form-group2" >
+      <div id="intmez" class="form-group2">
         <div>
           <label for="institution">Intézményben dolgozom</label>
-          <input type="radio" id="intezmenybutton" name="intezmenyOrCeg" (click)="toggleContent('intezmeny')" title="Kérem válasszon">
+          <input type="radio" id="intezmenybutton" name="intezmenyOrCeg" (click)="toggleContent('intezmeny')"
+            title="Kérem válasszon">
         </div>
       </div>
 
-      <div id="ceg" class="form-group2" >
+      <div id="ceg" class="form-group2">
         <div>
           <label for="institution">Cég tulajdonos/Háziorvos vagyok </label>
-          <input type="radio" id="cegbutton" name="intezmenyOrCeg" (click)="toggleContent('ceg')" title="Kérem válasszon">
+          <input type="radio" id="cegbutton" name="intezmenyOrCeg" (click)="toggleContent('ceg')"
+            title="Kérem válasszon">
         </div>
       </div>
-      
-                                                           
-      
+
+
+
       <div class="form-group2" *ngIf="intezmenyActive">
         <div>
           <label class="text" for="institution">Intézmény neve <s>*</s></label>
-        
-          <input class="droptextbox" type="text" id="institution" name="institution" [(ngModel)]="user.InstitutionName" placeholder="???" title="Kérem töltse ki a mezőt">
+
+          <input class="droptextbox" type="text" id="institution" name="institution" [(ngModel)]="user.InstitutionName"
+            placeholder="???" title="Kérem töltse ki a mezőt">
         </div>
       </div>
-  
+
       <div class="form-group2" *ngIf="intezmenyActive">
         <div>
           <label class="text" for="department">Osztály</label>
-        
-          <input class="droptextbox" type="text" id="department" name="department" [(ngModel)]="user.InstitutionDepartment" placeholder="???" title="Kérem töltse ki a mezőt">
+
+          <input class="droptextbox" type="text" id="department" name="department"
+            [(ngModel)]="user.InstitutionDepartment" placeholder="???" title="Kérem töltse ki a mezőt">
         </div>
-      </div>      
-      
-      
+      </div>
+
+
 
       <div class="form-group2" *ngIf="cegActive">
         <div>
           <label class="text" for="company">Cég neve <s>*</s></label>
-        
-          <input class="droptextbox" type="text" id="company" name="company" [(ngModel)]="user.CompanyName" placeholder="???" title="Kérem töltse ki a mezőt">
-        </div>
-       
-      </div>
-    
 
-      
+          <input class="droptextbox" type="text" id="company" name="company" [(ngModel)]="user.CompanyName"
+            placeholder="???" title="Kérem töltse ki a mezőt">
+        </div>
+
+      </div>
+
+
+
       <div class="form-group2" s>
-       <div>
+        <div>
           <label class="text" for="site">Város <s>*</s></label>
-         
-          <input class="droptextbox" type="text" id="city" name="city" [(ngModel)]="site.City" required placeholder="Budapest" title="Kérem töltse ki a mezőt">
+
+          <input class="droptextbox" type="text" id="city" name="city" [(ngModel)]="site.City" required
+            placeholder="Budapest" title="Kérem töltse ki a mezőt">
         </div>
       </div>
-      
+
       <div class="form-group2">
         <div>
           <label class="text" for="postcode">Irányítószám <s>*</s></label>
-        
-          <input class="droptextbox" type="number" id="postcode" name="postcode" [(ngModel)]="site.PostCode" required placeholder="1007" title="Kérem töltse ki a mezőt">
+
+          <input class="droptextbox" type="number" id="postcode" name="postcode" [(ngModel)]="site.PostCode" required
+            placeholder="1007" title="Kérem töltse ki a mezőt">
         </div>
-      </div>  
-  
+      </div>
+
       <div class="form-group2">
         <div>
           <label class="text" for="street">Utca ( közterület) neve <s>*</s></label>
-        
-          <input class="droptextbox" type="text" id="street" name="street" [(ngModel)]="site.Street" required placeholder="???" title="Kérem töltse ki a mezőt">
+
+          <input class="droptextbox" type="text" id="street" name="street" [(ngModel)]="site.Street" required
+            placeholder="???" title="Kérem töltse ki a mezőt">
         </div>
       </div>
 
       <div class="form-group2">
         <div>
           <label class="text" for="housenumber">Házszám <s>*</s></label>
-        
-          <input class="droptextbox" type="number" id="postcode" name="postcode" [(ngModel)]="site.HouseNumber" required placeholder="34" title="Kérem töltse ki a mezőt">
+
+          <input class="droptextbox" type="number" id="postcode" name="postcode" [(ngModel)]="site.HouseNumber" required
+            placeholder="34" title="Kérem töltse ki a mezőt">
         </div>
-      </div> 
+      </div>
 
     </div>
-  </div> 
+  </div>
 
-  <div style="text-align: center; position: relative; z-index: 1; display: flex; flex-direction: column; align-items: center; margin-bottom: 20px; margin-top: 0;">   
+  <div
+    style="text-align: center; position: relative; z-index: 1; display: flex; flex-direction: column; align-items: center; margin-bottom: 20px; margin-top: 0;">
     <button id="okebutton" (click)="finish()" style="z-index: 2; position: relative;">
-        Kész
+      Kész
     </button>
-    <div style="position: absolute; bottom: 0; width: 50%; z-index: 1; text-align: center;">
-        <hr style="margin-top: 10px; width: 100%; height: 1px; background-color: #0080ff; box-shadow:0px 1px 0px #848484;">
+
+
+    <div *ngIf="tokenVisible">  <br />
+      <p style="color: red">reCAPTCHA Token OK</p>
     </div>
-</div> 
-    <footer>   
-      <p>A "*" -al jelölt mezők kitöltése kötelező !</p>
-    </footer>
-</div> 
+   
+
+
+    <div style="position: absolute; bottom: 0; width: 50%; z-index: 1; text-align: center;">
+      <hr
+        style="margin-top: 10px; width: 100%; height: 1px; background-color: #0080ff; box-shadow:0px 1px 0px #848484;">
+    </div>
+  </div>
+  <footer>
+    <p>A "*" -al jelölt mezők kitöltése kötelező !</p>
+  </footer>
+</div>

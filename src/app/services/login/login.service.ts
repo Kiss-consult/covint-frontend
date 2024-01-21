@@ -133,6 +133,7 @@ export class LoginService {
 
   // This function inserts the new user into the Auth.
   public insertNewUser(user_: User,): Observable<Result<{}>> {
+    
     const url = this.url + "/registration";
     return this.httpClient.post<Result<{}>>(url, user_).pipe(
       map(result => fromJSON<{}>(JSON.stringify(result))),

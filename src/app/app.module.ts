@@ -50,7 +50,8 @@ import { UpdateuserComponent } from './components/pages/updateuser/updateuser.co
 import { ChangepwdbyadminComponent } from './components/pages/changepwdbyadmin/changepwdbyadmin.component';
 import { SafePipe } from './pipes/Safepipe';
 
-
+import { RecaptchaV3Module, RECAPTCHA_V3_SITE_KEY } from 'ng-recaptcha';
+import { environment } from 'src/enviroments/enviroment';
 
 
 @NgModule({
@@ -81,6 +82,7 @@ import { SafePipe } from './pipes/Safepipe';
     UpdateuserComponent,
     ChangepwdbyadminComponent,
     SafePipe,
+   
   ],
   imports: [
     BrowserModule,
@@ -98,7 +100,8 @@ import { SafePipe } from './pipes/Safepipe';
     ColorPickerModule,
     BrowserAnimationsModule,
     FormsModule,
-    NgSelectModule
+    NgSelectModule,
+    RecaptchaV3Module
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   providers: [
@@ -120,6 +123,10 @@ import { SafePipe } from './pipes/Safepipe';
       useFactory: initializeApp,
       multi: true,
       deps: [KeycloakService, ConfigService],
+    },
+    {
+      provide: RECAPTCHA_V3_SITE_KEY,
+      useValue: environment.recaptcha.siteKey,
     },
     SafePipe
   ],

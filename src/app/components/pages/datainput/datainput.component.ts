@@ -4,6 +4,8 @@ import { Illness } from 'src/app/models/illness/illness';
 import { Location } from '@angular/common'
 import { BackendService } from 'src/app/services/backend/backend.service';
 
+import { ReCaptchaV3Service } from 'ng-recaptcha';
+
 @Component({
   selector: 'app-datainput',
   templateUrl: './datainput.component.html',
@@ -19,10 +21,13 @@ export class DatainputComponent {
   markers: string[] = [];
   // This is only stored for faster access to the illnesses by BNO code
   illnessesByBno: Map<string, Illness> = new Map();
+
+  reCAPTCHAToken: string = "";
+  tokenVisible: boolean = false;
   goBackToPrevPage(): void {
     this.location.back();
   }
-  constructor(private backendService: BackendService,private location: Location) {
+  constructor(private backendService: BackendService,private location: Location,private recaptchaV3Service: ReCaptchaV3Service) {
     // query all the illnesses formn the database
     this.backendService.getMarkers().subscribe(
       result => {
@@ -148,6 +153,16 @@ export class DatainputComponent {
     if (!this.checkRequiredFields()) {
       return;
     }
+
+    this.recaptchaV3Service.execute('importantAction').subscribe((token: string) => {
+
+
+      this.tokenVisible = true;
+      this.reCAPTCHAToken = `Token [${token}] generated`;
+      console.log("rechapta ", token )
+      console.log("rechapta ", )
+
+
     this.case.Date = this.formatDate(new Date());
     console.log(this.case);
     this.backendService.insertValidated(this.case).subscribe(
@@ -162,4 +177,6 @@ export class DatainputComponent {
         this.case = new Case();
       });
   }
+  );
+}
 }
