@@ -6,6 +6,9 @@ import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angula
 import { Router } from '@angular/router';
 import { Location } from '@angular/common';
 
+
+import { ReCaptchaV3Service } from 'ng-recaptcha';
+
 @Component({
   selector: 'app-registration',
   templateUrl: './registration.component.html',
@@ -21,7 +24,8 @@ export class RegistrationComponent {
   password2: string = "";
   // Declare the form group
   genderForm: FormGroup;
-
+  reCAPTCHAToken: string = "";
+  tokenVisible: boolean = false;
   toggleContent(contentType: string) {
     if (contentType === 'ceg') {
       this.cegActive = true;
@@ -40,12 +44,15 @@ export class RegistrationComponent {
   goBackToPrevPage(): void {
     this.location.back();
   }
-  constructor(private loginService: LoginService, private fb: FormBuilder, private router: Router,private location: Location) {
+  constructor(private loginService: LoginService, private fb: FormBuilder, private router: Router, private location: Location, private recaptchaV3Service: ReCaptchaV3Service) {
     // this.user.IsCompany = false;
     //console.log("Iscompany start:", this.user.IsCompany)
     this.genderForm = this.fb.group({
       'gender': ['', Validators.required]
     });
+
+
+
   }
   /*
     public getSelectedGender() {
@@ -68,42 +75,61 @@ export class RegistrationComponent {
     if (!this.checkRequiredFields()) {
       return;
     }
-    console.log("before finish is company", this.user.IsCompany)
-    console.log("before finish user", this.user)
-    this.user.Site = this.site;
-    this.loginService.insertNewUser(this.user).subscribe(
-      result => {
-        if (result.isErr()) {
+
+    this.recaptchaV3Service.execute('importantAction').subscribe((token: string) => {
+
+      this.tokenVisible = true;
+      this.reCAPTCHAToken = `Token [${token}] generated`;
+      console.log("rechapta ", token)
+      console.log("rechapta ", )
+
+      console.log("before finish is company", this.user.IsCompany)
+      console.log("before finish user", this.user)
+      this.user.Site = this.site;
+
+      this.loginService.insertNewUser(this.user).subscribe(
+        result => {
+          if (result.isErr()) {
+  
+  
+            console.error(result.unwrapErr());
+            console.log(result.unwrapErr());
+  
+            let mess = result.unwrapErr().error.Error;
+            if (mess === "error creating user: 409 Conflict: User exists with same username") {
+              alert("Sikertelen regisztráció! \nEzzel a felhasználó névvel már regisztráltak korábban!")
+              console.log("már regisztártak ezzel a névvel")
+            }
+            if (mess === "Phone number must start with +36 or 06") {
+              alert("Sikertelen regisztráció! \nA telefonszám formátuma +36.... vagy  06....    ")
+              console.log("rossz telefonszám")
+            }
+            if (mess === "error creating user: 400 Bad Request: Password policy not met") {
+              alert("Sikertelen regisztráció! \nA jeszó minimum 8 karakter és tartalmaznia kell:  \nkis és nagy betűt, számot és extra karatert! ")
+              console.log("rossz jelszó")
+            }
+            //"Phone number must start with +36 or 06"
+            //alert("sikertelen regisztráció ");
+  
+            return;
+          }
+          alert("Sikeres regisztráció!\nRegisztrációját rögzítettük!\nA regisztrációját ellenőrzés után 3 napon belül elfogadjuk,\namiről emailt küldünk.\nTürelmét köszönjük! ");
+          console.log("Successfully inserted into database")
+          this.router.navigate(['/home']);
+          this.site = new Site();
+          this.user = new User();
+        });
 
 
-          console.error(result.unwrapErr());
-          console.log(result.unwrapErr());
 
-          let mess = result.unwrapErr().error.Error;
-          if (mess === "error creating user: 409 Conflict: User exists with same username") {
-            alert("Sikertelen regisztráció! \nEzzel a felhasználó névvel már regisztráltak korábban!")
-            console.log("már regisztártak ezzel a névvel")
-          }
-          if (mess === "Phone number must start with +36 or 06") {
-            alert("Sikertelen regisztráció! \nA telefonszám formátuma +36.... vagy  06....    ")
-            console.log("rossz telefonszám")
-          }
-          if (mess === "error creating user: 400 Bad Request: Password policy not met") {
-            alert("Sikertelen regisztráció! \nA jeszó minimum 8 karakter és tartalmaznia kell:  \nkis és nagy betűt, számot és extra karatert! ")
-            console.log("rossz jelszó")
-          }
-          //"Phone number must start with +36 or 06"
-          //alert("sikertelen regisztráció ");
-         
-          return;
-        }
-        alert("Sikeres regisztráció!\nRegisztrációját rögzítettük!\nA regisztrációját ellenőrzés után 3 napon belül elfogadjuk,\namiről emailt küldünk.\nTürelmét köszönjük! ");
-        console.log("Successfully inserted into database")
-        this.router.navigate(['/home']);
-        this.site = new Site();
-        this.user = new User();
-      });
+    }
+   );
+      
+
+        
   }
+
+
   public change(signal: boolean) {
     // if (!this.checkRequiredFields()) {
     //  return;

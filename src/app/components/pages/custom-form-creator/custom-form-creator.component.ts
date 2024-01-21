@@ -302,7 +302,10 @@ sendFormToBackend() {
     next: (result: any) => {
       // Directly access the 'value' property of the result
       if (result && result.value) {
-        this.displayResponse = `URL: ${result.value.Url}\n\nIframe:\n${result.value.Iframe}`;
+
+       // this.displayResponse = `URL: ${result.value.Url}\n\nIframe:\n${result.value.Iframe}`;
+        this.displayResponse = `Iframe:\n${result.value.Iframe}`;
+        window.open(result.value.Url); 
       } else {
         // Handle the case where the result is not in the expected format
         console.error('Unexpected response format', result);
