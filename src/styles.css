@@ -208,5 +208,82 @@ footer {
 
 }
 
+@media (max-width: 500px){
+
+    html, body{
+        background-color: white;
+    }
+
+    h1{
+        top: 99px;
+        text-align: center;
+        padding-left: 0;
+        position: fixed;
+    }
+
+    h2{
+        top:172px;
+        padding-left: 0%;
+        justify-content: center;
+        text-align: center;
+        position: fixed;
+    }
+
+    h3{
+        display: none;
+    }
+
+
+    
+    .container{
+        padding-left:0px;
+        margin-top: 100px;
+        position: relative;
+    }    
+
+    #emailprofil{
+        font-size: 1rem;
+        color: rgb(0, 0, 0);
+        position:absolute;
+        top: 68px;
+        right: 7px;
+    }
+
+    #backbutton {
+        display:none;
+      }
+
+    #home{
+    display: none;
+    }
+
+    #export{
+        display: none;
+    }
+
+    #diagram{
+        display: none;
+    }
+
+    #auditlog{
+        display: none;
+    }
+
+    #form{
+        display: none;
+    }
+
+    #email{
+        display: none;
+    }
+
+    #marker{
+        display: none;
+    }
+
+    #profil{
+        display: none;
+    }
+}
 
 

@@ -42,6 +42,7 @@
     margin-top: 60px;
     padding-right: 60px;
     padding-left: 60px;
+    z-index: 0;
 }
 
 #trueDead{
@@ -88,6 +89,14 @@
     margin-left: 30px;
 }
 
+#marker{
+    max-height: 265px; 
+    overflow-y: auto; 
+    min-width: 700px; 
+    margin-left: 100px; 
+    margin-bottom: 60px;
+}
+
 @media (max-width: 1200px){
     #markerbnoclass{
         text-align: left;
@@ -106,5 +115,55 @@
 
     #dead{
         margin-left: 0;
+    }
+}
+
+@media (max-width: 500px){
+    
+    .container{        
+        padding: 0;
+        position: relative;
+    }
+
+    .container2{
+        display: flex;
+        flex-direction: column;                
+        justify-content: space-between;  
+        padding-top: 0;  
+        padding-left: 0;  
+        padding-right: 0;         
+    }
+
+    .container3{
+        padding-bottom: 0;
+        padding-top: 40px;
+    }
+
+    #hospdead{
+        display: flex;
+        justify-content: center;
+        text-align: center;
+    }
+
+    .droptextbox{
+        margin-right: 0;        
+    }
+
+    #trueHosp{
+        margin-top: 20px;
+    }
+
+    #falseHosp{
+        margin-bottom: 40px;
+    }
+
+    #trueDead{
+        margin-top: 20px;
+    }
+
+
+    .content2{
+        padding-left: 10px;
+        padding-right: 10px;
     }
 }
