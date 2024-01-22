@@ -3,5 +3,7 @@
     "AuthUrl": "${AUTH_URL}",
     "KeycloakUrl": "${KEYCLOAK_URL}",
     "OpensearchDashboardUrlDoctor": "${OPENSEARCH_DASHBOARD_URL_DOCTOR}",
-    "OpensearchDashboardUrlResearcher": "${OPENSEARCH_DASHBOARD_URL_RESEARCHER}"
+    "OpensearchDashboardUrlResearcher": "${OPENSEARCH_DASHBOARD_URL_RESEARCHER}",
+    "CaptchaKey": "${CAPTCHA_KEY}",
+    "TelcoUrl": "${TELCO_URL}"
 }

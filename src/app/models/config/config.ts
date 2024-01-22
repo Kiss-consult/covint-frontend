@@ -4,4 +4,6 @@ export class Config {
     KeycloakUrl: string = "";
     OpensearchDashboardUrlDoctor: string = "";
     OpensearchDashboardUrlResearcher: string = "";
+    CaptchaKey: string = "";
+    TelcoUrl: string = "";
 }

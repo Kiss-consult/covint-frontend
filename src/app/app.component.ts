@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { LoginService } from './services/login/login.service';
 import { KutatoOrvos, Orvos, PortalKezelo, PortalVezeto } from 'src/app/models/group/group';
 import { KeycloakService } from 'keycloak-angular';
+import { ConfigService } from './services/config/config.service';
 
 
 @Component({
@@ -19,7 +20,7 @@ export class AppComponent {
   portalvezeto = PortalVezeto;
   isMenuOpen = false;
 
-  constructor(public loginService: LoginService, private router: Router) { }
+  constructor(public loginService: LoginService, private router: Router, private configService: ConfigService) { }
 
   logout() {
     this.loginService.logout();
@@ -39,7 +40,7 @@ export class AppComponent {
   }
   gotoTelco() {
    
-    window.open("https://www.w3schools.com");
+    window.open(this.configService.config.TelcoUrl);
   }
   /*
     ngOnInit(): void {

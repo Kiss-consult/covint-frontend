@@ -44,7 +44,7 @@ import { PercentoverwriteComponent } from './components/pages/percentoverwrite/p
 import { ProfileComponent } from './components/pages/profile/profile.component';
 import { OverrideuserComponent } from './components/pages/overrideuser/overrideuser.component';
 import { EmailTemplateComponent } from './components/pages/email-template/email-template.component';
-import { initializeApp } from './init/init';
+import { initCaptcha, initializeApp } from './init/init';
 import { KeycloakAngularModule, KeycloakService } from 'keycloak-angular';
 import { UpdateuserComponent } from './components/pages/updateuser/updateuser.component';
 import { ChangepwdbyadminComponent } from './components/pages/changepwdbyadmin/changepwdbyadmin.component';
@@ -126,7 +126,8 @@ import { environment } from 'src/enviroments/enviroment';
     },
     {
       provide: RECAPTCHA_V3_SITE_KEY,
-      useValue: environment.recaptcha.siteKey,
+      useFactory: initCaptcha,
+      deps: [ConfigService],
     },
     SafePipe
   ],

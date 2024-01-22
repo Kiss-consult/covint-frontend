@@ -38,6 +38,10 @@ export function initializeApp(keycloakService: KeycloakService, configService: C
   });
 }
 
+export function initCaptcha(configService: ConfigService) {
+  return configService.config.CaptchaKey;
+}
+
 
 function initConfig(config: ConfigService): () => Observable<void> {
   return () => config.load();
