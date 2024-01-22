@@ -26,6 +26,7 @@ import { EmailTemplateComponent } from './components/pages/email-template/email-
 import { AuthGuard } from './guard/auth.guard';
 import { UpdateuserComponent } from './components/pages/updateuser/updateuser.component';
 import { ChangepwdbyadminComponent } from './components/pages/changepwdbyadmin/changepwdbyadmin.component';
+import { DictionaryComponent } from './components/pages/dictionary/dictionary.component';
 
 
 const routes: Routes = [
@@ -57,6 +58,7 @@ const routes: Routes = [
   { path: "profile", component: ProfileComponent, canActivate: [AuthGuard] , data: { roles: [Orvos, PortalKezelo, KutatoOrvos, PortalVezeto] }  },
   { path: "overrideuser", component: OverrideuserComponent, canActivate: [AuthGuard] , data: { roles: [ PortalKezelo, KutatoOrvos, PortalVezeto] }  },
   { path: "email-template", component: EmailTemplateComponent , canActivate: [AuthGuard] , data: { roles: [ PortalKezelo, KutatoOrvos, PortalVezeto] } },
+  { path: "dictionary", component: DictionaryComponent , canActivate: [AuthGuard] , data: { roles: [ PortalKezelo, KutatoOrvos, PortalVezeto] } },
   { path: "updateuser/:userdata.id", component: UpdateuserComponent, canActivate: [AuthGuard] , data: { roles: [ PortalKezelo, KutatoOrvos, PortalVezeto] }  },// 'product/:id 
   { path: "changepwdbyadmin/:userdata.id", component: ChangepwdbyadminComponent , canActivate: [AuthGuard] , data: { roles: [ PortalKezelo, KutatoOrvos, PortalVezeto] } }
 ];
