@@ -37,7 +37,10 @@ export class AppComponent {
   toggleMenu() {
     this.isMenuOpen = !this.isMenuOpen;
   }
-
+  gotoTelco() {
+   
+    window.open("https://www.w3schools.com");
+  }
   /*
     ngOnInit(): void {
       const groups = [PortalAdmin, KutatoOrvos, PortalVezeto];
