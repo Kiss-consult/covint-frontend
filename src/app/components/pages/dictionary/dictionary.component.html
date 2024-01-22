@@ -1,61 +1,39 @@
 <p>dictionary works!</p>
-<ng-template #alternateContent>
-    <!-- Itt jelenjen meg az alapértelmezett tartalom, mivel be vagy jelentkezve a felhasználó -->
-    <h1>A COVINT ha nem vagy bejelentkezve</h1>
-    <!-- Alapértelmezett tartalom részei itt -->
-  </ng-template>
 
-  <ng-container >
-  
+
+<ng-container>
+
 
     <h1>A COVINT</h1>
-    
-      <h2>A projekt célja</h2>
-    
+
+    <h2>A projekt célja</h2>
+
     <div class="container">
-        
-        <div class="covinttext">
-            <h2>HTML Table</h2>
+
+       
+            <h2>Email megerősítés</h2>
 
             <table>
-              <tr>
-                <th>Company</th>
-                <th>Contact</th>
-                <th>Country</th>
-              </tr>
-              <tr>
-                <td>Alfreds Futterkiste</td>
-                <td>Maria Anders</td>
-                <td>Germany</td>
-              </tr>
-              <tr>
-                <td>Centro comercial Moctezuma</td>
-                <td>Francisco Chang</td>
-                <td>Mexico</td>
-              </tr>
-              <tr>
-                <td>Ernst Handel</td>
-                <td>Roland Mendel</td>
-                <td>Austria</td>
-              </tr>
-              <tr>
-                <td>Island Trading</td>
-                <td>Helen Bennett</td>
-                <td>UK</td>
-              </tr>
-              <tr>
-                <td>Laughing Bacchus Winecellars</td>
-                <td>Yoshi Tannamuri</td>
-                <td>Canada</td>
-              </tr>
-              <tr>
-                <td>Magazzini Alimentari Riuniti</td>
-                <td>Giovanni Rovelli</td>
-                <td>Italy</td>
-              </tr>
+                <tr>
+                    <th>Névy</th>
+                    <th>Hivatkozás</th>
+                    <th>Leírás</th>
+                </tr>
+                <tr>
+                    <td>link</td>
+                    <td>$ "{{ '{' }}" link "{{ '}' }}"</td>
+                    <td>Email cím megerősítő link</td>
+                </tr>
+                <tr>
+                    <td>érvényességi idő</td>
+                    <td>$ "{{ '{' }}" linkExpiration "{{ '}' }}"</td>
+                    <td>Időtartam amíg a link érvényes</td>
+                </tr>
             </table>
+
             
-      </div>
+
+       
     </div>
 
- </ng-container>
+</ng-container>
