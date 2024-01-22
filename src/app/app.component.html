@@ -36,9 +36,7 @@
       </nav>
       
 
-      <li class="nav-item" routerLinkActive="active" *ngIf="loginService.hasAnyGroup([portaladmin, portalvezeto, kutatoorvos])" >
-        <a href="/auditlog" id="auditlog" class="nav-link"   routerLink="auditlog">AuditLog</a>
-      </li>
+      
       <li class="nav-item" routerLinkActive="active" *ngIf="loginService.hasAnyGroup([portaladmin, portalvezeto, kutatoorvos])" >
         <a href="/form" id="form" class="nav-link"   routerLink="form">Form</a>
       </li>
@@ -58,6 +56,13 @@
           </li>
         </ul>
       </nav>
+
+      <li class="nav-item" routerLinkActive="active" *ngIf="loginService.hasAnyGroup([portaladmin, portalvezeto, kutatoorvos])" >
+        <a href="/auditlog" id="auditlog" class="nav-link"   routerLink="auditlog">AuditLog</a>
+      </li>
+      <li  class="nav-item" *ngIf="loginService.hasAnyGroup([ portalvezeto])">
+        <button (click)="gotoTelco()">Telco</button>
+     </li>
     </ul>
 
 

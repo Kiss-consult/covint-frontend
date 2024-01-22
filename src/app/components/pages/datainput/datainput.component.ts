@@ -156,7 +156,24 @@ export class DatainputComponent {
 
     this.recaptchaV3Service.execute('importantAction').subscribe((token: string) => {
 
-
+/*
+SubmitA() {
+  this.recaptchaV3Service.execute('login_a1')
+      .pipe(
+        timeoutWith(5000, throwError(new Error('timeout'))),
+      )
+      .subscribe(
+        (token) => {
+          // handle captcha token
+        },
+        (error) => {
+          if (error.message === 'timeout') {
+            // handle timeout
+          }
+        },
+      );
+}
+*/
       this.tokenVisible = true;
       this.reCAPTCHAToken = `Token [${token}] generated`;
       console.log("rechapta ", token )
