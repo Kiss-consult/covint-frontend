@@ -272,7 +272,9 @@ footer {
     #form{
         display: none;
     }
-
+    #telco{
+        display: none;
+    }
     #email{
         display: none;
     }
