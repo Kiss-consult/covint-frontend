@@ -118,6 +118,7 @@ export class RegistrationComponent {
           this.router.navigate(['/home']);
           this.site = new Site();
           this.user = new User();
+          this.tokenVisible = false;
         });
 
 

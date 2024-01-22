@@ -192,6 +192,7 @@ SubmitA() {
         alert("Sikeres adatfeltöltés");
         console.log("Successfully inserted into database")
         this.case = new Case();
+        this.tokenVisible = false;
       });
   }
   );
