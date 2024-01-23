@@ -16,6 +16,12 @@
     display: flex;
     
 }
+.container2{
+    padding-top: 100px;
+    padding-bottom: 100px;
+    display: flex;
+    
+}
 table {
     font-family: arial, sans-serif;
     border-collapse: collapse;
