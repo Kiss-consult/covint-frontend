@@ -28,7 +28,7 @@ export class EmailTemplateComponent {
   goBackToPrevPage(): void {
     this.location.back();
   }
-  constructor( public loginService: LoginService,private location: Location) {
+  constructor( public loginService: LoginService,private location: Location,private router: Router) {
    
     
   }
@@ -173,6 +173,13 @@ export class EmailTemplateComponent {
     
   }
 
+
+
+
+   public gotoDictionary(){
+    this.router.navigate(["/dictionary"]);
+
+   }
   public setSubmit() {
     this.submit= true;
   }

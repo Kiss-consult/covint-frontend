@@ -1,19 +1,19 @@
-import { Component, ViewEncapsulation  } from '@angular/core';
-import { QuestionBase, TextQuestion, YesNoQuestion, MultiSelectQuestion, yesnohospitalQuestion, SexQuestion, RelativeQuestion  } from './form-questions.model';
+import { Component, ViewEncapsulation } from '@angular/core';
+import { QuestionBase, TextQuestion, YesNoQuestion, MultiSelectQuestion, yesnohospitalQuestion, SexQuestion, RelativeQuestion } from './form-questions.model';
 import { CommonModule } from '@angular/common';
 import { CdkDragDrop, CdkDropList, CdkDrag, moveItemInArray } from '@angular/cdk/drag-drop';
 import { ColorPickerModule } from 'ngx-color-picker';
 import { FormsModule } from '@angular/forms';
 import { NgSelectModule } from '@ng-select/ng-select';
-import { BackendService } from 'src/app/services/backend/backend.service'; 
+import { BackendService } from 'src/app/services/backend/backend.service';
 import { Ok } from 'src/app/models/utils/result';
 import { ChangeDetectorRef } from '@angular/core';
-
+import { ReCaptchaV3Service } from 'ng-recaptcha';
 
 @Component({
   selector: 'app-custom-form-creator',
   standalone: true,
-  imports: [CommonModule, FormsModule,ColorPickerModule,NgSelectModule],
+  imports: [CommonModule, FormsModule, ColorPickerModule, NgSelectModule],
   templateUrl: './custom-form-creator.component.html',
   styleUrls: ['./custom-form-creator.component.css'],
   encapsulation: ViewEncapsulation.None,
@@ -29,19 +29,19 @@ export class CustomFormCreatorComponent {
   formName: string = 'Kérdőív';
   displayResponse: string = '';
   showFollowUpQuestion: boolean = false;
-  allIllnessOptions: string[] = [' Egészséges ',' Daganatos betegségek ',' Krónikus vesebetegség ',' Krónikus májbetegség ',' Mentális és viselkedési zavar ',' Hiperlipidémia ',' Immunhiányos állapot ',' Anyagcserezavar ',' Idegrendszeri betegség ',' COPD és emphysema ',' Elhízás ',' Szervátültetés ',' Hasnyálmirigy-gyulladás ',' Cukorbetegség (I. és II. Típus) ',' Immunszuppresszív gyógyszer szedése ',' Súlyos szívbetegség ',' Asztma '];
+  allIllnessOptions: string[] = [' Egészséges ', ' Daganatos betegségek ', ' Krónikus vesebetegség ', ' Krónikus májbetegség ', ' Mentális és viselkedési zavar ', ' Hiperlipidémia ', ' Immunhiányos állapot ', ' Anyagcserezavar ', ' Idegrendszeri betegség ', ' COPD és emphysema ', ' Elhízás ', ' Szervátültetés ', ' Hasnyálmirigy-gyulladás ', ' Cukorbetegség (I. és II. Típus) ', ' Immunszuppresszív gyógyszer szedése ', ' Súlyos szívbetegség ', ' Asztma '];
   // ha kell ide be kell olvasni a markereket
-  selectedOptions: string[] =[];
+  selectedOptions: string[] = [];
 
   availableQuestions: { label: string, type: string, selected: boolean, selectedOptions?: string[] }[] = [
-  { label: 'Kor kérdés', type: 'text', selected: false },
-  { label: 'Covid kérdés', type: 'yesno', selected: false },
-  { label: 'Korház Kérdés', type: 'yesnohospital', selected: false },
-  { label: 'Betegség kérdés', type: 'multiselect', selected: false, selectedOptions: [] },
-  { label: 'Nem kérdés', type: 'sex', selected: false },
-  { label: 'Hozzátartozóként tölti ki a kérdőívet?', type: 'relative', selected: false }
+    { label: 'Kor kérdés', type: 'text', selected: false },
+    { label: 'Covid kérdés', type: 'yesno', selected: false },
+    { label: 'Korház Kérdés', type: 'yesnohospital', selected: false },
+    { label: 'Betegség kérdés', type: 'multiselect', selected: false, selectedOptions: [] },
+    { label: 'Nem kérdés', type: 'sex', selected: false },
+    { label: 'Hozzátartozóként tölti ki a kérdőívet?', type: 'relative', selected: false }
 
-];
+  ];
   location: any;
 
 
@@ -55,67 +55,67 @@ export class CustomFormCreatorComponent {
     }
     this.selectedQuestions = [...this.selectedQuestions];
   }
-  
+
   onOptionsChange(question: any) {
     if (question.type === 'multiselect') {
-        // Find the question in the selectedQuestions array
-        const index = this.selectedQuestions.findIndex(q => q.type === question.type);
+      // Find the question in the selectedQuestions array
+      const index = this.selectedQuestions.findIndex(q => q.type === question.type);
 
-        console.log ('Index:',index)
+      console.log('Index:', index)
 
-        if (index !== -1) {
-            // Update the existing question's selectedOptions directly
-            (this.selectedQuestions[index] as MultiSelectQuestion).selectedOptions = question.selectedOptions
-            console.log ('Index:',index)
-        } else {
-            // If the question is not found, it's a new selection, so add it
-            // Use the existing question object as it already has a generated ID
-            this.selectedQuestions.push(question);
-            console.log ('Index:',index)
-        }
+      if (index !== -1) {
+        // Update the existing question's selectedOptions directly
+        (this.selectedQuestions[index] as MultiSelectQuestion).selectedOptions = question.selectedOptions
+        console.log('Index:', index)
+      } else {
+        // If the question is not found, it's a new selection, so add it
+        // Use the existing question object as it already has a generated ID
+        this.selectedQuestions.push(question);
+        console.log('Index:', index)
+      }
     }
 
     // Trigger change detection manually to update the view
     this.selectedQuestions = [...this.selectedQuestions];
 
     console.log('Updated selectedQuestions:', this.selectedQuestions);
-}
+  }
 
 
 
 
-  
+
 
   drop(event: CdkDragDrop<QuestionBase[]>) {
     moveItemInArray(this.selectedQuestions, event.previousIndex, event.currentIndex);
-}
-  
-  addQuestion(type: string) {
-      switch (type) {
-          case 'text':
-              this.selectedQuestions.push(new TextQuestion('Kérjük adja meg a korát:'));
-              break;
-          case 'yesno':
-              this.selectedQuestions.push(new YesNoQuestion('Elkapta a COVID vírust az elmúlt egy évben?'));
-              break;
-          case 'yesnohospital':
-              this.selectedQuestions.push(new yesnohospitalQuestion('Az elmúlt egy évben került korházba COVID miatt?'));
-              break;
-          case 'multiselect':
-              const newMultiSelectQuestion = new MultiSelectQuestion('Az alábbi lehetőségek közül kérjük válassza ki milyen betegségekkel rendelkezik:',this.allIllnessOptions , true, []);
-              this.selectedQuestions.push(newMultiSelectQuestion);
-              break;   
-          case 'sex':
-            this.selectedQuestions.push(new SexQuestion('Kérjük válassza ki a nemét:'));
-            break;
-          case 'relative':
-            this.selectedQuestions.push(new RelativeQuestion('Hozzátartozóként tölti ki a kérdőívet?'));
-            break;
-          
-              
+  }
 
-      }
-      
+  addQuestion(type: string) {
+    switch (type) {
+      case 'text':
+        this.selectedQuestions.push(new TextQuestion('Kérjük adja meg a korát:'));
+        break;
+      case 'yesno':
+        this.selectedQuestions.push(new YesNoQuestion('Elkapta a COVID vírust az elmúlt egy évben?'));
+        break;
+      case 'yesnohospital':
+        this.selectedQuestions.push(new yesnohospitalQuestion('Az elmúlt egy évben került korházba COVID miatt?'));
+        break;
+      case 'multiselect':
+        const newMultiSelectQuestion = new MultiSelectQuestion('Az alábbi lehetőségek közül kérjük válassza ki milyen betegségekkel rendelkezik:', this.allIllnessOptions, true, []);
+        this.selectedQuestions.push(newMultiSelectQuestion);
+        break;
+      case 'sex':
+        this.selectedQuestions.push(new SexQuestion('Kérjük válassza ki a nemét:'));
+        break;
+      case 'relative':
+        this.selectedQuestions.push(new RelativeQuestion('Hozzátartozóként tölti ki a kérdőívet?'));
+        break;
+
+
+
+    }
+
   }
   toggleSelection(question: MultiSelectQuestion, option: string) {
     const maxSelection = 10;
@@ -140,7 +140,7 @@ export class CustomFormCreatorComponent {
   removeSelection(question: MultiSelectQuestion, option: string) {
     const index = question.selectedOptions.indexOf(option);
     if (index > -1) {
-        question.selectedOptions.splice(index, 1);
+      question.selectedOptions.splice(index, 1);
     }
   }
   onRelativeAnswerChange(answer: string) {
@@ -162,12 +162,12 @@ export class CustomFormCreatorComponent {
     const randomNum = Math.floor(Math.random() * 1000); // Random number between 0 and 999
     const sanitizedFormName = this.formName.replace(/[^a-zA-Z0-9-_]/g, '');
     return `${sanitizedFormName}-${formattedDate}-${randomNum}`;
-}
+  }
 
 
-renderForm() {
-  const uniqueFormName = this.generateUniqueFormName();
-  let formHtml = `
+  renderForm() {
+    const uniqueFormName = this.generateUniqueFormName();
+    let formHtml = `
     <html>
     <head>
       <meta charset="UTF-8">
@@ -177,61 +177,61 @@ renderForm() {
       <div style="display: flex; justify-content: center; align-items: center; height: 100%; padding: 20px;">
         <form style="background-color: ${this.backgroundColor}; color: ${this.textColor}; padding: 20px; border: 1px solid #0800ff; border-radius: 10px; box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.4); width: 50%;" id="${uniqueFormName}">
           <h4 style="font-size:45px; font-family: 'Arial'; text-align: center;">${this.formName}</h4>`;
-          let questionContainerStyle = `display: flex; flex-direction: column; align-items: flex-start; margin: 10px; padding: 5px; border: 1px solid #0800ff; border-radius: 10px; box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.4); background-color: ${this.questionBackgroundColor}; font-family: 'Arial', sans-serif;`;
-          let labelStyle = `font-weight: bold; font-family: 'Arial', sans-serif; font-size: 16px; color: ${this.textColor};`; // Removed margin-bottom
-          let inputStyle = `background-color: ${this.backgroundColor}; color: ${this.textColor}; width: 100%; font-family: 'Arial', sans-serif; font-size: 14px;` ; // Set width to 100% for full width
+    let questionContainerStyle = `display: flex; flex-direction: column; align-items: flex-start; margin: 10px; padding: 5px; border: 1px solid #0800ff; border-radius: 10px; box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.4); background-color: ${this.questionBackgroundColor}; font-family: 'Arial', sans-serif;`;
+    let labelStyle = `font-weight: bold; font-family: 'Arial', sans-serif; font-size: 16px; color: ${this.textColor};`; // Removed margin-bottom
+    let inputStyle = `background-color: ${this.backgroundColor}; color: ${this.textColor}; width: 100%; font-family: 'Arial', sans-serif; font-size: 14px;`; // Set width to 100% for full width
 
-  this.selectedQuestions.forEach(question => {
-      
+    this.selectedQuestions.forEach(question => {
+
 
       formHtml += `<div style="${questionContainerStyle}">`;
 
       if (question.type === 'text') {
-          formHtml += `<label style="${labelStyle}">${question.label}</label>`;
-          formHtml += `<input type="text" style="${inputStyle}" name="Age">`;
+        formHtml += `<label style="${labelStyle}">${question.label}</label>`;
+        formHtml += `<input type="text" style="${inputStyle}" name="Age">`;
       } else if (question.type === 'yesnohospital') {
-          formHtml += `<label style="${labelStyle}">${question.label}</label>`;
-          formHtml += `<input type="radio" name="Hospitalized" value="Yes" style="${inputStyle}"> Igen `;
-          formHtml += `<input type="radio" name="Hospitalized" value="No" style="${inputStyle}"> Nem`;
+        formHtml += `<label style="${labelStyle}">${question.label}</label>`;
+        formHtml += `<input type="radio" name="Hospitalized" value="Yes" style="${inputStyle}"> Igen `;
+        formHtml += `<input type="radio" name="Hospitalized" value="No" style="${inputStyle}"> Nem`;
       }
-        else if (question.type === "yesno" ) {
-          formHtml += `<label style="${labelStyle}">${question.label}</label>`;
-          formHtml += `<input type="radio" name="Covid" value="Yes" style="${inputStyle}"> Igen `;
-          formHtml += `<input type="radio" name="Covid" value="No" style="${inputStyle}"> Nem`;
+      else if (question.type === "yesno") {
+        formHtml += `<label style="${labelStyle}">${question.label}</label>`;
+        formHtml += `<input type="radio" name="Covid" value="Yes" style="${inputStyle}"> Igen `;
+        formHtml += `<input type="radio" name="Covid" value="No" style="${inputStyle}"> Nem`;
       }
-        else if (question.type === "sex"){
-          formHtml += `<label style="${labelStyle}">${question.label}</label>`;
-          formHtml += `<input type="radio" name="Sex" value="Férfi" style="${inputStyle}"> Férfi `;
-          formHtml += `<input type="radio" name="Sex" value="Nő" style="${inputStyle}"> Nő`;
-        }
-        else if (question.type === 'relative'){
-          formHtml += `<label style="${labelStyle}">${question.label}</label>`
-          formHtml += `<input type="radio" name="${question.id}" value="Yes" style="${inputStyle}" onchange="toggleFollowUpQuestion(this.value)"> Igen`
-          formHtml += `<input type="radio" name="${question.id}" value="No" style="${inputStyle}" onchange="toggleFollowUpQuestion(this.value)"> Nem`
-        }
-        else if (question.type === 'multiselect') {
-          formHtml += `<label style="${labelStyle}">${question.label}</label>`;
-          const MultiSelectQuestion = question as MultiSelectQuestion;
-          MultiSelectQuestion.selectedOptions.forEach(option => {
-              formHtml += `<input type="checkbox" name="Illnesses" value="${option}" style="${inputStyle}"> ${option}`;
-          });
+      else if (question.type === "sex") {
+        formHtml += `<label style="${labelStyle}">${question.label}</label>`;
+        formHtml += `<input type="radio" name="Sex" value="Férfi" style="${inputStyle}"> Férfi `;
+        formHtml += `<input type="radio" name="Sex" value="Nő" style="${inputStyle}"> Nő`;
+      }
+      else if (question.type === 'relative') {
+        formHtml += `<label style="${labelStyle}">${question.label}</label>`
+        formHtml += `<input type="radio" name="${question.id}" value="Yes" style="${inputStyle}" onchange="toggleFollowUpQuestion(this.value)"> Igen`
+        formHtml += `<input type="radio" name="${question.id}" value="No" style="${inputStyle}" onchange="toggleFollowUpQuestion(this.value)"> Nem`
+      }
+      else if (question.type === 'multiselect') {
+        formHtml += `<label style="${labelStyle}">${question.label}</label>`;
+        const MultiSelectQuestion = question as MultiSelectQuestion;
+        MultiSelectQuestion.selectedOptions.forEach(option => {
+          formHtml += `<input type="checkbox" name="Illnesses" value="${option}" style="${inputStyle}"> ${option}`;
+        });
       }
       formHtml += `</div>`; // Close the question container
-  });
-  formHtml += `<div id="followUpQuestion" style="display:none; flex; flex-direction: column; align-items: flex-start; margin: 10px; padding: 5px; border: 1px solid #0800ff; border-radius: 10px; box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.4); background-color: ${this.questionBackgroundColor};">`
-  formHtml += `<label style="${labelStyle}">A hozzátartozója elhunyt Covidban?</label>`
-  formHtml += `<input type="radio" name="relativeDiedOfCovid" value="Yes" style="${inputStyle}"> Igen`
-  formHtml += `<input type="radio" name="relativeDiedOfCovid" value="No" style="${inputStyle}"> Nem`
-  formHtml += `</div>`
+    });
+    formHtml += `<div id="followUpQuestion" style="display:none; flex; flex-direction: column; align-items: flex-start; margin: 10px; padding: 5px; border: 1px solid #0800ff; border-radius: 10px; box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.4); background-color: ${this.questionBackgroundColor};">`
+    formHtml += `<label style="${labelStyle}">A hozzátartozója elhunyt Covidban?</label>`
+    formHtml += `<input type="radio" name="relativeDiedOfCovid" value="Yes" style="${inputStyle}"> Igen`
+    formHtml += `<input type="radio" name="relativeDiedOfCovid" value="No" style="${inputStyle}"> Nem`
+    formHtml += `</div>`
 
-  let buttonStyle = `width: 200px; height: 40px; background-color: #0080ff; border-color: #0080ff; border-radius: 5px; color: white; text-align: center; text-decoration: none; display: inline-block; font-size: 1rem; cursor: pointer;`;
+    let buttonStyle = `width: 200px; height: 40px; background-color: #0080ff; border-color: #0080ff; border-radius: 5px; color: white; text-align: center; text-decoration: none; display: inline-block; font-size: 1rem; cursor: pointer;`;
 
-  // Wrap the button in a div for center alignment
-  formHtml += `<div style="text-align: center; margin-top: 20px;"><input type="submit" onclick="submitForm()" value="Küldés" style="${buttonStyle}"></div></form></div>`;
+    // Wrap the button in a div for center alignment
+    formHtml += `<div style="text-align: center; margin-top: 20px;"><input type="submit" onclick="submitForm()" value="Küldés" style="${buttonStyle}"></div></form></div>`;
 
 
-  // Script for form submission
-  formHtml += `
+    // Script for form submission
+    formHtml += `
   <script>
   function toggleFollowUpQuestion(value) {
     var followUpQuestion = document.getElementById('followUpQuestion');
@@ -246,6 +246,8 @@ renderForm() {
     }
   });
 
+  
+
   function submitForm() {
     var formElement = document.getElementById('${uniqueFormName}');
     var formData = new FormData(formElement);
@@ -258,6 +260,9 @@ renderForm() {
         "Source": "form",
         "Date": new Date().toISOString().split('T')[0]
     };
+
+  
+
 
     // Handle multi-select (Illnesses)
     formData.getAll("Illnesses").forEach(function(value) {
@@ -290,80 +295,89 @@ renderForm() {
 </body>
 </html>`;
 
-  this.generatedFormHtml = formHtml;
-}
+    this.generatedFormHtml = formHtml;
+  }
 
 
-constructor(private backendService: BackendService) { }
+  constructor(private backendService: BackendService, private recaptchaV3Service: ReCaptchaV3Service) { }
 
-sendFormToBackend() {
-  const uniqueFormName = this.generateUniqueFormName(); // Generate the unique form name
-  this.backendService.sendFormHtml(this.generatedFormHtml, uniqueFormName).subscribe({
-    next: (result: any) => {
-      // Directly access the 'value' property of the result
-      if (result && result.value) {
+  sendFormToBackend() {
 
-       // this.displayResponse = `URL: ${result.value.Url}\n\nIframe:\n${result.value.Iframe}`;
-        this.displayResponse = `Iframe:\n${result.value.Iframe}`;
-        window.open(result.value.Url); 
-      } else {
-        // Handle the case where the result is not in the expected format
-        console.error('Unexpected response format', result);
-      }
-    },
-    error: (error) => {
-      console.error('Error sending form', error);
+    this.recaptchaV3Service.execute('importantAction').subscribe((token: string) => { // captcha
+      console.log("rechapta ", token)//
+
+
+
+      const uniqueFormName = this.generateUniqueFormName(); // Generate the unique form name
+      this.backendService.sendFormHtml(this.generatedFormHtml, uniqueFormName).subscribe({
+        next: (result: any) => {
+          // Directly access the 'value' property of the result
+          if (result && result.value) {
+
+            // this.displayResponse = `URL: ${result.value.Url}\n\nIframe:\n${result.value.Iframe}`;
+            this.displayResponse = `Iframe:\n${result.value.Iframe}`;
+            window.open(result.value.Url);
+          } else {
+            // Handle the case where the result is not in the expected format
+            console.error('Unexpected response format', result);
+          }
+        },
+        error: (error) => {
+          console.error('Error sending form', error);
+        }
+      });
     }
-  });
+    );
+   
 }
 
 
 
-sendFormData(data: any) {
-  fetch('YOUR_ENDPOINT_URL', {
+  sendFormData(data: any) {
+    fetch('YOUR_ENDPOINT_URL', {
       method: 'POST',
       headers: {
-          'Content-Type': 'application/json',
+        'Content-Type': 'application/json',
       },
       body: JSON.stringify(data),
-  })
-  .then(response => response.json())
-  .then(data => {
-      console.log('Success:', data);
-  })
-  .catch((error) => {
-      console.error('Error:', error);
-  });
-}
-submitForm() {
-  this.renderForm(); 
+    })
+      .then(response => response.json())
+      .then(data => {
+        console.log('Success:', data);
+      })
+      .catch((error) => {
+        console.error('Error:', error);
+      });
+  }
+  submitForm() {
+    this.renderForm();
 
-  if (!this.generatedFormHtml) {
+    if (!this.generatedFormHtml) {
       console.error("No HTML content to generate");
       return;
+    }
+
+    this.sendFormToBackend();
   }
 
-  this.sendFormToBackend(); 
-}
+  //Drag and drop cuccok későbbre:
+  isMultiSelectQuestion(question: any): question is MultiSelectQuestion {
+    return question.type === 'multiselect';
+  }
 
-//Drag and drop cuccok későbbre:
-isMultiSelectQuestion(question: any): question is MultiSelectQuestion {
-  return question.type === 'multiselect';
-}
-
-getOptions(question: QuestionBase): string[] {
-  if (this.isMultiSelectQuestion(question)) {
+  getOptions(question: QuestionBase): string[] {
+    if (this.isMultiSelectQuestion(question)) {
       return question.options;
+    }
+    return [];
   }
-  return [];
-}
 
-getSelectedOptions(question: QuestionBase): string[] {
-  if (this.isMultiSelectQuestion(question)) {
+  getSelectedOptions(question: QuestionBase): string[] {
+    if (this.isMultiSelectQuestion(question)) {
       return question.selectedOptions;
+    }
+    return [];
   }
-  return [];
-}
 
 
 
