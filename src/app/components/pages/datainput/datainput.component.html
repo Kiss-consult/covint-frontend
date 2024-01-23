@@ -38,7 +38,7 @@
       </div>
       -->
     <div class="container3"> 
-      <div>
+      <div class="markerclass">
         <div>
           <label class="text"> Marker <s>*</s></label>
         </div>
@@ -55,9 +55,34 @@
             <button id="addbutton" (click)="addMarker()">Hozzáadás</button>
           </div>
         </div> 
-      </div>    
+      </div>
+
+      <div class="content3">
+        <ng-container *ngIf="case.Illnesses && case.Illnesses.length > 0; else noMarkers">
+          <p class="markerbno2">Markerek</p>
+          <div id="marker">
+            <div *ngFor="let illness of case.Illnesses; let i = index" style="border-bottom: solid 3px #b8b8b8a6; display: flex; align-items: center; padding-bottom: 5px; margin-top: 5px;">
+              <div style="flex-grow: 1;">
+                <p style="margin: 0;">{{ illness }}</p>
+              </div>
+              <div style="margin-left: auto;">
+                <button id="deletebutton" (click)="removeMarker(illness)">Törlés</button>
+              </div>
+            </div>
+          </div>
+          <div *ngIf="case.Illnesses.length > 5">
+            <p style="margin-top: 20px; opacity: 70%;">(További Markerek megtekintéséhez görgessen lefele (vagy valami szöveget ide lehet írni))</p>
+          </div>
+        </ng-container>
+        <ng-template #noMarkers>
+          <p class="markerbno" title="Ha a betegnek nem volt társ betegsége, válassza az 'Egészséges' markert! ">Még nem adott hozzá Markert</p>
+        </ng-template>
+      </div>
+        
+      
+      
     
-      <div>
+      <div id="bnoclass">
         <div>
           <label class="text" for="bno">BNO Kódok bevitele</label>
         </div>
@@ -68,8 +93,33 @@
           <div>
             <button (click)="addBno()">Hozzáadás</button>
           </div> 
-        </div>         
+        </div> 
       </div>
+        <div class="content3">
+          <ng-container *ngIf="case.BnoCodes && case.BnoCodes.length > 0; else noBnos">
+            <p class="markerbno2">BNO Kódok</p>
+            <div id="marker" >
+              <div *ngFor="let bno of case.BnoCodes; let i = index" style="border-bottom: solid 3px #b8b8b8a6; display: flex; align-items: center; padding-bottom: 5px; margin-top: 5px;">
+                <div style="flex-grow: 1;">
+                  <p style="margin: 0;">{{ bno }}</p>
+                </div>
+                <div style="margin-left: auto;">
+                  <button id="deletebutton" (click)="removeBno(bno)">BNO Törlés</button>
+                </div>
+              </div>
+            </div>
+            <div *ngIf="case.BnoCodes.length > 5">
+              <p style="margin-top: 20px; opacity: 70%;">(További BNO Kódok megtekintéséhez görgessen lefele (vagy valami szöveget ide lehet írni))</p>
+            </div>
+          </ng-container>
+          <ng-template #noBnos>
+            <p class="markerbno" title="A BNO kód hozzáadása opcionális! ">Még nem adott hozzá BNO kódot</p>
+          </ng-template>
+    </div>
+      
+
+      
+
     </div>
 
     <div id="élvagyhal" class="container3">  
