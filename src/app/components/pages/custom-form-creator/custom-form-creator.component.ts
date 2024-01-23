@@ -9,6 +9,7 @@ import { BackendService } from 'src/app/services/backend/backend.service';
 import { Ok } from 'src/app/models/utils/result';
 import { ChangeDetectorRef } from '@angular/core';
 import { ReCaptchaV3Service } from 'ng-recaptcha';
+import { ConfigService } from 'src/app/services/config/config.service';
 
 @Component({
   selector: 'app-custom-form-creator',
@@ -64,18 +65,14 @@ export class CustomFormCreatorComponent {
       console.log('Index:', index)
 
       if (index !== -1) {
-        // Update the existing question's selectedOptions directly
         (this.selectedQuestions[index] as MultiSelectQuestion).selectedOptions = question.selectedOptions
         console.log('Index:', index)
       } else {
-        // If the question is not found, it's a new selection, so add it
-        // Use the existing question object as it already has a generated ID
         this.selectedQuestions.push(question);
         console.log('Index:', index)
       }
     }
 
-    // Trigger change detection manually to update the view
     this.selectedQuestions = [...this.selectedQuestions];
 
     console.log('Updated selectedQuestions:', this.selectedQuestions);
@@ -124,15 +121,11 @@ export class CustomFormCreatorComponent {
     }
     const index = question.selectedOptions.indexOf(option);
     if (index > -1) {
-      // Option already selected, remove it
       question.selectedOptions.splice(index, 1);
     } else {
-      // New selection
       if (question.selectedOptions.length < maxSelection) {
-        // Add new option if under limit
         question.selectedOptions.push(option);
       } else {
-        // Maybe show an error message or replace the earliest selection
         console.log("You can only select up to " + maxSelection + " options.");
       }
     }
@@ -216,7 +209,7 @@ export class CustomFormCreatorComponent {
           formHtml += `<input type="checkbox" name="Illnesses" value="${option}" style="${inputStyle}"> ${option}`;
         });
       }
-      formHtml += `</div>`; // Close the question container
+      formHtml += `</div>`; 
     });
     formHtml += `<div id="followUpQuestion" style="display:none; flex; flex-direction: column; align-items: flex-start; margin: 10px; padding: 5px; border: 1px solid #0800ff; border-radius: 10px; box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.4); background-color: ${this.questionBackgroundColor};">`
     formHtml += `<label style="${labelStyle}">A hozzátartozója elhunyt Covidban?</label>`
@@ -226,72 +219,73 @@ export class CustomFormCreatorComponent {
 
     let buttonStyle = `width: 200px; height: 40px; background-color: #0080ff; border-color: #0080ff; border-radius: 5px; color: white; text-align: center; text-decoration: none; display: inline-block; font-size: 1rem; cursor: pointer;`;
 
-    // Wrap the button in a div for center alignment
-    formHtml += `<div style="text-align: center; margin-top: 20px;"><input type="submit" onclick="submitForm()" value="Küldés" style="${buttonStyle}"></div></form></div>`;
+    formHtml += `<div style="text-align: center; margin-top: 20px;"><input onclick="submitForm()" value="Küldés" style="${buttonStyle}"></div></form></div>`;
 
 
-    // Script for form submission
+  
     formHtml += `
-  <script>
-  function toggleFollowUpQuestion(value) {
-    var followUpQuestion = document.getElementById('followUpQuestion');
-    followUpQuestion.style.display = value === 'Yes' ? 'block' : 'none';
-  }
-  document.addEventListener('DOMContentLoaded', function() {
-    var relativeRadioButtons = document.getElementsByName('relative');
-    for (var i = 0; i < relativeRadioButtons.length; i++) {
-      if (relativeRadioButtons[i].checked) {
-        toggleFollowUpQuestion(relativeRadioButtons[i]);
-      }
-    }
-  });
+    <script src="https://www.google.com/recaptcha/api.js?render=${this.configservice.config.CaptchaKey}"></script>
 
-  
-
-  function submitForm() {
-    var formElement = document.getElementById('${uniqueFormName}');
-    var formData = new FormData(formElement);
-    var formValues = {
-        "Sex": formData.get("Sex"),
-        "Age": parseInt(formData.get("Age")),
-        "Hospitalized": formData.get("Hospitalized") === "Yes",
-        "Dead": formData.get("Dead") === "Yes",
-        "Illnesses": [],
-        "Source": "form",
-        "Date": new Date().toISOString().split('T')[0]
-    };
-
-  
-
-
-    // Handle multi-select (Illnesses)
-    formData.getAll("Illnesses").forEach(function(value) {
-        formValues.Illnesses.push(value);
-    });
-
-    fetch('http://localhost:8090/cases/nonvalidated/upload', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(formValues),
-    })
-    .then(function(response) { 
-        if (!response.ok) {
-            throw new Error('Network response was not ok');
+    <!-- Script for form submission and reCAPTCHA handling -->
+    <script>
+        function toggleFollowUpQuestion(value) {
+            var followUpQuestion = document.getElementById('followUpQuestion');
+            followUpQuestion.style.display = value === 'Yes' ? 'block' : 'none';
         }
-        return response.json(); 
-    })
-    .then(function(data) {
-        console.log('Success:', data);  
-        alert('Köszönjük, válaszát rögzítettük'); // Show alert on success
-    })
-    .catch(function(error) {
-        console.error('Error:', error);
-    });
-    alert('Köszönjük, válaszát rögzítettük'); 
-  }
-  </script>
+
+        document.addEventListener('DOMContentLoaded', function() {
+            var relativeRadioButtons = document.getElementsByName('relative');
+            for (var i = 0; i < relativeRadioButtons.length; i++) {
+                if (relativeRadioButtons[i].checked) {
+                    toggleFollowUpQuestion(relativeRadioButtons[i]);
+                }
+            }
+        });
+
+        function submitForm() {
+            grecaptcha.ready(function() {
+                grecaptcha.execute('${this.configservice.config.CaptchaKey}', {action: 'submit'}).then(function(token) {
+                    var formElement = document.getElementById('${uniqueFormName}');
+                    var formData = new FormData(formElement);
+                    var formValues = {
+                        "Sex": formData.get("Sex"),
+                        "Age": parseInt(formData.get("Age")),
+                        "Hospitalized": formData.get("Hospitalized") === "Yes",
+                        "Dead": formData.get("Dead") === "Yes",
+                        "Illnesses": [],
+                        "Source": "${this.formName}",
+                        "Date": new Date().toISOString().split('T')[0],
+                        "g-recaptcha-response": token
+                    };
+
+                    formData.getAll("Illnesses").forEach(function(value) {
+                        formValues.Illnesses.push(value);
+                    });
+
+                    fetch('${this.configservice.config.BackendUrl}/cases/nonvalidated/upload', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                        },
+                        body: JSON.stringify(formValues),
+                    })
+                    .then(function(response) { 
+                        if (!response.ok) {
+                            throw new Error('Network response was not ok');
+                        }
+                        return response.json(); 
+                    })
+                    .then(function(data) {
+                        console.log('Success:', data);  
+                        alert('Köszönjük, válaszát rögzítettük');
+                    })
+                    .catch(function(error) {
+                        console.error('Error:', error);
+                    });
+                });
+            });
+        }
+    </script>
 </body>
 </html>`;
 
@@ -299,7 +293,7 @@ export class CustomFormCreatorComponent {
   }
 
 
-  constructor(private backendService: BackendService, private recaptchaV3Service: ReCaptchaV3Service) { }
+  constructor(private backendService: BackendService, private recaptchaV3Service: ReCaptchaV3Service,private configservice: ConfigService) { }
 
   sendFormToBackend() {
 
