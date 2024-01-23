@@ -2,6 +2,9 @@ import { Component } from '@angular/core';
 import { Override } from 'src/app/models/override/override';
 import { BackendService } from 'src/app/services/backend/backend.service';
 import { Location } from '@angular/common'
+import { KutatoOrvos, Orvos, PortalKezelo, PortalVezeto } from 'src/app/models/group/group';
+import { LoginService } from 'src/app/services/login/login.service';
+
 @Component({
   selector: 'app-percentoverwrite',
   templateUrl: './percentoverwrite.component.html',
@@ -9,7 +12,10 @@ import { Location } from '@angular/common'
 })
 export class PercentoverwriteComponent {
 
-
+  orvos = Orvos;
+  kutatoorvos = KutatoOrvos;
+  portaladmin= PortalKezelo;
+  portalvezeto = PortalVezeto;
   override: Override = new Override;
   markers: string[] = [];
   marker: string = '';
@@ -17,7 +23,7 @@ export class PercentoverwriteComponent {
     this.location.back();
   }
 
-  constructor(private backendService: BackendService,private location: Location) {
+  constructor(private backendService: BackendService,private location: Location ,public loginService: LoginService) {
     this.backendService.getMarkers().subscribe(
       result => {
         if (result.isErr()) {
