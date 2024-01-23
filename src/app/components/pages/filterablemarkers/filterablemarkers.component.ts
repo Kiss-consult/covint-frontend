@@ -6,6 +6,7 @@ import { BackendService } from 'src/app/services/backend/backend.service';
 import { KutatoOrvos, Orvos, PortalKezelo, PortalVezeto } from 'src/app/models/group/group';
 import { LoginService } from 'src/app/services/login/login.service';
 import { Location } from '@angular/common'
+
 @Component({
   selector: 'app-filterablemarkers',
   templateUrl: './filterablemarkers.component.html',
