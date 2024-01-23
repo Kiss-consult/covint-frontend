@@ -39,7 +39,7 @@
             <input *ngIf="loginService.hasAnyGroup([portalvezeto, kutatoorvos])" type="checkbox"
               [checked]="illness.IsMarker" [(ngModel)]="illness.IsMarker" (change)="change(illness) " id="ismarker">
             <input *ngIf="loginService.hasAnyGroup([portaladmin])" type="checkbox" disabled="disabled"
-              [checked]="illness.IsMarker" id="ismarker">
+              [checked]="illness.IsMarker" id="ismarker" title ="Portálkezelő számára csak látható, nem módosítható">
           </td>
         </ng-container>
 

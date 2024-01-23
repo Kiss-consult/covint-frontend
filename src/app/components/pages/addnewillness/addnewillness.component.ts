@@ -7,6 +7,8 @@ import { BackendService } from 'src/app/services/backend/backend.service';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatPaginator } from '@angular/material/paginator';
 import { Location } from '@angular/common'
+import { KutatoOrvos, Orvos, PortalKezelo, PortalVezeto } from 'src/app/models/group/group';
+import { LoginService } from 'src/app/services/login/login.service';
 @Component({
   selector: 'app-addnewillness',
   templateUrl: './addnewillness.component.html',
@@ -25,7 +27,10 @@ export class AddnewillnessComponent {
   ages: number[] = [];
   selectedRows: boolean[] = [];
   searchValue: string = '';
-
+  orvos = Orvos;
+  kutatoorvos = KutatoOrvos;
+  portaladmin= PortalKezelo;
+  portalvezeto = PortalVezeto;
   matchesFilter(row: Default): boolean {
     const searchFields: (keyof Default)[] = ['Sex', 'Age', 'Hospitalized', 'Dead']; // Specify the field names of Default
   
@@ -39,7 +44,7 @@ export class AddnewillnessComponent {
   }
   // This is only stored for faster access to the illnesses by BNO code
   //illnessesByBno: Map<string, Illness> = new Map();
-  constructor(private backendService: BackendService,private location: Location) {
+  constructor(private backendService: BackendService,private location: Location,public loginService: LoginService ) {
     this.backendService.hello().subscribe((data) => {
       console.log(data);
     });

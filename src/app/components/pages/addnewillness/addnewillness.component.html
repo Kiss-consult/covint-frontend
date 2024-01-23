@@ -10,7 +10,10 @@
           <label for="newillness">Új betegség: <s>*</s></label>
         </div>
       <div>
-        <input class="droptextbox" type="text" id="newillness" name="newillness"[(ngModel)]="newIllness.GroupName" placeholder="Betegség neve..." title="Kérem töltse ki a mezőt">
+        <input  *ngIf="loginService.hasAnyGroup([portalvezeto, kutatoorvos])"
+        class="droptextbox" type="text" id="newillness" name="newillness"[(ngModel)]="newIllness.GroupName" placeholder="Betegség neve..." title="Kérem töltse ki a mezőt">
+        <input  *ngIf="loginService.hasAnyGroup([portaladmin])"
+        class="droptextbox" type="text" id="newillness" name="newillness"[(ngModel)]="newIllness.GroupName"  disabled="disabled" placeholder="Betegség neve..." title="Portálkezelő számára csak olvasható">
       </div>
     </div>
 
@@ -20,10 +23,11 @@
       </div>
       <div>
         <label for="trueMark">Igen</label>
-        <input type="radio" id="trueMArk" name="ismarker" [value]="true" [(ngModel)]="newIllness.IsMarker" title="Kérem válasszon">
-
+        <input *ngIf="loginService.hasAnyGroup([portalvezeto, kutatoorvos])"type="radio" id="trueMArk" name="ismarker" [value]="true" [(ngModel)]="newIllness.IsMarker" title="Kérem válasszon">
+        <input *ngIf="loginService.hasAnyGroup([portaladmin])"type="radio" id="trueMArk" name="ismarker" [value]="true" [(ngModel)]="newIllness.IsMarker" disabled="disabled"  title="Portálkezelő számára csak olvasható">
         <label for="falseMark">Nem</label>
-        <input type="radio" id="falseMark" name="ismarker" [value]="false" [(ngModel)]="newIllness.IsMarker" title="Kérem válasszon">
+        <input *ngIf="loginService.hasAnyGroup([portalvezeto, kutatoorvos])"type="radio" id="falseMark" name="ismarker" [value]="false" [(ngModel)]="newIllness.IsMarker" title="Kérem válasszon">
+        <input *ngIf="loginService.hasAnyGroup([portaladmin])"type="radio" id="falseMark" name="ismarker" [value]="false" [(ngModel)]="newIllness.IsMarker" disabled="disabled"title="Portálkezelő számára csak olvasható">
       </div>
     </div>
 
@@ -33,10 +37,14 @@
           <label for="bno">Alternatív név bevitele</label>
         </div>      
         <div>
-          <input class="droptextbox" type="text" id="bno" name="bno" [(ngModel)]="newAlternativeName" placeholder="Alternativ betegség neve..." title="Több alternatív nevet is megadhat, a kitöltés opcionális!">
+          <input *ngIf="loginService.hasAnyGroup([portalvezeto, kutatoorvos])" class="droptextbox" type="text" id="bno" name="bno"
+           [(ngModel)]="newAlternativeName" placeholder="Alternativ betegség neve..." title="Több alternatív nevet is megadhat, a kitöltés opcionális!">
+           <input *ngIf="loginService.hasAnyGroup([portaladmin])" class="droptextbox" type="text" id="bno" name="bno"
+           [(ngModel)]="newAlternativeName" disabled="disabled" placeholder="Alternativ betegség neve..." title="Portálkezelő számára csak olvasható!">
         </div>
         <div>
-          <button (click)="addAlternativeName()">Hozzáadás</button>
+          <button *ngIf="loginService.hasAnyGroup([portalvezeto, kutatoorvos])" (click)="addAlternativeName()">Hozzáadás</button>
+          <button *ngIf="loginService.hasAnyGroup([portaladmin])" disabled="disabled" (click)="addAlternativeName()" title="Portálkezelő számára nem használható!">Hozzáadás</button>
         </div>      
       </div>
   
@@ -45,7 +53,8 @@
           <label>{{newillness}}</label>
         </div>
         <div>
-          <button (click)="removeAlternativeName(newillness)">Törlés</button>
+          <button  *ngIf="loginService.hasAnyGroup([portalvezeto, kutatoorvos])" (click)="removeAlternativeName(newillness)">Törlés</button>
+          <button  *ngIf="loginService.hasAnyGroup([portaladmin])" disabled="disabled" (click)="removeAlternativeName(newillness)" title="Portálkezelő számára nem használható!">Törlés</button>
         </div>    
       </div>
     </div>
@@ -96,9 +105,12 @@
     
 
   <div style="text-align: center; position: relative; z-index: 1; display: flex; flex-direction: column; align-items: center;">   
-    <button id="okebutton" (click)="finish()" style="z-index: 2; position: relative;">
+    <button *ngIf="loginService.hasAnyGroup([portalvezeto, kutatoorvos])"  id="okebutton" (click)="finish()" style="z-index: 2; position: relative;">
         Kész
     </button>
+    <button *ngIf="loginService.hasAnyGroup([portaladmin])"  disabled="disabled" id="okebutton" (click)="finish()"  title="Portálkezelő számára nem használható!" style="z-index: 2; position: relative;">
+      Kész
+  </button>
     <div style="position: absolute; bottom: 0; width: 50%; z-index: 1; text-align: center;">
         <hr style="margin-top: 10px; width: 100%; height: 1px; background-color: #0080ff; box-shadow:0px 1px 0px #848484;">
     </div>
