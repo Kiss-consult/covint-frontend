@@ -1,5 +1,5 @@
 # STAGE 1: Compile and Build angular application
-FROM node:20.5.1 AS builder
+FROM node:20.9.0 AS builder
 WORKDIR /usr/local/app
 COPY . ./
 
