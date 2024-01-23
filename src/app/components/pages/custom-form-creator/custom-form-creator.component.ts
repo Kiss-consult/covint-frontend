@@ -33,7 +33,6 @@ export class CustomFormCreatorComponent {
   allIllnessOptions: string[] = [' Egészséges ', ' Daganatos betegségek ', ' Krónikus vesebetegség ', ' Krónikus májbetegség ', ' Mentális és viselkedési zavar ', ' Hiperlipidémia ', ' Immunhiányos állapot ', ' Anyagcserezavar ', ' Idegrendszeri betegség ', ' COPD és emphysema ', ' Elhízás ', ' Szervátültetés ', ' Hasnyálmirigy-gyulladás ', ' Cukorbetegség (I. és II. Típus) ', ' Immunszuppresszív gyógyszer szedése ', ' Súlyos szívbetegség ', ' Asztma '];
   // ha kell ide be kell olvasni a markereket
   selectedOptions: string[] = [];
-  private url: string = "";
 
   availableQuestions: { label: string, type: string, selected: boolean, selectedOptions?: string[] }[] = [
     { label: 'Kor kérdés', type: 'text', selected: false },
@@ -294,9 +293,7 @@ export class CustomFormCreatorComponent {
   }
 
 
-  constructor(private backendService: BackendService, private recaptchaV3Service: ReCaptchaV3Service,private configservice: ConfigService) { 
-    this.url = this.configservice.config.BackendUrl;
-  }
+  constructor(private backendService: BackendService, private recaptchaV3Service: ReCaptchaV3Service,private configservice: ConfigService) { }
 
   sendFormToBackend() {
 
