@@ -61,7 +61,7 @@
         <a href="/auditlog" id="auditlog" class="nav-link"   routerLink="auditlog">AuditLog</a>
       </li>
       <li  class="nav-item" *ngIf="loginService.hasAnyGroup([ portalvezeto])">
-        <button (click)="gotoTelco()">Telco</button>
+        <button (click)="gotoTelco()" id="telco">Telco</button>
      </li>
     </ul>
 

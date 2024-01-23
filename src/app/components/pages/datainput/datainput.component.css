@@ -166,4 +166,12 @@
         padding-left: 10px;
         padding-right: 10px;
     }
+    #marker{
+        max-height: auto;
+        overflow-y: auto;
+        min-width: 0;
+        margin-left: 10px;
+        margin-bottom: 20px;
+        margin-right: 10px;
+    }
 }
