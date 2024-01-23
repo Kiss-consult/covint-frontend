@@ -74,7 +74,7 @@
         <select *ngIf="loginService.hasAnyGroup([portaladmin])" class="droptextbox" type="text" id="markers" name="markers" [(ngModel)]="marker" title="Portáladmin számára nem elérhető">
           <ng-container *ngFor="let marker of markers">
             <option value="" disabled selected hidden>Válasszon markert...</option>
-            <option value="{{marker}}" disabled selected hidden>{{marker}}</option>
+            <option value="{{marker}}" >{{marker}}</option>
           </ng-container>
         </select>
         <button *ngIf="loginService.hasAnyGroup([portalvezeto, kutatoorvos])" (click)="addMarker()">Hozzáadás</button>
