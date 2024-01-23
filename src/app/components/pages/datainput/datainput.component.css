@@ -67,8 +67,8 @@
     background: linear-gradient(180deg, rgba(224,224,224,1) 60%, rgb(255, 255, 255) 90%);
     justify-content: space-between;
     padding-bottom: 40px;
-    padding-right: 60px;
-    padding-left: 60px;
+    padding-right: 80px;
+    padding-left: 80px;
     padding-top: 40px;
 }
 
@@ -91,10 +91,15 @@
 
 #marker{
     max-height: 265px; 
-    overflow-y: auto; 
-    min-width: 700px; 
+    overflow-y: auto;  
     margin-left: 100px; 
     margin-bottom: 60px;
+}
+
+#hospdead{
+    display: flex;
+    justify-content: center;
+    text-align: center;
 }
 
 @media (max-width: 1200px){
@@ -103,6 +108,13 @@
         display: flex;
         flex-direction: column; 
         margin-bottom: 40px;        
+    }
+
+    #marker{
+        max-height: 265px; 
+        overflow-y: auto;  
+        margin-left: 10px; 
+        margin-bottom: 60px;
     }
 
     #markers{
@@ -119,10 +131,27 @@
 }
 
 @media (max-width: 500px){
+
+    #marker{
+        max-height: 265px; 
+        overflow-y: auto; 
+        margin-left: 10px; 
+        margin-bottom: 60px;
+        display: flex;
+        flex-direction: column;
+    }
+
+    #deletebutton{
+        width: auto;
+    }
     
-    .container{        
+    .container{    
+        position: relative;    
         padding: 0;
-        position: relative;
+        padding-right: 0;
+        padding-top: 50px;
+        z-index: 0;
+        overflow: scroll;
     }
 
     .container2{
@@ -137,6 +166,7 @@
     .container3{
         padding-bottom: 0;
         padding-top: 40px;
+        
     }
 
     #hospdead{
@@ -173,5 +203,9 @@
         margin-left: 10px;
         margin-bottom: 20px;
         margin-right: 10px;
+    }
+
+    #datainput{
+        background-color: white;
     }
 }
