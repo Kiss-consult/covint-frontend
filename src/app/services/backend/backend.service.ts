@@ -36,15 +36,15 @@ export class BackendService {
 
 
   private getParams(): HttpParams {
-    return new HttpParams().set('pagenumber', '0',).set('size', "100");  
-    
-      ;
+    return new HttpParams().set('pagenumber', '0',).set('size', "100");
+
+    ;
   }
   // This function inserts the new user into the Auth.
   public getAuditlogs(): Observable<Result<Auditlog[]>> {
     let options = {
       headers: this.getHeaders(),
-      params: this.getParams()     
+      params: this.getParams()
     };
     const url = this.url + "/auditlog";
     return this.httpClient.get<Result<Auditlog[]>>(url, options).pipe(
@@ -108,39 +108,39 @@ export class BackendService {
   public filterSave(filtername: string, filter: Filter): Observable<Result<{}>> {
     const url = this.url + "/filters/save";
     let savedfilter = { filtername, filter }
-    return this.httpClient.post<Result<{}>>(url, savedfilter,{ headers: this.getHeaders() }).pipe(
+    return this.httpClient.post<Result<{}>>(url, savedfilter, { headers: this.getHeaders() }).pipe(
       map(result => fromJSON<{}>(JSON.stringify(result))),
       catchError(error => of(new Err<{}>(error)))
     );
   }
 
 
- // This function save  the  given filter.
- public getFilterDiagram(diagramtype: string, filter: Filter): Observable<Result<Diagram>> {
-  const url = this.url + "/diagram/get";
-  let savedfilter = { diagramtype, filter }
-  return this.httpClient.post<Result<Diagram>>(url, savedfilter,{ headers: this.getHeaders() }).pipe(
-    map(result => fromJSON<Diagram>(JSON.stringify(result))),
-    catchError(error => of(new Err<Diagram>(error)))
-  );
-}
- // This function save  the  given filter.
- public changeIllness(name: string, ismarker: boolean): Observable<Result<{}>> {
-  const url = this.url + "/illnesses/change";
-  let changed = { name, ismarker }
-  return this.httpClient.post<Result<{}>>(url,changed,{ headers: this.getHeaders() }).pipe(
-    map(result => fromJSON<{}>(JSON.stringify(result))),
-    catchError(error => of(new Err<{}>(error)))
-  );
-}
-public overrideCombination(illnesses: string[], defaults: Default[]): Observable<Result<{}>> {
-  const url = this.url + "/illnesses/change";
-  let combination = { illnesses, defaults }
-  return this.httpClient.post<Result<{}>>(url,combination,{ headers: this.getHeaders() }).pipe(
-    map(result => fromJSON<{}>(JSON.stringify(result))),
-    catchError(error => of(new Err<{}>(error)))
-  );
-}
+  // This function save  the  given filter.
+  public getFilterDiagram(diagramtype: string, filter: Filter): Observable<Result<Diagram>> {
+    const url = this.url + "/diagram/get";
+    let savedfilter = { diagramtype, filter }
+    return this.httpClient.post<Result<Diagram>>(url, savedfilter, { headers: this.getHeaders() }).pipe(
+      map(result => fromJSON<Diagram>(JSON.stringify(result))),
+      catchError(error => of(new Err<Diagram>(error)))
+    );
+  }
+  // This function save  the  given filter.
+  public changeIllness(name: string, ismarker: boolean): Observable<Result<{}>> {
+    const url = this.url + "/illnesses/change";
+    let changed = { name, ismarker }
+    return this.httpClient.post<Result<{}>>(url, changed, { headers: this.getHeaders() }).pipe(
+      map(result => fromJSON<{}>(JSON.stringify(result))),
+      catchError(error => of(new Err<{}>(error)))
+    );
+  }
+  public overrideCombination(illnesses: string[], defaults: Default[]): Observable<Result<{}>> {
+    const url = this.url + "/illnesses/change";
+    let combination = { illnesses, defaults }
+    return this.httpClient.post<Result<{}>>(url, combination, { headers: this.getHeaders() }).pipe(
+      map(result => fromJSON<{}>(JSON.stringify(result))),
+      catchError(error => of(new Err<{}>(error)))
+    );
+  }
 
   private getHeaders(): HttpHeaders {
     return new HttpHeaders({
@@ -159,13 +159,21 @@ public overrideCombination(illnesses: string[], defaults: Default[]): Observable
   // This function returns all the markers stored in the database.
   public getMarkers(): Observable<Result<string[]>> {
     const url = this.url + "/illnesses/markers";
-    return this.httpClient.get<Result<string[]>>(url, {headers: this.getHeaders()}).pipe(
+    return this.httpClient.get<Result<string[]>>(url, { headers: this.getHeaders() }).pipe(
+      map(result => fromJSON<string[]>(JSON.stringify(result))),
+      catchError(error => of(new Err<string[]>(error)))
+    );
+  }
+  // This function returns all the forms stored in the database.
+  public getForms(): Observable<Result<string[]>> {
+    const url = this.url + "/forms/list";
+    return this.httpClient.get<Result<string[]>>(url, { headers: this.getHeaders() }).pipe(
       map(result => fromJSON<string[]>(JSON.stringify(result))),
       catchError(error => of(new Err<string[]>(error)))
     );
   }
 
-    // This function returns all the illnesses stored in the database.
+  // This function returns all the illnesses stored in the database.
   public getFilterList(): Observable<Result<SavedFilter[]>> {
     const url = this.url + "/filters/list";
     return this.httpClient.get<Result<SavedFilter[]>>(url, { headers: this.getHeaders() }).pipe(
@@ -191,25 +199,25 @@ public overrideCombination(illnesses: string[], defaults: Default[]): Observable
     );
   }
 
-// This function inserts the new illness into the database.
-public insertOverride(override: Override): Observable<Result<{}>> {
-  const url = this.url + "/rates/override";
-  return this.httpClient.post<Result<{}>>(url, override, { headers: this.getHeaders() }).pipe(
-    map(result => fromJSON<{}>(JSON.stringify(result))),
-    catchError(error => of(new Err<{}>(error)))
-  );
-}
+  // This function inserts the new illness into the database.
+  public insertOverride(override: Override): Observable<Result<{}>> {
+    const url = this.url + "/rates/override";
+    return this.httpClient.post<Result<{}>>(url, override, { headers: this.getHeaders() }).pipe(
+      map(result => fromJSON<{}>(JSON.stringify(result))),
+      catchError(error => of(new Err<{}>(error)))
+    );
+  }
 
-public sendFormHtml(htmlData: string, formName: string): Observable<Result<{}>> {
-  const url = `${this.url}/forms/add/${formName}`;
-  console.log("Sending HTML Data:", htmlData);
-  const headers = new HttpHeaders({ 'Content-Type': 'text/html' });
+  public sendFormHtml(htmlData: string, formName: string): Observable<Result<{}>> {
+    const url = `${this.url}/forms/add/${formName}`;
+    console.log("Sending HTML Data:", htmlData);
+    const headers = new HttpHeaders({ 'Content-Type': 'text/html' });
 
-  return this.httpClient.post<Result<{}>>(url, htmlData, { headers: headers }).pipe(
-    map(result => fromJSON<{}>(JSON.stringify(result))),
-    catchError(error => of(new Err<{}>(error)))
-  );
-}
+    return this.httpClient.post<Result<{}>>(url, htmlData, { headers: headers }).pipe(
+      map(result => fromJSON<{}>(JSON.stringify(result))),
+      catchError(error => of(new Err<{}>(error)))
+    );
+  }
 
 
 }
