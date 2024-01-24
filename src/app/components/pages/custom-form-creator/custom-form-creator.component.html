@@ -14,7 +14,7 @@
             <div *ngFor="let question of availableQuestions">
                 <input type="checkbox" id="{{question.type}}" [(ngModel)]="question.selected"
                     (change)="toggleQuestionSelection(question)">
-                <label style="margin-left: 10px;" for="{{question.type}}">{{question.label}}</label>
+                <label style="margin-left: 10px;" [innerHTML]="question.label"></label>
 
                 <div *ngIf="question.type === 'multiselect' && question.selected">
                     <div>
@@ -139,3 +139,6 @@
         </div>
     </div>
 </div>
+<footer>   
+    <p>A "*" -al jelölt kérdések kiválasztása kötelező!</p>
+  </footer>
