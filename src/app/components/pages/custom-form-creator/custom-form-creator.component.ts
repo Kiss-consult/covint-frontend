@@ -33,6 +33,10 @@ export class CustomFormCreatorComponent {
   allIllnessOptions: string[] = [' Egészséges ', ' Daganatos betegségek ', ' Krónikus vesebetegség ', ' Krónikus májbetegség ', ' Mentális és viselkedési zavar ', ' Hiperlipidémia ', ' Immunhiányos állapot ', ' Anyagcserezavar ', ' Idegrendszeri betegség ', ' COPD és emphysema ', ' Elhízás ', ' Szervátültetés ', ' Hasnyálmirigy-gyulladás ', ' Cukorbetegség (I. és II. Típus) ', ' Immunszuppresszív gyógyszer szedése ', ' Súlyos szívbetegség ', ' Asztma '];
   // ha kell ide be kell olvasni a markereket
   selectedOptions: string[] = [];
+  form: string = '';
+  forms: string[] = [];
+
+
 
   availableQuestions: { label: string, type: string, selected: boolean, selectedOptions?: string[] }[] = [
     { label: 'Kor kérdés', type: 'text', selected: false },
@@ -45,7 +49,22 @@ export class CustomFormCreatorComponent {
   ];
   location: any;
 
+  public getForms() {
+    this.backendService.getForms().subscribe(
+      result => {
+        if (result.isErr()) {
+          alert("Formok lekérdezése sikertelen");
+          console.error(result.unwrapErr());
+          return;
+        }
+        this.forms = result.unwrap();
+        
+        console.log("Formok sikresen lekérdezve a az adatbázisból");
+        console.log(this.forms);
+        //this.dataSource.paginator = this.paginator;
 
+      });
+  }
   toggleQuestionSelection(question: { label: string, type: string, selected: boolean }) {
     if (question.selected) {
       if (!this.selectedQuestions.some(q => q.type === question.type)) {
@@ -209,7 +228,7 @@ export class CustomFormCreatorComponent {
           formHtml += `<input type="checkbox" name="Illnesses" value="${option}" style="${inputStyle}"> ${option}`;
         });
       }
-      formHtml += `</div>`; 
+      formHtml += `</div>`;
     });
     formHtml += `<div id="followUpQuestion" style="display:none; flex; flex-direction: column; align-items: flex-start; margin: 10px; padding: 5px; border: 1px solid #0800ff; border-radius: 10px; box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.4); background-color: ${this.questionBackgroundColor};">`
     formHtml += `<label style="${labelStyle}">A hozzátartozója elhunyt Covidban?</label>`
@@ -222,7 +241,7 @@ export class CustomFormCreatorComponent {
     formHtml += `<div style="text-align: center; margin-top: 20px;"><input onclick="submitForm()" value="Küldés" style="${buttonStyle}"></div></form></div>`;
 
 
-  
+
     formHtml += `
     <script src="https://www.google.com/recaptcha/api.js?render=${this.configservice.config.CaptchaKey}"></script>
 
@@ -271,7 +290,10 @@ export class CustomFormCreatorComponent {
                     })
                     .then(function(response) { 
                         if (!response.ok) {
-                            throw new Error('Network response was not ok');
+                          alert('Fontos kérdés hiányzik');
+                          
+                          throw new Error(response.json);
+                          
                         }
                         return response.json(); 
                     })
@@ -280,7 +302,7 @@ export class CustomFormCreatorComponent {
                         alert('Köszönjük, válaszát rögzítettük');
                     })
                     .catch(function(error) {
-                        console.error('Error:', error);
+                        console.error('Error:', response.json);
                     });
                 });
             });
@@ -293,7 +315,22 @@ export class CustomFormCreatorComponent {
   }
 
 
-  constructor(private backendService: BackendService, private recaptchaV3Service: ReCaptchaV3Service,private configservice: ConfigService) { }
+  constructor(private backendService: BackendService, private recaptchaV3Service: ReCaptchaV3Service, private configservice: ConfigService) {
+    this.backendService.getForms().subscribe(
+      result => {
+        if (result.isErr()) {
+          alert("Formok lekérdezése sikertelen");
+          console.error(result.unwrapErr());
+          return;
+        }
+        this.forms = result.unwrap();
+        
+        console.log("Formok sikresen lekérdezve a az adatbázisból");
+        console.log(this.forms);
+        //this.dataSource.paginator = this.paginator;
+
+      });
+   }
 
   sendFormToBackend() {
 
@@ -322,8 +359,8 @@ export class CustomFormCreatorComponent {
       });
     }
     );
-   
-}
+
+  }
 
 
 
