@@ -154,6 +154,10 @@ export class CustomFormCreatorComponent {
       }
     }
   }
+
+  goBackToPrevPage(): void {
+    this.location.back();
+  }
   removeSelection(question: MultiSelectQuestion, option: string) {
     const index = question.selectedOptions.indexOf(option);
     if (index > -1) {
