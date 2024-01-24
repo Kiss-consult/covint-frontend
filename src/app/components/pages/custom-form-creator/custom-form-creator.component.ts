@@ -36,14 +36,14 @@ export class CustomFormCreatorComponent {
   form: string = '';
   forms: string[] = [];
 
-
+  
 
   availableQuestions: { label: string, type: string, selected: boolean, selectedOptions?: string[] }[] = [
-    { label: 'Kor kérdés', type: 'text', selected: false },
-    { label: 'Covid kérdés', type: 'yesno', selected: false },
-    { label: 'Korház Kérdés', type: 'yesnohospital', selected: false },
+    { label: 'Kor kérdés <sup>*</sup>', type: 'text', selected: false },
+    { label: 'Covid kérdés <sup>*</sup>', type: 'yesno', selected: false },
+    { label: 'Korház Kérdés <sup>*</sup>', type: 'yesnohospital', selected: false },
     { label: 'Betegség kérdés', type: 'multiselect', selected: false, selectedOptions: [] },
-    { label: 'Nem kérdés', type: 'sex', selected: false },
+    { label: 'Nem kérdés <sup>*</sup>', type: 'sex', selected: false },
     { label: 'Hozzátartozóként tölti ki a kérdőívet?', type: 'relative', selected: false }
 
   ];
@@ -145,7 +145,7 @@ export class CustomFormCreatorComponent {
       if (question.selectedOptions.length < maxSelection) {
         question.selectedOptions.push(option);
       } else {
-        console.log("You can only select up to " + maxSelection + " options.");
+        console.log("Max választható válaszlehetőségek " + maxSelection + " options.");
       }
     }
   }
@@ -291,18 +291,17 @@ export class CustomFormCreatorComponent {
                     .then(function(response) { 
                         if (!response.ok) {
                           alert('Fontos kérdés hiányzik');
-                          
-                          throw new Error(response.json);
-                          
+                          const responsetext = response.text();
+                          console.log('Error:',responsetext)
                         }
-                        return response.json(); 
                     })
                     .then(function(data) {
                         console.log('Success:', data);  
                         alert('Köszönjük, válaszát rögzítettük');
                     })
                     .catch(function(error) {
-                        console.error('Error:', response.json);
+                        alert('Kötelező kérdések hiányoznak!')
+                        console.error('Error:', error);
                     });
                 });
             });
