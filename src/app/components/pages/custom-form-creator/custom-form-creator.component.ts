@@ -10,6 +10,7 @@ import { Ok } from 'src/app/models/utils/result';
 import { ChangeDetectorRef } from '@angular/core';
 import { ReCaptchaV3Service } from 'ng-recaptcha';
 import { ConfigService } from 'src/app/services/config/config.service';
+import { Form } from 'src/app/models/form';
 
 @Component({
   selector: 'app-custom-form-creator',
@@ -35,6 +36,9 @@ export class CustomFormCreatorComponent {
   selectedOptions: string[] = [];
   form: string = '';
   forms: string[] = [];
+  getForm: Form = new Form;
+  
+  
 
 
 
@@ -49,18 +53,19 @@ export class CustomFormCreatorComponent {
   ];
   location: any;
 
-  public getForms() {
-    this.backendService.getForms().subscribe(
+  public getFormByName(formname: string) {
+    this.backendService.getFormByName(formname).subscribe(
       result => {
         if (result.isErr()) {
-          alert("Formok lekérdezése sikertelen");
+          alert("Form lekérdezése sikertelen");
           console.error(result.unwrapErr());
           return;
         }
-        this.forms = result.unwrap();
+        this.getForm = result.unwrap();
         
-        console.log("Formok sikresen lekérdezve a az adatbázisból");
+        console.log("Form sikresen lekérdezve a az adatbázisból");
         console.log(this.forms);
+        window.open(this.getForm.Url);
         //this.dataSource.paginator = this.paginator;
 
       });
