@@ -14,6 +14,7 @@ import { Override } from 'src/app/models/override/override';
 import { Default } from 'src/app/models/default/default';
 import { Auditlog } from 'src/app/models/auditlog/auditlog';
 import { Diagram } from 'src/app/models/diagram/diagram';
+import { Form } from 'src/app/models/form';
 
 
 @Injectable({
@@ -172,7 +173,14 @@ export class BackendService {
       catchError(error => of(new Err<string[]>(error)))
     );
   }
-
+// This function returns all the forms stored in the database.
+public getFormByName(formname : String): Observable<Result<Form>> {
+  const url = this.url + "/forms/"+ formname;
+  return this.httpClient.get<Result<Form>>(url, { headers: this.getHeaders() }).pipe(
+    map(result => fromJSON<Form>(JSON.stringify(result))),
+    catchError(error => of(new Err<Form>(error)))
+  );
+}
   // This function returns all the illnesses stored in the database.
   public getFilterList(): Observable<Result<SavedFilter[]>> {
     const url = this.url + "/filters/list";

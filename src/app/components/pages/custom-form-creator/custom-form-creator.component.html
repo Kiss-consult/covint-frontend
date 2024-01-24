@@ -21,7 +21,7 @@
                         <label class="text" for="bno">Lehetséges társbetegségek: </label>
                     </div>
                     <ng-select [items]="allIllnessOptions" [multiple]="true" [maxSelectedItems]="10"
-                        (change)="onOptionsChange(question)" bindLabel="name" [(ngModel)]="question.selectedOptions"
+                        (change)="onOptionsChange(question)" bindLabel="name"placeholder=" válasszon a legördülő menüből &darr;" [(ngModel)]="question.selectedOptions"
                         title="Klikkeljen ide és válasszon a betegségek hozzáadásához!">
                         <br>
                     </ng-select>
@@ -121,7 +121,7 @@
     </div>
     <div>
         <div>
-            <label>Meglévő szűrő lekérdezése</label>
+            <label>Mentett FORM lekérdezése</label>
         </div>
         <div style="display: flex;">
             <div>
@@ -134,9 +134,13 @@
                 </select>
             </div>
             <div>
-                <button id="form" (click)="getForms()">Valami</button>
+                <button id="form" (click)="getFormByName(form)">Form lekérés / megnyitás</button>
             </div>
         </div>
+        <div style="flex-grow: 1;">
+            <p style="margin: 0;">{{ this.getForm.Url }}</p>
+            <p style="margin: 0;">{{ this.getForm.Iframe }}</p>
+          </div>
     </div>
 </div>
 <footer>   
