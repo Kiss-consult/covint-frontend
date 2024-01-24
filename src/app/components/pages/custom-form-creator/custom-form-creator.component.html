@@ -1,4 +1,11 @@
-<h1>Kérdőív</h1>
+<h1>Kérdőív összeállítása </h1>
+
+<h2>Állítson össze saját kérdőívet: a *-al jelölt kérdések szükségesek a form működéséhez ( adatbázis)! </h2>
+
+
+<div class="container">  
+<h3><button id="backbutton" (click)="goBackToPrevPage()">&#11148;</button></h3>
+  <div class="container2">
 
 <div class="container">
 
@@ -125,7 +132,7 @@
         </div>
         <div style="display: flex;">
             <div>
-                <label style="margin-right: 20px;" class="text">Válasszon a mentett filterek közül!</label>
+                <label style="margin-right: 20px;" class="text">Válasszon a mentett formok közül!</label>
                 <select class="droptextbox" type="text" id="filters" name="filters" [(ngModel)]="form"
                     title="Kérem válasszon">
                     <ng-container *ngFor="let form of forms">
@@ -143,6 +150,4 @@
           </div>
     </div>
 </div>
-<footer>   
-    <p>A "*" -al jelölt kérdések kiválasztása kötelező!</p>
-  </footer>
+
