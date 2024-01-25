@@ -1,18 +1,21 @@
 .container{            
         padding-top: 0;
+        
 }
 
 .question-selection{
     text-align: left;
-    padding-left: 60px;
+    padding-left: 60px;padding-right: 20px;
 }
 
 .custom-form-creator{
     background: rgb(224,224,224);
     background: linear-gradient(180deg, rgba(224,224,224,1) 80%, rgb(255, 255, 255) 100%);
-    padding: 20px;
-    
-    padding-top: 60px;
+    padding-left: 20px;
+    padding-right: 20px;
+    margin-bottom: 10px;
+    padding-bottom: 60px;
+    padding-top: 85px;
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     justify-content: space-between;
@@ -65,17 +68,24 @@ h5 {
     margin-left: 10px;
 }
 
+#savedform{
+    margin-right: 20px;
+}
+
 #generaltext{
     width:100%;
     min-height: 150px;
     margin-bottom: 10px;
     height: auto;
+    margin-right: 0;
+    padding-right: 0;
 }
 
 #generaldiv{
     margin: 20px;
     margin-left: 0;
-    margin-bottom: 0;
+    margin-bottom: 40px;
+    margin-right: 0;
 }
 
 #backgroundColorPicker{
