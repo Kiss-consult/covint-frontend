@@ -57,7 +57,7 @@
                 </div>
                 <div>
                     <div>
-                        <label>Mentett FORM lekérdezése</label>
+                        <label> <b>Mentett FORM lekérdezése</b></label>
                     </div>
                     
                     <div>
@@ -73,9 +73,10 @@
                         <button id="form" (click)="getFormByName(form)">Form lekérés / megnyitás</button>
                     </div>
                     
-                    <div style="flex-grow: 1;">
-                        <p style="margin: 0;">{{ this.getForm.Url }}</p>
-                        <p style="margin: 0;">{{ this.getForm.Iframe }}</p>
+                    <div id="generaldiv" style="flex-grow: 1;">
+                        <textarea id="generaltext" style="margin-bottom: 0;" class="droptextbox"
+                        readonly>  {{ this.getForm.Iframe }}</textarea>
+                        
                     </div>
                 </div>
 

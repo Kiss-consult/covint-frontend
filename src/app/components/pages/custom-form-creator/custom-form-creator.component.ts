@@ -11,6 +11,7 @@ import { ChangeDetectorRef } from '@angular/core';
 import { ReCaptchaV3Service } from 'ng-recaptcha';
 import { ConfigService } from 'src/app/services/config/config.service';
 import { Form } from 'src/app/models/form';
+import { Location } from '@angular/common'
 
 @Component({
   selector: 'app-custom-form-creator',
@@ -52,6 +53,23 @@ export class CustomFormCreatorComponent {
 
   ];
   location: any;
+
+  constructor(private backendService: BackendService,   private recaptchaV3Service: ReCaptchaV3Service, private configservice: ConfigService,private location2: Location) {
+    this.backendService.getForms().subscribe(
+      result => {
+        if (result.isErr()) {
+          alert("Formok lekérdezése sikertelen");
+          console.error(result.unwrapErr());
+          return;
+        }
+        this.forms = result.unwrap();
+        
+        console.log("Formok sikresen lekérdezve a az adatbázisból");
+        console.log(this.forms);
+        //this.dataSource.paginator = this.paginator;
+
+      });
+   }
 
   public getFormByName(formname: string) {
     this.backendService.getFormByName(formname).subscribe(
@@ -156,7 +174,7 @@ export class CustomFormCreatorComponent {
   }
 
   goBackToPrevPage(): void {
-    this.location.back();
+    this.location2.back();
   }
   removeSelection(question: MultiSelectQuestion, option: string) {
     const index = question.selectedOptions.indexOf(option);
@@ -323,22 +341,7 @@ export class CustomFormCreatorComponent {
   }
 
 
-  constructor(private backendService: BackendService, private recaptchaV3Service: ReCaptchaV3Service, private configservice: ConfigService) {
-    this.backendService.getForms().subscribe(
-      result => {
-        if (result.isErr()) {
-          alert("Formok lekérdezése sikertelen");
-          console.error(result.unwrapErr());
-          return;
-        }
-        this.forms = result.unwrap();
-        
-        console.log("Formok sikresen lekérdezve a az adatbázisból");
-        console.log(this.forms);
-        //this.dataSource.paginator = this.paginator;
-
-      });
-   }
+  
 
   sendFormToBackend() {
 
