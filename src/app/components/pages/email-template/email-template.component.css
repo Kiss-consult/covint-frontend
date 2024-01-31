@@ -78,7 +78,7 @@ h3{
 
 }
 
-@media (max-width: 1400px){
+@media (max-width: 1450px){
 
 .container2{
     display: grid;
@@ -93,7 +93,7 @@ h3{
     #segedlet{
         width: auto;
         position: absolute;
-        top: 36px;
+        top: 5px;
         left: 150px;
         height: 45px;
         color: #646464;
@@ -124,7 +124,7 @@ h3{
     #segedlet{
         width: auto;
         position: absolute;
-        top: 6px;
+        top: 36px;
         left: 150px;
         height: 45px;
         color: #646464;
