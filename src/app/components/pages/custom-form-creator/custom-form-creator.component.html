@@ -27,12 +27,15 @@
                         <div>
                             <label class="text" for="bno">Lehetséges társbetegségek: </label>
                         </div>
+                        <div>
                         <ng-select [items]="allIllnessOptions" [multiple]="true" [maxSelectedItems]="10"
-                            (change)="onOptionsChange(question)" bindLabel="name"placeholder=" válasszon a legördülő menüből &darr;" [(ngModel)]="question.selectedOptions"
+                            (change)="onOptionsChange(question)" bindLabel="name"placeholder=" Válasszon betegséget &darr;" [(ngModel)]="question.selectedOptions"
                             title="Klikkeljen ide és válasszon a betegségek hozzáadásához!">
-                            <br>
                         </ng-select>
+                        </div>
                     </div>
+
+                    
 
                 </div>
 
