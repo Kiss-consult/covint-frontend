@@ -3,7 +3,7 @@
 <h2>Állítson össze saját kérdőívet: a *-al jelölt kérdések szükségesek a form működéséhez ( adatbázis)! </h2>
 
 
-<div class="container">  
+<div class="container">
     <h3><button id="backbutton" (click)="goBackToPrevPage()">&#11148;</button></h3>
     <div class="container2">
 
@@ -24,18 +24,20 @@
                     <label style="margin-left: 10px;" [innerHTML]="question.label"></label>
 
                     <div *ngIf="question.type === 'multiselect' && question.selected">
-                        <div>
-                            <label class="text" for="bno">Lehetséges társbetegségek: </label>
+
+                        <div class="container2">
+                            <ng-select [items]="allIllnessOptions" [multiple]="true" [maxSelectedItems]="10"
+                                (change)="onOptionsChange(question)" bindLabel="name"
+                                placeholder=" Válasszon betegséget &darr;" [(ngModel)]="question.selectedOptions"
+                                title="Klikkeljen ide és válasszon a betegségek hozzáadásához!">
+                                
+                            </ng-select>
                         </div>
-                        <div>
-                        <ng-select [items]="allIllnessOptions" [multiple]="true" [maxSelectedItems]="10"
-                            (change)="onOptionsChange(question)" bindLabel="name"placeholder=" Válasszon betegséget &darr;" [(ngModel)]="question.selectedOptions"
-                            title="Klikkeljen ide és válasszon a betegségek hozzáadásához!">
-                        </ng-select>
-                        </div>
+
+
                     </div>
 
-                    
+
 
                 </div>
 
@@ -62,7 +64,7 @@
                     <div>
                         <label> <b>Mentett FORM lekérdezése</b></label>
                     </div>
-                    
+
                     <div>
                         <label id="savedform" class="text">Válasszon a mentett formok közül!</label>
                         <select class="droptextbox" type="text" id="filters" name="filters" [(ngModel)]="form"
@@ -75,15 +77,15 @@
                     <div>
                         <button id="form" (click)="getFormByName(form)">Form lekérés / megnyitás</button>
                     </div>
-                    
+
                     <div id="generaldiv" style="flex-grow: 1;">
                         <textarea id="generaltext" style="margin-bottom: 0;" class="droptextbox"
-                        readonly>  {{ this.getForm.Iframe }}</textarea>
-                        
+                            readonly>  {{ this.getForm.Iframe }}</textarea>
+
                     </div>
                 </div>
 
-                
+
             </div>
 
             <div class="form-preview" [ngStyle]="{'background-color': backgroundColor, 'color': textColor}">
@@ -98,7 +100,8 @@
                             <ng-container *ngIf="question.type === 'text'" class="question-container">
                                 <label class="question-label">{{ question.label }}</label>
                                 <div>
-                                    <input style="margin-bottom: 0;" class="droptextbox" type="text" [name]="question.id">
+                                    <input style="margin-bottom: 0;" class="droptextbox" type="text"
+                                        [name]="question.id">
                                 </div>
                             </ng-container>
                             <ng-container *ngIf="question.type === 'yesno'" class="question-container">
@@ -152,12 +155,11 @@
                 </div>
                 <button id="send" type="button" disabled>Küldés</button>
             </div>
-            
-            
-        
-    </div>
-    <footer>   
-        <p>A "*" -al jelölt mezők kitöltése kötelező !</p>
-    </footer>
-</div>
 
+
+
+        </div>
+        <footer>
+            <p>A "*" -al jelölt mezők kitöltése kötelező !</p>
+        </footer>
+    </div>
