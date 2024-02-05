@@ -47,7 +47,7 @@ export class CustomFormCreatorComponent {
     { label: 'Kor kérdés <sup>*</sup>', type: 'text', selected: false },
     { label: 'Covid kérdés <sup>*</sup>', type: 'yesno', selected: false },
     { label: 'Korház Kérdés <sup>*</sup>', type: 'yesnohospital', selected: false },
-    { label: 'Betegség kérdés', type: 'multiselect', selected: false, selectedOptions: [] },
+    { label: 'Betegség kérdés <sup>*</sup>', type: 'multiselect', selected: false, selectedOptions: [] },
     { label: 'Nem kérdés <sup>*</sup>', type: 'sex', selected: false },
     { label: 'Hozzátartozóként tölti ki a kérdőívet?', type: 'relative', selected: false }
 
