@@ -317,7 +317,7 @@ export class CustomFormCreatorComponent {
                     })
                     .then(function(response) { 
                         if (!response.ok) {
-                          alert('Fontos kérdés hiányzik');
+                          
                           const responsetext = response.text();
                           console.log('Error:',responsetext)
                         }
@@ -420,8 +420,39 @@ export class CustomFormCreatorComponent {
     }
     return [];
   }
+/*
+  private checkRequiredFields(): boolean {
+
+    
+    if (this.filter.Sex === null || this.filter.Sex === "") {
+      alert("A 'Nem' mező kitöltése kötelező");
+      return false;
+    }
+    if (this.filter.Validated === null || this.filter.Validated === "") {
+      alert("A 'Validitás' mező kitöltése kötelező");
+      return false;
+    }
+    if (this.filter.AgeFrom === null || this.filter.AgeFrom < 18 || this.filter.AgeFrom > 88) {
+      alert("A 'Páciens kora -tól' mező kitöltése kötelező, és 18 és 88 között kell lennie");
+      return false;
+    }
+    if (this.filter.AgeTo === null || this.filter.AgeTo < 18 || this.filter.AgeTo > 88) {
+      alert("A 'Páciens kora -ig' mező kitöltése kötelező, és 18 és 88 között kell lennie");
+      return false;
+    }
+    return true;
+  }
 
 
+
+
+   if (!this.checkRequiredFields()) {
+      return;
+    }
+
+
+    
+ */
 
 
 
