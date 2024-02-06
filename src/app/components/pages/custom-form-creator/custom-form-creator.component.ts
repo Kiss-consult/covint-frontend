@@ -206,20 +206,20 @@ export class CustomFormCreatorComponent {
 
   renderForm() {
     const uniqueFormName = this.generateUniqueFormName();
-    const requiredQuestionTypes = ['text', 'yesno', 'yesnohospital', 'multiselect', 'sex']; // Define required question types here
-  let missingTypes = requiredQuestionTypes.slice(); // Copy required types to track missing ones
+    const requiredQuestionTypes = ['text', 'yesno', 'yesnohospital', 'multiselect', 'sex']; 
+  let missingTypes = requiredQuestionTypes.slice(); 
 
-  // Check if all required question types are selected
+ 
   this.selectedQuestions.forEach(question => {
     const index = missingTypes.indexOf(question.type);
     if (index !== -1) {
-      missingTypes.splice(index, 1); // Remove found type from missingTypes
+      missingTypes.splice(index, 1); 
     }
   });
 
   if (missingTypes.length > 0) {
-    alert('Úgy tűnik, elfelejtettél néhány fontos kérdést hozzáadni. Kérlek, ellenőrizd és próbáld újra!'); // Friendly sarcastic alert for missing questions
-    return; // Stop form rendering if required questions are missing
+    alert('Úgy tűnik, elfelejtettél néhány fontos kérdést hozzáadni. Kérlek, ellenőrizd és próbáld újra!'); 
+    return; 
   }
     let formHtml = `
     <html>
