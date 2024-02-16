@@ -15,4 +15,4 @@ COPY ./nginx.conf /etc/nginx/conf.d/default.conf
 
 EXPOSE 8080
 
-CMD ["/bin/bash", "-c", "envsubst </app/usr/share/nginx/html/assets/config.templ.json > /app/usr/share/nginx/html/assets/config.json && exec nginx -g 'daemon off;'"]
+CMD ["/bin/bash", "-c", "/app/startup.sh && exec nginx -g 'daemon off;'"]
