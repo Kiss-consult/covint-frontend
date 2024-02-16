@@ -11,6 +11,22 @@
     margin: 0;     
   }
 
+  #telco{
+    background-color: white;
+    color: #000000;
+    border: none;
+    width: auto;
+  }
+
+  #telco:hover{
+    background-color:#9dc3ff ;
+    border-top-right-radius:7px;
+    border-top-left-radius: 7px;
+    color: white;
+    margin: 0;    
+    cursor: pointer;
+  }
+
   .nav-link.active {
     background-color: #0080ff; 
     
@@ -90,7 +106,7 @@
 
 
 
-@media (max-width: 1400px) {
+@media (max-width: 1450px) {
   .navbar-nav {
     list-style-type: none;
     margin: 0;
@@ -126,13 +142,22 @@
     top: 0;
   }
 
+  #telco:hover{
+    background-color:#9dc3ff ;
+    border-top-right-radius:7px;
+    border-top-left-radius: 7px;
+    color: white;
+    margin: 0;    
+    cursor: pointer;
+  }
+
 }
 
 
 @media (max-width: 500px){
 
   #login{
-    margin-left: 5px;
+    margin-left: 10px;
   }
 
   #logout{

@@ -1,21 +1,28 @@
-#covint_logo{
-    width: 100%;
-    border-right: 4px solid #0800ff;
-    padding-right: 50px;
+.container{
+    padding-top: 0;
+    padding-bottom: 20px;
+    display: flex;    
 }
 
-.covinttext{
-    width: 50%;
-    flex: 1;
-    margin-left: 50px;
-}
- 
-.container{
-    padding-top: 100px;
-    padding-bottom: 100px;
+#backbutton {
     display: flex;
-    
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    width: 40px;
+    font-size: 35px;
+    font-weight: bold;
+    height: 40px
+  }
+
+.segedletclass{
+    padding-top: 80px;
+    background: rgb(224,224,224);
+    padding-left: 15px;
+    padding-right: 15px;padding-bottom: 15px;
+    width: 100%;
 }
+
 .container2{
     padding-top: 100px;
     padding-bottom: 100px;
@@ -23,35 +30,25 @@
     
 }
 table {
-    font-family: arial, sans-serif;
     border-collapse: collapse;
     width: 100%;
+    border-top: 15px solid white;
+    border-bottom: 20px solid white;
+    
   }
   
   td, th {
-    border: 1px solid #dddddd;
+    border: 2px solid white;
     text-align: left;
     padding: 8px;
+    width: 33%;
   }
   
   tr:nth-child(even) {
-    background-color: #dddddd;
+    background-color: white;
   }
 @media (max-width: 1400px){
-    #covint_logo{
-        display: none;
-    }
-
-    .container{
-        
-        padding-right: 0;
-    }
-
-    .covinttext{
-        width: 100%;
-        flex: 1;
-        margin: 10px;
-    }
+    
 }
 
 

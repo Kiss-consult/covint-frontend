@@ -10,17 +10,25 @@
           <label class="text" for="sex">Páciens neme <s>*</s></label>
         </div>
         <div>
-          <select class="droptextbox" name="sex" id="sex" [(ngModel)]="override.Sex" title="Kérem válasszon">
+          <select *ngIf="loginService.hasAnyGroup([portalvezeto, kutatoorvos])" class="droptextbox" name="sex" id="sex" [(ngModel)]="override.Sex" title="Kérem válasszon">
             <option value="" disabled selected hidden>Válasszon nemet...</option>
             <option value="Férfi">Férfi</option>
             <option value="Nő">Nő</option>
+          </select>
+          <select *ngIf="loginService.hasAnyGroup([portaladmin])" class="droptextbox" name="sex" id="sex" [(ngModel)]="override.Sex" title="Portáladmin számára nem elérhető">
+            <option value="" disabled selected hidden>Válasszon nemet...</option>
+            <option value="Férfi"  disabled selected hidden>Férfi</option>
+            <option value="Nő" disabled selected hidden>Nő</option>
           </select>
           <div class="ageclass">
             <div>
               <label class="text" for="age">Páciens kora <s>*</s></label>
             </div>
             <div>
-              <input class="droptextbox" type="number" id="age" name="age" min="1" [(ngModel)]="override.Age" placeholder="18-88" title="Kérem töltse ki a mezőt">
+              <input  *ngIf="loginService.hasAnyGroup([portalvezeto, kutatoorvos])" class="droptextbox" type="number" id="age" name="age" min="1" 
+              [(ngModel)]="override.Age" placeholder="18-88" title="Kérem töltse ki a mezőt">
+              <input  *ngIf="loginService.hasAnyGroup([portaladmin])"  disabled="disabled" class="droptextbox" type="number" id="age" name="age" min="1" 
+              [(ngModel)]="override.Age" placeholder="18-88" title="Portáladmin számára nem elérhető">
             </div>
           </div>
         </div>
@@ -34,13 +42,19 @@
           <label class="text"> Halálozási % <s>*</s></label>
         </div>
         <div>        
-          <input class="droptextbox" type="number" id="deadpercent" name="deadpercent" min = '1' max = '100' [(ngModel)]="override.Dead" placeholder="12%" title="Kérem töltse ki a mezőt 1-100 ">    
+          <input class="droptextbox"  *ngIf="loginService.hasAnyGroup([portalvezeto, kutatoorvos])" type="number" id="deadpercent" name="deadpercent" min = '1' max = '100'
+           [(ngModel)]="override.Dead" placeholder="12%" title="Kérem töltse ki a mezőt 1-100 ">   
+           <input class="droptextbox"  *ngIf="loginService.hasAnyGroup([portaladmin])" type="number" id="deadpercent" name="deadpercent" min = '1' max = '100'
+           [(ngModel)]="override.Dead"   disabled="disabled" placeholder="12%" title="Portáladmin számára nem elérhető">   
         </div>  
         <div>
           <label class="text"> Kórházba kerülési % <s>*</s></label>
         </div>
         <div>
-          <input class="droptextbox" type="number" id="hosppercent" name="hosppercent" min = '1' max = '100' [(ngModel)]="override.Hospitalized" placeholder="34%" title="Kérem töltse ki a mezőt">
+          <input class="droptextbox"  *ngIf="loginService.hasAnyGroup([portalvezeto, kutatoorvos])" type="number" id="hosppercent" name="hosppercent" min = '1' max = '100'
+           [(ngModel)]="override.Hospitalized" placeholder="34%" title="Kérem töltse ki a mezőt">
+           <input class="droptextbox"  *ngIf="loginService.hasAnyGroup([portaladmin])" type="number" id="hosppercent" name="hosppercent" min = '1' max = '100'
+           [(ngModel)]="override.Hospitalized"   disabled="disabled" placeholder="34%" title="Portáladmin számára nem elérhető">
         </div>
       </div>
     </div>
@@ -51,13 +65,20 @@
         <label class="text"> Marker <s>*</s></label>
       </div>
       <div>
-        <select class="droptextbox" type="text" id="markers" name="markers" [(ngModel)]="marker" title="Ha a betegnek nem volt társ betegsége, válassza az 'Egészséges' markert! ">
+        <select *ngIf="loginService.hasAnyGroup([portalvezeto, kutatoorvos])" class="droptextbox" type="text" id="markers" name="markers" [(ngModel)]="marker" title="Ha a betegnek nem volt társ betegsége, válassza az 'Egészséges' markert! ">
           <ng-container *ngFor="let marker of markers">
             <option value="" disabled selected hidden>Válasszon markert...</option>
             <option value="{{marker}}">{{marker}}</option>
           </ng-container>
         </select>
-        <button (click)="addMarker()">Hozzáadás</button>
+        <select *ngIf="loginService.hasAnyGroup([portaladmin])" class="droptextbox" type="text" id="markers" name="markers" [(ngModel)]="marker" title="Portáladmin számára nem elérhető">
+          <ng-container *ngFor="let marker of markers">
+            <option value="" disabled selected hidden>Válasszon markert...</option>
+            <option value="{{marker}}" >{{marker}}</option>
+          </ng-container>
+        </select>
+        <button *ngIf="loginService.hasAnyGroup([portalvezeto, kutatoorvos])" (click)="addMarker()">Hozzáadás</button>
+        <button *ngIf="loginService.hasAnyGroup([portaladmin])"  disabled="disabled"  title="Portáladmin számára nem elérhető"  (click)="addMarker()">Hozzáadás</button>
       </div>
     </div>
   </div>
@@ -86,7 +107,8 @@
               <p style="margin: 0;">{{ illness }}</p>
             </div>
             <div style="margin-left: auto;">
-              <button (click)="removeMarker(illness)">Törlés</button>
+              <button *ngIf="loginService.hasAnyGroup([portalvezeto, kutatoorvos])" (click)="removeMarker(illness)">Törlés</button>
+              <button *ngIf="loginService.hasAnyGroup([portaladmin])" (click)="removeMarker(illness)" title="Portáladmin számára nem elérhető">Törlés</button>
             </div>
           </div>
         </div>
@@ -101,7 +123,8 @@
   
   
     <div style="text-align: center; position: relative; z-index: 1; display: flex; flex-direction: column; align-items: center;">   
-      <button id="okebutton" (click)=" overridePercent()"style="z-index: 2; position: relative;">Mentés</button>
+      <button   *ngIf="loginService.hasAnyGroup([portalvezeto, kutatoorvos])"id="okebutton" (click)=" overridePercent()"style="z-index: 2; position: relative;">Mentés</button>
+      <button   *ngIf="loginService.hasAnyGroup([portaladmin])"id="okebutton" disabled="disabled" title="Portáladmin számára nem elérhető" (click)=" overridePercent()"style="z-index: 2; position: relative;">Mentés</button>
       <div style="position: absolute; bottom: 0; width: 50%; z-index: 1; text-align: center;">
         <hr style="margin-top: 10px; width: 100%; height: 1px; background-color: #0080ff; box-shadow:0px 1px 0px #848484;">
       </div>

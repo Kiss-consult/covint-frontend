@@ -50,7 +50,14 @@ h3{
     font-weight: 500;
     width: 100px;     
     padding-left: 30px;
-    margin-top: 5px;
+    margin-top: 6px;
+}
+
+h4{
+    background-color: #646464;
+    color: white;
+    padding: 10px;
+    margin: 0;
 }
 
 .container{   
@@ -196,7 +203,7 @@ footer {
 
 
 
-@media (max-width: 1400px){
+@media (max-width: 1450px){
     .container{
         padding-left:165px;
     }

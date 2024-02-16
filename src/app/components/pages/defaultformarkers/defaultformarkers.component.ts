@@ -5,6 +5,8 @@ import { BackendService } from 'src/app/services/backend/backend.service';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatPaginator } from '@angular/material/paginator';
 import { Location } from '@angular/common'
+import { KutatoOrvos, Orvos, PortalKezelo, PortalVezeto } from 'src/app/models/group/group';
+import { LoginService } from 'src/app/services/login/login.service';
 @Component({
   selector: 'app-defaultformarkers',
   templateUrl: './defaultformarkers.component.html',
@@ -12,7 +14,10 @@ import { Location } from '@angular/common'
 })
 export class DefaultformarkersComponent {
 
- 
+  orvos = Orvos;
+  kutatoorvos = KutatoOrvos;
+  portaladmin= PortalKezelo;
+  portalvezeto = PortalVezeto;
   marker: string = ''; 
   markers: string[] = [];
   case: Case = new Case();
@@ -34,7 +39,7 @@ export class DefaultformarkersComponent {
   goBackToPrevPage(): void {
     this.location.back();
   }
-  constructor(private backendService: BackendService,private location: Location) {
+  constructor(private backendService: BackendService,private location: Location, public loginService : LoginService) {
     // query all the illnesses formn the database
     this.backendService.getMarkers().subscribe(
       result => {

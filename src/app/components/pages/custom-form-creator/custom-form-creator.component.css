@@ -1,22 +1,26 @@
 .container{            
         padding-top: 0;
+        
 }
 
 .question-selection{
     text-align: left;
-    padding-left: 60px;
+    padding-left: 60px;padding-right: 20px;
 }
 
 .custom-form-creator{
     background: rgb(224,224,224);
     background: linear-gradient(180deg, rgba(224,224,224,1) 80%, rgb(255, 255, 255) 100%);
-    padding: 20px;
-    
-    padding-top: 60px;
+    padding-left: 20px;
+    padding-right: 20px;
+    margin-bottom: 10px;
+    padding-bottom: 60px;
+    padding-top: 85px;
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     justify-content: space-between;
   }
+
 
 .form-preview{
     text-align: center;
@@ -65,17 +69,24 @@ h5 {
     margin-left: 10px;
 }
 
+#savedform{
+    margin-right: 20px;
+}
+
 #generaltext{
     width:100%;
     min-height: 150px;
     margin-bottom: 10px;
     height: auto;
+    margin-right: 0;
+    padding-right: 0;
 }
 
 #generaldiv{
     margin: 20px;
     margin-left: 0;
-    margin-bottom: 0;
+    margin-bottom: 40px;
+    margin-right: 0;
 }
 
 #backgroundColorPicker{
@@ -96,28 +107,60 @@ h5 {
     margin-top: 30px;
 }
 /* Style the dropdown container */
-.ng-select {
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    background: #bdd6ef;
+
+.ng-value-container{
+    display: flex;
+    flex-direction: column;    
 }
 
 /* Style the selected items */
-.ng-select .ng-value {
+.ng-value {
     background-color: #ffffff;
-    color: rgb(0, 0, 0);
+    color: rgb(0, 0, 0);    
+    padding: 10px;
+    margin-top: 0;
+    border-radius: 7px;
+    margin-top: 40px;
+}
+
+.ng-select{
+    margin-bottom:20px;
+   
 }
 
 /* Style the dropdown panel */
-.ng-select .ng-dropdown-panel {
-    background-color: #f8f9fa;
-    border-color: #dee2e6;
+.ng-dropdown-panel {
+    background-color: #ffffff;
+    border-color:solid 2px #000000;
+    border-radius: 7px;
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 40px;    
 }
 
 /* Style individual options in the dropdown */
-.ng-select .ng-option {
+.ng-option {
+    margin-left: 0;
     padding: 10px;
     &:hover {
-        background-color: #e9ecef;
+        background-color: #9dc3ff;
     }
 }
+
+.ng-placeholder{
+    border-radius: 5px;
+    border: solid 1px #0080ff;
+    background-color: #ffffff;
+    height: 40px;
+    padding: 5px;
+    min-width: 200px;
+    width: 200px;
+    text-align: center;
+    box-shadow: 1px 1px 0px 0.5px #848484;
+    margin-bottom: 20px;
+}
+
+.ng-clear-wrapper{
+    display: none;
+}
+

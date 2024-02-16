@@ -10,6 +10,8 @@ import { Ok } from 'src/app/models/utils/result';
 import { ChangeDetectorRef } from '@angular/core';
 import { ReCaptchaV3Service } from 'ng-recaptcha';
 import { ConfigService } from 'src/app/services/config/config.service';
+import { Form } from 'src/app/models/form';
+import { Location } from '@angular/common'
 
 @Component({
   selector: 'app-custom-form-creator',
@@ -33,19 +35,59 @@ export class CustomFormCreatorComponent {
   allIllnessOptions: string[] = [' Egészséges ', ' Daganatos betegségek ', ' Krónikus vesebetegség ', ' Krónikus májbetegség ', ' Mentális és viselkedési zavar ', ' Hiperlipidémia ', ' Immunhiányos állapot ', ' Anyagcserezavar ', ' Idegrendszeri betegség ', ' COPD és emphysema ', ' Elhízás ', ' Szervátültetés ', ' Hasnyálmirigy-gyulladás ', ' Cukorbetegség (I. és II. Típus) ', ' Immunszuppresszív gyógyszer szedése ', ' Súlyos szívbetegség ', ' Asztma '];
   // ha kell ide be kell olvasni a markereket
   selectedOptions: string[] = [];
+  form: string = '';
+  forms: string[] = [];
+  getForm: Form = new Form;
+  
+  
+
+  
 
   availableQuestions: { label: string, type: string, selected: boolean, selectedOptions?: string[] }[] = [
-    { label: 'Kor kérdés', type: 'text', selected: false },
-    { label: 'Covid kérdés', type: 'yesno', selected: false },
-    { label: 'Korház Kérdés', type: 'yesnohospital', selected: false },
-    { label: 'Betegség kérdés', type: 'multiselect', selected: false, selectedOptions: [] },
-    { label: 'Nem kérdés', type: 'sex', selected: false },
+    { label: 'Kor kérdés <sup>*</sup>', type: 'text', selected: false },
+    { label: 'Covid kérdés <sup>*</sup>', type: 'yesno', selected: false },
+    { label: 'Korház Kérdés <sup>*</sup>', type: 'yesnohospital', selected: false },
+    { label: 'Betegség kérdés <sup>*</sup>', type: 'multiselect', selected: false, selectedOptions: [] },
+    { label: 'Nem kérdés <sup>*</sup>', type: 'sex', selected: false },
     { label: 'Hozzátartozóként tölti ki a kérdőívet?', type: 'relative', selected: false }
 
   ];
   location: any;
 
+  constructor(private backendService: BackendService,   private recaptchaV3Service: ReCaptchaV3Service, private configservice: ConfigService,private location2: Location) {
+    this.backendService.getForms().subscribe(
+      result => {
+        if (result.isErr()) {
+          alert("Formok lekérdezése sikertelen");
+          console.error(result.unwrapErr());
+          return;
+        }
+        this.forms = result.unwrap();
+        
+        console.log("Formok sikresen lekérdezve a az adatbázisból");
+        console.log(this.forms);
+        //this.dataSource.paginator = this.paginator;
 
+      });
+   }
+
+  public getFormByName(formname: string) {
+    this.backendService.getFormByName(formname).subscribe(
+      result => {
+        if (result.isErr()) {
+          alert("Form lekérdezése sikertelen");
+          console.error(result.unwrapErr());
+          return;
+        }
+        this.getForm = result.unwrap();
+        
+        console.log("Form sikresen lekérdezve a az adatbázisból");
+        console.log(this.forms);
+        window.open(this.getForm.Url);
+        //this.dataSource.paginator = this.paginator;
+
+      });
+  }
   toggleQuestionSelection(question: { label: string, type: string, selected: boolean }) {
     if (question.selected) {
       if (!this.selectedQuestions.some(q => q.type === question.type)) {
@@ -126,9 +168,13 @@ export class CustomFormCreatorComponent {
       if (question.selectedOptions.length < maxSelection) {
         question.selectedOptions.push(option);
       } else {
-        console.log("You can only select up to " + maxSelection + " options.");
+        console.log("Max választható válaszlehetőségek " + maxSelection + " options.");
       }
     }
+  }
+
+  goBackToPrevPage(): void {
+    this.location2.back();
   }
   removeSelection(question: MultiSelectQuestion, option: string) {
     const index = question.selectedOptions.indexOf(option);
@@ -160,6 +206,21 @@ export class CustomFormCreatorComponent {
 
   renderForm() {
     const uniqueFormName = this.generateUniqueFormName();
+    const requiredQuestionTypes = ['text', 'yesno', 'yesnohospital', 'multiselect', 'sex']; 
+  let missingTypes = requiredQuestionTypes.slice(); 
+
+ 
+  this.selectedQuestions.forEach(question => {
+    const index = missingTypes.indexOf(question.type);
+    if (index !== -1) {
+      missingTypes.splice(index, 1); 
+    }
+  });
+
+  if (missingTypes.length > 0) {
+    alert('Úgy tűnik, elfelejtettél néhány fontos kérdést hozzáadni. Kérlek, ellenőrizd és próbáld újra!'); 
+    return; 
+  }
     let formHtml = `
     <html>
     <head>
@@ -209,7 +270,7 @@ export class CustomFormCreatorComponent {
           formHtml += `<input type="checkbox" name="Illnesses" value="${option}" style="${inputStyle}"> ${option}`;
         });
       }
-      formHtml += `</div>`; 
+      formHtml += `</div>`;
     });
     formHtml += `<div id="followUpQuestion" style="display:none; flex; flex-direction: column; align-items: flex-start; margin: 10px; padding: 5px; border: 1px solid #0800ff; border-radius: 10px; box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.4); background-color: ${this.questionBackgroundColor};">`
     formHtml += `<label style="${labelStyle}">A hozzátartozója elhunyt Covidban?</label>`
@@ -222,7 +283,7 @@ export class CustomFormCreatorComponent {
     formHtml += `<div style="text-align: center; margin-top: 20px;"><input onclick="submitForm()" value="Küldés" style="${buttonStyle}"></div></form></div>`;
 
 
-  
+
     formHtml += `
     <script src="https://www.google.com/recaptcha/api.js?render=${this.configservice.config.CaptchaKey}"></script>
 
@@ -271,15 +332,17 @@ export class CustomFormCreatorComponent {
                     })
                     .then(function(response) { 
                         if (!response.ok) {
-                            throw new Error('Network response was not ok');
+                          
+                          const responsetext = response.text();
+                          console.log('Error:',responsetext)
                         }
-                        return response.json(); 
                     })
                     .then(function(data) {
                         console.log('Success:', data);  
                         alert('Köszönjük, válaszát rögzítettük');
                     })
                     .catch(function(error) {
+                        alert('Kötelező kérdések hiányoznak!')
                         console.error('Error:', error);
                     });
                 });
@@ -293,7 +356,7 @@ export class CustomFormCreatorComponent {
   }
 
 
-  constructor(private backendService: BackendService, private recaptchaV3Service: ReCaptchaV3Service,private configservice: ConfigService) { }
+  
 
   sendFormToBackend() {
 
@@ -322,8 +385,8 @@ export class CustomFormCreatorComponent {
       });
     }
     );
-   
-}
+
+  }
 
 
 
@@ -372,8 +435,39 @@ export class CustomFormCreatorComponent {
     }
     return [];
   }
+/*
+  private checkRequiredFields(): boolean {
+
+    
+    if (this.filter.Sex === null || this.filter.Sex === "") {
+      alert("A 'Nem' mező kitöltése kötelező");
+      return false;
+    }
+    if (this.filter.Validated === null || this.filter.Validated === "") {
+      alert("A 'Validitás' mező kitöltése kötelező");
+      return false;
+    }
+    if (this.filter.AgeFrom === null || this.filter.AgeFrom < 18 || this.filter.AgeFrom > 88) {
+      alert("A 'Páciens kora -tól' mező kitöltése kötelező, és 18 és 88 között kell lennie");
+      return false;
+    }
+    if (this.filter.AgeTo === null || this.filter.AgeTo < 18 || this.filter.AgeTo > 88) {
+      alert("A 'Páciens kora -ig' mező kitöltése kötelező, és 18 és 88 között kell lennie");
+      return false;
+    }
+    return true;
+  }
 
 
+
+
+   if (!this.checkRequiredFields()) {
+      return;
+    }
+
+
+    
+ */
 
 
 

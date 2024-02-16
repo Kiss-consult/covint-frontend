@@ -7,8 +7,28 @@
     background: linear-gradient(180deg, rgba(224,224,224,1) 50%, rgba(255,255,255,0) 70%);
     padding-left: 5%;
     padding-right: 5%;
-    padding-bottom: 60px;
-    
+    padding-bottom: 60px;    
+}
+
+#segedlet{
+    width: auto;
+    position: absolute;
+    top: 6px;
+    height: 45px;
+    color: #646464;
+    background-color: white;
+    border-color: white;
+    padding-bottom: 5px;
+    margin-left: 20px;
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius:0;
+    border: none;
+}
+
+#segedlet:hover{
+    background-color: #646464;
+    color: #ffffff;
+    height: 47px;
 }
 
 .exportbutton:nth-child(even) {
@@ -58,7 +78,7 @@ h3{
 
 }
 
-@media (max-width: 1400px){
+@media (max-width: 1450px){
 
 .container2{
     display: grid;
@@ -70,4 +90,51 @@ h3{
         border-top:solid 5px #848484;
     }
 
+    #segedlet{
+        width: auto;
+        position: absolute;
+        top: 5px;
+        left: 150px;
+        height: 45px;
+        color: #646464;
+        background-color: white;
+        border-color: white;
+        padding-bottom: 5px;
+        margin-left: 0;
+        border-bottom-left-radius: 0;
+        border-bottom-right-radius:0;
+        border-top-left-radius:0;
+        border: none;
+    }
+    
+    #segedlet:hover{
+        background-color: #646464;
+        color: #ffffff;
+        height: 47px;
+    }
+
+
+    h2{
+        padding-left: 235px;
+    }
+}
+
+@media (max-width:1048px){
+
+    #segedlet{
+        width: auto;
+        position: absolute;
+        top: 36px;
+        left: 150px;
+        height: 45px;
+        color: #646464;
+        background-color: white;
+        border-color: white;
+        padding-bottom: 5px;
+        margin-left: 0;
+        border-bottom-left-radius: 0;
+        border-bottom-right-radius:0;
+        border-top-left-radius:0;
+        border: none;
+    }
 }
