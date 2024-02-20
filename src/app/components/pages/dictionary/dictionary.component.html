@@ -17,12 +17,12 @@
           </tr>
           <tr>
             <td>link</td>
-            <td>$&#10100;link&#10101;</td>
+            <td>$&#123;link&#125;</td>
             <td>Email cím megerősítő link</td>
           </tr>
           <tr>
             <td>érvényességi idő</td>
-            <td>$&#10100;linkExpiration&#10101;</td>
+            <td>$&#123;linkExpiration&#125;</td>
             <td>Időtartam amíg a link érvényes</td>
           </tr>
         </table>
@@ -38,12 +38,12 @@
           </tr>
           <tr>
             <td>link</td>
-            <td>$&#10100;link&#10101;</td>
+            <td>$&#123;link&#125;</td>
             <td>jelszó visszaállító link</td>
           </tr>
           <tr>
             <td>érvényességi idő</td>
-            <td>$&#10100;linkExpiration&#10101;</td>
+            <td>$&#123;linkExpiration&#125;</td>
             <td>Időtartam amíg a link érvényes</td>
           </tr>
         </table>
@@ -60,88 +60,79 @@
           </tr>
           <tr>
             <td>link</td>
-            <td>$&#10100;link&#10101;</td>
+            <td>$&#123;link&#125;</td>
             <td>link a felhasználó elfogdásához</td>
           </tr>
           <tr>
             <td>felhasználó email </td>
-            <td>$&#10100;email&#10101;</td>
+            <td>$&#123;email&#125;</td>
             <td>Az új felhasználó email címe</td>
           </tr>  
-          <tr>
-            <td>felhasználó csoportja(i) </td>
-            <td>$&#10100;groups&#10101;</td>
-            <td>Az új felhasználófelhasználó csoportja(i)</td>
-          </tr> 
-          <tr>
-            <td>elfogadó email-címe </td>
-            <td>$&#10100;approverEmailv&#10101;</td>
-            <td>Az elfogadást végző személy email címe</td>
-          </tr>       
+                
           <tr>
             <td>vezetéknév</td>
-            <td>$&#10100;LastName&#10101;</td>
+            <td>$&#123;LastName&#125;</td>
             <td>A felhasználó vezetékneve</td>
           </tr>
           <tr>
             <td>keresztnév</td>
-            <td>$&#10100;FirstName&#10101;</td>
+            <td>$&#123;FirstName&#125;</td>
             <td>A felhasználó keresztneve</td>
           </tr>
           <tr>
             <td>telefonszám</td>
-            <td>$&#10100;Phone&#10101;</td>
+            <td>$&#123;Phone&#125;</td>
             <td>A felhasználó telefonszáma</td>
           </tr>
           <tr>
             <td>pecsétszám</td>
-            <td>$&#10100;SealNumber&#10101;</td>
+            <td>$&#123;SealNumber&#125;</td>
             <td>A felhasználó pecsétszáma</td>
           </tr>
           <tr>
             <td>titulus</td>
-            <td>$&#10100;Title&#10101;</td>
+            <td>$&#123;Title&#125;</td>
             <td>A felhasználó titulusa</td>
           </tr>
           <tr>
             <td>cég-e?</td>
-            <td>$&#10100;IsCompany&#10101;</td>
+            <td>$&#123;IsCompany&#125;</td>
             <td>A felhasználó céges-e vagy intézményes</td>
           </tr>
           <tr>
             <td>cég neve</td>
-            <td>$&#10100;CompanyName&#10101;</td>
+            <td>$&#123;CompanyName&#125;</td>
             <td>A felhasználó cégneve (csak ha van cége)</td>
           </tr>
           <tr>
             <td>intézmény neve</td>
-            <td>$&#10100;InstitutionName&#10101;</td>
+            <td>$&#123;InstitutionName&#125;</td>
             <td>A felhasználó intézménye (csak ha van intézménye)</td>
           </tr>
           <tr>
             <td>intézményi osztály neve</td>
-            <td>$&#10100;InstitutionDepartment&#10101;</td>
+            <td>$&#123;InstitutionDepartment&#125;</td>
             <td>A felhasználó intézmény osztálya (csak ha van intézménye
               és osztálya is)</td>
           </tr>
           <tr>
             <td>város</td>
-            <td>$&#10100;Site.City&#10101;</td>
+            <td>$&#123;Site.City&#125;</td>
             <td>A felhasználó telepheyének városa </td>
           </tr>
           <tr>
             <td>irányítószám</td>
-            <td>$&#10100;Site.PostCode&#10101;</td>
+            <td>$&#123;Site.PostCode&#125;</td>
             <td>A felhasználó telepheyének irányítószáma </td>
           </tr>
           <tr>
             <td>utca</td>
-            <td>$&#10100;Site.Street&#10101;</td>
+            <td>$&#123;Site.Street&#125;</td>
             <td>A felhasználó telepheyének utcája </td>
           </tr>
           <tr>
             <td>házszám</td>
-            <td>$&#10100;Site.HouseNumber&#10101;</td>
+            <td>$&#123;Site.HouseNumber&#125;</td>
             <td>A felhasználó telepheyének házszáma </td>
           </tr>
         </table>
@@ -157,19 +148,39 @@
           </tr>
           <tr>
             <td>link</td>
-            <td>$&#10100;link&#10101;</td>
+            <td>$&#123;link&#125;</td>
             <td>link a honlapra</td>
           </tr>
           <tr>
+            <td>Vezetéknév</td>
+            <td>$&#123;LastName&#125;</td>
+            <td>felhaználó vezetékneve</td>
+          </tr>
+          <tr>
+            <td>Keresztnév</td>
+            <td>$&#123;FirstName&#125;</td>
+            <td>felhaználó keresztneve</td>
+          </tr>
+          <tr>
             <td>felhasználó név</td>
-            <td>$&#10100;email&#10101;</td>
+            <td>$&#123;email&#125;</td>
             <td>A regisztrált fiókhoz tartozó email cím</td>
           </tr>
           <tr>
             <td>csatolmány link</td>
-            <td>$&#10100;attachmentLink&#10101;</td>
+            <td>$&#123;attachmentLink&#125;</td>
             <td>Link ami a csatolmány fájlra mutat</td>
           </tr>
+          <tr>
+            <td>felhasználó csoportja(i) </td>
+            <td>$&#123;groups&#125;</td>
+            <td>Az új felhasználófelhasználó csoportja(i)</td>
+          </tr> 
+          <tr>
+            <td>elfogadó email-címe </td>
+            <td>$&#123;approverEmailv&#125;</td>
+            <td>Az elfogadást végző személy email címe</td>
+          </tr> 
         </table>
       </div>
     </div>
