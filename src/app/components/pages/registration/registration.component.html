@@ -10,21 +10,17 @@
 
     <div class="form-group">
       <div class="tab-button">Regisztrációs adatok</div>
-
       <div class="form-group2">
         <div>
           <label class="text" for="email">E-mail cím <s>*</s></label>
-
           <input class="droptextbox" type="email" id="email" name="email" [(ngModel)]="user.Email"
             placeholder="covint@covint.com" title="Kérem töltse ki a mezőt">
-
         </div>
       </div>
 
       <div class="form-group2">
         <div>
           <label class="text" for="password">Jelszó <s>*</s></label>
-
           <input class="droptextbox" type="password" id="password" name="password" [(ngModel)]="user.Password" required
             placeholder="jelszo12345" title="Kérem töltse ki a mezőt">
         </div>
@@ -33,23 +29,17 @@
       <div class="form-group2">
         <div>
           <label class="text" for="password2">Jelszó ismét <s>*</s></label>
-
           <input class="droptextbox" type="password" id="password2" name="password2" [(ngModel)]="password2" required
             required placeholder="jelszo12345" title="Kérem töltse ki a mezőt">
         </div>
       </div>
-
-
     </div>
 
     <div class="form-group">
-
       <div class="tab-button">Személyes adatok</div>
-
       <div class="form-group2">
         <div>
           <label class="text" for="title">Előtag</label>
-
           <input class="droptextbox" type="text" id="title" name="title" [(ngModel)]="user.Title" required
             placeholder="Dr" title="Kérem töltse ki a mezőt">
         </div>
@@ -58,7 +48,6 @@
       <div class="form-group2">
         <div>
           <label class="text" for="lastname">Vezetéknév <s>*</s></label>
-
           <input class="droptextbox" type="text" id="lastname" name="lastname" [(ngModel)]="user.LastName" required
             placeholder="Covint" title="Kérem töltse ki a mezőt">
         </div>
@@ -67,7 +56,6 @@
       <div class="form-group2">
         <div>
           <label class="text" for="firstname">Keresztnév <s>*</s></label>
-
           <input class="droptextbox" type="text" id="firstname" name="firstname" [(ngModel)]="user.FirstName" required
             placeholder="János" title="Kérem töltse ki a mezőt">
         </div>
@@ -76,7 +64,6 @@
       <div class="form-group2">
         <div>
           <label class="text" for="stampnumber">Pecsét száma <s>*</s></label>
-
           <input class="droptextbox" type="text" id="stampnumber" name="stampnumber" [(ngModel)]="user.SealNumber"
             required placeholder="???" title="Kérem töltse ki a mezőt">
         </div>
@@ -85,33 +72,15 @@
       <div class="form-group2">
         <div>
           <label class="text" for="telephone">Telefonszám <s>*</s></label>
-
           <input class="droptextbox" type="text" id="telephone" name="telephone" [(ngModel)]="user.Phone" required
             placeholder="???" title="Kérem töltse ki a mezőt">
         </div>
       </div>
-
     </div>
-    <!--
-    <div>
 
-      <p>Select Your Gender:</p>
-    
-      <form [formGroup]="genderForm">
-        <input type="radio" formControlName="gender" value="Male"> Male<br>
-        <input type="radio" formControlName="gender" value="Female"> Female<br>
-        <input type="radio" formControlName="gender" value="Others"> Others<br><br>
-    
-        <button (click)="getSelectedGender()">Get Selected Gender</button>
-    
-      </form>
-    
-    </div> -->
 
     <div class="form-group">
-
       <div class="tab-button">Intézmény/Cég címe</div>
-
       <div id="intmez" class="form-group2">
         <div>
           <label for="institution">Intézményben dolgozom</label>
@@ -133,7 +102,6 @@
       <div class="form-group2" *ngIf="intezmenyActive">
         <div>
           <label class="text" for="institution">Intézmény neve <s>*</s></label>
-
           <input class="droptextbox" type="text" id="institution" name="institution" [(ngModel)]="user.InstitutionName"
             placeholder="???" title="Kérem töltse ki a mezőt">
         </div>
@@ -142,7 +110,6 @@
       <div class="form-group2" *ngIf="intezmenyActive">
         <div>
           <label class="text" for="department">Osztály</label>
-
           <input class="droptextbox" type="text" id="department" name="department"
             [(ngModel)]="user.InstitutionDepartment" placeholder="???" title="Kérem töltse ki a mezőt">
         </div>
@@ -153,19 +120,14 @@
       <div class="form-group2" *ngIf="cegActive">
         <div>
           <label class="text" for="company">Cég neve <s>*</s></label>
-
           <input class="droptextbox" type="text" id="company" name="company" [(ngModel)]="user.CompanyName"
             placeholder="???" title="Kérem töltse ki a mezőt">
         </div>
-
       </div>
-
-
 
       <div class="form-group2" s>
         <div>
           <label class="text" for="site">Város <s>*</s></label>
-
           <input class="droptextbox" type="text" id="city" name="city" [(ngModel)]="site.City" required
             placeholder="Budapest" title="Kérem töltse ki a mezőt">
         </div>
@@ -174,7 +136,6 @@
       <div class="form-group2">
         <div>
           <label class="text" for="postcode">Irányítószám <s>*</s></label>
-
           <input class="droptextbox" type="number" id="postcode" name="postcode" [(ngModel)]="site.PostCode" required
             placeholder="1007" title="Kérem töltse ki a mezőt">
         </div>
@@ -183,7 +144,6 @@
       <div class="form-group2">
         <div>
           <label class="text" for="street">Utca ( közterület) neve <s>*</s></label>
-
           <input class="droptextbox" type="text" id="street" name="street" [(ngModel)]="site.Street" required
             placeholder="???" title="Kérem töltse ki a mezőt">
         </div>
@@ -192,12 +152,10 @@
       <div class="form-group2">
         <div>
           <label class="text" for="housenumber">Házszám <s>*</s></label>
-
           <input class="droptextbox" type="number" id="postcode" name="postcode" [(ngModel)]="site.HouseNumber" required
             placeholder="34" title="Kérem töltse ki a mezőt">
         </div>
       </div>
-
     </div>
   </div>
 
@@ -206,13 +164,9 @@
     <button id="okebutton" (click)="finish()" style="z-index: 2; position: relative;">
       Kész
     </button>
-
-
-    <div *ngIf="tokenVisible">  <br />
+    <div *ngIf="tokenVisible"> <br />
       <p style="color: red">reCAPTCHA Token OK</p>
     </div>
-   
-
 
     <div style="position: absolute; bottom: 0; width: 50%; z-index: 1; text-align: center;">
       <hr

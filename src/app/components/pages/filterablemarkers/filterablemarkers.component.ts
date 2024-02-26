@@ -1,6 +1,6 @@
 import { Component, ViewChild } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
-import { MatTableModule, MatTableDataSource } from '@angular/material/table';
+import {  MatTableDataSource } from '@angular/material/table';
 import { Illness } from 'src/app/models/illness/illness';
 import { BackendService } from 'src/app/services/backend/backend.service';
 import { KutatoOrvos, Orvos, PortalKezelo, PortalVezeto } from 'src/app/models/group/group';
@@ -14,11 +14,8 @@ import { Location } from '@angular/common'
 })
 export class FilterablemarkersComponent {
 
-
-
   displayedColumns: string[] = ['groupname', 'ismarker']; // Itt adhatod meg az oszlopok neveit
   dataSource: MatTableDataSource<Illness>; 
-
   marker: string = '';
   illnesses: Illness[] = [];
   illness: Illness = new Illness;
@@ -37,12 +34,12 @@ export class FilterablemarkersComponent {
     const filterValue = (event.target as HTMLInputElement).value;
     this.dataSource.filter = filterValue.trim().toLowerCase();
   }
+
   goBackToPrevPage(): void {
     this.location.back();
   }
+
     constructor(private backendService: BackendService ,public loginService: LoginService,private location: Location) {
-
-
       
     this.backendService.getAllIllnesses().subscribe(
       result => {
@@ -53,12 +50,9 @@ export class FilterablemarkersComponent {
         }
         this.illnesses = result.unwrap();
         this.dataSource = new MatTableDataSource(this.illnesses);
-        this.dataSource.paginator = this.paginator;
-  
-       // this.dataSource.data = this.illnesses; // Az adatforrás frissítése
+        this.dataSource.paginator = this.paginator;      
         console.log("Sikeresen lekérdezve a betegségek (Illnesses)az adatbázisból filteres");
-        console.log(this.illnesses);
-        
+        console.log(this.illnesses);       
 
         this.backendService.getMarkers().subscribe(
           result => {
@@ -68,38 +62,25 @@ export class FilterablemarkersComponent {
               return;
             }
             this.markers = result.unwrap();
-            //for (let illness of result.unwrap()) {
-            // illness.BnoCodes.forEach((bnoCode) => {
-            //   this.illnessesByBno.set(bnoCode, illness);
-            // });
-            // }
-            // this.dataSource.data = this.illnesses; // Az adatforrás frissítése
-            console.log("Sikeresen lekérdezve a betegségek az adatbázisból filteres");
-            console.log(this.markers);
             
-
-
+            console.log("Sikeresen lekérdezve a betegségek az adatbázisból filteres");
+            console.log(this.markers);      
             this.setMarker()
-
-
           });
-
-      });
-      
+      });      
   }
  
+
+  // read the status of illnesses ( marker or not)
   public setMarker() {
-
-
     for (let illness of this.illnesses) {
       illness.IsMarker = this.markers.some(y => y === illness.GroupName);
       console.log("lassuk mi van");
       console.log(illness.IsMarker);
-
     };
   }
 
-
+ // change the status of illnesses
   public change(illness: Illness) {
 
     this.illness.GroupName = illness.GroupName;
@@ -117,10 +98,8 @@ export class FilterablemarkersComponent {
         }
         alert("Sikeres marker illesztés");
         console.log("Successfully changed marker ")
-
       });
   }
-
 
 }
 

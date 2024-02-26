@@ -3,7 +3,6 @@ import { Case } from 'src/app/models/case/case';
 import { Illness } from 'src/app/models/illness/illness';
 import { Location } from '@angular/common'
 import { BackendService } from 'src/app/services/backend/backend.service';
-
 import { ReCaptchaV3Service } from 'ng-recaptcha';
 
 @Component({
@@ -24,9 +23,11 @@ export class DatainputComponent {
 
   reCAPTCHAToken: string = "";
   tokenVisible: boolean = false;
+
   goBackToPrevPage(): void {
     this.location.back();
   }
+
   constructor(private backendService: BackendService,private location: Location,private recaptchaV3Service: ReCaptchaV3Service) {
     // query all the illnesses formn the database
     this.backendService.getMarkers().subscribe(
@@ -37,16 +38,9 @@ export class DatainputComponent {
           return;
         }
         this.markers = result.unwrap();
-        //for (let illness of result.unwrap()) {
-        // illness.BnoCodes.forEach((bnoCode) => {
-        //   this.illnessesByBno.set(bnoCode, illness);
-        // });
-        // }
-        // this.dataSource.data = this.illnesses; // Az adatforrás frissítése
+       
         console.log("Sikeresen lekérdezve a betegségek az adatbázisból");
-        console.log(this.markers);
-        //this.dataSource.paginator = this.paginator;
-
+        console.log(this.markers);      
       });
   }
 
@@ -56,31 +50,25 @@ export class DatainputComponent {
     if (this.marker === '') {
       alert("Kérem adjon meg minimum egy markert!");
       return;
-    }
-    //const newMarker = new Marker(this.newBno, this.illnessesByBno.get(this.newBno)?.Names);
-
+    }   
     if (this.marker === "Egészséges" && this.case.Illnesses.length != 0) {
       alert("Már van betegség hozzáadva, így nem lehet Egészséges!");
       return;
     }  
-
-
     if (this.case.Illnesses.filter((valami) => valami === this.marker).length > 0) {
       console.log("Marker already exists")
-      alert("Ez a marker már hozzá lett adva!")
-      //this.removeMarker(this.marker);
+      alert("Ez a marker már hozzá lett adva!")      
       return;
     }
-
     if (this.case.Illnesses.filter((valami) => valami === "Egészséges").length > 0) {
       console.log("Marker already exists")
-      alert("Egészséges jelentése: csak covidos volt, nincs más betegsége!")
-      //this.removeMarker(this.marker);
+      alert("Egészséges jelentése: csak covidos volt, nincs más betegsége!")      
       return;
     }
     this.case.Illnesses.push(this.marker);
     this.newIllness = '';
   }
+
   // Function to remove marker from the case
   public removeMarker(illness: string) {
     this.case.Illnesses = this.case.Illnesses.filter(m => m !== illness);
@@ -92,9 +80,7 @@ export class DatainputComponent {
     if (this.newBno === '') {
       alert("Kérem adjon meg egy BNO kódot!");
       return;
-    }
-    //const newMarker = new Marker(this.newBno, this.illnessesByBno.get(this.newBno)?.Names);
-
+    }   
     if (this.case.BnoCodes.filter((valami) => valami === this.newBno).length > 0) {
       console.log("Marker already exists")
       this.removeBno(this.newBno);
@@ -109,6 +95,7 @@ export class DatainputComponent {
   public removeBno(bno: string) {
     this.case.BnoCodes = this.case.BnoCodes.filter(m => m !== bno);
   }
+
   // Function to check the required fields of the case.
   // If any of the required fields are not filled, it alerts the user and returns false.
   private checkRequiredFields(): boolean {
@@ -149,39 +136,19 @@ export class DatainputComponent {
   // Function to finish data input. It checks the required fields,
   // adds the current date to the case, and inserts the case into the database.
   // It also clears the form for the next case.
+  // This function call recaptcha service to check the user behavior
   public finish() {
     if (!this.checkRequiredFields()) {
       return;
     }
-
     this.recaptchaV3Service.execute('importantAction').subscribe((token: string) => {
-
-/*
-SubmitA() {
-  this.recaptchaV3Service.execute('login_a1')
-      .pipe(
-        timeoutWith(5000, throwError(new Error('timeout'))),
-      )
-      .subscribe(
-        (token) => {
-          // handle captcha token
-        },
-        (error) => {
-          if (error.message === 'timeout') {
-            // handle timeout
-          }
-        },
-      );
-}
-*/
       this.tokenVisible = true;
       this.reCAPTCHAToken = `Token [${token}] generated`;
       console.log("rechapta ", token )
       console.log("rechapta ", )
-
-
     this.case.Date = this.formatDate(new Date());
     console.log(this.case);
+
     this.backendService.insertValidated(this.case).subscribe(
       result => {
         if (result.isErr()) {

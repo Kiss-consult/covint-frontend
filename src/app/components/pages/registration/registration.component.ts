@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { Site } from 'src/app/models/user/site';
 import { User } from 'src/app/models/user/user';
 import { LoginService } from 'src/app/services/login/login.service';
-import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Location } from '@angular/common';
 
@@ -26,6 +26,7 @@ export class RegistrationComponent {
   genderForm: FormGroup;
   reCAPTCHAToken: string = "";
   tokenVisible: boolean = false;
+
   toggleContent(contentType: string) {
     if (contentType === 'ceg') {
       this.cegActive = true;
@@ -41,48 +42,30 @@ export class RegistrationComponent {
     }
 
   }
+
   goBackToPrevPage(): void {
     this.location.back();
   }
+
   constructor(private loginService: LoginService, private fb: FormBuilder, private router: Router, private location: Location, private recaptchaV3Service: ReCaptchaV3Service) {
-    // this.user.IsCompany = false;
-    //console.log("Iscompany start:", this.user.IsCompany)
+
     this.genderForm = this.fb.group({
       'gender': ['', Validators.required]
     });
-
-
-
   }
-  /*
-    public getSelectedGender() {
-  
-      let selectedValue = this.genderForm.controls['gender'].value;
-  
-      if (selectedValue) {
-        console.log('You have selected ' + selectedValue);
-      }
-      else {
-        console.log("You haven't selected anything.");
-      }
-  
-    }
-  */
 
+
+  // finish the registration process and send data to the database , the user have to wait for acceptance
 
   public finish() {
-
     if (!this.checkRequiredFields()) {
       return;
     }
-
     this.recaptchaV3Service.execute('importantAction').subscribe((token: string) => {
-
       this.tokenVisible = true;
       this.reCAPTCHAToken = `Token [${token}] generated`;
       console.log("rechapta ", token)
-      console.log("rechapta ", )
-
+      console.log("rechapta ",)
       console.log("before finish is company", this.user.IsCompany)
       console.log("before finish user", this.user)
       this.user.Site = this.site;
@@ -90,11 +73,8 @@ export class RegistrationComponent {
       this.loginService.insertNewUser(this.user).subscribe(
         result => {
           if (result.isErr()) {
-  
-  
             console.error(result.unwrapErr());
             console.log(result.unwrapErr());
-  
             let mess = result.unwrapErr().error.Error;
             if (mess === "error creating user: 409 Conflict: User exists with same username") {
               alert("Sikertelen regisztráció! \nEzzel a felhasználó névvel már regisztráltak korábban!")
@@ -108,9 +88,6 @@ export class RegistrationComponent {
               alert("Sikertelen regisztráció! \nA jeszó minimum 8 karakter és tartalmaznia kell:  \nkis és nagy betűt, számot és extra karatert! ")
               console.log("rossz jelszó")
             }
-            //"Phone number must start with +36 or 06"
-            //alert("sikertelen regisztráció ");
-  
             return;
           }
           alert("Sikeres regisztráció!\nRegisztrációját rögzítettük!\nA regisztrációját ellenőrzés után 3 napon belül elfogadjuk,\namiről emailt küldünk.\nTürelmét köszönjük! ");
@@ -120,30 +97,10 @@ export class RegistrationComponent {
           this.user = new User();
           this.tokenVisible = false;
         });
-
-
-
-    }
-   );
-      
-
-        
+    });
   }
-
-
-  public change(signal: boolean) {
-    // if (!this.checkRequiredFields()) {
-    //  return;
-    //  }
-    console.log("Iscompany from page when was click:", this.user.IsCompany)
-    this.user.IsCompany = true;
-    console.log("Iscompany now:", this.user.IsCompany)
-  }
-
-
 
   private checkRequiredFields(): boolean {
-
     if (this.user.Email === "") {
       alert("Az 'Email' mező kitöltése kötelező!");
       return false;
@@ -188,7 +145,6 @@ export class RegistrationComponent {
       alert("Az 'Utca' mező kitöltése kötelező!");
       return false;
     }
-
     return true;
   }
 }

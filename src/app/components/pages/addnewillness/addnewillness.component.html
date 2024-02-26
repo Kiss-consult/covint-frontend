@@ -1,5 +1,5 @@
 <h1>Új betegség hozzáadás</h1>
-<h2>Új betegség rögzítése kiinduló értékekkel  ( kiinduló értékek ( % ) kitöltése kötelező!) </h2>
+<h2>Új betegség rögzítése kiinduló értékekkel ( kiinduló értékek ( % ) kitöltése kötelező!) </h2>
 
 <div class="container">
   <h3><button id="backbutton" (click)="goBackToPrevPage()">&#11148;</button></h3>
@@ -9,115 +9,136 @@
         <div>
           <label for="newillness">Új betegség: <s>*</s></label>
         </div>
-      <div>
-        <input  *ngIf="loginService.hasAnyGroup([portalvezeto, kutatoorvos])"
-        class="droptextbox" type="text" id="newillness" name="newillness"[(ngModel)]="newIllness.GroupName" placeholder="Betegség neve..." title="Kérem töltse ki a mezőt">
-        <input  *ngIf="loginService.hasAnyGroup([portaladmin])"
-        class="droptextbox" type="text" id="newillness" name="newillness"[(ngModel)]="newIllness.GroupName"  disabled="disabled" placeholder="Betegség neve..." title="Portálkezelő számára csak olvasható">
-      </div>
-    </div>
-
-    <div class="ismarker">
-      <div>
-        <label class="text" title="Ha markernek jelöli kereshető és szürhető lesz!">Az új betegség egyben marker is? <s>*</s></label>
-      </div>
-      <div>
-        <label for="trueMark">Igen</label>
-        <input *ngIf="loginService.hasAnyGroup([portalvezeto, kutatoorvos])"type="radio" id="trueMArk" name="ismarker" [value]="true" [(ngModel)]="newIllness.IsMarker" title="Kérem válasszon">
-        <input *ngIf="loginService.hasAnyGroup([portaladmin])"type="radio" id="trueMArk" name="ismarker" [value]="true" [(ngModel)]="newIllness.IsMarker" disabled="disabled"  title="Portálkezelő számára csak olvasható">
-        <label for="falseMark">Nem</label>
-        <input *ngIf="loginService.hasAnyGroup([portalvezeto, kutatoorvos])"type="radio" id="falseMark" name="ismarker" [value]="false" [(ngModel)]="newIllness.IsMarker" title="Kérem válasszon">
-        <input *ngIf="loginService.hasAnyGroup([portaladmin])"type="radio" id="falseMark" name="ismarker" [value]="false" [(ngModel)]="newIllness.IsMarker" disabled="disabled"title="Portálkezelő számára csak olvasható">
-      </div>
-    </div>
-
-    <div class="content3">
-      <div class="bnoclass">    
         <div>
-          <label for="bno">Alternatív név bevitele</label>
-        </div>      
+          <input *ngIf="loginService.hasAnyGroup([portalvezeto, kutatoorvos])" class="droptextbox" type="text"
+            id="newillness" name="newillness" [(ngModel)]="newIllness.GroupName" placeholder="Betegség neve..."
+            title="Kérem töltse ki a mezőt">
+          <input *ngIf="loginService.hasAnyGroup([portaladmin])" class="droptextbox" type="text" id="newillness"
+            name="newillness" [(ngModel)]="newIllness.GroupName" disabled="disabled" placeholder="Betegség neve..."
+            title="Portálkezelő számára csak olvasható">
+        </div>
+      </div>
+
+      <div class="ismarker">
         <div>
-          <input *ngIf="loginService.hasAnyGroup([portalvezeto, kutatoorvos])" class="droptextbox" type="text" id="bno" name="bno"
-           [(ngModel)]="newAlternativeName" placeholder="Alternativ betegség neve..." title="Több alternatív nevet is megadhat, a kitöltés opcionális!">
-           <input *ngIf="loginService.hasAnyGroup([portaladmin])" class="droptextbox" type="text" id="bno" name="bno"
-           [(ngModel)]="newAlternativeName" disabled="disabled" placeholder="Alternativ betegség neve..." title="Portálkezelő számára csak olvasható!">
+          <label class="text" title="Ha markernek jelöli kereshető és szürhető lesz!">Az új betegség egyben marker is?
+            <s>*</s></label>
         </div>
         <div>
-          <button *ngIf="loginService.hasAnyGroup([portalvezeto, kutatoorvos])" (click)="addAlternativeName()">Hozzáadás</button>
-          <button *ngIf="loginService.hasAnyGroup([portaladmin])" disabled="disabled" (click)="addAlternativeName()" title="Portálkezelő számára nem használható!">Hozzáadás</button>
-        </div>      
-      </div>
-  
-      <div class="addedtext" *ngFor="let newillness of newIllness.AlternativeNames">  
-        <div>
-          <label>{{newillness}}</label>
+          <label for="trueMark">Igen</label>
+          <input *ngIf="loginService.hasAnyGroup([portalvezeto, kutatoorvos])" type="radio" id="trueMArk"
+            name="ismarker" [value]="true" [(ngModel)]="newIllness.IsMarker" title="Kérem válasszon">
+          <input *ngIf="loginService.hasAnyGroup([portaladmin])" type="radio" id="trueMArk" name="ismarker"
+            [value]="true" [(ngModel)]="newIllness.IsMarker" disabled="disabled"
+            title="Portálkezelő számára csak olvasható">
+          <label for="falseMark">Nem</label>
+          <input *ngIf="loginService.hasAnyGroup([portalvezeto, kutatoorvos])" type="radio" id="falseMark"
+            name="ismarker" [value]="false" [(ngModel)]="newIllness.IsMarker" title="Kérem válasszon">
+          <input *ngIf="loginService.hasAnyGroup([portaladmin])" type="radio" id="falseMark" name="ismarker"
+            [value]="false" [(ngModel)]="newIllness.IsMarker" disabled="disabled"
+            title="Portálkezelő számára csak olvasható">
         </div>
-        <div>
-          <button  *ngIf="loginService.hasAnyGroup([portalvezeto, kutatoorvos])" (click)="removeAlternativeName(newillness)">Törlés</button>
-          <button  *ngIf="loginService.hasAnyGroup([portaladmin])" disabled="disabled" (click)="removeAlternativeName(newillness)" title="Portálkezelő számára nem használható!">Törlés</button>
-        </div>    
       </div>
+
+      <div class="content3">
+        <div class="bnoclass">
+          <div>
+            <label for="bno">Alternatív név bevitele</label>
+          </div>
+          <div>
+            <input *ngIf="loginService.hasAnyGroup([portalvezeto, kutatoorvos])" class="droptextbox" type="text"
+              id="bno" name="bno" [(ngModel)]="newAlternativeName" placeholder="Alternativ betegség neve..."
+              title="Több alternatív nevet is megadhat, a kitöltés opcionális!">
+            <input *ngIf="loginService.hasAnyGroup([portaladmin])" class="droptextbox" type="text" id="bno" name="bno"
+              [(ngModel)]="newAlternativeName" disabled="disabled" placeholder="Alternativ betegség neve..."
+              title="Portálkezelő számára csak olvasható!">
+          </div>
+          <div>
+            <button *ngIf="loginService.hasAnyGroup([portalvezeto, kutatoorvos])"
+              (click)="addAlternativeName()">Hozzáadás</button>
+            <button *ngIf="loginService.hasAnyGroup([portaladmin])" disabled="disabled" (click)="addAlternativeName()"
+              title="Portálkezelő számára nem használható!">Hozzáadás</button>
+          </div>
+        </div>
+
+        <div class="addedtext" *ngFor="let newillness of newIllness.AlternativeNames">
+          <div>
+            <label>{{newillness}}</label>
+          </div>
+          <div>
+            <button *ngIf="loginService.hasAnyGroup([portalvezeto, kutatoorvos])"
+              (click)="removeAlternativeName(newillness)">Törlés</button>
+            <button *ngIf="loginService.hasAnyGroup([portaladmin])" disabled="disabled"
+              (click)="removeAlternativeName(newillness)" title="Portálkezelő számára nem használható!">Törlés</button>
+          </div>
+        </div>
+      </div>
+
     </div>
 
-  </div>
+    <div class="scrollable-container">
+      <mat-form-field style="width: 100%;">
+        <mat-label>Keresés</mat-label>
+        <input matInput placeholder="Keresés" [(ngModel)]="searchValue">
+      </mat-form-field>
+      <table mat-table class="mat-table" [dataSource]="defaults">
+        <ng-container matColumnDef="sex">
+          <th mat-header-cell class="mat-header-cell" *matHeaderCellDef>Nem</th>
+          <td mat-cell class="mat-cell" *matCellDef="let default">{{ default.Sex }}</td>
+        </ng-container>
 
-  <div class="scrollable-container">
-    <mat-form-field style="width: 100%;">
-      <mat-label>Keresés</mat-label>
-    <input matInput placeholder="Keresés" [(ngModel)]="searchValue">
-    </mat-form-field>
-    <table mat-table class="mat-table" [dataSource]="defaults">
-      <ng-container matColumnDef="sex">
-        <th mat-header-cell class="mat-header-cell" *matHeaderCellDef>Nem</th>
-        <td mat-cell class="mat-cell" *matCellDef="let default">{{ default.Sex }}</td>
-      </ng-container>
-    
-      <ng-container matColumnDef="age">
-        <th mat-header-cell class="mat-header-cell" *matHeaderCellDef>Kor</th>
-        <td mat-cell class="mat-cell" *matCellDef="let default">{{ default.Age }}</td>
-      </ng-container>
-    
-      <ng-container matColumnDef="hospitalized">
-        <th mat-header-cell class="mat-header-cell" *matHeaderCellDef>Halálozás</th>
-        <td mat-cell class="mat-cell" *matCellDef="let default">
-          <input type="number" [(ngModel)]="default.Hospitalized" min = '1' max = '100' name="hospitalized" id="hospitalized" class="form-control">
-        </td>
-      </ng-container>
-    
-      <ng-container matColumnDef="dead">
-        <th mat-header-cell class="mat-header-cell" *matHeaderCellDef>Kórház</th>
-        <td mat-cell class="mat-cell" *matCellDef="let default">
-          <input type="number" [(ngModel)]="default.Dead" name="dead" min = '1' max = '100' id="dead" class="form-control">
-        </td>
-      </ng-container>
-    
-      <tr mat-header-row *matHeaderRowDef="['sex', 'age', 'hospitalized', 'dead']"></tr>
-      <tr mat-row *matRowDef="let row; columns: ['sex', 'age', 'hospitalized', 'dead']; let i = index"
+        <ng-container matColumnDef="age">
+          <th mat-header-cell class="mat-header-cell" *matHeaderCellDef>Kor</th>
+          <td mat-cell class="mat-cell" *matCellDef="let default">{{ default.Age }}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="hospitalized">
+          <th mat-header-cell class="mat-header-cell" *matHeaderCellDef>Halálozás</th>
+          <td mat-cell class="mat-cell" *matCellDef="let default">
+            <input type="number" [(ngModel)]="default.Hospitalized" min='1' max='100' name="hospitalized"
+              id="hospitalized" class="form-control">
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="dead">
+          <th mat-header-cell class="mat-header-cell" *matHeaderCellDef>Kórház</th>
+          <td mat-cell class="mat-cell" *matCellDef="let default">
+            <input type="number" [(ngModel)]="default.Dead" name="dead" min='1' max='100' id="dead"
+              class="form-control">
+          </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="['sex', 'age', 'hospitalized', 'dead']"></tr>
+        <tr mat-row *matRowDef="let row; columns: ['sex', 'age', 'hospitalized', 'dead']; let i = index"
           [ngClass]="{'highlight': selectedRows[i]}" [hidden]="!matchesFilter(row)">
-      </tr>
-    
-      </table>    
+        </tr>
+
+      </table>
     </div>
-  
+
   </div>
-  
 
-    
 
-  <div style="text-align: center; position: relative; z-index: 1; display: flex; flex-direction: column; align-items: center;">   
-    <button *ngIf="loginService.hasAnyGroup([portalvezeto, kutatoorvos])"  id="okebutton" (click)="finish()" style="z-index: 2; position: relative;">
-        Kész
-    </button>
-    <button *ngIf="loginService.hasAnyGroup([portaladmin])"  disabled="disabled" id="okebutton" (click)="finish()"  title="Portálkezelő számára nem használható!" style="z-index: 2; position: relative;">
+
+
+  <div
+    style="text-align: center; position: relative; z-index: 1; display: flex; flex-direction: column; align-items: center;">
+    <button *ngIf="loginService.hasAnyGroup([portalvezeto, kutatoorvos])" id="okebutton" (click)="finish()"
+      style="z-index: 2; position: relative;">
       Kész
-  </button>
+    </button>
+    <button *ngIf="loginService.hasAnyGroup([portaladmin])" disabled="disabled" id="okebutton" (click)="finish()"
+      title="Portálkezelő számára nem használható!" style="z-index: 2; position: relative;">
+      Kész
+    </button>
     <div style="position: absolute; bottom: 0; width: 50%; z-index: 1; text-align: center;">
-        <hr style="margin-top: 10px; width: 100%; height: 1px; background-color: #0080ff; box-shadow:0px 1px 0px #848484;">
+      <hr
+        style="margin-top: 10px; width: 100%; height: 1px; background-color: #0080ff; box-shadow:0px 1px 0px #848484;">
     </div>
-  </div>  
-  
-  <footer>   
+  </div>
+
+  <footer>
     <p>A "*" -al jelölt mezők kitöltése kötelező !</p>
   </footer>
- 
+
 </div>

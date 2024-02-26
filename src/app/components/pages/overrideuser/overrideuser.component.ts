@@ -6,7 +6,6 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { User } from 'src/app/models/user/user';
 import { UserData } from 'src/app/models/userdata/userdata';
 import { LoginService } from 'src/app/services/login/login.service';
-import { BackendService } from 'src/app/services/backend/backend.service';
 import { KutatoOrvos, Orvos, PortalKezelo, PortalVezeto } from 'src/app/models/group/group';
 import { Location } from '@angular/common'
 
@@ -40,12 +39,12 @@ export class OverrideuserComponent {
   togglePopupContent(userdata: any) {
     this.expandedUser = this.expandedUser === userdata ? null : userdata;
     this.getUserAttributes(userdata.id);
-    
+
   }
   goBackToPrevPage(): void {
     this.location.back();
   }
-  displayedColumns: string[] = ['Név',"Jelszócsere","Adatmódosítás"]; // Itt adhatod meg az oszlopok neveit
+  displayedColumns: string[] = ['Név', "Jelszócsere", "Adatmódosítás"]; // Itt adhatod meg az oszlopok neveit
   dataSource: MatTableDataSource<UserData>;
   @ViewChild('paginator') paginator: MatPaginator;
   pageSizeOptions: number[] = [5, 10];
@@ -60,7 +59,8 @@ export class OverrideuserComponent {
     const filterValue = (event.target as HTMLInputElement).value;
     this.dataSource.filter = filterValue.trim().toLowerCase();
   }
-  constructor(public loginService: LoginService, private router: Router,private _Activatedroute:ActivatedRoute,private location: Location) {
+
+  constructor(public loginService: LoginService, private router: Router, private location: Location) {
 
 
     this.loginService.getAllUsers().subscribe(
@@ -77,13 +77,12 @@ export class OverrideuserComponent {
         console.log(this.userdatas)
         console.log("id", this.userdata.id)
         console.log(this.dataSource.data);
-
-
-
       });
-
   }
-  public getUserAttributes(id : string) {
+
+
+  //read user attributes from the database
+  public getUserAttributes(id: string) {
     this.loginService.getUserAttributes(id).subscribe(
       result => {
         if (result.isErr()) {
@@ -92,57 +91,33 @@ export class OverrideuserComponent {
             alert("Sikertelen adatlekérés \nÖn nem jogosult az adatok lekérésére !")
             console.log("jogosultsági probléma")
           }
-         else
-          alert("Sikertelen adatlekérés");
+          else
+            alert("Sikertelen adatlekérés");
           console.error(result.unwrapErr());
           return;
         }
         this.user = result.unwrap();
-  
-       // this.dataSource = new MatTableDataSource(this.userdatas);
-        //this.dataSource.paginator = this.paginator;
+
         console.log(this.user)
-        //console.log(this.dataSource.data);
-  
       });
-  
   }
-  public updateUserAttributes(id : string, user: User) {
-    this.loginService.updateUserAttributes(id, user).subscribe(
-      result => {
-        if (result.isErr()) {
-          alert("Sikertelen update user attributes");
-          console.error(result.unwrapErr());
-          return;
-        }
-        
-  
-       // this.dataSource = new MatTableDataSource(this.userdatas);
-        //this.dataSource.paginator = this.paginator;
-        console.log(this.user)
-        //console.log(this.dataSource.data);
-  
-      });
-  
+
+  // go to change password  by admin page with selected user id
+  public changepass(userdata: UserData) {
+    this.userdata = userdata;
+    console.log("call button1", this.userdata)
+    this.router.navigate(['/changepwdbyadmin', userdata.id]);
   }
-  
 
- public  changepass(userdata: UserData){
-  this.userdata = userdata;
-  console.log("call button1",this.userdata)
-  this.router.navigate(['/changepwdbyadmin', userdata.id]);
-}
-
-
-public updateattr(userdata: UserData){
-  this.userdata = userdata;
-  console.log("call button2",this.userdata)
-   
+  // go to update user page with selected user id
+  public updateattr(userdata: UserData) {
+    this.userdata = userdata;
+    console.log("call button2", this.userdata)
     this.router.navigate(
-        ['/updateuser', userdata.id]
-    ); 
-}
-  
+      ['/updateuser', userdata.id]
+    );
+  }
+
 
 }
 
