@@ -1,16 +1,15 @@
-import { Component, OnInit, ChangeDetectorRef, AfterContentChecked } from '@angular/core';
+import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { LoginService } from './services/login/login.service';
 import { KutatoOrvos, Orvos, PortalKezelo, PortalVezeto } from 'src/app/models/group/group';
-import { KeycloakService } from 'keycloak-angular';
 import { ConfigService } from './services/config/config.service';
-
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
+
 export class AppComponent {
   title = 'covint';
   flag: boolean = true;
@@ -20,43 +19,27 @@ export class AppComponent {
   portalvezeto = PortalVezeto;
   isMenuOpen = false;
 
+  toggleMenu() {
+    this.isMenuOpen = !this.isMenuOpen;
+  }
+
   constructor(public loginService: LoginService, private router: Router, private configService: ConfigService) { }
 
   logout() {
     this.loginService.logout();
     this.router.navigate(["/login"]);
   }
-  changePassword() {
 
+  changePassword() {
     this.router.navigate(["/changepwd"]);
   }
   
   getUserAttributes() {
-
     this.router.navigate(["/profile"]);
-  }
-  toggleMenu() {
-    this.isMenuOpen = !this.isMenuOpen;
-  }
-  gotoTelco() {
-   
+  }  
+
+  gotoTelco() {   
     window.open(this.configService.config.TelcoUrl);
   }
-  /*
-    ngOnInit(): void {
-      const groups = [PortalAdmin, KutatoOrvos, PortalVezeto];
-      if(this.loginService.hasAnyGroup(groups)) {
-      this.flag = true;
-      console.log("app component", this.flag)
-    } else {
-      alert('uzenet annak akiNEM orvos');  
-      this.flag = false;
-      console.log("app component",this.flag)
-    }
-    }
-   
-    ngAfterContentChecked(): void {
-      this.changeDetector.detectChanges();
-    }
-     */
+  
 }

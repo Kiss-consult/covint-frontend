@@ -1,202 +1,150 @@
 <h1>Email template
-  
+
 </h1>
-<h2>A felhasználóknak küldött email-ek módosítása / eredeti visszaállítása  <button id="segedlet" (click)="gotoDictionary()">Segédlet </button></h2>
+<h2>A felhasználóknak küldött email-ek módosítása / eredeti visszaállítása <button id="segedlet"
+    (click)="gotoDictionary()">Segédlet </button></h2>
 
 <div class="container">
-
   <div class="container2">
-<h3><button id="backbutton" (click)="goBackToPrevPage()">&#11148;</button></h3>
-  <div class="exportbutton">
-    
-    <div class="tab-button">
-      Password template
-    </div>
-    
-    <p>Töltse le a reset-password template-t</p>
-    <button (click)="dowloadTemplate(0)"> reset-password Letöltés</button>
-    <p>Html template reset-password</p>
-    <div>
-      <div hidden>
-        <input type="file" accept=".html" class="file-input" (change)="onFileSelected($event,0)" #fileUpload0>
-        <p>feltöltes template reset-password</p>
+    <h3><button id="backbutton" (click)="goBackToPrevPage()">&#11148;</button></h3>
+    <div class="exportbutton">
+      <div class="tab-button">
+        Password template
       </div>
+      <p>Töltse le a reset-password template-t</p>
+      <button (click)="dowloadTemplate(0)"> reset-password Letöltés</button>
+      <p>Html template reset-password</p>
+      <div>
+        <div hidden>
+          <input type="file" accept=".html" class="file-input" (change)="onFileSelected($event,0)" #fileUpload0>
+          <p>feltöltes template reset-password</p>
+        </div>
+        <div class="file-upload">
+          <br>
+          <div class="exportbutton2">
+            <button mat-mini-fab color="primary" (click)="fileUpload0.click()" tabindex="39"> RESET PW FELTÖLT
+              <mat-icon>
+                attach_file</mat-icon></button>
+          </div>
+          <div class="nofile">{{uploadedMessage0|| noFileMessage}}</div>
+        </div>
+        <div class="progress">
+          <mat-progress-bar class="progress-bar" mode="determinate" [value]="loginService.uploadProgress"
+            *ngIf="loginService.uploadProgress">
+          </mat-progress-bar>
+          <mat-icon class="cancel-upload" (click)="loginService.cancelUpload()"
+            *ngIf="loginService.uploadProgress">delete_forever</mat-icon>
+        </div>
+      </div>
+      <br>
+      <br>
+      <br>
+      <p>visszaállítás</p>
+      <button (click)="setEmailToDefault(0)">reset pw visszaállítás</button>
+    </div>
 
+    <div class="exportbutton">
+      <div class="tab-button">
+        User approved tamplate
+      </div>
+      <p>Töltse le user-approved a template-et</p>
+      <button (click)="dowloadTemplate(1)"> user-approved Letöltés</button>
+      <p>Html template</p>
+      <div hidden>
+        <input type="file" accept=".html" class="file-input" (change)="onFileSelected($event, 1)" #fileUpload1>
+      </div>
       <div class="file-upload">
         <br>
         <div class="exportbutton2">
-
-          <button mat-mini-fab color="primary" (click)="fileUpload0.click()" tabindex="39"> RESET PW FELTÖLT <mat-icon>
+          <button mat-mini-fab color="primary" (click)="fileUpload1.click()" tabindex="39"> USER APPR FELTÖLT <mat-icon>
               attach_file</mat-icon></button>
+          <div class="nofile">{{uploadedMessage1|| noFileMessage}}</div>
         </div>
-        <div class="nofile">{{uploadedMessage0|| noFileMessage}}</div>
+        <div class="progress">
+          <mat-progress-bar class="progress-bar" mode="determinate" [value]="loginService.uploadProgress"
+            *ngIf="loginService.uploadProgress">
+          </mat-progress-bar>
+          <mat-icon class="cancel-upload" (click)="loginService.cancelUpload()"
+            *ngIf="loginService.uploadProgress">delete_forever</mat-icon>
+        </div>
       </div>
-
-
-      <div class="progress">
-
-        <mat-progress-bar class="progress-bar" mode="determinate" [value]="loginService.uploadProgress"
-          *ngIf="loginService.uploadProgress">
-
-        </mat-progress-bar>
-
-        <mat-icon class="cancel-upload" (click)="loginService.cancelUpload()"
-          *ngIf="loginService.uploadProgress">delete_forever</mat-icon>
-
-      </div>
-    </div>
-    <br>
-    <br>
-    <br>
-    
-    
-    <p>visszaállítás</p>
-    <button (click)="setEmailToDefault(0)">reset pw visszaállítás</button>
-  </div>
-  <div class="exportbutton">
-
-    <div class="tab-button">
-      User approved tamplate
-    </div>
-    <p>Töltse le user-approved a template-et</p>
-    <button (click)="dowloadTemplate(1)"> user-approved Letöltés</button>
-    <p>Html template</p>
-    <div hidden>
-      <input type="file" accept=".html" class="file-input" (change)="onFileSelected($event, 1)" #fileUpload1>
-    </div>
-
-    <div class="file-upload">
       <br>
-      <div class="exportbutton2">
-
-        <button mat-mini-fab color="primary" (click)="fileUpload1.click()" tabindex="39"> USER APPR FELTÖLT <mat-icon>
-            attach_file</mat-icon></button>
-        <div class="nofile">{{uploadedMessage1|| noFileMessage}}</div>     
-
-
-      </div>
-
-      <div class="progress">
-
-        <mat-progress-bar class="progress-bar" mode="determinate" [value]="loginService.uploadProgress"
-          *ngIf="loginService.uploadProgress">
-
-        </mat-progress-bar>
-
-        <mat-icon class="cancel-upload" (click)="loginService.cancelUpload()"
-          *ngIf="loginService.uploadProgress">delete_forever</mat-icon>
-
-      </div>
-    </div>
-    <br>
-    <br>
-    <br>
-    
-    
-    <p>visszaállítás</p>
-    <button (click)="setEmailToDefault(1)">user appr visszaállítás</button>
-  </div>
-
-  <div id="u1400" class="exportbutton">
-
-    <div  class="tab-button">
-      User waiting template
-    </div>
-    <p>Töltse le a user-waiting template-e</p>
-    <button (click)="dowloadTemplate(2)">user-waiting Letöltés</button>
-    <p>Html template</p>
-    <div hidden>
-      <input type="file" accept=".html" class="file-input" (change)="onFileSelected($event,2)" #fileUpload2>
-    </div>
-
-    <div class="file-upload">
       <br>
-      <div class="exportbutton2">
-
-        <button mat-mini-fab color="primary" (click)="fileUpload2.click()" tabindex="39"> USER WAIT FELTÖLT <mat-icon>
-            attach_file</mat-icon></button>
-        <div class="nofile">{{uploadedMessage2|| noFileMessage}}</div>
-      </div>
-
-      <div class="progress">
-
-        <mat-progress-bar class="progress-bar" mode="determinate" [value]="loginService.uploadProgress"
-          *ngIf="loginService.uploadProgress">
-
-        </mat-progress-bar>
-
-        <mat-icon class="cancel-upload" (click)="loginService.cancelUpload()"
-          *ngIf="loginService.uploadProgress">delete_forever</mat-icon>
-
-      </div>
-    </div>
-    <br>
-    <br>
-    <br>
-    
-    
-    <p>visszaállítás</p>
-    <button (click)="setEmailToDefault(2)">user-waiting visszaállítás</button>
-  </div>
-
-  <div id="u1400" class="exportbutton">
-
-    <div class="tab-button">
-      Verify email template
-    </div>
-    <p>Töltse le a verify-email template-et</p>
-    <button (click)="dowloadTemplate(3)">verify-email Letöltés</button>
-    <p>Html template</p>
-    <div hidden>
-      <input type="file" accept=".html" class="file-input" (change)="onFileSelected($event,3)" #fileUpload3>
-    </div>
-
-    <div class="file-upload">
       <br>
-      <div class="exportbutton2">
-
-        <button mat-mini-fab color="primary" (click)="fileUpload3.click()" tabindex="39"> VERIFY FELTÖLT<mat-icon>
-            attach_file</mat-icon></button>
-        <div class="nofile">{{uploadedMessage3|| noFileMessage}}</div>
-      </div>
-
-      <div class="progress">
-
-        <mat-progress-bar class="progress-bar" mode="determinate" [value]="loginService.uploadProgress"
-          *ngIf="loginService.uploadProgress">
-
-        </mat-progress-bar>
-
-        <mat-icon class="cancel-upload" (click)="loginService.cancelUpload()"
-          *ngIf="loginService.uploadProgress">delete_forever</mat-icon>
-
-      </div>
+      <p>visszaállítás</p>
+      <button (click)="setEmailToDefault(1)">user appr visszaállítás</button>
     </div>
-    <br>
-    <br>
-    <br>
-    
 
-    <p>visszaállítás</p>
-    <button (click)="setEmailToDefault(3)">verify-email visszaállítás</button>
-    
+    <div id="u1400" class="exportbutton">
+      <div class="tab-button">
+        User waiting template
+      </div>
+      <p>Töltse le a user-waiting template-e</p>
+      <button (click)="dowloadTemplate(2)">user-waiting Letöltés</button>
+      <p>Html template</p>
+      <div hidden>
+        <input type="file" accept=".html" class="file-input" (change)="onFileSelected($event,2)" #fileUpload2>
+      </div>
+      <div class="file-upload">
+        <br>
+        <div class="exportbutton2">
+          <button mat-mini-fab color="primary" (click)="fileUpload2.click()" tabindex="39"> USER WAIT FELTÖLT <mat-icon>
+              attach_file</mat-icon></button>
+          <div class="nofile">{{uploadedMessage2|| noFileMessage}}</div>
+        </div>
+        <div class="progress">
+          <mat-progress-bar class="progress-bar" mode="determinate" [value]="loginService.uploadProgress"
+            *ngIf="loginService.uploadProgress">
+          </mat-progress-bar>
+          <mat-icon class="cancel-upload" (click)="loginService.cancelUpload()"
+            *ngIf="loginService.uploadProgress">delete_forever</mat-icon>
+        </div>
+      </div>
+      <br>
+      <br>
+      <br>
+      <p>visszaállítás</p>
+      <button (click)="setEmailToDefault(2)">user-waiting visszaállítás</button>
+    </div>
+
+    <div id="u1400" class="exportbutton">
+      <div class="tab-button">
+        Verify email template
+      </div>
+      <p>Töltse le a verify-email template-et</p>
+      <button (click)="dowloadTemplate(3)">verify-email Letöltés</button>
+      <p>Html template</p>
+      <div hidden>
+        <input type="file" accept=".html" class="file-input" (change)="onFileSelected($event,3)" #fileUpload3>
+      </div>
+      <div class="file-upload">
+        <br>
+        <div class="exportbutton2">
+          <button mat-mini-fab color="primary" (click)="fileUpload3.click()" tabindex="39"> VERIFY FELTÖLT<mat-icon>
+              attach_file</mat-icon></button>
+          <div class="nofile">{{uploadedMessage3|| noFileMessage}}</div>
+        </div>
+        <div class="progress">
+          <mat-progress-bar class="progress-bar" mode="determinate" [value]="loginService.uploadProgress"
+            *ngIf="loginService.uploadProgress">
+          </mat-progress-bar>
+          <mat-icon class="cancel-upload" (click)="loginService.cancelUpload()"
+            *ngIf="loginService.uploadProgress">delete_forever</mat-icon>
+        </div>
+      </div>
+      <br>
+      <br>
+      <br>
+      <p>visszaállítás</p>
+      <button (click)="setEmailToDefault(3)">verify-email visszaállítás</button>
+    </div>
   </div>
-
-
-  
-
-</div>
-
 </div>
 
 <div class="progress">
-
   <mat-progress-bar class="progress-bar" mode="determinate" [value]="loginService.uploadProgress"
     *ngIf="loginService.uploadProgress">
-
   </mat-progress-bar>
-
   <mat-icon class="cancel-upload" (click)="loginService.cancelUpload()"
     *ngIf="loginService.uploadProgress">delete_forever</mat-icon>
-
 </div>

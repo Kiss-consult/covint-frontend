@@ -1,12 +1,12 @@
 import { Component } from '@angular/core';
-
 import { Site } from 'src/app/models/user/site';
 import { User } from 'src/app/models/user/user';
 import { LoginService } from 'src/app/services/login/login.service';
-import { FormBuilder, FormGroup,  ReactiveFormsModule ,Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { UserData } from 'src/app/models/userdata/userdata';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Location } from '@angular/common'
+
 @Component({
   selector: 'app-updateuser',
   templateUrl: './updateuser.component.html',
@@ -14,20 +14,16 @@ import { Location } from '@angular/common'
 })
 export class UpdateuserComponent {
 
-
-
-
   cegActive: boolean = false;
   intezmenyActive: boolean = false;
-   userdata: UserData = new UserData;
+  userdata: UserData = new UserData;
   user: User = new User;
   site: Site = new Site;
-  password2: string = "" ;
-   // Declare the form group
-   genderForm: FormGroup;
+  password2: string = "";
+  // Declare the form group
+  genderForm: FormGroup;
   sub: any;
- 
-   id: string = this.userdata.id || '';
+  id: string = this.userdata.id || '';
 
   toggleContent(contentType: string) {
     if (contentType === 'ceg') {
@@ -35,100 +31,63 @@ export class UpdateuserComponent {
       this.intezmenyActive = false;
       this.user.IsCompany = true;
       console.log("ceget valsztottam", this.user.IsCompany)
-
     } else if (contentType === 'intezmeny') {
       this.cegActive = false;
       this.intezmenyActive = true;
       this.user.IsCompany = false;
       console.log("intezmenyt vaálasztottam:", this.user.IsCompany)
     }
+  }
 
-    }
-    goBackToPrevPage(): void {
-      this.location.back();
-    }
-  constructor(public loginService: LoginService,private fb: FormBuilder,
-     private _Activatedroute:ActivatedRoute,private router: Router,private location: Location
-  )  {
-   // this.user.IsCompany = false;
-    //console.log("Iscompany start:", this.user.IsCompany)
-    //let userdata = OverrideuserComponent.getuserdataValue();
-      const id = this._Activatedroute.snapshot.paramMap.get("userdata.id"); /// majd ide jon a masik componensbol a valtozo
-      console.log("lekerdeztem" , id);
- 
-        
+  goBackToPrevPage(): void {
+    this.location.back();
+  }
 
-      
-      this.loginService.getUserAttributes(id).subscribe(result => {
-  
-        if (result.isErr()) {
-          let mess = result.unwrapErr().error.Error;
-          if (mess === "You are not allowed to interact the data of this user") {
-            alert("Sikertelen adatlekérés \nÖn nem jogosult az adatok lekérésére !")
-            console.log("jogosultsági probléma")
-          }
-          else
-          alert("useradatok lekérdezése  sikertelen ");
-          console.error(result.unwrapErr());
-          return;
+  constructor(public loginService: LoginService, private fb: FormBuilder,
+    private _Activatedroute: ActivatedRoute, private router: Router, private location: Location
+  ) {   
+    const id = this._Activatedroute.snapshot.paramMap.get("userdata.id"); /// here we get the variable from another page
+    console.log("lekerdeztem", id);
+    this.loginService.getUserAttributes(id).subscribe(result => {
+      if (result.isErr()) {
+        let mess = result.unwrapErr().error.Error;
+        if (mess === "You are not allowed to interact the data of this user") {
+          alert("Sikertelen adatlekérés \nÖn nem jogosult az adatok lekérésére !")
+          console.log("jogosultsági probléma")
         }
-        this.user = result.unwrap();
-        
-      });
-
-      this.genderForm = this.fb.group({
-        'gender': ['', Validators.required]
-  
-      
+        else
+          alert("useradatok lekérdezése  sikertelen ");
+        console.error(result.unwrapErr());
+        return;
+      }
+      this.user = result.unwrap();
     });
-
-
-
+    this.genderForm = this.fb.group({
+      'gender': ['', Validators.required]
+    });
   }
 
 
-   
-/* Using snapshot */
-
-/*
-  public getSelectedGender() {
-
-    let selectedValue = this.genderForm.controls['gender'].value;
-
-    if (selectedValue) {
-      console.log('You have selected ' + selectedValue);
-    }
-    else {
-      console.log("You haven't selected anything.");
-    }
-
-  }
-*/
-
-
+// finish the update process and send data to the database
   public finish() {
-   if (!this.checkRequiredFields()) {
+    if (!this.checkRequiredFields()) {
       return;
-   }
-  const id = this._Activatedroute.snapshot.paramMap.get("userdata.id");
-
-  console.log("before finish is company", this.user.IsCompany)
-  console.log("before finish user", this.user)
-  console.log("before finish id", id)
-   // this.user.Site = this.site;
-    this.loginService.updateUserAttributes(id,this.user).subscribe(
+    }
+    const id = this._Activatedroute.snapshot.paramMap.get("userdata.id");
+    console.log("before finish is company", this.user.IsCompany)
+    console.log("before finish user", this.user)
+    console.log("before finish id", id)   
+    this.loginService.updateUserAttributes(id, this.user).subscribe(
       result => {
         if (result.isErr()) {
-          
           console.error(result.unwrapErr());
           let mess = result.unwrapErr().error.Error;
-          
           if (mess === "Phone number must start with +36 or 06") {
             alert("Sikertelen adatmódosítás! \nA telefonszám formátuma +36.... vagy  06....    ")
             console.log("rossz telefonszám")
           }
           else
-          alert("Sikertelen update");
+            alert("Sikertelen update");
           return;
         }
         alert("Sikeres update");
@@ -140,20 +99,12 @@ export class UpdateuserComponent {
       });
   }
 
-  public change(signal : boolean) {
-    // if (!this.checkRequiredFields()) {
-     //  return;
-   //  }
-   console.log("Iscompany from page when was click:", this.user.IsCompany)
-     this.user.IsCompany = true;
-     console.log("Iscompany now:", this.user.IsCompany)
-   }
+  
 
 
 
-   private checkRequiredFields(): boolean {
+  private checkRequiredFields(): boolean {
 
-   
     if (this.user.FirstName === "") {
       alert("A 'Keresznév' mező kitöltése kötelező!");
       return false;
@@ -170,12 +121,12 @@ export class UpdateuserComponent {
       alert("Az 'Intézmény neve' vagy  a 'Cég neve' mező kitöltése kötelező!");
       return false;
     }
-    
+
     if (this.user.Site.City === "") {
       alert("A 'Város' mező kitöltése kötelező!");
       return false;
     }
-     
+
     if (this.user.Site.PostCode === 0 || this.user.Site.PostCode === null) {
       alert("Az 'Irányítószám' mező kitöltése kötelező!");
       return false;
@@ -189,7 +140,6 @@ export class UpdateuserComponent {
       alert("Az 'Utca' mező kitöltése kötelező!");
       return false;
     }
-
     return true;
   }
 

@@ -5,7 +5,6 @@ import { Router } from '@angular/router';
 import { User } from 'src/app/models/user/user';
 import { UserData } from 'src/app/models/userdata/userdata';
 import { LoginService } from 'src/app/services/login/login.service';
-import { BackendService } from 'src/app/services/backend/backend.service';
 import { KutatoOrvos, Orvos, PortalKezelo, PortalVezeto } from 'src/app/models/group/group';
 import { Location } from '@angular/common'
 
@@ -27,6 +26,7 @@ export class AcceptnewuserComponent {
   researchergroup: boolean = false;
   portaladmingroup: boolean = false;
   portalmanagergroup: boolean = false;
+
   group: string = "";
   username: string = "";
   password: string = "";
@@ -35,16 +35,8 @@ export class AcceptnewuserComponent {
   confirmation: string = "";
 
   expandedUser: any | null = null;
-
-  togglePopupContent(userdata: any) {
-    this.expandedUser = this.expandedUser === userdata ? null : userdata;
-    this.getUserAttributes(userdata.id);
-    
-  }
-  goBackToPrevPage(): void {
-    this.location.back();
-  }
-  displayedColumns: string[] = ['Név', 'Orvos', 'Kutató orvos', 'Portál kezelő', 'Portál vezető', 'elfogadva']; // Itt adhatod meg az oszlopok neveit
+ 
+  displayedColumns: string[] = ['Név', 'Orvos', 'Kutató orvos', 'Portál kezelő', 'Portál vezető', 'elfogadva']; 
   dataSource: MatTableDataSource<UserData>;
   @ViewChild('paginator') paginator: MatPaginator;
   pageSizeOptions: number[] = [5, 10];
@@ -55,17 +47,27 @@ export class AcceptnewuserComponent {
   portalvezeto = PortalVezeto;
 
 
+  togglePopupContent(userdata: any) {
+    this.expandedUser = this.expandedUser === userdata ? null : userdata;
+    this.getUserAttributes(userdata.id);
+
+  }
+  goBackToPrevPage(): void {
+    this.location.back();
+  }
+
   illnessFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;
     this.dataSource.filter = filterValue.trim().toLowerCase();
   }
-  constructor(public loginService: LoginService, private router: Router,private location: Location) {
+
+  constructor(public loginService: LoginService, private router: Router, private location: Location) {
 
 
     this.loginService.getWaitingUsers().subscribe(
       result => {
         if (result.isErr()) {
-          alert("Sikertelen userlist");
+          alert("Sikertelen betöltés: várakozó userek");
           console.error(result.unwrapErr());
           return;
         }
@@ -76,58 +78,47 @@ export class AcceptnewuserComponent {
         console.log(this.userdatas)
         console.log("id", this.userdata.id)
         console.log(this.dataSource.data);
-
-
-
       });
-
   }
 
 
   public isDoctor(doctorgroup: boolean) {
-
     this.doctorgroup = doctorgroup;
     if (this.doctorgroup)
       this.usergroup.push(Orvos);
     this.doctorgroup = false;
     console.log(this.usergroup);
-
   }
-  public isResearcher(researchergroup: boolean) {
 
+  public isResearcher(researchergroup: boolean) {
     this.researchergroup = researchergroup;
     if (this.researchergroup)
       this.usergroup.push(KutatoOrvos);
     this.researchergroup = false;
     console.log(this.researchergroup);
     console.log(this.usergroup);
-
   }
-  public isPortalAdmin(portaladmingroup: boolean) {
 
+  public isPortalAdmin(portaladmingroup: boolean) {
     this.portaladmingroup = portaladmingroup;
     if (this.portaladmingroup)
       this.usergroup.push(PortalVezeto);
     this.portaladmingroup = false;
     console.log(this.usergroup);
-
   }
-  public isPortalManager(portalmanagergroup: boolean) {
 
+  public isPortalManager(portalmanagergroup: boolean) {
     this.portalmanagergroup = portalmanagergroup;
     if (this.portalmanagergroup)
       this.usergroup.push(PortalKezelo);
     this.portalmanagergroup = false;
     console.log(this.usergroup);
-
   }
+  
+  // accept user and add groups to the user
   public accept(userdata: UserData) {
     console.log("kaptam");
     console.log(userdata);
-
-
-
-
     this.userdata.email = userdata.email;
     this.userdata.id = userdata.id;
     console.log("kuldenem")
@@ -139,14 +130,14 @@ export class AcceptnewuserComponent {
           console.error(result.unwrapErr());
           return;
         }
-        alert("Sikeresuser elfogadás");
+        alert("Sikeres user elfogadás");
         console.log("Successfully accepted the user ")
         this.usergroup = [];
         // this.reloadCurrentPage();
         this.loginService.getWaitingUsers().subscribe(
           result => {
             if (result.isErr()) {
-              alert("Sikertelen userlist");
+              alert("Sikertelen betöltés: várakozó userek");
               console.error(result.unwrapErr());
               return;
             }
@@ -156,17 +147,12 @@ export class AcceptnewuserComponent {
             this.dataSource.paginator = this.paginator;
             console.log(this.userdatas)
             console.log(this.dataSource.data);
-
           });
-
-
       });
-
-
-
   }
 
-  public getUserAttributes(id : string) {
+// return with user attributes
+  public getUserAttributes(id: string) {
     this.loginService.getUserAttributes(id).subscribe(
       result => {
         if (result.isErr()) {
@@ -174,17 +160,11 @@ export class AcceptnewuserComponent {
           console.error(result.unwrapErr());
           return;
         }
-        this.user = result.unwrap();
-  
-       // this.dataSource = new MatTableDataSource(this.userdatas);
-        //this.dataSource.paginator = this.paginator;
-        console.log(this.user)
-        //console.log(this.dataSource.data);
-  
+        this.user = result.unwrap();        
+        console.log(this.user)   
       });
-  
   }
-  
+
 
   public reloadCurrentPage() {
     window.location.reload();

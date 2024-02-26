@@ -1,20 +1,13 @@
-import { Component, ViewChild, OnInit, ChangeDetectorRef, AfterContentChecked } from '@angular/core';
-import { Case } from 'src/app/models/case/case';
+import { Component, ViewChild } from '@angular/core';
 import { Illness } from 'src/app/models/illness/illness';
-
 import { BackendService } from 'src/app/services/backend/backend.service';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatPaginator } from '@angular/material/paginator';
-import { MatSort } from '@angular/material/sort';
 import { Filter } from 'src/app/models/filter/filter';
 import { Export } from 'src/app/models/export/export';
 import { SavedFilter } from 'src/app/models/savedfilter/savedfilter';
-import { GroupGuard } from 'src/app/guards/group.guard';
 import { KutatoOrvos, Orvos, PortalKezelo, PortalVezeto } from 'src/app/models/group/group';
 import { LoginService } from 'src/app/services/login/login.service';
-
-import { ActivatedRouteSnapshot, RouterStateSnapshot, UrlTree, Router } from '@angular/router';
-import { Observable } from 'rxjs/internal/Observable';
 import { Diagram } from 'src/app/models/diagram/diagram';
 import { Location } from '@angular/common'
 
@@ -40,7 +33,6 @@ export class ExportComponent {
   savedfilter: SavedFilter = new SavedFilter();
   currentfilter: SavedFilter = new SavedFilter();
 
-
   displayedColumns: string[] = ['sex', 'age', 'markers', 'hospitalized', 'dead', 'count', 'validated', 'source', 'datefrom', 'dateto']; // Itt adhatod meg az oszlopok neveit
   dataSource: MatTableDataSource<Export>;
   flag: boolean = false;
@@ -51,8 +43,10 @@ export class ExportComponent {
   markers: string[] = [];
   // This is only stored for faster access to the illnesses by BNO code
   illnessesByBno: Map<string, Illness> = new Map();
+
   @ViewChild('paginator') paginator: MatPaginator;
   pageSizeOptions: number[] = [5, 10];
+
   orvos = Orvos;
   kutatoorvos = KutatoOrvos;
   portaladmin = PortalKezelo;
@@ -61,6 +55,7 @@ export class ExportComponent {
   diagramtype: string = '';
   url = "";
   iframe = "";
+  paneltitle: string = '';
 
   toggleContent(contentType: string) {
     if (contentType === 'marker') {
@@ -72,8 +67,6 @@ export class ExportComponent {
       this.getFilters();
     }
 
-
-
     if (contentType === 'time') {
       this.timeActive = true;
       this.relativtimeActive = false;
@@ -83,14 +76,13 @@ export class ExportComponent {
       this.relativtimeActive = true;
       console.log("Relativ dátumot választottam");
     }
-
   }
 
   goBackToPrevPage(): void {
     this.location.back();
   }
-  constructor(private backendService: BackendService, public loginService: LoginService, private router: Router,
-    private changeDetector: ChangeDetectorRef, private location: Location) {
+
+  constructor(private backendService: BackendService, public loginService: LoginService, private location: Location) {
 
     this.backendService.getMarkers().subscribe(
       result => {
@@ -105,24 +97,11 @@ export class ExportComponent {
         console.log(this.markers);
         this.dataSource = new MatTableDataSource(this.exports);
         this.dataSource.paginator = this.paginator;
-
       });
-
-  }
-
-
-
-
-  /*
-  ngAfterViewInit() {
-    this.dataSource = new MatTableDataSource(this.exports);
-    this.dataSource.paginator = this.paginator;
-  }
-  */
+  } 
 
 
   private checkRequiredFields(): boolean {
-
 
     if (this.filter.Sex === null || this.filter.Sex === "") {
       alert("A 'Nem' mező kitöltése kötelező");
@@ -142,44 +121,13 @@ export class ExportComponent {
     }
     return true;
   }
-
   public getMarkerNames(e: Export): string {
     return e.Illnesses.map(m => m).join(", ");
   }
-  /*
-  ngOnInit(): void {
-    const groups = [PortalAdmin, KutatoOrvos, PortalVezeto];
-    if(this.loginService.hasAnyGroup(groups)) {
-    this.flag = true;
-    console.log(this.flag)
-  } else {
-    alert('en uzenetem mert te egy orvos vagy');
-    this.flag = false;
-    console.log(this.flag)
-  }
-  }
-  
-  ngAfterContentChecked(): void {
-    this.changeDetector.detectChanges();
-  }
-  */
-
-  // Function to see the funcuóion is valable or not with your permission
-  /* public available() {
-  const groups = [PortalAdmin, KutatoOrvos, PortalVezeto];
-  if (this.loginService.hasAnyGroup(groups)) {
-    return true;
-  } else {
-    alert(`You have to be any of ${groups} to access this page!`);
-    this.router.navigate(['/home']);
-    return false;
-  }
-
-} */
 
 
 
-
+// return with filtered data from the database
   public finish() {
     if (!this.checkRequiredFields()) {
       return;
@@ -204,12 +152,8 @@ export class ExportComponent {
     this.dataSource.data = this.exports;
   }
 
-
-  public saveFilter() {
-    //if (!this.checkRequiredFields()) {
-    //  return;
-    //}
-
+ // save the given filter with name
+  public saveFilter() {    
     this.backendService.filterSave(this.filtername, this.filter).subscribe(
       result => {
         if (result.isErr()) {
@@ -219,31 +163,26 @@ export class ExportComponent {
         }
         alert("Sikeres szűrő mentés");
         console.log("Successfully saved filter")
-
       });
   }
-  public getFilterDiagram(t: number) {
-    //if (!this.checkRequiredFields()) {
-    //  return;
-    //}
+
+
+  // set filtertype and return with diagram , open it in new window
+  public getFilterDiagram(t: number) {   
     let filtertype = "";
     switch (t) {
       case 0:
         filtertype = "pie";
-
         break;
       case 1:
         filtertype = "line";
-
         break;
       case 2:
         filtertype = "bar";
     }
-
-
     console.log("filtertype", filtertype)
     this.diagramtype = filtertype;
-    this.backendService.getFilterDiagram(this.diagramtype, this.filter).subscribe(
+    this.backendService.getFilterDiagram(this.diagramtype, this.filter, this.paneltitle).subscribe(
       result => {
         if (result.isErr()) {
           alert("Sikertelen diagram url és iframe lekérés");
@@ -258,23 +197,19 @@ export class ExportComponent {
         this.url = diagramdata.Url;
         this.iframe = diagramdata.Iframe;
         window.open(this.url);
-
       });
   }
 
+
   public openLink() {
     window.open(this.url)
-
   }
 
-
-
+  // export ( download ) filtered data from the database
   public export() {
     if (!this.checkRequiredFields()) {
       return;
     }
-
-
     const filename = "szurt_adatok_covint.xlsx";
     this.backendService.downloadExport(this.filter).subscribe((result) => {
       if (result.isErr()) {
@@ -293,8 +228,8 @@ export class ExportComponent {
     });
   }
 
+  // export ( download ) all  data from the database - rate index
   public rates() {
-
     const filename = "eredmenyek_teljes.xlsx";
     this.backendService.downloadRates().subscribe((result) => {
       if (result.isErr()) {
@@ -313,73 +248,54 @@ export class ExportComponent {
     });
   }
 
-  public getFilters() {
-    //if (!this.checkRequiredFields()) {
-    //  return;
-    //}
-
+// return with saved filters 
+  public getFilters() {   
     this.backendService.getFilterList().subscribe(
       result => {
         if (result.isErr()) {
           alert("Szűrők lekérdezése sikertelen");
           console.error(result.unwrapErr());
           return;
-        }
-        //alert("Sikeres szűrők lekérdezése");
-        this.savedfilters = result.unwrap();
-        //for (let illness of result.unwrap()) {
-        // illness.BnoCodes.forEach((bnoCode) => {
-        //   this.illnessesByBno.set(bnoCode, illness);
-        // });
-        // }
-        // this.dataSource.data = this.illnesses; // Az adatforrás frissítése
+        }        
+        this.savedfilters = result.unwrap();       
         console.log("Sikeresen szűrők lekérdezése az adatbázisból");
-        console.log(this.savedfilters);
-        //this.dataSource.paginator = this.paginator;
-
+        console.log(this.savedfilters);    
       });
   }
+
   public getFilterNames(sf: SavedFilter): string {
     return sf.FilterName;
   }
 
+  // return with selected filter
   public getCurrentFilter(currentfilter: SavedFilter): Filter {
-
     console.log(currentfilter);
     console.log(this.currentfilter.FilterName);
-
     this.filter = this.currentfilter.Filter;
-
     console.log(this.filter);
-
     return this.filter;
   }
 
-
+// add marker to the filter
   public getMarker() {
     if (this.marker === '') {
       alert("Kérem adjon meg minimum egy markert!");
       return;
     }
-    if (this.filter.Illnesses.filter((valami) => valami === this.marker).length > 0) {
+    if (this.filter.Illnesses.filter((m) => m === this.marker).length > 0) {
       console.log("Marker already exists")
-      alert("Ez a marker már hozzá lett adva!")
-      //this.removeMarker(this.marker);
+      alert("Ez a marker már hozzá lett adva!")   
       return;
     }
     if (this.marker === "Egészséges" && this.filter.Illnesses.length != 0) {
       alert("Már van betegség hozzáadva, így nem lehet Egészséges!");
       return;
     }
-
-
     if (this.filter.Illnesses.filter((valami) => valami === "Egészséges").length > 0) {
       console.log("Marker already exists")
-      alert("Egészséges jelentése: csak covidos volt, nincs más betegsége!")
-      //this.removeMarker(this.marker);
+      alert("Egészséges jelentése: csak covidos volt, nincs más betegsége!")   
       return;
-    }
-    //const newMarker = new Marker(this.newBno, this.illnessesByBno.get(this.newBno)?.Names);
+    }    
     this.filter.Illnesses.push(this.marker);
   }
 
@@ -388,8 +304,5 @@ export class ExportComponent {
   public removeMarker(illness: string) {
     this.filter.Illnesses = this.filter.Illnesses.filter(m => m !== illness);
   }
-
-
-
 
 }

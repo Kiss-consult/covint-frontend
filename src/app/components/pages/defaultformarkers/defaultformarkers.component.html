@@ -1,112 +1,126 @@
 <h1>Ősfeltöltés</h1>
-<h2>Ősfeltöltés több marker kombinációjára  ( kiinduló értékek megadása ) </h2>
+<h2>Ősfeltöltés több marker kombinációjára ( kiinduló értékek megadása ) </h2>
 
 <div class="container">
   <h3><button id="backbutton" (click)="goBackToPrevPage()">&#11148;</button></h3>
   <div class="content">
     <div class="content2">
       <div class="newillnessclass">
-      <div>
+        <div>
           <label class="text"> Marker <s>*</s></label>
         </div>
         <div>
-          <select *ngIf="loginService.hasAnyGroup([portalvezeto, kutatoorvos])" class="droptextbox" type="text" id="markers" name="markers" [(ngModel)]="marker" title="Ha a betegnek nem volt társ betegsége, válassza az 'Egészséges' markert! ">
+          <select *ngIf="loginService.hasAnyGroup([portalvezeto, kutatoorvos])" class="droptextbox" type="text"
+            id="markers" name="markers" [(ngModel)]="marker"
+            title="Ha a betegnek nem volt társ betegsége, válassza az 'Egészséges' markert! ">
             <ng-container *ngFor="let marker of markers">
               <option value="" disabled selected hidden>Válasszon markert...</option>
               <option value="{{marker}}">{{marker}}</option>
             </ng-container>
           </select>
-          <select *ngIf="loginService.hasAnyGroup([portaladmin])" class="droptextbox" type="text" id="markers" name="markers" [(ngModel)]="marker" title="Portálkezelő számára csak olvasható">
+          <select *ngIf="loginService.hasAnyGroup([portaladmin])" class="droptextbox" type="text" id="markers"
+            name="markers" [(ngModel)]="marker" title="Portálkezelő számára csak olvasható">
             <ng-container *ngFor="let marker of markers">
               <option value="" disabled selected hidden>Válasszon markert...</option>
-              <option value="{{marker}}"  >{{marker}}</option>
+              <option value="{{marker}}">{{marker}}</option>
             </ng-container>
           </select>
-          <button *ngIf="loginService.hasAnyGroup([portalvezeto, kutatoorvos])"  (click)="addMarker()">Hozzáadás</button>
-          <button *ngIf="loginService.hasAnyGroup([portaladmin])" disabled="disabled" (click)="addMarker()" title="Portálkezelő számára csak olvasható">Hozzáadás</button>
+          <button *ngIf="loginService.hasAnyGroup([portalvezeto, kutatoorvos])" (click)="addMarker()">Hozzáadás</button>
+          <button *ngIf="loginService.hasAnyGroup([portaladmin])" disabled="disabled" (click)="addMarker()"
+            title="Portálkezelő számára csak olvasható">Hozzáadás</button>
         </div>
       </div>
-    
-  
 
-  <div class="content2" style="margin-top: 60px;">
-    <ng-container *ngIf="illnesses && illnesses.length > 0; else noMarkers">
-      <p class="markerbno2">Markerek</p>
-      <div style="max-height: 265px; overflow-y: auto; min-width: 500px; margin-left: 100px; margin-bottom: 60px;">
-        <div *ngFor="let illness of illnesses; let i = index" style="border-bottom: solid 3px #b8b8b8a6; display: flex; align-items: center; padding-bottom: 5px; margin-top: 5px;">
-          <div style="flex-grow: 1;">
-            <p style="margin: 0;">{{ illness }}</p>
+
+
+      <div class="content2" style="margin-top: 60px;">
+        <ng-container *ngIf="illnesses && illnesses.length > 0; else noMarkers">
+          <p class="markerbno2">Markerek</p>
+          <div style="max-height: 265px; overflow-y: auto; min-width: 500px; margin-left: 100px; margin-bottom: 60px;">
+            <div *ngFor="let illness of illnesses; let i = index"
+              style="border-bottom: solid 3px #b8b8b8a6; display: flex; align-items: center; padding-bottom: 5px; margin-top: 5px;">
+              <div style="flex-grow: 1;">
+                <p style="margin: 0;">{{ illness }}</p>
+              </div>
+              <div style="margin-left: auto;">
+                <button *ngIf="loginService.hasAnyGroup([portalvezeto, kutatoorvos])"
+                  (click)="removeMarker(illness)">Törlés</button>
+                <button *ngIf="loginService.hasAnyGroup([portaladmin])" disabled="disabled"
+                  (click)="removeMarker(illness)" title="Portálkezelő számára csak olvasható">Törlés</button>
+              </div>
+            </div>
           </div>
-          <div style="margin-left: auto;">
-            <button  *ngIf="loginService.hasAnyGroup([portalvezeto, kutatoorvos])"(click)="removeMarker(illness)">Törlés</button>
-            <button  *ngIf="loginService.hasAnyGroup([portaladmin])" disabled="disabled" (click)="removeMarker(illness)" title="Portálkezelő számára csak olvasható">Törlés</button>
+          <div *ngIf="illnesses.length > 5">
+            <p style="margin-top: 20px; opacity: 70%;">(További Markerek megtekintéséhez görgessen lefele (vagy valami
+              szöveget ide lehet írni))</p>
           </div>
-        </div>
+        </ng-container>
+        <ng-template #noMarkers>
+          <p class="markerbno" title="Minimum 2 marker megadása szükséges ">Még nem adott hozzá Markert</p>
+        </ng-template>
       </div>
-      <div *ngIf="illnesses.length > 5">
-        <p style="margin-top: 20px; opacity: 70%;">(További Markerek megtekintéséhez görgessen lefele (vagy valami szöveget ide lehet írni))</p>
-      </div>
-    </ng-container>
-    <ng-template #noMarkers>
-      <p class="markerbno" title="Minimum 2 marker megadása szükséges ">Még nem adott hozzá Markert</p>
-    </ng-template>
-  </div>
-</div>
-  
-  <div class="scrollable-container">
-    <mat-form-field style="width: 100%;">
-      <mat-label>Keresés</mat-label>
-    <input matInput placeholder="Keresés" [(ngModel)]="searchValue">
-    </mat-form-field>
-    <table mat-table class="mat-table" [dataSource]="defaults">
-      <ng-container matColumnDef="sex">
-        <th mat-header-cell class="mat-header-cell" *matHeaderCellDef>Nem</th>
-        <td mat-cell class="mat-cell" *matCellDef="let default">{{ default.Sex }}</td>
-      </ng-container>
-    
-      <ng-container matColumnDef="age">
-        <th mat-header-cell class="mat-header-cell" *matHeaderCellDef>Kor</th>
-        <td mat-cell class="mat-cell" *matCellDef="let default">{{ default.Age }}</td>
-      </ng-container>
-    
-      <ng-container matColumnDef="hospitalized">
-        <th mat-header-cell class="mat-header-cell" *matHeaderCellDef>Halálozás</th>
-        <td mat-cell class="mat-cell" *matCellDef="let default">
-          <input type="number" [(ngModel)]="default.Hospitalized" min = '1' max = '100' name="hospitalized" id="hospitalized" class="form-control">
-        </td>
-      </ng-container>
-    
-      <ng-container matColumnDef="dead">
-        <th mat-header-cell class="mat-header-cell" *matHeaderCellDef>Kórház</th>
-        <td mat-cell class="mat-cell" *matCellDef="let default">
-          <input type="number" [(ngModel)]="default.Dead"  min = '1' max = '100' name="dead" id="dead" class="form-control">
-        </td>
-      </ng-container>
-    
-      <tr mat-header-row *matHeaderRowDef="['sex', 'age', 'hospitalized', 'dead']"></tr>
-      <tr mat-row *matRowDef="let row; columns: ['sex', 'age', 'hospitalized', 'dead']; let i = index"
+    </div>
+
+    <div class="scrollable-container">
+      <mat-form-field style="width: 100%;">
+        <mat-label>Keresés</mat-label>
+        <input matInput placeholder="Keresés" [(ngModel)]="searchValue">
+      </mat-form-field>
+      <table mat-table class="mat-table" [dataSource]="defaults">
+        <ng-container matColumnDef="sex">
+          <th mat-header-cell class="mat-header-cell" *matHeaderCellDef>Nem</th>
+          <td mat-cell class="mat-cell" *matCellDef="let default">{{ default.Sex }}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="age">
+          <th mat-header-cell class="mat-header-cell" *matHeaderCellDef>Kor</th>
+          <td mat-cell class="mat-cell" *matCellDef="let default">{{ default.Age }}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="hospitalized">
+          <th mat-header-cell class="mat-header-cell" *matHeaderCellDef>Halálozás</th>
+          <td mat-cell class="mat-cell" *matCellDef="let default">
+            <input type="number" [(ngModel)]="default.Hospitalized" min='1' max='100' name="hospitalized"
+              id="hospitalized" class="form-control">
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="dead">
+          <th mat-header-cell class="mat-header-cell" *matHeaderCellDef>Kórház</th>
+          <td mat-cell class="mat-cell" *matCellDef="let default">
+            <input type="number" [(ngModel)]="default.Dead" min='1' max='100' name="dead" id="dead"
+              class="form-control">
+          </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="['sex', 'age', 'hospitalized', 'dead']"></tr>
+        <tr mat-row *matRowDef="let row; columns: ['sex', 'age', 'hospitalized', 'dead']; let i = index"
           [ngClass]="{'highlight': selectedRows[i]}" [hidden]="!matchesFilter(row)">
-      </tr>
-    
-      </table>    
+        </tr>
+
+      </table>
     </div>
   </div>
-  
 
-    <div style="text-align: center; position: relative; z-index: 1; display: flex; flex-direction: column; align-items: center;">   
-      <button id="okebutton" *ngIf="loginService.hasAnyGroup([portalvezeto, kutatoorvos])" (click)="finish()" style="z-index: 2; position: relative;">
-          Kész
-      </button>
-      <button id="okebutton"  *ngIf="loginService.hasAnyGroup([portaladmin])" disabled="disabled" title="Portálkezelő számára csak olvasható" (click)="finish()" style="z-index: 2; position: relative;">
-        Kész
+
+  <div
+    style="text-align: center; position: relative; z-index: 1; display: flex; flex-direction: column; align-items: center;">
+    <button id="okebutton" *ngIf="loginService.hasAnyGroup([portalvezeto, kutatoorvos])" (click)="finish()"
+      style="z-index: 2; position: relative;">
+      Kész
     </button>
-      <div style="position: absolute; bottom: 0; width: 50%; z-index: 1; text-align: center;">
-          <hr style="margin-top: 10px; width: 100%; height: 1px; background-color: #0080ff; box-shadow:0px 1px 0px #848484;">
-      </div>
-    </div>  
+    <button id="okebutton" *ngIf="loginService.hasAnyGroup([portaladmin])" disabled="disabled"
+      title="Portálkezelő számára csak olvasható" (click)="finish()" style="z-index: 2; position: relative;">
+      Kész
+    </button>
+    <div style="position: absolute; bottom: 0; width: 50%; z-index: 1; text-align: center;">
+      <hr
+        style="margin-top: 10px; width: 100%; height: 1px; background-color: #0080ff; box-shadow:0px 1px 0px #848484;">
+    </div>
+  </div>
 
-    <footer>   
-      <p>A "*" -al jelölt mezők kitöltése kötelező !</p>
-    </footer>
+  <footer>
+    <p>A "*" -al jelölt mezők kitöltése kötelező !</p>
+  </footer>
 
 </div>

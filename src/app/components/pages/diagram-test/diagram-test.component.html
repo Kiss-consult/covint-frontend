@@ -9,9 +9,6 @@
       [src]="getDoctorDashboardUrl() | safe:'url'"></iframe>
   </div>
 
-
-
-
   <div class="tab" *ngIf="loginService.hasAnyGroup([portaladmin, portalvezeto, kutatoorvos])"><iframe id="diagram"
       [src]="getResearcherDashboardUrl() | safe:'url'"></iframe>
   </div>

@@ -2,94 +2,93 @@
 
 <div class="container">
   <h3><button id="backbutton" (click)="goBackToPrevPage()">&#11148;</button></h3>
- <div class="content">
+  <div class="content">
     <table>
-    <tr>
-      <td>
-        <label for="name">Felhasználó neve:</label>
-      </td>
-      <td>
-        <p>{{this.user.Title}} {{this.user.LastName}} {{this.user.FirstName}}</p>
-      </td>
-    </tr>
-  
-    <tr>
-      <td>
-        <label for="sealnumber">Pecsét száma:</label>
-      </td>
-      <td>
-        <p>{{this.user.SealNumber}}</p>
-      </td>
-    </tr>
-  
-    <tr>
-      <td>
-        <label for="companyname">Cég neve:</label>
-      </td>
-      <td>
-        <p>{{this.user.CompanyName}}</p>
-      </td>
-    </tr>
-  
-    <tr>
-      <td>
-        <label for="institute">Intézmény neve:</label>
-      </td>
-      <td>
-        <p>{{this.user.InstitutionName}}</p>
-      </td>
-    </tr>
-  
-    <tr>
-      <td>
-        <label for="departure">Osztály:</label>
-      </td>
-      <td>
-        <p>{{this.user.InstitutionDepartment}}</p>
-      </td>
-    </tr>
-  
-    <tr>
-      <td>
-        <label for="phone">Telefon:</label>
-      </td>
-      <td>
-        <p>{{this.user.Phone}}</p>
-      </td>
-    </tr>
+      <tr>
+        <td>
+          <label for="name">Felhasználó neve:</label>
+        </td>
+        <td>
+          <p>{{this.user.Title}} {{this.user.LastName}} {{this.user.FirstName}}</p>
+        </td>
+      </tr>
 
-    <tr>
-      <td>
-        <label for="address">Telephely:</label>
-      </td>
-      <td>
-        <p>   {{this.user.Site.PostCode}} {{this.user.Site.City}} {{this.user.Site.Street}} {{this.user.Site.HouseNumber}} </p>
-      
-      </td>
-    </tr>
-    
-    <tr>
-      <td>
-        <div class="content2">
-        <label  >Adatmódosítási igény esetén keresse a portálkezelőket! Köszönjük!</label>
-        </div>
+      <tr>
+        <td>
+          <label for="sealnumber">Pecsét száma:</label>
+        </td>
+        <td>
+          <p>{{this.user.SealNumber}}</p>
+        </td>
+      </tr>
 
-      </td>
-      <td>
-        <!--
-        <button id="done" (click)="">Adatmódosítás</button>
-      -->
-      </td>
-    </tr>
+      <tr>
+        <td>
+          <label for="companyname">Cég neve:</label>
+        </td>
+        <td>
+          <p>{{this.user.CompanyName}}</p>
+        </td>
+      </tr>
 
-    <tr>
-      <td>
-        <label>Jelszó:</label>
-      </td>
-      <td>
-        <button id="done" (click)="gotoChangePassword()">Jelszócsere</button>
-      </td>
-    </tr>
+      <tr>
+        <td>
+          <label for="institute">Intézmény neve:</label>
+        </td>
+        <td>
+          <p>{{this.user.InstitutionName}}</p>
+        </td>
+      </tr>
+
+      <tr>
+        <td>
+          <label for="departure">Osztály:</label>
+        </td>
+        <td>
+          <p>{{this.user.InstitutionDepartment}}</p>
+        </td>
+      </tr>
+
+      <tr>
+        <td>
+          <label for="phone">Telefon:</label>
+        </td>
+        <td>
+          <p>{{this.user.Phone}}</p>
+        </td>
+      </tr>
+
+      <tr>
+        <td>
+          <label for="address">Telephely:</label>
+        </td>
+        <td>
+          <p> {{this.user.Site.PostCode}} {{this.user.Site.City}} {{this.user.Site.Street}}
+            {{this.user.Site.HouseNumber}} </p>
+
+        </td>
+      </tr>
+
+      <tr>
+        <td>
+          <div class="content2">
+            <label>Adatmódosítási igény esetén keresse a portálkezelőket! Köszönjük!</label>
+          </div>
+
+        </td>
+        <td>
+   
+        </td>
+      </tr>
+
+      <tr>
+        <td>
+          <label>Jelszó:</label>
+        </td>
+        <td>
+          <button id="done" (click)="gotoChangePassword()">Jelszócsere</button>
+        </td>
+      </tr>
     </table>
   </div>
 </div>

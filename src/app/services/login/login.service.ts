@@ -2,9 +2,7 @@ import { Injectable } from '@angular/core';
 import { Observable, Subscription, catchError, finalize, map, of } from 'rxjs';
 import { Err, Ok, Result, fromJSON } from 'src/app/models/utils/result';
 import { ConfigService } from '../config/config.service';
-
-import { HttpClient, HttpEventType, HttpHeaders, HttpParams } from '@angular/common/http';
-
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { jwtDecode } from 'jwt-decode';
 import { AccessToken } from 'src/app/models/token/accesstoken';
 import { Router } from '@angular/router';
@@ -22,20 +20,18 @@ export class LoginService {
   static hasAnyGroup(groups: string[]) {
     throw new Error('Method not implemented.');
   }
-  url: string = "";
 
+  url: string = "";
   token: string = "";
   id: string = "";
   email: string = "";
   uploadProgress: number;
   uploadSub: Subscription;
-
-
   username: string = "";
   loggedIn: boolean = false;
   userId: string = "";
 
-
+// Login call Keycloak login service
   constructor(private httpClient: HttpClient, private config: ConfigService,
     private router: Router, private keycloakService: KeycloakService) {
     this.url = this.config.config.AuthUrl;
@@ -49,17 +45,14 @@ export class LoginService {
         }
       }
     });
-
-
-
     if (keycloakService.isLoggedIn()) {
       this.getUserData();
     } else {
       this.loggedIn = false;
-
     }
   }
 
+  // return with email tempalate in html format, f : define witch one
   public downloadEmailTemplate(f: number): Observable<Result<[any[], string]>> {
     let options = {
       headers: this.getHeaders(),
@@ -79,22 +72,18 @@ export class LoginService {
     );
   }
 
+  //  set email template to default
   public setEmailToDeafult(f: number): Observable<Result<{}>> {
-
-
     const url = this.url + "/templates/default";
     return this.httpClient.post(url, "", {
       params: this.getParams(f),
       headers: new HttpHeaders(),
     })
-
       .pipe(
         map(result => fromJSON<{}>(JSON.stringify(result))),
         catchError(error => of(new Err<{}>(error)))
       );
   }
-
-
 
 
   public getUsername(): string {
@@ -104,11 +93,8 @@ export class LoginService {
   public getUserId(): string {
     return this.userId;
   }
+
   public hasAnyGroup(expectedGroups: string[]): boolean {
-    /*if (!this.isLoggedIn()) {
-      this.router.navigate(['/login']);
-      return false;
-    }*/
     const decoded = jwtDecode<AccessToken>(this.token);
     return decoded.groups.some(group => expectedGroups.includes(group));
   }
@@ -119,21 +105,14 @@ export class LoginService {
 
   public logout() {
     let home = window.location.toString().replace(this.router.url, '')
-
     this.keycloakService.logout(home)
     this.keycloakService.clearToken();
-
     this.token = "";
-  }
-
-  // public getAccessToken(): string {
-  //   console.log("getAccessToken", this.token_.access_token);
-  //   return this.token_.access_token;
-  // }
+  }  
 
   // This function inserts the new user into the Auth.
   public insertNewUser(user_: User,): Observable<Result<{}>> {
-    
+
     const url = this.url + "/registration";
     return this.httpClient.post<Result<{}>>(url, user_).pipe(
       map(result => fromJSON<{}>(JSON.stringify(result))),
@@ -141,6 +120,7 @@ export class LoginService {
     );
   }
 
+  // This function inserts the new user by admin ( no acceptance ) into the Auth.
   public insertNewUserbyAdmin(userwithgroups: UserWithGroups): Observable<Result<{}>> {
     const url = this.url + "/user/create";
 
@@ -150,7 +130,7 @@ export class LoginService {
     );
   }
 
-  // This function inserts the new user into the Auth.
+  // This function return all users basic data ( email, id)
   public getAllUsers(): Observable<Result<UserData[]>> {
     const url = this.url + "/user/all";
     return this.httpClient.get<Result<UserData[]>>(url, { headers: this.getHeaders() }).pipe(
@@ -159,7 +139,7 @@ export class LoginService {
     );
 
   }
-  // This function inserts the new user into the Auth.
+  // This function lists the users who are waiting acceptance.
   public getWaitingUsers(): Observable<Result<UserData[]>> {
     const url = this.url + "/user/waiting";
     return this.httpClient.get<Result<UserData[]>>(url, { headers: this.getHeaders() }).pipe(
@@ -168,7 +148,7 @@ export class LoginService {
     );
 
   }
-  // This function get  new user attributes from  Auth.
+  // This function get the user attributes from  Auth. 
   public getUserAttributes(id_: string | null): Observable<Result<User>> {
     const url = this.url + "/user/attributes/" + id_;
     console.log("kuldtem:", id_)
@@ -186,20 +166,16 @@ export class LoginService {
       catchError(error => of(new Err<{}>(error)))
     );
   }
-
+  
+// change own password 
   public changePassword(currentPassword: string, newPassword: string, confirmation: string, byAdmin: boolean, id: string): Observable<Result<{}>> {
     let userID = "";
-
     if (byAdmin) {
       userID = id;
-
-
     }
     if (!byAdmin) {
       userID = this.getUserId()
-
     }
-
     const url = this.url + "/user/changepassword/" + userID;
     let newP = { currentPassword, newPassword, confirmation, byAdmin }
     return this.httpClient.put<Result<{}>>(url, newP, { headers: this.getHeaders() }).pipe(
@@ -207,6 +183,8 @@ export class LoginService {
       catchError(error => of(new Err<{}>(error)))
     );
   }
+
+// admin change password for someone else
   public acceptUser(userId: string, usergroup: string[]): Observable<Result<{}>> {
     const url = this.url + "/user/approve/" + userId;
 
@@ -224,10 +202,9 @@ export class LoginService {
 
   }
 
+  // params to define email template will use
   private getParams(f: number): HttpParams {
-
     let actiontype = "";
-
     switch (f) {
       case 0:
         actiontype = "reset-password"
@@ -249,9 +226,7 @@ export class LoginService {
         actiontype = "email-test"
         console.log('actiontype', actiontype);
     }
-    return new HttpParams().set('action', actiontype)
-
-      ;
+    return new HttpParams().set('action', actiontype);
   }
 
   private getUserData() {
@@ -285,9 +260,6 @@ export class LoginService {
   uploadFile(file: File, f: number): Observable<Result<Empty>> {
     const url = this.url + "/templates/upload";
     let formData = new FormData();
-
-
-
     formData.append('template', file);
     const upload$ = this.httpClient.post(url, formData, {
       params: this.getParams(f),

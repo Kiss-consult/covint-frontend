@@ -15,11 +15,11 @@ export class AddnewuserComponent {
 
   cegActive: boolean = false;
   intezmenyActive: boolean = false;
-  userwithgroups : UserWithGroups = new UserWithGroups;
+  userwithgroups: UserWithGroups = new UserWithGroups;
   user: User = new User;
   site: Site = new Site;
-  password2: string = "" ;
- 
+  password2: string = "";
+
   usergroup: string[] = [];
   orvos = Orvos;
   kutatoorvos = KutatoOrvos;
@@ -49,62 +49,55 @@ export class AddnewuserComponent {
   goBackToPrevPage(): void {
     this.location.back();
   }
-  constructor(public loginService: LoginService,private location: Location) {
-    
+  constructor(public loginService: LoginService, private location: Location) {
+
   }
 
   public isDoctor(doctorgroup: boolean) {
-
     this.doctorgroup = doctorgroup;
     if (this.doctorgroup)
       this.usergroup.push(Orvos);
     this.doctorgroup = false;
     console.log(this.usergroup);
-
   }
-  public isResearcher(researchergroup: boolean) {
 
+  public isResearcher(researchergroup: boolean) {
     this.researchergroup = researchergroup;
     if (this.researchergroup)
       this.usergroup.push(KutatoOrvos);
     this.researchergroup = false;
     console.log(this.researchergroup);
     console.log(this.usergroup);
-
   }
-  public isPortalAdmin(portaladmingroup: boolean) {
 
+  public isPortalAdmin(portaladmingroup: boolean) {
     this.portaladmingroup = portaladmingroup;
     if (this.portaladmingroup)
       this.usergroup.push(PortalVezeto);
     this.portaladmingroup = false;
     console.log(this.usergroup);
-
   }
-  public isPortalManager(portalmanagergroup: boolean) {
 
+  public isPortalManager(portalmanagergroup: boolean) {
     this.portalmanagergroup = portalmanagergroup;
     if (this.portalmanagergroup)
       this.usergroup.push(PortalKezelo);
     this.portalmanagergroup = false;
     console.log(this.usergroup);
-
   }
 
+  // admin can create ( add) new user with groups, acceptance is not neccessary
   public finish() {
     if (!this.checkRequiredFields()) {
-     return;
-   }
+      return;
+    }
     this.user.Site = this.site;
     this.userwithgroups.User = this.user;
     this.userwithgroups.Groups = this.usergroup;
-
     this.loginService.insertNewUserbyAdmin(this.userwithgroups).subscribe(
       result => {
         if (result.isErr()) {
-         
           console.error(result.unwrapErr());
-
           let mess = result.unwrapErr().error.Error;
           if (mess === "error creating user: 409 Conflict: User exists with same username") {
             alert("Sikertelen regisztráció! \nEzzel a felhasználó névvel már regisztráltak korábban!")
@@ -177,8 +170,5 @@ export class AddnewuserComponent {
     }
     return true;
   }
-
-
-
 
 }
